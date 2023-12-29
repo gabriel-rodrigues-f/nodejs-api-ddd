@@ -6,5 +6,8 @@
   "env": {
     "browser": false,
     "node": true
+  },
+  "rules": {
+    "@typescript-eslint/strict-boolean-expressions": "off"
   }
 }
