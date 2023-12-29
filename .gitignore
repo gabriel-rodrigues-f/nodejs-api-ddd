@@ -20,8 +20,6 @@
 /packages/*/coverage/
 /packages/*/node_modules/
 
-./coverage
-/coverage
 coverage
 
 /website/.docusaurus
