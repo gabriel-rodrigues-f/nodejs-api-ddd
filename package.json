@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "husky:prepare": "husky install"
+    "husky:prepare": "husky install",
+    "lint:fix": "eslint 'src/**' --fix",
+    "lint-staged:run": "npx lint-staged"
   },
   "keywords": [],
   "author": "",
