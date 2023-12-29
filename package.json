@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "husky:prepare": "husky install",
-    "lint-staged:run": "lint-staged"
+    "husky:prepare": "husky install"
   },
   "keywords": [],
   "author": "",
