@@ -7,7 +7,7 @@
     "husky:prepare": "husky install",
     "lint:fix": "eslint 'src/**' --fix",
     "lint-staged:run": "npx lint-staged",
-    "test": "jest"
+    "test:staged": "jest --passWithNoTests"
   },
   "keywords": [],
   "author": "",
