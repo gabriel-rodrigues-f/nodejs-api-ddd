@@ -1,0 +1,4 @@
+- Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
+  - Criar uma instância da minha classe de produção, que será chamada de SUT
+  - Realizar um spyOn do método que quero verificar se está sendo chamado
+  - Fazer a comparação que desejo (toHaveBeenCalledWith, toEqual, etc...)
