@@ -1,4 +1,6 @@
-Assistindo: F014 014
+continuar de #F018 018-criando-teste-de-integracao-para-o-signup
+
+
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT
