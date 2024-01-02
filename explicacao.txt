@@ -4,3 +4,5 @@ Assistindo: F014 014
   - Criar uma instância da minha classe de produção, que será chamada de SUT
   - Realizar um spyOn do método que quero verificar se está sendo chamado
   - Fazer a comparação que desejo (toHaveBeenCalledWith, toEqual, etc...)
+
+  repositório: https://github.com/rmanguinho/clean-ts-api/blob/master/tsconfig.json

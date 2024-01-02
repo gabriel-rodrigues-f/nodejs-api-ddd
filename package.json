@@ -1,7 +1,7 @@
 {
   "name": "nodejs-api-ddd",
   "version": "1.0.0",
-  "description": "",
+  "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
   "main": "index.js",
   "scripts": {
     "husky:prepare": "husky install",
@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@shelf/jest-mongodb": "^4.2.0",
+    "@shelf/jest-mongodb": "^2.0.3",
     "@types/bcrypt": "^5.0.2",
     "@types/jest": "^29.5.11",
     "@types/mongodb": "^4.0.7",
@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
-    "mongodb": "^6.3.0",
+    "mongodb": "^4.1.1",
     "validator": "^13.11.0"
   }
 }

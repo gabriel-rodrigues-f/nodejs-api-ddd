@@ -9,10 +9,19 @@
   },
   "rules": {
     "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/consistent-type-definitions": "off",
+    "@typescript-eslint/comma-spacing": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "import/export": "off",
     "@typescript-eslint/consistent-type-imports": "off",
-    "@typescript-eslint/no-unsafe-argument": "off",
-    "@typescript-eslint/no-var-requires": "off",
+    "t@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-confusing-void-expression": "off",
-    "@typescript-eslint/method-signature-style": "off"
+    "@typescript-eslint/no-unused-expressions": "off",
+    "@typescript-eslint/method-signature-style": "off",
+    "@typescript-eslint/no-unsafe-argument": "off"
   }
 }
