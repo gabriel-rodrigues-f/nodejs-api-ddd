@@ -3,11 +3,12 @@ import app from '../config/app'
 
 describe('Cors Middleware', () => {
   it('Should enable CORS ', async () => {
-    app.post('/test_cors', (req, res) => {
+    const route = '/test_cors'
+    app.post(route, (req, res) => {
       res.send(req.body)
     })
     await request(app)
-      .get('/test_cors')
+      .get(route)
       .expect('access-control-allow-origin', '*')
       .expect('access-control-allow-methods', '*')
       .expect('access-control-allow-headers', '*')
