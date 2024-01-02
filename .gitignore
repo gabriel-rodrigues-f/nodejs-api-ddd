@@ -30,6 +30,8 @@ coverage
 /website/yarn.lock
 /website/i18n/*
 
+globalConfig
+
 /benchmarks/*/node_modules/
 
 /reports/*
