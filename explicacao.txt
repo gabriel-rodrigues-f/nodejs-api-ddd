@@ -7,3 +7,6 @@ aula: #F019 019-fazendo-a-composicao-do-signup-e-desacoplando-do-express
   - Fazer a comparação que desejo (toHaveBeenCalledWith, toEqual, etc...)
 
   repositório: https://github.com/rmanguinho/clean-ts-api/blob/master/tsconfig.json
+  mongodb compass: https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-os-x/
+    start: brew services start mongodb-community@7.0
+    stop: brew services stop mongodb-community@7.0
