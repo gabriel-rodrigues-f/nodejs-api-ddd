@@ -1,5 +1,5 @@
 status: assistindo
-aula: #F019 019-fazendo-a-composicao-do-signup-e-desacoplando-do-express
+aula: F021 021-aplicando-o-design-pattern-decorator
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT
