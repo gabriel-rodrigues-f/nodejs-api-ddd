@@ -1,5 +1,5 @@
 status: assistindo
-aula: 023-refatorando-os-testes
+aula: 025-criando-tag-e-fazendo-push-para-o-github
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT
