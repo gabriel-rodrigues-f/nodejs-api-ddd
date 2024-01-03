@@ -1,5 +1,5 @@
 status: assistindo
-aula: F022 022-testando-o-logcontrollerdecorator
+aula: 023-refatorando-os-testes
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT

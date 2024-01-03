@@ -1,3 +1,4 @@
 jest.config.js
 **/*.spec.ts
 **/*.test.ts
+*.js
