@@ -17,7 +17,7 @@
     "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
-  "author": "",
+  "author": "Gabriel Rodrigues",
   "license": "ISC",
   "devDependencies": {
     "@shelf/jest-mongodb": "^4.2.0",

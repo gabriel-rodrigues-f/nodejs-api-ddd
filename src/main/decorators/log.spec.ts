@@ -41,7 +41,7 @@ const makeSut = (): SutTypes => {
 }
 
 describe('Log Controller Decorator', () => {
-  it('Should call controller handle ', async () => {
+  test('Should call controller handle ', async () => {
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -56,7 +56,7 @@ describe('Log Controller Decorator', () => {
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
   })
 
-  it('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
+  test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
     const httpRequest = {
       body: {
         name: 'any_name',
@@ -70,7 +70,7 @@ describe('Log Controller Decorator', () => {
     expect(httpResponse).toEqual({ body: {}, statusCode: 200 })
   })
 
-  it('Should  ', async () => {
+  test('Should  ', async () => {
     const { sut, controllerStub, logErrorRepositoryStub } = makeSut()
     const fakeError = new Error()
     fakeError.stack = 'any_stack'
