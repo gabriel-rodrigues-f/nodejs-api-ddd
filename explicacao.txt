@@ -1,5 +1,5 @@
 status: assistindo
-aula:  028-aplicando-o-design-pattern-composite
+aula:  030-aplicando-o-design-pattern-composite
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT
