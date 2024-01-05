@@ -1,6 +1,7 @@
 import { Collection } from 'mongodb'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account'
+import { AddAccountModel } from '../../../../domain/usecases/add-account'
 
 let accountCollection: Collection
 describe('Account Mongo Repository', () => {
@@ -17,17 +18,19 @@ describe('Account Mongo Repository', () => {
     await accountCollection.deleteMany({})
   })
 
+  const makeAddAccountModel = (): AddAccountModel => ({
+    name: 'any_name',
+    email: 'any_email@mail.com',
+    password: 'any_password'
+  })
+
   const makeSut = (): AccountMongoRepository => {
     return new AccountMongoRepository()
   }
 
   test('Should return an account on add success', async () => {
     const sut = makeSut()
-    const account = await sut.add({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
+    const account = await sut.add(makeAddAccountModel())
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
     expect(account.name).toBe('any_name')
@@ -37,11 +40,7 @@ describe('Account Mongo Repository', () => {
 
   test('Should return an account on loadByEmail success', async () => {
     const sut = makeSut()
-    await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
+    await accountCollection.insertOne(makeAddAccountModel())
     const account = await sut.loadByEmail('any_email@mail.com')
     expect(account).toBeTruthy()
     expect(account.id).toBeTruthy()
@@ -58,11 +57,7 @@ describe('Account Mongo Repository', () => {
 
   test('Should udpate the account accessToken on updateAccessToken success', async () => {
     const sut = makeSut()
-    const result = await accountCollection.insertOne({
-      name: 'any_name',
-      email: 'any_email@mail.com',
-      password: 'any_password'
-    })
+    const result = await accountCollection.insertOne(makeAddAccountModel())
     const fake_id = result.insertedId.toHexString()
     const account = await accountCollection.findOne({ _id: result.insertedId })
     expect(account.accessToken).toBeFalsy()
