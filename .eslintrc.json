@@ -22,6 +22,7 @@
     "@typescript-eslint/no-confusing-void-expression": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/method-signature-style": "off",
-    "@typescript-eslint/no-unsafe-argument": "off"
+    "@typescript-eslint/no-unsafe-argument": "off",
+    "n/no-path-concat": "off"
   }
 }
