@@ -1,4 +1,5 @@
 export default {
   MONGO_DB_URL: process.env.MONGO_URL || 'mongodb://localhost:27017/nodejs-api-ddd',
-  PORT: process.env.PORT || 5050
+  PORT: process.env.PORT || 5050,
+  JWT_SECRET: process.env.JWT_SECRET || ';alksjdfjklajdf'
 }
