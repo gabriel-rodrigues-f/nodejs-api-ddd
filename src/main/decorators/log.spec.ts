@@ -19,8 +19,7 @@ const makeLogErrorRepository = (): LogErrorRepository => {
       return new Promise(resolve => resolve())
     }
   }
-  const logErrorRepositoryStub = new LogErrorRepositoryStub()
-  return logErrorRepositoryStub
+  return new LogErrorRepositoryStub()
 }
 
 interface SutTypes {

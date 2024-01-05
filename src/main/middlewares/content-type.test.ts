@@ -2,7 +2,7 @@ import request from 'supertest'
 import app from '../config/app'
 
 describe('Content Type Middleware', () => {
-  it('Should return default conten-type as JSON ', async () => {
+  test('Should return default conten-type as JSON ', async () => {
     const route = '/test_content_type'
     app.get(route, (req, res) => {
       res.send()
@@ -12,7 +12,7 @@ describe('Content Type Middleware', () => {
       .expect('content-type', /json/)
   })
 
-  it('Should return XML when forced ', async () => {
+  test('Should return XML when forced ', async () => {
     const route = '/test_content_type_xml'
     app.get(route, (req, res) => {
       res.type('xml')

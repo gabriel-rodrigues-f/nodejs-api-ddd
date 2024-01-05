@@ -3,7 +3,7 @@ import app from '../config/app'
 
 describe('Body Parser Middleware', () => {
   const route = '/test_body_parser'
-  it('Should parse body as JSON ', async () => {
+  test('Should parse body as JSON ', async () => {
     app.post(route, (req, res) => {
       res.send(req.body)
     })

@@ -9,8 +9,7 @@ const makeAuthentication = (): Authentication => {
       return new Promise(resolve => resolve('any_token'))
     }
   }
-  const authenticationStub = new AuthenticationStub()
-  return authenticationStub
+  return new AuthenticationStub()
 }
 
 const makeFakeRequest = (): HttpRequest => ({
