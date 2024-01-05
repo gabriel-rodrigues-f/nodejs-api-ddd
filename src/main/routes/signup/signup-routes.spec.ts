@@ -1,6 +1,6 @@
 import request from 'supertest'
-import app from '../config/app'
-import { MongoHelper } from '../../infra/db/mongodb/helpers/mongo-helper'
+import app from '../../config/app'
+import { MongoHelper } from '../../../infra/db/mongodb/helpers/mongo-helper'
 
 beforeAll(async () => {
   await MongoHelper.connect(process.env.MONGO_URL)
