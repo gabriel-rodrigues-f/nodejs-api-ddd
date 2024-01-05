@@ -16,7 +16,7 @@ beforeEach(async () => {
 })
 
 describe('SignUp Route', () => {
-  test('Should return an account on success ', async () => {
+  test('Should return an account on add success ', async () => {
     await request(app)
       .post('/api/signup')
       .send({

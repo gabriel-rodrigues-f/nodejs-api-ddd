@@ -17,8 +17,11 @@ export const MongoHelper = {
     return this.client.db().collection(name)
   },
 
-  map (id: string, data: any): any {
+  map (data: any, id?: string): any {
     const { _id, ...account } = data
-    return { ...account, id }
+    if (id) {
+      return { ...account, id }
+    }
+    return { ...account, id: _id }
   }
 }
