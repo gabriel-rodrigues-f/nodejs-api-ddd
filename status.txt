@@ -1,5 +1,5 @@
 status: assistindo
-aula:  031-refatorando-o-codigo
+aula:  032-criando-o-dbauthentication-e-integrando-com-o-loadaccountbyemailrepository
 
 - Para verificar se uma dependência de classe está sendo chamada dentro de um método desta classe, devo:
   - Criar uma instância da minha classe de produção, que será chamada de SUT
