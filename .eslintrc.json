@@ -1,7 +1,7 @@
 {
   "extends": "standard-with-typescript",
   "parserOptions": {
-    "project": "./tsconfig.json"
+    "project": "./tsconfig.eslint.json"
   },
   "env": {
     "browser": false,
@@ -23,6 +23,7 @@
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/method-signature-style": "off",
     "@typescript-eslint/no-unsafe-argument": "off",
-    "n/no-path-concat": "off"
+    "n/no-path-concat": "off",
+    "@typescript-eslint/unbound-method": "off"
   }
 }
