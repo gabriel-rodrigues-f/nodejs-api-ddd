@@ -12,7 +12,7 @@
 !/e2e/presets/js/node_modules
 /e2e/transform/*/coverage
 /e2e/transform/*/node_modules
-status
+__status__
 
 /node_modules
 
