@@ -5,10 +5,11 @@ import { Collection } from 'mongodb'
 import { hash } from 'bcrypt'
 
 let accountCollection: Collection
+const MONGO_URL = process.env.MONGO_URL || ''
 
 describe('Login Route', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL)
+    await MongoHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
@@ -40,13 +41,13 @@ describe('Login Route', () => {
       await accountCollection.insertOne({
         name: 'valid_name',
         email: 'valid_email@mail.com',
-        password,
+        password
       })
       await request(app)
         .post('/api/login')
         .send({
           email: 'valid_email@mail.com',
-          password: '123',
+          password: '123'
         })
         .expect(200)
     })
@@ -56,13 +57,13 @@ describe('Login Route', () => {
       await accountCollection.insertOne({
         name: 'valid_name',
         email: 'valid_email@mail.com',
-        password,
+        password
       })
       await request(app)
         .post('/api/login')
         .send({
           email: 'valid_email@mail.com',
-          password: 'invalid_password',
+          password: 'invalid_password'
         })
         .expect(401)
     })

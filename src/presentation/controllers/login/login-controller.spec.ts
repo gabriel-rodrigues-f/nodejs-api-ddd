@@ -1,11 +1,11 @@
-import { MissingParamError } from "../../errors"
-import { ok, badRequest, serverError, unauthorized } from "../../helpers/http/http-helpers"
-import { LoginController } from "./login-controller"
+import { MissingParamError } from '../../errors'
+import { ok, badRequest, serverError, unauthorized } from '../../helpers/http/http-helpers'
+import { LoginController } from './login-controller'
 import { Authentication, AuthenticationModel, HttpRequest, Validation } from './login-controller-protocols'
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationModel): Promise<string> {
       return new Promise(resolve => resolve('any_token'))
     }
   }
@@ -29,8 +29,8 @@ const makeValidation = (): Validation => {
 }
 
 interface SutTypes {
-  sut: LoginController,
-  authenticationStub: Authentication,
+  sut: LoginController
+  authenticationStub: Authentication
   validationStub: Validation
 }
 
@@ -58,7 +58,7 @@ describe('Login Controller', () => {
 
   test('Should return 401 if invalid credentials are provided', async () => {
     const { sut, authenticationStub } = makeSut()
-    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise(resolve => resolve(null)))
+    jest.spyOn(authenticationStub, 'auth').mockReturnValueOnce(new Promise(resolve => resolve('')))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(unauthorized())
   })
@@ -76,11 +76,11 @@ describe('Login Controller', () => {
     expect(httpResponse).toEqual(ok({ accessToken: 'any_token' }))
   })
 
-  test('Should call Validation using correct value', () => {
+  test('Should call Validation using correct value', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
-    sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 

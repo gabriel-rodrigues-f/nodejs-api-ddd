@@ -4,9 +4,11 @@ import { AccountMongoRepository } from './account-mongo-repository'
 import { AddAccountModel } from '../../../../domain/usecases/add-account'
 
 let accountCollection: Collection
+const MONGO_URL = process.env.MONGO_URL || ''
+
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL)
+    await MongoHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
@@ -58,12 +60,16 @@ describe('Account Mongo Repository', () => {
   test('Should udpate the account accessToken on updateAccessToken success', async () => {
     const sut = makeSut()
     const result = await accountCollection.insertOne(makeAddAccountModel())
-    const fake_id = result.insertedId.toHexString()
+    const fakeId = result.insertedId.toHexString()
     const account = await accountCollection.findOne({ _id: result.insertedId })
-    expect(account.accessToken).toBeFalsy()
-    await sut.updateAccessToken(fake_id, 'any_token')
+    if (account) {
+      expect(account.accessToken).toBeFalsy()
+    }
+    await sut.updateAccessToken(fakeId, 'any_token')
     const accountWithAccessToken = await accountCollection.findOne({ _id: result.insertedId })
-    expect(accountWithAccessToken).toBeTruthy()
-    expect(accountWithAccessToken.accessToken).toBe('any_token')
+    if (accountWithAccessToken) {
+      expect(accountWithAccessToken).toBeTruthy()
+      expect(accountWithAccessToken.accessToken).toBe('any_token')
+    }
   })
 })

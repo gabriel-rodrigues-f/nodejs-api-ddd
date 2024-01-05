@@ -1,5 +1,5 @@
-import { DbAuthentication } from "./db-authentication"
-import { AccountModel, AuthenticationModel, HashComparer, LoadAccountByEmailRepository, Encrypter, UpdateAccessTokenRepository } from "./db-authentication-protocols"
+import { DbAuthentication } from './db-authentication'
+import { AccountModel, AuthenticationModel, HashComparer, LoadAccountByEmailRepository, Encrypter, UpdateAccessTokenRepository } from './db-authentication-protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   name: 'any_name',
@@ -52,8 +52,8 @@ const makeUpdateAccessTokenRepositoryStub = (): UpdateAccessTokenRepository => {
 interface SutTypes {
   sut: DbAuthentication
   hashComparerStub: HashComparer
-  loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository,
-  encrypterStub: Encrypter,
+  loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
+  encrypterStub: Encrypter
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
 }
 
@@ -94,7 +94,7 @@ describe('DbAuthentication UseCase', () => {
 
   test('Should return null if LoadAccountByEmailRepository returns null', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = makeSut()
-    jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockReturnValueOnce(null)
+    jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail').mockImplementationOnce(null)
     const accessToken = await sut.auth(makeFakeAuthentication())
     expect(accessToken).toBeNull()
   })

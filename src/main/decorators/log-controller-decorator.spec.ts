@@ -1,7 +1,7 @@
-import { LogErrorRepository } from "../../data/protocols/db/log/log-error-repository"
-import { serverError } from "../../presentation/helpers/http/http-helpers"
-import { Controller, HttpRequest, HttpResponse } from "../../presentation/protocols"
-import { LogControllerDecorator } from "./log-controller-decorator"
+import { LogErrorRepository } from '../../data/protocols/db/log/log-error-repository'
+import { serverError } from '../../presentation/helpers/http/http-helpers'
+import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols'
+import { LogControllerDecorator } from './log-controller-decorator'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {
@@ -23,8 +23,8 @@ const makeLogErrorRepository = (): LogErrorRepository => {
 }
 
 interface SutTypes {
-  sut: LogControllerDecorator,
-  controllerStub: Controller,
+  sut: LogControllerDecorator
+  controllerStub: Controller
   logErrorRepositoryStub: LogErrorRepository
 }
 

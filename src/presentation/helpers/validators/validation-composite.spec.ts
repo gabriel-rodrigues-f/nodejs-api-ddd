@@ -1,6 +1,6 @@
-import { MissingParamError } from "../../errors"
-import { Validation } from "../../protocols/validation"
-import { ValidationComposite } from "./validation-composite"
+import { MissingParamError } from '../../errors'
+import { Validation } from '../../protocols/validation'
+import { ValidationComposite } from './validation-composite'
 
 const makeValidation = (): Validation => {
   class ValidationStub implements Validation {
@@ -12,7 +12,7 @@ const makeValidation = (): Validation => {
 }
 
 interface SutTypes {
-  sut: ValidationComposite,
+  sut: ValidationComposite
   validationStubs: Validation[]
 }
 
@@ -42,7 +42,7 @@ describe('Validation Composite', () => {
   })
 
   test('Should not return if validation success', () => {
-    const { sut, validationStubs } = makeSut()
+    const { sut } = makeSut()
     const error = sut.validate({ field: 'any_value' })
     expect(error).toBeFalsy()
   })

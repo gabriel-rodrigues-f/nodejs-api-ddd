@@ -1,11 +1,13 @@
-import { LogErrorRepository } from "../../../../data/protocols/db/log/log-error-repository"
-import { MongoHelper } from "../helpers/mongo-helper"
-import { LogMongoRepository } from "./log-mongo-repository"
+import { LogErrorRepository } from '../../../../data/protocols/db/log/log-error-repository'
+import { MongoHelper } from '../helpers/mongo-helper'
+import { LogMongoRepository } from './log-mongo-repository'
 
 describe('Log Mongo Repository', () => {
   let errorCollection
+  const MONGO_URL = process.env.MONGO_URL || ''
+
   beforeAll(async () => {
-    await MongoHelper.connect(process.env.MONGO_URL)
+    await MongoHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {

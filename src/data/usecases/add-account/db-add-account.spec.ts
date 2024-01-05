@@ -27,7 +27,7 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 
 interface SutTypes {
   sut: DbAddAccount
-  hasherStub: Hasher,
+  hasherStub: Hasher
   addAccountRepositoryStub: AddAccountRepository
 }
 
@@ -64,7 +64,7 @@ describe('DbAddAccount Usecase', () => {
       password: 'valid_password'
     }
     const promise = sut.add(accountData)
-    expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow()
   })
 
   test('Shoud call AddAccountRepository with correct values', async () => {
@@ -108,6 +108,6 @@ describe('DbAddAccount Usecase', () => {
       password: 'valid_password'
     }
     const promise = sut.add(accountData)
-    expect(promise).rejects.toThrow()
+    await expect(promise).rejects.toThrow()
   })
 })

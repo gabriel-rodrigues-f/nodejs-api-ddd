@@ -39,7 +39,7 @@ const makeValidation = (): Validation => {
 
 interface SutTypes {
   sut: SignUpController
-  addAccountStub: AddAccount,
+  addAccountStub: AddAccount
   validationStub: Validation
 }
 
@@ -61,7 +61,7 @@ describe('SignUp Controller', () => {
       return new Promise((resolve, reject) => reject(new Error()))
     })
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(serverError(new ServerError("")))
+    expect(httpResponse).toEqual(serverError(new ServerError('')))
   })
 
   test('Should return 200 if data is provided', async () => {
@@ -71,22 +71,22 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(makeFakeAccount())
   })
 
-  test('Should call AddAccount with correct values', () => {
+  test('Should call AddAccount with correct values', async () => {
     const { sut, addAccountStub } = makeSut()
     const addSpy = jest.spyOn(addAccountStub, 'add')
-    sut.handle(makeFakeRequest())
+    await sut.handle(makeFakeRequest())
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@email.com',
-      password: 'any_password',
+      password: 'any_password'
     })
   })
 
-  test('Should call Validation using correct value', () => {
+  test('Should call Validation using correct value', async () => {
     const { sut, validationStub } = makeSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const httpRequest = makeFakeRequest()
-    sut.handle(httpRequest)
+    await sut.handle(httpRequest)
     expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 
