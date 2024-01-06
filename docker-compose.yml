@@ -1,7 +1,7 @@
 version: "3"
 services:
-  mongodb:
-    container_name: mongodb-container
+  mongo:
+    container_name: mongo-container
     image: mongo:3
     restart: always
     volumes:
@@ -19,4 +19,4 @@ services:
     ports:
       - "5050:5050"
     links:
-      - mongodb
+      - mongo
