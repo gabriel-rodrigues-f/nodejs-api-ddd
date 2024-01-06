@@ -13,9 +13,6 @@ services:
     build: .
     restart: always
     image: nodejs-api-ddd
-    command: npm start
-    volumes:
-      - ./dist:/urs/src/nodejs-api-ddd/dist
     ports:
       - "5050:5050"
     links:
