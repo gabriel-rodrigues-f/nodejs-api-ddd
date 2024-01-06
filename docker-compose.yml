@@ -1,0 +1,22 @@
+version: "3"
+services:
+  mongodb:
+    container_name: mongodb-container
+    image: mongo:3
+    restart: always
+    volumes:
+      - ./data:./data/db
+    ports:
+      - "27017:27017"
+  api:
+    container_name: api-container
+    build: .
+    restart: always
+    image: nodejs-api-ddd
+    command: npm start
+    volumes:
+      - ./dist:/urs/src/nodejs-api-ddd/dist
+    ports:
+      - "5050:5050"
+    links:
+      - mongodb
