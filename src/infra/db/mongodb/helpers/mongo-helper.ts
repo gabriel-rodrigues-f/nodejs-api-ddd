@@ -1,4 +1,5 @@
 import { Collection, MongoClient } from 'mongodb'
+import env from '../../../../main/config/env'
 
 export const MongoHelper = {
   client: null as MongoClient,
@@ -14,7 +15,7 @@ export const MongoHelper = {
   },
 
   getCollection (name: string): Collection {
-    return this.client.db().collection(name)
+    return this.client.db(env.MONGO_DB_DATABASE).collection(name)
   },
 
   map (data: any, id?: string): any {
