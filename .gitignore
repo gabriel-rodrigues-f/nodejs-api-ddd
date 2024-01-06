@@ -17,6 +17,7 @@ __status__
 /node_modules
 
 dist
+data
 
 /packages/*/build/
 /packages/*/dist/

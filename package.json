@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node dist/main/server.js",
     "build": "rimraf dist && tsc",
-    "start:dev": "tsx watch src/main/server.ts",
+    "up": "npm run build && docker-compose up -d",
+    "down":"docker-compose down",
     "husky:prepare": "husky install",
     "lint:fix": "eslint 'src/**' --fix",
     "lint-staged:run": "npx lint-staged",
