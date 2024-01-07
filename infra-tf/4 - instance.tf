@@ -31,20 +31,19 @@ resource "aws_security_group" "fiap_sg" {
   description = "challenge fiap security group"
   vpc_id      = module.vpc.vpc_id
 
-  ingress {
-    description = "allow http"
-    from_port   = 5050
-    to_port     = 5050
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+  dynamic "ingress" {
+    for_each = [
+      { description = "allow http", from_port = 5050, to_port = 5050, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] },
+      { description = "allow ssh", from_port = 22, to_port = 22, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"] }
+    ]
 
-  ingress {
-    description = "allow ssh"
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    content {
+      description = ingress.value.description
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+    }
   }
 
   egress {
