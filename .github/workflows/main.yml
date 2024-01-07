@@ -1,6 +1,8 @@
 name: Generating Terraform Docs for terraform files 
 on:
-  - push
+  push:
+    paths:
+      - "infra-tf/**"
 
 jobs:
   docs:
