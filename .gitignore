@@ -68,4 +68,6 @@ packages/jest-worker/src/workers/__tests__/__temp__
 # terraform files
 infra-tf/.terraform
 infra-tf/.terraform.lock.hcl
+infra-tf/.terraform.tfstate.lock.info
 infra-tf/terraform.tfstate
+infra-tf/terraform.tfstate.backup
