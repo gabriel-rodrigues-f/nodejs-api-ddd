@@ -64,3 +64,8 @@ crowdin-cli.jar
 
 # We don't want these temp files
 packages/jest-worker/src/workers/__tests__/__temp__
+
+# terraform files
+infra-tf/.terraform
+infra-tf/.terraform.lock.hcl
+infra-tf/terraform.tfstate
