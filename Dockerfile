@@ -1,7 +1,7 @@
 FROM node:18-alpine as base
 WORKDIR /usr/src/nodejs-api-ddd
 COPY ./package.json .
-RUN npm install --only=prod && npm install -g typescript
+RUN npm i && npm i -g typescript
 
 FROM base as build
 WORKDIR /usr/src/nodejs-api-ddd
