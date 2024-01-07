@@ -71,3 +71,4 @@ infra-tf/.terraform.lock.hcl
 infra-tf/.terraform.tfstate.lock.info
 infra-tf/terraform.tfstate
 infra-tf/terraform.tfstate.backup
+infra-tf/*.pem
