@@ -39,12 +39,12 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_availability_zones_name"></a> [availability\_zones\_name](#input\_availability\_zones\_name) | n/a | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
+| <a name="input_availability_zones_name"></a> [availability\_zones\_name](#input\_availability\_zones\_name) | Availability Zones for VPC | `list(string)` | <pre>[<br>  "us-east-1a",<br>  "us-east-1b",<br>  "us-east-1c"<br>]</pre> | no |
 | <a name="input_instance_type"></a> [instance\_type](#input\_instance\_type) | EC2 Instance Type - Instance Sizing | `string` | `"t2.micro"` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_instance_ip_addr"></a> [instance\_ip\_addr](#output\_instance\_ip\_addr) | n/a |
+| <a name="output_instance_ip_addr"></a> [instance\_ip\_addr](#output\_instance\_ip\_addr) | Public IP Address of EC2 Instance |
 <!-- END_TF_DOCS -->
