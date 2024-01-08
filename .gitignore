@@ -18,6 +18,7 @@ __status__
 
 dist
 data
+!src/data
 
 /packages/*/build/
 /packages/*/dist/
