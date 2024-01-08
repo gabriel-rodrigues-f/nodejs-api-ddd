@@ -5,21 +5,10 @@ resource "aws_instance" "fiap" {
   vpc_security_group_ids = [aws_security_group.fiap_sg.id]
   subnet_id              = module.vpc.public_subnets[0]
   associate_public_ip_address = true
-  user_data = <<-EOF
-  #!/bin/bash
-  sudo yum update -y
-  sudo yum install -y git docker docker.io
-  sudo systemctl enable --now docker
-  sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-  sudo chmod +x /usr/local/bin/docker-compose
-  sudo usermod -aG docker $USER
-  sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-  sudo systemctl restart docker
-  git clone https://github.com/gabriel-rodrigues-f/nodejs-api-ddd.git
-  cd nodejs-api-ddd/
-  sudo docker build -t nodejs-api-ddd .
-  sudo docker-compose up -d
-  EOF
+
+  provisioner "local-exec" {
+    command = "ansible-playbook -i ansible/inventory.ini ansible/instance.yml"
+  }
 
   tags = {
     "Name" = "fiap"
