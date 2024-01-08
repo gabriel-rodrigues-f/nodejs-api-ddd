@@ -6,10 +6,6 @@ resource "aws_instance" "fiap" {
   subnet_id              = module.vpc.public_subnets[0]
   associate_public_ip_address = true
 
-  provisioner "local-exec" {
-    command = "ansible-playbook -i ansible/inventory.ini ansible/instance.yml"
-  }
-
   tags = {
     "Name" = "fiap"
   }

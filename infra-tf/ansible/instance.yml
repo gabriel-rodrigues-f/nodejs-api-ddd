@@ -36,13 +36,6 @@
         repo: https://github.com/gabriel-rodrigues-f/nodejs-api-ddd.git
         dest: /nodejs-api-ddd
     
-    - name: Build docker image
-      community.docker.docker_image:
-        name: nodejs-api-ddd
-        build:
-          path: /nodejs-api-ddd
-        source: build
-    
     - name: Execute docker-compose
       ansible.builtin.shell:
         cmd: docker-compose up -d
