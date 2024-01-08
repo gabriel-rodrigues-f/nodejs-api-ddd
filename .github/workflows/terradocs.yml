@@ -1,0 +1,21 @@
+name: Generating Terraform Docs for terraform files 
+on:
+  push:
+    paths:
+      - "infra-tf/**"
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Render terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: infra-tf
+        output-file: README.md
+        output-method: inject
+        git-push: "true"
