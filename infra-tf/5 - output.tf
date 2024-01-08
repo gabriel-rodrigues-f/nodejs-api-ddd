@@ -1,4 +1,5 @@
 output "instance_ip_addr" {
+    description = "Public IP Address of EC2 Instance"
     value = aws_instance.fiap.public_ip
 }
 
