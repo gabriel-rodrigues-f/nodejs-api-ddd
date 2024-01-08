@@ -1,0 +1,51 @@
+---
+- name: Install packages
+  hosts: fiap
+  gather_facts: yes
+  become: yes
+  tasks:
+
+    - name: Update all packages
+      ansible.builtin.yum:
+        name: '*'
+        state: latest
+
+    - name: Install packages
+      ansible.builtin.yum:
+        name:
+          - docker
+          - git
+        state: latest
+    
+    - name: Reload and enable daemon
+      ansible.builtin.systemd_service:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Download and install docker-compose
+      ansible.builtin.shell: |
+        sudo curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
+        sudo chmod +x /usr/local/bin/docker-compose
+        sudo usermod -aG docker $USER
+        sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+        sudo systemctl restart docker
+
+    - name: Cloning github repo
+      ansible.builtin.git:
+        repo: https://github.com/gabriel-rodrigues-f/nodejs-api-ddd.git
+        dest: /nodejs-api-ddd
+    
+    - name: Build docker image
+      community.docker.docker_image:
+        name: nodejs-api-ddd
+        build:
+          path: /nodejs-api-ddd
+        source: build
+    
+    - name: Execute docker-compose
+      ansible.builtin.shell:
+        cmd: docker-compose up -d
+      args:
+        chdir: /nodejs-api-ddd
+        executable: /bin/bash
