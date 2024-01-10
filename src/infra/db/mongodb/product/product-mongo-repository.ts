@@ -3,7 +3,7 @@ import { MongoHelper } from '../helpers/mongo-helper'
 
 export class ProductMongoRepository implements AddProductRepository {
   async add (productData: AddProductModel): Promise<void> {
-    const productCollection = MongoHelper.getCollection('product')
+    const productCollection = MongoHelper.getCollection('products')
     await productCollection.insertOne(productData)
   }
 }
