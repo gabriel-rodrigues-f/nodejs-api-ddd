@@ -3,7 +3,7 @@ import { AddProductController } from './add-product-controller'
 import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
 import { AddProduct, AddProductModel, Validation } from './add-product-controller-protocols'
 
-const makeFakeProduct = (): AddProductModel => ({
+const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -22,7 +22,7 @@ const makeFakeProduct = (): AddProductModel => ({
 })
 
 const makeFakeRequest = (): HttpRequest => ({
-  body: makeFakeProduct()
+  body: makeFakeAddProduct()
 })
 
 const makeValidation = (): Validation => {
