@@ -20,15 +20,33 @@ const makeFakeAddProduct = (): AddProductModel => ({
   }
 })
 
+interface SutTypes {
+  sut: DbAddProduct
+  addProductRepositoryStub: AddProductRepository
+}
+
+const makeAddProductRepository = (): AddProductRepository => {
+  class AddProductRepositoryStub implements AddProductRepository {
+    async add (productData: AddProductModel): Promise<void> {
+      return new Promise(resolve => resolve())
+    }
+  }
+  const addProductRepositoryStub = new AddProductRepositoryStub()
+  return addProductRepositoryStub
+}
+
+const makeSut = (): SutTypes => {
+  const addProductRepositoryStub = makeAddProductRepository()
+  const sut = new DbAddProduct(addProductRepositoryStub)
+  return {
+    sut,
+    addProductRepositoryStub
+  }
+}
+
 describe('DbAddProduct Usecase', () => {
   test('Should call AddProductRepository usign correct values', async () => {
-    class AddProductRepositoryStub implements AddProductRepository {
-      async add (productData: AddProductModel): Promise<void> {
-        return new Promise(resolve => resolve())
-      }
-    }
-    const addProductRepositoryStub = new AddProductRepositoryStub()
-    const sut = new DbAddProduct(addProductRepositoryStub)
+    const { sut, addProductRepositoryStub } = makeSut()
     const addSpy = jest.spyOn(addProductRepositoryStub, 'add')
     const addProductData = makeFakeAddProduct()
     await sut.add(addProductData)
