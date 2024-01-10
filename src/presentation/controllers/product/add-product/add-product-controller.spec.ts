@@ -1,6 +1,6 @@
 import { HttpRequest } from '../../../protocols/http'
 import { AddProductController } from './add-product-controller'
-import { badRequest } from '../../../helpers/http/http-helpers'
+import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
 import { AddProduct, AddProductModel, Validation } from './add-product-controller-protocols'
 
 const makeFakeProduct = (): AddProductModel => ({
@@ -85,5 +85,19 @@ describe('Add Product Controller', () => {
     const httpRequest = makeFakeRequest()
     await sut.handle(httpRequest)
     expect(addProductSpy).toHaveBeenCalledWith(httpRequest.body)
+  })
+
+  test('Should return 500 if AddProduct throws', async () => {
+    const { sut, addProductStub } = makeSut()
+    jest.spyOn(addProductStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 on success', async () => {
+    const { sut, addProductStub } = makeSut()
+    jest.spyOn(addProductStub, 'add')
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
   })
 })
