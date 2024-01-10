@@ -1,27 +1,28 @@
 import { HttpRequest } from '../../../protocols/http'
 import { AddProductController } from './add-product-controller'
-import { Validation } from './add-product-controller-protocols'
 import { badRequest } from '../../../helpers/http/http-helpers'
+import { AddProduct, AddProductModel, Validation } from './add-product-controller-protocols'
+
+const makeFakeProduct = (): AddProductModel => ({
+  category: 'any_category',
+  name: 'any_name',
+  price: 'any_price',
+  nutritionalInformation: {
+    calorie: 'any_calorie',
+    carbohydrate: 'any_carbohydrate',
+    total_sugars: 'any_total_sugars',
+    added_sugars: 'any_added_sugars',
+    proteins: 'any_proteins',
+    total_fat: 'any_total_fat',
+    saturated_fat: 'any_saturated_fat',
+    trans_fats: 'any_trans_fats',
+    dietary_fiber: 'any_dietary_fiber',
+    sodium: 'any_sodium'
+  }
+})
 
 const makeFakeRequest = (): HttpRequest => ({
-  body: {
-    id: '1',
-    category: 'snack',
-    name: 'Duc Tasty',
-    price: '39,90',
-    nutritionalInformation: {
-      calorie: '44g',
-      carbohydrate: '10g',
-      total_sugars: '6g',
-      added_sugars: '42g',
-      proteins: '57g',
-      total_fat: '23g',
-      saturated_fat: '1.5g',
-      trans_fats: '4.5g',
-      dietary_fiber: '4.5g',
-      sodium: '1370.89mg'
-    }
-  }
+  body: makeFakeProduct()
 })
 
 const makeValidation = (): Validation => {
@@ -34,17 +35,30 @@ const makeValidation = (): Validation => {
   return validationStub
 }
 
+const makeAddProduct = (): AddProduct => {
+  class AddProductStub implements AddProduct {
+    async add (data: AddProductModel): Promise<void> {
+      return new Promise(resolve => resolve())
+    }
+  }
+  const addProductStub = new AddProductStub()
+  return addProductStub
+}
+
 interface SutTypes {
   sut: AddProductController
   validationStub: Validation
+  addProductStub: AddProduct
 }
 
 const makeSut = (): SutTypes => {
+  const addProductStub = makeAddProduct()
   const validationStub = makeValidation()
-  const sut = new AddProductController(validationStub)
+  const sut = new AddProductController(validationStub, addProductStub)
   return {
     sut,
-    validationStub
+    validationStub,
+    addProductStub
   }
 }
 
@@ -63,5 +77,13 @@ describe('Add Product Controller', () => {
     const httpRequest = makeFakeRequest()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual(badRequest(new Error()))
+  })
+
+  test('Should call AddProduct usign correct values', async () => {
+    const { sut, addProductStub } = makeSut()
+    const addProductSpy = jest.spyOn(addProductStub, 'add')
+    const httpRequest = makeFakeRequest()
+    await sut.handle(httpRequest)
+    expect(addProductSpy).toHaveBeenCalledWith(httpRequest.body)
   })
 })
