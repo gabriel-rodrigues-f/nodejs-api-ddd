@@ -52,4 +52,11 @@ describe('DbAddProduct Usecase', () => {
     await sut.add(addProductData)
     expect(addSpy).toHaveBeenCalledWith(addProductData)
   })
+
+  test('Shoud throw Error if Hasher Throw Error', async () => {
+    const { sut, addProductRepositoryStub } = makeSut()
+    jest.spyOn(addProductRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const promise = sut.add(makeFakeAddProduct())
+    await expect(promise).rejects.toThrow()
+  })
 })
