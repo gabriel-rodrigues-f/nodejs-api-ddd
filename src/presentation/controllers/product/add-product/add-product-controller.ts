@@ -1,5 +1,5 @@
 import { AddProduct } from '../../../../domain/usecases/add-product'
-import { badRequest, serverError } from '../../../helpers/http/http-helpers'
+import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
 import { Controller, HttpRequest, HttpResponse, Validation } from './add-product-controller-protocols'
 
 export class AddProductController implements Controller {
@@ -14,7 +14,7 @@ export class AddProductController implements Controller {
       if (error) { return badRequest(error) }
       const { category, name, price, nutritionalInformation } = httpRequest.body
       await this.addProduct.add({ category, name, price, nutritionalInformation })
-      return null
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
