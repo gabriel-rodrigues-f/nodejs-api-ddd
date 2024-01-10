@@ -1,5 +1,5 @@
 import { AddProduct } from '../../../../domain/usecases/add-product'
-import { badRequest } from '../../../helpers/http/http-helpers'
+import { badRequest, serverError } from '../../../helpers/http/http-helpers'
 import { Controller, HttpRequest, HttpResponse, Validation } from './add-product-controller-protocols'
 
 export class AddProductController implements Controller {
@@ -9,12 +9,14 @@ export class AddProductController implements Controller {
   ) { }
 
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
-    const error = this.validation.validate(httpRequest.body)
-    if (error) {
-      return badRequest(error)
+    try {
+      const error = this.validation.validate(httpRequest.body)
+      if (error) { return badRequest(error) }
+      const { category, name, price, nutritionalInformation } = httpRequest.body
+      await this.addProduct.add({ category, name, price, nutritionalInformation })
+      return null
+    } catch (error) {
+      return serverError(error)
     }
-    const { category, name, price, nutritionalInformation } = httpRequest.body
-    await this.addProduct.add({ category, name, price, nutritionalInformation })
-    return new Promise(resolve => resolve(null))
   }
 }
