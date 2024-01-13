@@ -21,7 +21,7 @@ describe('Product Routes', () => {
   })
 
   describe('POST /products', () => {
-    test('Should return 204 on product', async () => {
+    test('Should return 403 on product', async () => {
       await request(app)
         .post('/api/products')
         .send({
@@ -41,7 +41,7 @@ describe('Product Routes', () => {
             sodium: 'any_sodium'
           }
         })
-        .expect(204)
+        .expect(403)
     })
   })
 })
