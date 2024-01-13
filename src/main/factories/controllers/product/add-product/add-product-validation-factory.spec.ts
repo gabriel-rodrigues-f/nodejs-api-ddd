@@ -1,8 +1,8 @@
-import { RequiredFieldsValidation, ValidationComposite } from '../../../../validation/validators'
-import { Validation } from '../../../../presentation/protocols'
+import { RequiredFieldsValidation, ValidationComposite } from '../../../../../validation/validators'
+import { Validation } from '../../../../../presentation/protocols'
 import { makeAddProductValidation } from './add-product-validation-factory'
 
-jest.mock('../../../../validation/validators/validation-composite')
+jest.mock('../../../../../validation/validators/validation-composite')
 
 describe('Add Product Validation Factory', () => {
   test('Should call validation using all validations ', () => {
