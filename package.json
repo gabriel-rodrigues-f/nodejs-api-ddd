@@ -8,6 +8,7 @@
     "start:dev": "tsx watch src/main/server.ts",
     "build": "rimraf dist && tsc",
     "up": "npm run build && docker-compose up -d",
+    "up:locally":"npm run build && docker build -t nodejs-api-ddd . && docker-compose up -d",
     "down":"docker-compose down",
     "husky:prepare": "husky install",
     "lint:fix": "eslint 'src/**' --fix",
