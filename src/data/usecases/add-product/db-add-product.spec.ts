@@ -28,7 +28,7 @@ interface SutTypes {
 const makeAddProductRepository = (): AddProductRepository => {
   class AddProductRepositoryStub implements AddProductRepository {
     async add (productData: AddProductModel): Promise<void> {
-      return await new Promise(resolve => resolve())
+      return await Promise.resolve()
     }
   }
   const addProductRepositoryStub = new AddProductRepositoryStub()
@@ -55,7 +55,7 @@ describe('DbAddProduct Usecase', () => {
 
   test('Shoud throw Error if Hasher Throw Error', async () => {
     const { sut, addProductRepositoryStub } = makeSut()
-    jest.spyOn(addProductRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(addProductRepositoryStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(makeFakeAddProduct())
     await expect(promise).rejects.toThrow()
   })

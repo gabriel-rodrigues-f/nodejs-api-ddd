@@ -4,7 +4,7 @@ import { DbAddAccount } from './db-add-account'
 const makeHasher = (): Hasher => {
   class HasherStub implements Hasher {
     async hash (value: string): Promise<string> {
-      return await new Promise(resolve => resolve('hashed_password'))
+      return await Promise.resolve('hashed_password')
     }
   }
   return new HasherStub()
@@ -26,7 +26,7 @@ const makeFakeAccountData = (): AddAccountModel => ({
 const makeAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountModel): Promise<AccountModel> {
-      return await new Promise(resolve => resolve(makeFakeAccount()))
+      return await Promise.resolve(makeFakeAccount())
     }
   }
   return new AddAccountRepositoryStub()
@@ -35,7 +35,7 @@ const makeAddAccountRepository = (): AddAccountRepository => {
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
     async loadByEmail (email: string): Promise<AccountModel> {
-      return await new Promise(resolve => resolve(null))
+      return await Promise.resolve(null)
     }
   }
   return new LoadAccountByEmailRepositoryStub()
@@ -71,7 +71,7 @@ describe('DbAddAccount Usecase', () => {
 
   test('Shoud throw Error if Hasher Throw Error', async () => {
     const { sut, hasherStub } = makeSut()
-    jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(makeFakeAccountData())
     await expect(promise).rejects.toThrow()
   })
@@ -95,7 +95,7 @@ describe('DbAddAccount Usecase', () => {
 
   test('Shoud throw Error if Hasher Throw Error', async () => {
     const { sut, addAccountRepositoryStub } = makeSut()
-    jest.spyOn(addAccountRepositoryStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(addAccountRepositoryStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(makeFakeAccountData())
     await expect(promise).rejects.toThrow()
   })

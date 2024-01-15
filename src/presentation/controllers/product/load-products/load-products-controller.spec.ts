@@ -43,7 +43,7 @@ const makeFakeProducts = (): ProductModel[] => ([
 const makeLoadProducts = (): LoadProducts => {
   class LoadProductsStub implements LoadProducts {
     async load (): Promise<ProductModel[]> {
-      return await new Promise(resolve => resolve(makeFakeProducts()))
+      return await Promise.resolve(makeFakeProducts())
     }
   }
   return new LoadProductsStub()
@@ -79,14 +79,14 @@ describe('LoadProducts Controller', () => {
 
   test('Should return 204 LoadProduct returns empty', async () => {
     const { sut, loadProductsStub } = makeSut()
-    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve([])))
+    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.resolve([]))
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(noContent())
   })
 
   test('Should 500 if LoadProducts throws', async () => {
     const { sut, loadProductsStub } = makeSut()
-    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(serverError(new Error()))
   })

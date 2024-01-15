@@ -38,7 +38,7 @@ const makeValidation = (): Validation => {
 const makeAddProduct = (): AddProduct => {
   class AddProductStub implements AddProduct {
     async add (data: AddProductModel): Promise<void> {
-      return await new Promise(resolve => resolve())
+      return await Promise.resolve()
     }
   }
   const addProductStub = new AddProductStub()
@@ -89,7 +89,7 @@ describe('Add Product Controller', () => {
 
   test('Should return 500 if AddProduct throws', async () => {
     const { sut, addProductStub } = makeSut()
-    jest.spyOn(addProductStub, 'add').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(addProductStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })

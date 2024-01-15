@@ -45,7 +45,7 @@ const makeFakeProducts = (): ProductModel[] => ([
 const makeProductsRepository = (): LoadProductsRepository => {
   class LoadProductsRepositoryStub implements LoadProductsRepository {
     async loadAll (): Promise<ProductModel[]> {
-      return await new Promise(resolve => resolve(makeFakeProducts()))
+      return await Promise.resolve(makeFakeProducts())
     }
   }
   return new LoadProductsRepositoryStub()
@@ -81,7 +81,7 @@ describe('DbLoadProducts', () => {
 
   test('Should throw if LoadProductsRepository throws', async () => {
     const { sut, loadProductsRepositoryStub } = makeSut()
-    jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.load()
     await expect(promise).rejects.toThrow()
   })
