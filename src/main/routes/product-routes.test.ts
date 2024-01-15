@@ -75,4 +75,35 @@ describe('Product Routes', () => {
         .expect(204)
     })
   })
+
+  describe('GET /products', () => {
+    test('Should return 403 on product', async () => {
+      await request(app)
+        .post('/api/products')
+        .send(makeFakeAddProduct())
+        .expect(403)
+    })
+
+    test('Should return 204 on load products without accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        passwprd: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      await request(app)
+        .get('/api/products')
+        .send(makeFakeAddProduct())
+        .expect(403)
+    })
+  })
 })
