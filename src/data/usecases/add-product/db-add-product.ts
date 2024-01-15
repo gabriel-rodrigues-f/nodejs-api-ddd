@@ -1,4 +1,4 @@
-import { AddProduct, AddProductModel } from '../../../domain/usecases/add-product'
+import { AddProduct, AddProductModel } from '@/domain/usecases/add-product'
 import { AddProductRepository } from './db-add-product-protocols'
 
 export class DbAddProduct implements AddProduct {

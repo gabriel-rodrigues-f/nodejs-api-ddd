@@ -1,16 +1,19 @@
 {
   "compilerOptions": {
     "strictNullChecks": false,
-    "outDir": "./dist",
+    "outDir": "dist",
     "module": "commonJS",
     "target": "es2019",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rootDir": "src",
+    "baseUrl": "src",
+    "paths": {
+      "@/*": [
+        "*"
+      ]
+    },
   },
   "include": [
     "src"
-  ],
-  "exclude": [
-    "**/*.spec.ts",
-    "**/*.test.ts"
   ]
 }
