@@ -1,4 +1,5 @@
 import { ProductModel } from '../../../domain/models/product'
+import { LoadProducts } from '../../../domain/usecases/load-products'
 import { LoadProductsRepository } from '../../protocols/db/product/load-products-repository'
 import { DbLoadProducts } from './db-load-products'
 
@@ -51,7 +52,7 @@ const makeProductsRepository = (): LoadProductsRepository => {
 }
 
 interface SutTypes {
-  sut: LoadProductsRepository
+  sut: LoadProducts
   loadProductsRepositoryStub: LoadProductsRepository
 }
 
@@ -68,20 +69,20 @@ describe('DbLoadProducts', () => {
   test('Should call LoadProductsRepository', async () => {
     const { sut, loadProductsRepositoryStub } = makeSut()
     const loadAllSpy = jest.spyOn(loadProductsRepositoryStub, 'loadAll')
-    await sut.loadAll()
+    await sut.load()
     expect(loadAllSpy).toHaveBeenCalled()
   })
 
   test('Should return a list of Products on success', async () => {
     const { sut } = makeSut()
-    const products = await sut.loadAll()
+    const products = await sut.load()
     expect(products).toEqual(makeFakeProducts())
   })
 
   test('Should throw if LoadProductsRepository throws', async () => {
     const { sut, loadProductsRepositoryStub } = makeSut()
     jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
-    const promise = sut.loadAll()
+    const promise = sut.load()
     await expect(promise).rejects.toThrow()
   })
 })
