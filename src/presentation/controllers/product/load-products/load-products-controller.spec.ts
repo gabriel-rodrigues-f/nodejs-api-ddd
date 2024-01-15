@@ -1,5 +1,5 @@
 import { LoadProductsController } from './load-products-controller'
-import { ProductModel, LoadProducts, ok, serverError } from './load-products-controller-protocols'
+import { ProductModel, LoadProducts, ok, serverError, noContent } from './load-products-controller-protocols'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {
@@ -64,20 +64,27 @@ const makeSut = (): SutType => {
 }
 
 describe('LoadProducts Controller', () => {
-  test('Should call LoadProducts ', async () => {
+  test('Should call LoadProducts', async () => {
     const { sut, loadProductsStub } = makeSut()
     const loadSpy = jest.spyOn(loadProductsStub, 'load')
     await sut.handle({})
     expect(loadSpy).toHaveBeenCalled()
   })
 
-  test('Should return 200 on success ', async () => {
+  test('Should return 200 on success', async () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(ok(makeFakeProducts()))
   })
 
-  test('Should 500 if LoadProducts throws ', async () => {
+  test('Should return 204 LoadProduct returns empty', async () => {
+    const { sut, loadProductsStub } = makeSut()
+    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(new Promise(resolve => resolve([])))
+    const httpResponse = await sut.handle({})
+    expect(httpResponse).toEqual(noContent())
+  })
+
+  test('Should 500 if LoadProducts throws', async () => {
     const { sut, loadProductsStub } = makeSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const httpResponse = await sut.handle({})
