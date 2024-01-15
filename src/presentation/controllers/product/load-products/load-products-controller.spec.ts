@@ -49,7 +49,7 @@ const makeLoadProducts = (): LoadProducts => {
   return new LoadProductsStub()
 }
 
-interface SutType {
+type SutType = {
   sut: LoadProductsController
   loadProductsStub: LoadProducts
 }
