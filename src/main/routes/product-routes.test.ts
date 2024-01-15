@@ -84,7 +84,7 @@ describe('Product Routes', () => {
         .expect(403)
     })
 
-    test('Should return 204 on load products without accessToken', async () => {
+    test('Should return 403 on load products without accessToken', async () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
@@ -104,6 +104,29 @@ describe('Product Routes', () => {
         .get('/api/products')
         .send(makeFakeAddProduct())
         .expect(403)
+    })
+
+    test('Should return 200 on load products without accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        passwprd: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      await request(app)
+        .get('/api/products')
+        .set('x-access-token', accessToken)
+        .send(makeFakeAddProduct())
+        .expect(204)
     })
   })
 })
