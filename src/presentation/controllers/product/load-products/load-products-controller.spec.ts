@@ -1,5 +1,5 @@
 import { LoadProductsController } from './load-products-controller'
-import { ProductModel, LoadProducts, ok } from './load-products-controller-protocols'
+import { ProductModel, LoadProducts, ok, serverError } from './load-products-controller-protocols'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {
@@ -75,5 +75,12 @@ describe('LoadProducts Controller', () => {
     const { sut } = makeSut()
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(ok(makeFakeProducts()))
+  })
+
+  test('Should 500 if LoadProducts throws ', async () => {
+    const { sut, loadProductsStub } = makeSut()
+    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
+    const httpResponse = await sut.handle({})
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
