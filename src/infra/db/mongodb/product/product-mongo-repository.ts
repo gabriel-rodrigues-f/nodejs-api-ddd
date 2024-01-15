@@ -1,5 +1,5 @@
-import { LoadProductsRepository } from '../../../../data/protocols/db/product/load-products-repository'
-import { AddProductModel, AddProductRepository, ProductModel } from '../../../../data/usecases/add-product/db-add-product-protocols'
+import { LoadProductsRepository } from '@/data/protocols/db/product/load-products-repository'
+import { AddProductModel, AddProductRepository, ProductModel } from '@/data/usecases/add-product/db-add-product-protocols'
 import { MongoHelper } from '../helpers/mongo-helper'
 
 export class ProductMongoRepository implements AddProductRepository, LoadProductsRepository {

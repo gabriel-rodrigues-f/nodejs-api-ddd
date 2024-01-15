@@ -13,5 +13,8 @@ module.exports = {
   coveragePathIgnorePatterns: [
     'domain',
     'protocols'
-  ]
+  ],
+  moduleNameMapper: {
+    '@/(.*)': '<rootDir>/src/$1'
+  },
 };
