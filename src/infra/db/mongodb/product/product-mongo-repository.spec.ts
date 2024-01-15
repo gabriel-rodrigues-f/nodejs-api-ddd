@@ -91,11 +91,17 @@ describe('ProductRepository', () => {
   })
 
   describe('loadAll()', () => {
-    test('Should load all products on success ', async () => {
+    test('Should load all products on success', async () => {
       await productCollection.insertMany(makeFakeProducts())
       const sut = makeSut()
       const products = await sut.loadAll()
       expect(products.length).toBe(2)
+    })
+
+    test('Should load empty list', async () => {
+      const sut = makeSut()
+      const products = await sut.loadAll()
+      expect(products.length).toBe(0)
     })
   })
 })
