@@ -1,4 +1,4 @@
-import { Collection, MongoClient } from 'mongodb'
+import { type Collection, MongoClient } from 'mongodb'
 import env from '@/main/config/env'
 
 export const MongoHelper = {

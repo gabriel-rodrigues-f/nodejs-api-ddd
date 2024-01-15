@@ -1,5 +1,5 @@
 import { LoadProductsController } from './load-products-controller'
-import { ProductModel, LoadProducts, ok, serverError, noContent } from './load-products-controller-protocols'
+import { type ProductModel, type LoadProducts, ok, serverError, noContent } from './load-products-controller-protocols'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {
@@ -43,13 +43,13 @@ const makeFakeProducts = (): ProductModel[] => ([
 const makeLoadProducts = (): LoadProducts => {
   class LoadProductsStub implements LoadProducts {
     async load (): Promise<ProductModel[]> {
-      return new Promise(resolve => resolve(makeFakeProducts()))
+      return await new Promise(resolve => resolve(makeFakeProducts()))
     }
   }
   return new LoadProductsStub()
 }
 
-type SutType = {
+interface SutType {
   sut: LoadProductsController
   loadProductsStub: LoadProducts
 }

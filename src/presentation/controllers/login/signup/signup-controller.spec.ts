@@ -1,5 +1,5 @@
 import { SignUpController } from './signup-controller'
-import { AccountModel, AddAccount, AddAccountModel, Authentication, AuthenticationModel, HttpRequest, Validation } from './signup-controller-protocols'
+import { type AccountModel, type AddAccount, type AddAccountModel, type Authentication, type AuthenticationModel, type HttpRequest, type Validation } from './signup-controller-protocols'
 import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
 import { ok, badRequest, serverError, forbidden } from '../../../helpers/http/http-helpers'
 
@@ -28,7 +28,7 @@ const makeFakeAddAccount = (): AddAccountModel => ({
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
     async auth (authentication: AuthenticationModel): Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
+      return await new Promise(resolve => resolve('any_token'))
     }
   }
   return new AuthenticationStub()
@@ -37,7 +37,7 @@ const makeAuthentication = (): Authentication => {
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
     async add (account: AddAccountModel): Promise<AccountModel> {
-      return new Promise(resolve => resolve(makeFakeAccount()))
+      return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
   return new AddAccountStub()
@@ -52,7 +52,7 @@ const makeValidation = (): Validation => {
   return new ValidationStub()
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: SignUpController
   addAccountStub: AddAccount
   validationStub: Validation
@@ -76,7 +76,7 @@ describe('SignUp Controller', () => {
   test('Should return 500 if AddAccount throws Exception', async () => {
     const { sut, addAccountStub } = makeSut()
     jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {
-      return new Promise((resolve, reject) => reject(new Error()))
+      return await new Promise((resolve, reject) => reject(new Error()))
     })
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new ServerError('')))

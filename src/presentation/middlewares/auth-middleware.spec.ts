@@ -1,4 +1,4 @@
-import { AuthMiddleware, HttpRequest, LoadAccountByToken, AccountModel } from './auth-middleware-protocols'
+import { AuthMiddleware, type HttpRequest, type LoadAccountByToken, type AccountModel } from './auth-middleware-protocols'
 import { forbidden, ok, serverError } from '../helpers/http/http-helpers'
 import { AccessDeniedError } from '../errors'
 
@@ -15,7 +15,7 @@ const makeFakeRequest = (): HttpRequest => ({
   }
 })
 
-type SutTypes = {
+interface SutTypes {
   sut: AuthMiddleware
   loadAccountByTokenStub: LoadAccountByToken
 }
@@ -23,7 +23,7 @@ type SutTypes = {
 const makeLoadAccountByToken = (): LoadAccountByToken => {
   class LoadAccountByTokenStub implements LoadAccountByToken {
     async load (accessToken: string, role?: string): Promise<AccountModel> {
-      return new Promise(resolve => resolve(makeFakeAccount()))
+      return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
   const loadAccountByTokenStub = new LoadAccountByTokenStub()

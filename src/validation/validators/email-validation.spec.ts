@@ -1,4 +1,4 @@
-import { EmailValidator } from '../protocols/email-validator'
+import { type EmailValidator } from '../protocols/email-validator'
 import { EmailValidation } from './email-validation'
 
 const makeEmailValidator = (): EmailValidator => {
@@ -10,7 +10,7 @@ const makeEmailValidator = (): EmailValidator => {
   return new EmailValidatorStub()
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: EmailValidation
   emailValidatorStub: EmailValidator
 }

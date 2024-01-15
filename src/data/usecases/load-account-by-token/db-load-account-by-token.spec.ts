@@ -1,12 +1,12 @@
-import { Decrypter } from '../../protocols/criptography/decrypter'
-import { AccountModel } from '../add-account/db-add-account-protocols'
+import { type Decrypter } from '../../protocols/criptography/decrypter'
+import { type AccountModel } from '../add-account/db-add-account-protocols'
 import { DbLoadAccountByToken } from './db-load-account-by-token'
-import { LoadAccountByTokenRepository } from '../../protocols/db/account/load-account-by-token-repository'
+import { type LoadAccountByTokenRepository } from '../../protocols/db/account/load-account-by-token-repository'
 
 const makeDecrypterStub = (): Decrypter => {
   class DecrypterStub implements Decrypter {
     async decrypt (value: string): Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
+      return await new Promise(resolve => resolve('any_token'))
     }
   }
   return new DecrypterStub()
@@ -22,13 +22,13 @@ const makeFakeAccount = (): AccountModel => ({
 const makeLoadAccountByTokenRepository = (): LoadAccountByTokenRepository => {
   class LoadAccountByTokenRepositoryStub implements LoadAccountByTokenRepository {
     async loadByToken (token: string, role?: string): Promise<AccountModel> {
-      return new Promise(resolve => resolve(makeFakeAccount()))
+      return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
   return new LoadAccountByTokenRepositoryStub()
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: DbLoadAccountByToken
   decrypterStub: Decrypter
   loadAccountByTokenRepositoryStub: LoadAccountByTokenRepository

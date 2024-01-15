@@ -1,5 +1,5 @@
-import { Collection } from 'mongodb'
-import { AddProductModel, ProductModel } from '../../../../data/usecases/add-product/db-add-product-protocols'
+import { type Collection } from 'mongodb'
+import { type AddProductModel, type ProductModel } from '@/data/usecases/add-product/db-add-product-protocols'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { ProductMongoRepository } from './product-mongo-repository'
 

@@ -1,5 +1,5 @@
 import { DbAuthentication } from './db-authentication'
-import { AccountModel, AuthenticationModel, HashComparer, LoadAccountByEmailRepository, Encrypter, UpdateAccessTokenRepository } from './db-authentication-protocols'
+import { type AccountModel, type AuthenticationModel, type HashComparer, type LoadAccountByEmailRepository, type Encrypter, type UpdateAccessTokenRepository } from './db-authentication-protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   name: 'any_name',
@@ -16,7 +16,7 @@ const makeFakeAuthentication = (): AuthenticationModel => ({
 const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
     async loadByEmail (email: string): Promise<AccountModel> {
-      return new Promise(resolve => resolve(makeFakeAccount()))
+      return await new Promise(resolve => resolve(makeFakeAccount()))
     }
   }
   return new LoadAccountByEmailRepositoryStub()
@@ -25,7 +25,7 @@ const makeLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 const makeEncrypter = (): Encrypter => {
   class EcrypterStub implements Encrypter {
     async encrypt (id: string): Promise<string> {
-      return new Promise(resolve => resolve('any_token'))
+      return await new Promise(resolve => resolve('any_token'))
     }
   }
   return new EcrypterStub()
@@ -34,7 +34,7 @@ const makeEncrypter = (): Encrypter => {
 const makeHashComparer = (): HashComparer => {
   class HasComparerStub implements HashComparer {
     async compare (value: string, hash: string): Promise<boolean> {
-      return new Promise(resolve => resolve(true))
+      return await new Promise(resolve => resolve(true))
     }
   }
   return new HasComparerStub()
@@ -43,13 +43,13 @@ const makeHashComparer = (): HashComparer => {
 const makeUpdateAccessTokenRepositoryStub = (): UpdateAccessTokenRepository => {
   class UpdateAccessTokenRepositoryStub implements UpdateAccessTokenRepository {
     async updateAccessToken (id: string, token: string): Promise<void> {
-      return new Promise(resolve => resolve())
+      return await new Promise(resolve => resolve())
     }
   }
   return new UpdateAccessTokenRepositoryStub()
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: DbAuthentication
   hashComparerStub: HashComparer
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository

@@ -1,6 +1,6 @@
-import { ProductModel } from '../../../domain/models/product'
-import { LoadProducts } from '../../../domain/usecases/load-products'
-import { LoadProductsRepository } from '../../protocols/db/product/load-products-repository'
+import { type ProductModel } from '../../../domain/models/product'
+import { type LoadProducts } from '../../../domain/usecases/load-products'
+import { type LoadProductsRepository } from '../../protocols/db/product/load-products-repository'
 import { DbLoadProducts } from './db-load-products'
 
 const makeFakeProducts = (): ProductModel[] => ([
@@ -45,13 +45,13 @@ const makeFakeProducts = (): ProductModel[] => ([
 const makeProductsRepository = (): LoadProductsRepository => {
   class LoadProductsRepositoryStub implements LoadProductsRepository {
     async loadAll (): Promise<ProductModel[]> {
-      return new Promise(resolve => resolve(makeFakeProducts()))
+      return await new Promise(resolve => resolve(makeFakeProducts()))
     }
   }
   return new LoadProductsRepositoryStub()
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: LoadProducts
   loadProductsRepositoryStub: LoadProductsRepository
 }

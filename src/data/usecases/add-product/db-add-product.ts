@@ -1,5 +1,5 @@
-import { AddProduct, AddProductModel } from '@/domain/usecases/add-product'
-import { AddProductRepository } from './db-add-product-protocols'
+import { type AddProduct, type AddProductModel } from '@/domain/usecases/add-product'
+import { type AddProductRepository } from './db-add-product-protocols'
 
 export class DbAddProduct implements AddProduct {
   constructor (private readonly addProductRepository: AddProductRepository) { }

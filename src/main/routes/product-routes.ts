@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { type Router } from 'express'
 import { adaptRoute } from '../adapters/express-route-adapter'
 import { makeAddProductController } from '../factories/controllers/product/add-product/add-product-controller-factory'
 import { makeLoadProductsController } from '../factories/controllers/product/load-products/load-products-controller-factory'

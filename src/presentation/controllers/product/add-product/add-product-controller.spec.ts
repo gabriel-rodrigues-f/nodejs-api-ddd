@@ -1,7 +1,7 @@
-import { HttpRequest } from '../../../protocols/http'
+import { type HttpRequest } from '../../../protocols/http'
 import { AddProductController } from './add-product-controller'
 import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
-import { AddProduct, AddProductModel, Validation } from './add-product-controller-protocols'
+import { type AddProduct, type AddProductModel, type Validation } from './add-product-controller-protocols'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',
@@ -38,14 +38,14 @@ const makeValidation = (): Validation => {
 const makeAddProduct = (): AddProduct => {
   class AddProductStub implements AddProduct {
     async add (data: AddProductModel): Promise<void> {
-      return new Promise(resolve => resolve())
+      return await new Promise(resolve => resolve())
     }
   }
   const addProductStub = new AddProductStub()
   return addProductStub
 }
 
-type SutTypes = {
+interface SutTypes {
   sut: AddProductController
   validationStub: Validation
   addProductStub: AddProduct

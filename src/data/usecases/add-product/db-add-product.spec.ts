@@ -1,6 +1,6 @@
-import { AddProductModel } from '../../../domain/usecases/add-product'
+import { type AddProductModel } from '../../../domain/usecases/add-product'
 import { DbAddProduct } from './db-add-product'
-import { AddProductRepository } from '../../protocols/db/product/add-product-repository'
+import { type AddProductRepository } from '../../protocols/db/product/add-product-repository'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',
@@ -20,7 +20,7 @@ const makeFakeAddProduct = (): AddProductModel => ({
   }
 })
 
-type SutTypes = {
+interface SutTypes {
   sut: DbAddProduct
   addProductRepositoryStub: AddProductRepository
 }
@@ -28,7 +28,7 @@ type SutTypes = {
 const makeAddProductRepository = (): AddProductRepository => {
   class AddProductRepositoryStub implements AddProductRepository {
     async add (productData: AddProductModel): Promise<void> {
-      return new Promise(resolve => resolve())
+      return await new Promise(resolve => resolve())
     }
   }
   const addProductRepositoryStub = new AddProductRepositoryStub()
