@@ -20,7 +20,7 @@ const makeFakeAddProduct = (): AddProductModel => ({
   }
 })
 
-interface SutTypes {
+type SutTypes = {
   sut: DbAddProduct
   addProductRepositoryStub: AddProductRepository
 }

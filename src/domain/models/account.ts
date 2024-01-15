@@ -1,4 +1,4 @@
-export interface AccountModel {
+export type AccountModel = {
   name: string
   email: string
   password: string

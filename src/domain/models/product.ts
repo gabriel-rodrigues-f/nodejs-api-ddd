@@ -1,4 +1,4 @@
-export interface ProductNutritionalInformationModel {
+export type ProductNutritionalInformationModel = {
   calorie: string
   carbohydrate: string
   total_sugars: string
@@ -11,7 +11,7 @@ export interface ProductNutritionalInformationModel {
   sodium: string
 }
 
-export interface ProductModel {
+export type ProductModel = {
   id: string
   category: string
   name: string

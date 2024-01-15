@@ -1,5 +1,5 @@
 import { ProductModel } from '../models/product'
 
-export interface LoadProducts {
+export type LoadProducts = {
   load (): Promise<ProductModel[]>
 }

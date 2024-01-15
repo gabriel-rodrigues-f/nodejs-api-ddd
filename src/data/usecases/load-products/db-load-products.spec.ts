@@ -51,7 +51,7 @@ const makeProductsRepository = (): LoadProductsRepository => {
   return new LoadProductsRepositoryStub()
 }
 
-interface SutTypes {
+type SutTypes = {
   sut: LoadProducts
   loadProductsRepositoryStub: LoadProductsRepository
 }

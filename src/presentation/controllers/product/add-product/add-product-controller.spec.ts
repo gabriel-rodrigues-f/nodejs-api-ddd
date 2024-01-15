@@ -45,7 +45,7 @@ const makeAddProduct = (): AddProduct => {
   return addProductStub
 }
 
-interface SutTypes {
+type SutTypes = {
   sut: AddProductController
   validationStub: Validation
   addProductStub: AddProduct
