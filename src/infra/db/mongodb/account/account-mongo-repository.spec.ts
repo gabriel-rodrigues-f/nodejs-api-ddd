@@ -1,7 +1,9 @@
 import { type Collection } from 'mongodb'
-import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountMongoRepository } from './account-mongo-repository'
-import { type AddAccountModel } from '../../../../domain/usecases/account/add-account'
+import {
+  MongoHelper,
+  type AddAccountModel
+} from './account-mongo-repository-protocols'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
