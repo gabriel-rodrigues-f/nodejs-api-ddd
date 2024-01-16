@@ -1,4 +1,4 @@
-import { type AddAccountModel } from '@/domain/usecases/add-account'
+import { type AddAccountModel } from '@/domain/usecases/account/add-account'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import request from 'supertest'
 import app from '../config/app'
