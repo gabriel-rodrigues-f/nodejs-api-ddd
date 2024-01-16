@@ -1,6 +1,7 @@
 import { type LoadProductById } from '@/domain/usecases/load-product-by-id'
 import { LoadProductByidController } from './load-product-by-id-controller'
-import { type HttpRequest, type ProductModel } from './load-product-by-id-controller-protocols'
+import { forbidden, type HttpRequest, type ProductModel } from './load-product-by-id-controller-protocols'
+import { InvalidParamError } from '@/presentation/errors'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',
@@ -51,10 +52,17 @@ const makeSut = (): SutTypes => {
 }
 
 describe('LoadProductById Controller', () => {
-  test(' Should call LoadProductBy with correct values ', async () => {
+  test(' Should call LoadProductBy with correct values', async () => {
     const { sut, loadProductByIdStub } = makeSut()
     const loadProductByIdSpy = jest.spyOn(loadProductByIdStub, 'loadById')
     await sut.handle(makeFakeRequest())
     expect(loadProductByIdSpy).toHaveBeenCalledWith('any_productId')
+  })
+
+  test('Should return 403 if LoadProductById returns null', async () => {
+    const { sut, loadProductByIdStub } = makeSut()
+    jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(forbidden((new InvalidParamError('productId'))))
   })
 })
