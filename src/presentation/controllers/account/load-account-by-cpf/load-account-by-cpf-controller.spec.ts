@@ -6,7 +6,7 @@ import {
   notFound,
   serverError,
   ok
-} from './load-account-by-cpf-controller-protocols'
+} from '.'
 
 const makeFakeRequest = (): HttpRequest => ({
   params: {

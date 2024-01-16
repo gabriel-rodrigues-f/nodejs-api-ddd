@@ -6,7 +6,7 @@ import {
   type ProductModel,
   type LoadProductByIdRepository,
   MongoHelper
-} from './product-mongo-repository-protocols'
+} from '.'
 
 export class ProductMongoRepository implements AddProductRepository, LoadProductsRepository, LoadProductByIdRepository {
   async add (productData: AddProductModel): Promise<void> {

@@ -8,7 +8,7 @@ import {
   badRequest,
   serverError,
   unauthorized
-} from './login-controller-protocols'
+} from '.'
 
 export class LoginController implements Controller {
   constructor (

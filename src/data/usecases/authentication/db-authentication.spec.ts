@@ -6,7 +6,7 @@ import {
   type LoadAccountByEmailRepository,
   type Encrypter,
   type UpdateAccessTokenRepository
-} from './db-authentication-protocols'
+} from '.'
 
 const makeFakeAccount = (): AccountModel => ({
   name: 'any_name',

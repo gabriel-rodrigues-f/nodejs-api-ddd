@@ -3,7 +3,7 @@ import {
   type Controller,
   type HttpRequest,
   type HttpResponse
-} from './log-controller-decorator-protocol'
+} from '.'
 
 export class LogControllerDecorator implements Controller {
   constructor (

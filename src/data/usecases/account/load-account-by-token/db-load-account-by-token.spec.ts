@@ -3,7 +3,7 @@ import {
   type LoadAccountByTokenRepository,
   type Decrypter,
   type AccountModel
-} from './db-load-account-by-token-protocols'
+} from '.'
 
 const makeDecrypterStub = (): Decrypter => {
   class DecrypterStub implements Decrypter {

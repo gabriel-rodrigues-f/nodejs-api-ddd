@@ -5,7 +5,7 @@ import {
   noContent,
   serverError,
   ok
-} from './load-product-by-id-controller-protocols'
+} from '.'
 
 export class LoadProductByidController implements Controller {
   constructor (private readonly loadProductById: LoadProductById) { }

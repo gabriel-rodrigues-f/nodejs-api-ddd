@@ -7,7 +7,7 @@ import {
   ok,
   forbidden,
   serverError
-} from './auth-middleware-protocols'
+} from '.'
 
 export class AuthMiddleware implements Middleware {
   constructor (

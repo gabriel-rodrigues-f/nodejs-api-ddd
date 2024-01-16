@@ -4,7 +4,7 @@ import {
   MongoHelper,
   type AddProductModel,
   type ProductModel
-} from './product-mongo-repository-protocols'
+} from '.'
 
 let productCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''

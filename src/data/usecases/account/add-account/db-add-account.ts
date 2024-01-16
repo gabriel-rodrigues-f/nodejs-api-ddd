@@ -5,7 +5,7 @@ import {
   type Hasher,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
-} from './db-add-account-protocols'
+} from '.'
 
 export class DbAddAccount implements AddAccount {
   constructor (

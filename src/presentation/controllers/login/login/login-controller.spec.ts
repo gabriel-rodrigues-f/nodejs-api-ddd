@@ -9,7 +9,7 @@ import {
   serverError,
   unauthorized,
   MissingParamError
-} from './login-controller-protocols'
+} from '.'
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {

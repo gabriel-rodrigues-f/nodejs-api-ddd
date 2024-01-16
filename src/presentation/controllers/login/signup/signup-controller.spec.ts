@@ -14,7 +14,7 @@ import {
   ServerError,
   EmailInUseError,
   MissingParamError
-} from './signup-controller-protocols'
+} from '.'
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {

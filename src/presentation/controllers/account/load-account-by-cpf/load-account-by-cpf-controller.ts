@@ -5,7 +5,7 @@ import {
   serverError,
   notFound,
   ok
-} from './load-account-by-cpf-controller-protocols'
+} from '.'
 
 export class LoadAccountByCpfController implements Controller {
   constructor (private readonly loadAccountByCpf: LoadAccountByCpf) { }

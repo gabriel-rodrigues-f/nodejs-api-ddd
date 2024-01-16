@@ -6,7 +6,7 @@ import {
   noContent,
   ok,
   serverError
-} from '../load-products/load-products-controller-protocols'
+} from '.'
 
 export class LoadProductsController implements Controller {
   constructor (private readonly loadProducts: LoadProducts) { }

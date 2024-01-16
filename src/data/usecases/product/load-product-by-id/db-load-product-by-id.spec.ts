@@ -2,7 +2,7 @@ import { DbLoadProductById } from './db-load-product-by-id'
 import {
   type LoadProductByIdRepository,
   type ProductModel
-} from './db-load-product-by-id-protocols'
+} from '.'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',

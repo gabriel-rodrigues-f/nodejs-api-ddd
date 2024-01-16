@@ -7,7 +7,7 @@ import {
   type AddAccountModel,
   type AccountModel,
   MongoHelper
-} from './account-mongo-repository-protocols'
+} from '.'
 
 export class AccountMongoRepository implements
   AddAccountRepository,

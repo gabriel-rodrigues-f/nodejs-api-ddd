@@ -7,7 +7,7 @@ import {
   serverError,
   badRequest,
   noContent
-} from './add-product-controller-protocols'
+} from '.'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',

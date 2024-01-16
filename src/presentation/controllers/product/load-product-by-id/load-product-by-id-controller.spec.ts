@@ -6,7 +6,7 @@ import {
   noContent,
   serverError,
   ok
-} from './load-product-by-id-controller-protocols'
+} from '.'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',

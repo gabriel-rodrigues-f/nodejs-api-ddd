@@ -2,7 +2,7 @@ import { type LoadProducts } from '@/domain/usecases/product/load-products'
 import {
   type LoadProductsRepository,
   type ProductModel
-} from './db-load-products-protocols'
+} from '.'
 
 export class DbLoadProducts implements LoadProducts {
   constructor (private readonly loadProductsRepository: LoadProductsRepository) { }

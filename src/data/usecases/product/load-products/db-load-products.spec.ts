@@ -3,7 +3,7 @@ import {
   type ProductModel,
   type LoadProductsRepository,
   type LoadProducts
-} from './db-load-products-protocols'
+} from '.'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {

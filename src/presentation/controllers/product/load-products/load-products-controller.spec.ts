@@ -5,7 +5,7 @@ import {
   ok,
   serverError,
   noContent
-} from './load-products-controller-protocols'
+} from '.'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {

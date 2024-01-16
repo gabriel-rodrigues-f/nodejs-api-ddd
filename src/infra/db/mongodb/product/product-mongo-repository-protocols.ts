@@ -1,4 +1,0 @@
-export * from '@/data/protocols/db/product/load-products-repository'
-export * from '@/data/usecases/product/add-product/db-add-product-protocols'
-export * from '@/data/usecases/product/load-product-by-id/db-load-product-by-id-protocols'
-export * from '../helpers/mongo-helper'

@@ -5,7 +5,7 @@ import {
   type HttpResponse,
   type LogErrorRepository,
   serverError
-} from './log-controller-decorator-protocol'
+} from '.'
 
 const makeController = (): Controller => {
   class ControllerStub implements Controller {

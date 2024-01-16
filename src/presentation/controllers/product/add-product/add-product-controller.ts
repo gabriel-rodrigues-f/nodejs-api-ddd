@@ -7,7 +7,7 @@ import {
   badRequest,
   noContent,
   serverError
-} from './add-product-controller-protocols'
+} from '.'
 
 export class AddProductController implements Controller {
   constructor (

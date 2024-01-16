@@ -2,7 +2,7 @@ import { DbAddProduct } from './db-add-product'
 import {
   type AddProductModel,
   type AddProductRepository
-} from './db-add-product-protocols'
+} from '.'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',

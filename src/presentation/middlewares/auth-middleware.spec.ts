@@ -7,7 +7,7 @@ import {
   serverError,
   AuthMiddleware,
   AccessDeniedError
-} from './auth-middleware-protocols'
+} from '.'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',

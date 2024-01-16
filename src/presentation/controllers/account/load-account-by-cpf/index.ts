@@ -1,4 +1,4 @@
 export * from '@/domain/models/account'
 export * from '@/domain/usecases/account/load-account-by-cpf'
 export * from '@/presentation/helpers/http/http-helpers'
-export * from '../../login/login/login-controller-protocols'
+export * from '../../login/login'

@@ -3,7 +3,7 @@ import { AccountMongoRepository } from './account-mongo-repository'
 import {
   MongoHelper,
   type AddAccountModel
-} from './account-mongo-repository-protocols'
+} from '.'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''

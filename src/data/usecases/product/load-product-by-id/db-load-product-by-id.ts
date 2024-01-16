@@ -2,7 +2,7 @@ import {
   type LoadProductById,
   type ProductModel,
   type LoadProductByIdRepository
-} from './db-load-product-by-id-protocols'
+} from '.'
 
 export class DbLoadProductById implements LoadProductById {
   constructor (private readonly loadProductByIdRepository: LoadProductByIdRepository) { }

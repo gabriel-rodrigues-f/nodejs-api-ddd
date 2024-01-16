@@ -3,7 +3,7 @@ import {
   type AccountModel,
   type LoadAccountByTokenRepository,
   type LoadAccountByToken
-} from './db-load-account-by-token-protocols'
+} from '.'
 
 export class DbLoadAccountByToken implements LoadAccountByToken {
   constructor (

@@ -2,7 +2,7 @@ import {
   type LoadAccountByCpf,
   type AccountModel,
   type LoadAccountByCpfRepository
-} from './db-load-account-by-cpf-protocols'
+} from '.'
 
 export class DbLoadAccountByCpf implements LoadAccountByCpf {
   constructor (private readonly loadAccountByCpfRepository: LoadAccountByCpfRepository) { }

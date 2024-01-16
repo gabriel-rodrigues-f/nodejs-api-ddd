@@ -4,7 +4,7 @@ import {
   type AddAccountModel,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
-} from './db-add-account-protocols'
+} from '.'
 import { DbAddAccount } from './db-add-account'
 
 const makeHasher = (): Hasher => {

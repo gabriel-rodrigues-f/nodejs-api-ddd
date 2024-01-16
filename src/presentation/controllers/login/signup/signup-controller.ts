@@ -10,7 +10,7 @@ import {
   badRequest,
   serverError,
   EmailInUseError
-} from './signup-controller-protocols'
+} from '.'
 
 export class SignUpController implements Controller {
   constructor (
