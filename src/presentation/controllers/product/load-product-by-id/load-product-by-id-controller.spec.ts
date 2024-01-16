@@ -1,6 +1,6 @@
 import { type LoadProductById } from '@/domain/usecases/load-product-by-id'
 import { LoadProductByidController } from './load-product-by-id-controller'
-import { noContent, type HttpRequest, type ProductModel } from './load-product-by-id-controller-protocols'
+import { noContent, type HttpRequest, type ProductModel, serverError } from './load-product-by-id-controller-protocols'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',
@@ -58,10 +58,17 @@ describe('LoadProductById Controller', () => {
     expect(loadProductByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
-  test('Should return 204 if LoadAccountById returns empty', async () => {
+  test('Should return 204 if LoadProductById returns empty', async () => {
     const { sut, loadProductByIdStub } = makeSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(noContent())
+  })
+
+  test('Should return 500 if LoadProductById throws', async () => {
+    const { sut, loadProductByIdStub } = makeSut()
+    jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
