@@ -1,7 +1,6 @@
 import { type LoadProductById } from '@/domain/usecases/load-product-by-id'
 import { LoadProductByidController } from './load-product-by-id-controller'
-import { forbidden, type HttpRequest, type ProductModel } from './load-product-by-id-controller-protocols'
-import { InvalidParamError } from '@/presentation/errors'
+import { noContent, type HttpRequest, type ProductModel } from './load-product-by-id-controller-protocols'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',
@@ -59,10 +58,10 @@ describe('LoadProductById Controller', () => {
     expect(loadProductByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
-  test('Should return 403 if LoadProductById returns null', async () => {
+  test('Should return 204 if LoadAccountById returns empty', async () => {
     const { sut, loadProductByIdStub } = makeSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(forbidden((new InvalidParamError('productId'))))
+    expect(httpResponse).toEqual(noContent())
   })
 })
