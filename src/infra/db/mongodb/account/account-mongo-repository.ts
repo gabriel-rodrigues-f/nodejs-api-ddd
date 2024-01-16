@@ -46,4 +46,9 @@ export class AccountMongoRepository implements
     })
     return account && MongoHelper.map(account)
   }
+
+  async loadByCpf (cpf: string): Promise<AccountModel> {
+    const accountCollection = MongoHelper.getCollection('accounts')
+    return await accountCollection.findOne<AccountModel>({ cpf })
+  }
 }
