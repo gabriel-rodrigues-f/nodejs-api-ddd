@@ -1,5 +1,11 @@
 import { LoadProductsController } from './load-products-controller'
-import { type ProductModel, type LoadProducts, ok, serverError, noContent } from './load-products-controller-protocols'
+import {
+  type ProductModel,
+  type LoadProducts,
+  ok,
+  serverError,
+  noContent
+} from './load-products-controller-protocols'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {

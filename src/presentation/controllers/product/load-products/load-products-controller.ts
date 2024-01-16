@@ -1,4 +1,12 @@
-import { type Controller, type HttpRequest, type HttpResponse, type LoadProducts, noContent, ok, serverError } from '../load-products/load-products-controller-protocols'
+import {
+  type Controller,
+  type HttpRequest,
+  type HttpResponse,
+  type LoadProducts,
+  noContent,
+  ok,
+  serverError
+} from '../load-products/load-products-controller-protocols'
 
 export class LoadProductsController implements Controller {
   constructor (private readonly loadProducts: LoadProducts) { }
