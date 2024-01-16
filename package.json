@@ -2,10 +2,10 @@
   "name": "nodejs-api-ddd",
   "version": "1.5.1",
   "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
-  "main": "index.js",
+  "main": "dist/main/server.js",
   "scripts": {
     "start": "node dist/main/server.js",
-    "start:dev": "tsx watch src/main/server.ts",
+    "start:dev": "ts-node src/main/server.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "up": "npm run build && docker-compose up -d",
     "up:locally": "npm run build && docker build -t nodejs-api-ddd . && docker-compose up -d",
@@ -46,7 +46,7 @@
     "rimraf": "^5.0.5",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.1",
-    "tsx": "^4.7.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
   "dependencies": {

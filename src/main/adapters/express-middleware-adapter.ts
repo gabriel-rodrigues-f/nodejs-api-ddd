@@ -1,12 +1,12 @@
-import { type HttpRequest, type Middleware } from '@/presentation/protocols'
+import { type Middleware } from '@/presentation/protocols'
 import { type NextFunction, type Request, type Response } from 'express'
 
 export const adaptMiddleware = (middleware: Middleware) => {
   return async (req: Request, res: Response, next: NextFunction) => {
-    const httpRequest: HttpRequest = {
-      headers: req.headers
+    const request = {
+      headers: req.headers || {}
     }
-    const httpResponse = await middleware.handle(httpRequest)
+    const httpResponse = await middleware.handle(request)
     if (httpResponse.statusCode === 200) {
       Object.assign(req, httpResponse.body)
       next()
