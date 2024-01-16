@@ -11,9 +11,7 @@ export class AddProductController implements Controller {
   async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const error = this.validation.validate(httpRequest.body)
-      if (error) {
-        return badRequest(error)
-      }
+      if (error) return badRequest(error)
       const { category, name, price, nutritionalInformation } = httpRequest.body
       await this.addProduct.add({ category, name, price, nutritionalInformation })
       return noContent()
