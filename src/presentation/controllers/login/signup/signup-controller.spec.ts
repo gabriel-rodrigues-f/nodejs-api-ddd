@@ -1,7 +1,20 @@
 import { SignUpController } from './signup-controller'
-import { type AccountModel, type AddAccount, type AddAccountModel, type Authentication, type AuthenticationModel, type HttpRequest, type Validation } from './signup-controller-protocols'
-import { EmailInUseError, MissingParamError, ServerError } from '../../../errors'
-import { ok, badRequest, serverError, forbidden } from '../../../helpers/http/http-helpers'
+import {
+  type HttpRequest,
+  type AccountModel,
+  type AddAccountModel,
+  type Authentication,
+  type AuthenticationModel,
+  type AddAccount,
+  type Validation,
+  ok,
+  forbidden,
+  serverError,
+  badRequest,
+  ServerError,
+  EmailInUseError,
+  MissingParamError
+} from './signup-controller-protocols'
 
 const makeFakeRequest = (): HttpRequest => ({
   body: {
