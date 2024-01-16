@@ -51,10 +51,10 @@ describe('LoadProductById Usecase', () => {
     expect(loadByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
-  test('Should call LoadProductByIdRepository with correct values', async () => {
+  test('Should thorws if LoadProductByIdRepository throws', async () => {
     const { sut, loadProductByIdRepositoryStub } = makeSut()
-    const loadByIdSpy = jest.spyOn(loadProductByIdRepositoryStub, 'loadById')
-    await sut.loadById('any_productId')
-    expect(loadByIdSpy).toHaveBeenCalledWith('any_productId')
+    jest.spyOn(loadProductByIdRepositoryStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.loadById('any_productId')
+    await expect(promise).rejects.toThrow()
   })
 })
