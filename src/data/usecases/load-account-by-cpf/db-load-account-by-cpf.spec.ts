@@ -46,4 +46,10 @@ describe('DbLoadAccountByCpf Usecase', () => {
     const promise = sut.loadByCpf('any_cpf')
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return an account on success', async () => {
+    const { sut } = makeSut()
+    const product = await sut.loadByCpf('any_cpf')
+    expect(product).toEqual(makeFakeAccount())
+  })
 })
