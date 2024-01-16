@@ -1,7 +1,10 @@
 import { type Collection } from 'mongodb'
-import { type AddProductModel, type ProductModel } from '@/data/usecases/product/add-product/db-add-product-protocols'
-import { MongoHelper } from '../helpers/mongo-helper'
 import { ProductMongoRepository } from './product-mongo-repository'
+import {
+  MongoHelper,
+  type AddProductModel,
+  type ProductModel
+} from './product-mongo-repository-protocols'
 
 let productCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
