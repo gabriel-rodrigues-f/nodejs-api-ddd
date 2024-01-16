@@ -1,5 +1,8 @@
 import { DbLoadAccountByCpf } from './db-load-account-by-cpf'
-import { type LoadAccountByCpfRepository, type AccountModel } from './db-load-account-by-cpf-protocols'
+import {
+  type LoadAccountByCpfRepository,
+  type AccountModel
+} from './db-load-account-by-cpf-protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
