@@ -1,6 +1,5 @@
-import { type LoadAccountByCpfRepository } from '@/data/protocols/db/account/load-account-by-cpf-repository'
-import { type AccountModel } from '../authentication/db-authentication-protocols'
 import { DbLoadAccountByCpf } from './db-load-account-by-cpf'
+import { type LoadAccountByCpfRepository, type AccountModel } from './db-load-account-by-cpf-protocols'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -39,5 +38,12 @@ describe('DbLoadAccountByCpf Usecase', () => {
     const loadByCpfStub = jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf')
     await sut.loadByCpf('valid_cpf')
     expect(loadByCpfStub).toHaveBeenCalledWith('valid_cpf')
+  })
+
+  test('Should thorws if LoadAccountByCpfRepository throws', async () => {
+    const { sut, loadAccountByCpfRepositoryStub } = makeSut()
+    jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.loadByCpf('any_cpf')
+    await expect(promise).rejects.toThrow()
   })
 })
