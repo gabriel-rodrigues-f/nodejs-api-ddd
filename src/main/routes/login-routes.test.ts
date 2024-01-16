@@ -1,11 +1,21 @@
+import { type AddAccountModel } from '@/domain/usecases/add-account'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import request from 'supertest'
 import app from '../config/app'
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { type Collection } from 'mongodb'
 import { hash } from 'bcrypt'
+import { sign } from 'jsonwebtoken'
+import env from '../config/env'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
+
+const makeFakeAddAccount = (): AddAccountModel => ({
+  cpf: '12345678909',
+  name: 'valid_name',
+  email: 'valid_email@mail.com',
+  password: 'hashed_password'
+})
 
 describe('Login Routes', () => {
   beforeAll(async () => {
@@ -27,7 +37,7 @@ describe('Login Routes', () => {
         .post('/api/signup')
         .send({
           name: 'valid_name',
-          cpf: '123.456.789-09',
+          cpf: '12345678909',
           email: 'valid_email@mail.com',
           password: '123',
           passwordConfirmation: '123'
@@ -67,6 +77,38 @@ describe('Login Routes', () => {
           password: 'invalid_password'
         })
         .expect(401)
+    })
+  })
+
+  describe('GET /account/:cpf', () => {
+    test('Should return 403 on account if no accessToken is provided', async () => {
+      await request(app)
+        .get('/api/accounts/cpf')
+        .expect(403)
+    })
+
+    test('Should return 200 on load account with accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        cpf: '12345678909',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      await accountCollection.insertOne(makeFakeAddAccount())
+      await request(app)
+        .get('/api/accounts/12345678909')
+        .set('x-access-token', accessToken)
+        .expect(200)
     })
   })
 })
