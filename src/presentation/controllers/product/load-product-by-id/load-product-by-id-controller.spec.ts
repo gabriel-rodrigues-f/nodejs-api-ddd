@@ -1,6 +1,6 @@
 import { type LoadProductById } from '@/domain/usecases/load-product-by-id'
 import { LoadProductByidController } from './load-product-by-id-controller'
-import { noContent, type HttpRequest, type ProductModel, serverError } from './load-product-by-id-controller-protocols'
+import { noContent, type HttpRequest, type ProductModel, serverError, ok } from './load-product-by-id-controller-protocols'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',
@@ -70,5 +70,11 @@ describe('LoadProductById Controller', () => {
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(ok(makeFakeProduct()))
   })
 })
