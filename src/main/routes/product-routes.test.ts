@@ -2,7 +2,7 @@ import request from 'supertest'
 import app from '../config/app'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 import { type Collection } from 'mongodb'
-import { type AddProductModel } from '@/domain/usecases/add-product'
+import { type AddProductModel } from '@/domain/usecases/product/add-product'
 import { sign } from 'jsonwebtoken'
 import env from '../config/env'
 

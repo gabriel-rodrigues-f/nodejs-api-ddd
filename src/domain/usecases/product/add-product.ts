@@ -1,4 +1,4 @@
-import { type ProductModel } from '../models/product'
+import { type ProductModel } from '../../models/product'
 
 export type AddProductModel = Omit<ProductModel, 'id'>
 

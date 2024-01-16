@@ -1,4 +1,4 @@
-import { type LoadProducts } from '@/domain/usecases/load-products'
+import { type LoadProducts } from '@/domain/usecases/product/load-products'
 import {
   type LoadProductsRepository,
   type ProductModel

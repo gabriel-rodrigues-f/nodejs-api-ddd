@@ -1,4 +1,4 @@
-import { type LoadProductById } from '@/domain/usecases/load-product-by-id'
+import { type LoadProductById } from '@/domain/usecases/product/load-product-by-id'
 import { LoadProductByidController } from './load-product-by-id-controller'
 import { noContent, type HttpRequest, type ProductModel, serverError, ok } from './load-product-by-id-controller-protocols'
 
