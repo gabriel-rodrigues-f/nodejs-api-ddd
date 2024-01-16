@@ -1,6 +1,4 @@
-import { type LoadAccountByCpf } from '@/domain/usecases/load-account-by-cpf'
-import { type AccountModel } from '../authentication/db-authentication-protocols'
-import { type LoadAccountByCpfRepository } from '@/data/protocols/db/account/load-account-by-cpf-repository'
+import { type LoadAccountByCpf, type AccountModel, type LoadAccountByCpfRepository } from './db-load-account-by-cpf-protocols'
 
 export class DbLoadAccountByCpf implements LoadAccountByCpf {
   constructor (private readonly loadAccountByCpfRepository: LoadAccountByCpfRepository) { }
