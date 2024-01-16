@@ -1,6 +1,8 @@
-import { type AddProductModel } from '../../../domain/usecases/add-product'
 import { DbAddProduct } from './db-add-product'
-import { type AddProductRepository } from '../../protocols/db/product/add-product-repository'
+import {
+  type AddProductModel,
+  type AddProductRepository
+} from './db-add-product-protocols'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',
