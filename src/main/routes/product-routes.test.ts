@@ -10,25 +10,25 @@ let productCollection: Collection
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
-describe('Product Routes', () => {
-  const makeFakeAddProduct = (): AddProductModel => ({
-    category: 'any_category',
-    name: 'any_name',
-    price: 'any_price',
-    nutritionalInformation: {
-      calorie: 'any_calorie',
-      carbohydrate: 'any_carbohydrate',
-      total_sugars: 'any_total_sugars',
-      added_sugars: 'any_added_sugars',
-      proteins: 'any_proteins',
-      total_fat: 'any_total_fat',
-      saturated_fat: 'any_saturated_fat',
-      trans_fats: 'any_trans_fats',
-      dietary_fiber: 'any_dietary_fiber',
-      sodium: 'any_sodium'
-    }
-  })
+const makeFakeAddProduct = (): AddProductModel => ({
+  category: 'any_category',
+  name: 'any_name',
+  price: 'any_price',
+  nutritionalInformation: {
+    calorie: 'any_calorie',
+    carbohydrate: 'any_carbohydrate',
+    total_sugars: 'any_total_sugars',
+    added_sugars: 'any_added_sugars',
+    proteins: 'any_proteins',
+    total_fat: 'any_total_fat',
+    saturated_fat: 'any_saturated_fat',
+    trans_fats: 'any_trans_fats',
+    dietary_fiber: 'any_dietary_fiber',
+    sodium: 'any_sodium'
+  }
+})
 
+describe('Product Routes', () => {
   beforeAll(async () => {
     await MongoHelper.connect(MONGO_URL)
   })
@@ -56,7 +56,7 @@ describe('Product Routes', () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
-        passwprd: 123,
+        password: 123,
         role: 'admin'
       })
       const id = reponse.insertedId
@@ -88,7 +88,7 @@ describe('Product Routes', () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
-        passwprd: 123,
+        password: 123,
         role: 'admin'
       })
       const id = reponse.insertedId
@@ -110,7 +110,7 @@ describe('Product Routes', () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
-        passwprd: 123,
+        password: 123,
         role: 'admin'
       })
       const id = reponse.insertedId
@@ -130,11 +130,10 @@ describe('Product Routes', () => {
     })
   })
 
-  describe('GET /products:productId/product', () => {
+  describe('GET /products/:productId/product', () => {
     test('Should return 403 on product if no accessToken is provided', async () => {
       await request(app)
         .get('/api/products/:id')
-        .send(makeFakeAddProduct())
         .expect(403)
     })
 
@@ -142,7 +141,7 @@ describe('Product Routes', () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
-        passwprd: 123,
+        password: 123,
         role: 'admin'
       })
       const id = reponse.insertedId
