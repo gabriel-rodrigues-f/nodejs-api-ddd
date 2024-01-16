@@ -1,5 +1,11 @@
 import { LoadAccountByCpfController } from './load-account-by-cpf-controller'
-import { type LoadAccountByCpf, type HttpRequest, type AccountModel, notFound } from './load-account-by-cpf-controller-protocols'
+import {
+  type LoadAccountByCpf,
+  type HttpRequest,
+  type AccountModel,
+  notFound,
+  serverError
+} from './load-account-by-cpf-controller-protocols'
 
 const makeFakeRequest = (): HttpRequest => ({
   params: {
@@ -46,10 +52,17 @@ describe('LoadAccountByCpf Controller', () => {
     expect(loadbyCpfSpy).toHaveBeenCalledWith('valid_cpf')
   })
 
-  test('Should return 204 if LoadProductById returns empty', async () => {
+  test('Should return 204 if LoadAccountByCpf returns empty', async () => {
     const { sut, loadAccountByCpfStub } = makeSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(notFound())
+  })
+
+  test('Should return 500 if LoadAccountByCpf throws', async () => {
+    const { sut, loadAccountByCpfStub } = makeSut()
+    jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
   })
 })
