@@ -19,10 +19,10 @@ export const MongoHelper = {
   },
 
   map (data: any, id?: string): any {
-    const { _id, ...account } = data
+    const { _id, ...object } = data
     if (id) {
-      return { ...account, id }
+      return { ...object, id }
     }
-    return { ...account, id: _id }
+    return { ...object, id: _id }
   }
 }

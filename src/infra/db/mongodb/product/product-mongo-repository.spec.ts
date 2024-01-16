@@ -58,30 +58,49 @@ const makeFakeProducts = (): ProductModel[] => ([
   }
 ])
 
+const makeFakeProduct = (): ProductModel => ({
+  id: 'any_id',
+  category: 'any_category',
+  name: 'any_name',
+  price: 'any_price',
+  nutritionalInformation: {
+    calorie: 'any_calorie',
+    carbohydrate: 'any_carbohydrate',
+    total_sugars: 'any_total_sugars',
+    added_sugars: 'any_added_sugars',
+    proteins: 'any_proteins',
+    total_fat: 'any_total_fat',
+    saturated_fat: 'any_saturated_fat',
+    trans_fats: 'any_trans_fats',
+    dietary_fiber: 'any_dietary_fiber',
+    sodium: 'any_sodium'
+  }
+})
+
+const makeFakeAddProductModel = (): AddProductModel => ({
+  category: 'any_category',
+  name: 'any_name',
+  price: 'any_price',
+  nutritionalInformation: {
+    calorie: 'any_calorie',
+    carbohydrate: 'any_carbohydrate',
+    total_sugars: 'any_total_sugars',
+    added_sugars: 'any_added_sugars',
+    proteins: 'any_proteins',
+    total_fat: 'any_total_fat',
+    saturated_fat: 'any_saturated_fat',
+    trans_fats: 'any_trans_fats',
+    dietary_fiber: 'any_dietary_fiber',
+    sodium: 'any_sodium'
+  }
+})
+
 const makeSut = (): ProductMongoRepository => {
   return new ProductMongoRepository()
 }
 
 describe('ProductRepository', () => {
   describe('add()', () => {
-    const makeFakeAddProductModel = (): AddProductModel => ({
-      category: 'any_category',
-      name: 'any_name',
-      price: 'any_price',
-      nutritionalInformation: {
-        calorie: 'any_calorie',
-        carbohydrate: 'any_carbohydrate',
-        total_sugars: 'any_total_sugars',
-        added_sugars: 'any_added_sugars',
-        proteins: 'any_proteins',
-        total_fat: 'any_total_fat',
-        saturated_fat: 'any_saturated_fat',
-        trans_fats: 'any_trans_fats',
-        dietary_fiber: 'any_dietary_fiber',
-        sodium: 'any_sodium'
-      }
-    })
-
     test('Should return a product on AddProduct success', async () => {
       const sut = makeSut()
       await sut.add(makeFakeAddProductModel())
@@ -102,6 +121,16 @@ describe('ProductRepository', () => {
       const sut = makeSut()
       const products = await sut.loadAll()
       expect(products.length).toBe(0)
+    })
+  })
+
+  describe('loadById()', () => {
+    test('Should load a product on success', async () => {
+      const response = await productCollection.insertOne(makeFakeProduct())
+      const insertedId = response.insertedId.toHexString()
+      const sut = makeSut()
+      const products = await sut.loadById(insertedId)
+      expect(products).toBeTruthy()
     })
   })
 })

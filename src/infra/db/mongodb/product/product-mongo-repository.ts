@@ -1,8 +1,14 @@
-import { type LoadProductsRepository } from '@/data/protocols/db/product/load-products-repository'
-import { type AddProductModel, type AddProductRepository, type ProductModel } from '@/data/usecases/add-product/db-add-product-protocols'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { ObjectId } from 'mongodb'
+import {
+  type LoadProductsRepository,
+  type AddProductModel,
+  type AddProductRepository,
+  type ProductModel,
+  type LoadProductByIdRepository,
+  MongoHelper
+} from './product-mongo-repository-protocols'
 
-export class ProductMongoRepository implements AddProductRepository, LoadProductsRepository {
+export class ProductMongoRepository implements AddProductRepository, LoadProductsRepository, LoadProductByIdRepository {
   async add (productData: AddProductModel): Promise<void> {
     const productCollection = MongoHelper.getCollection('products')
     await productCollection.insertOne(productData)
@@ -12,5 +18,10 @@ export class ProductMongoRepository implements AddProductRepository, LoadProduct
     const productsCollection = MongoHelper.getCollection('products')
     const products = await productsCollection.find<ProductModel>({}).toArray()
     return products
+  }
+
+  async loadById (id: string): Promise<ProductModel> {
+    const productsCollection = MongoHelper.getCollection('products')
+    return await productsCollection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
   }
 }

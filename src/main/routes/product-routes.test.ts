@@ -133,7 +133,7 @@ describe('Product Routes', () => {
   describe('GET /products:productId/product', () => {
     test('Should return 403 on product if no accessToken is provided', async () => {
       await request(app)
-        .get('/api/products/:id/product')
+        .get('/api/products/:id')
         .send(makeFakeAddProduct())
         .expect(403)
     })
@@ -157,7 +157,7 @@ describe('Product Routes', () => {
       const insertedProduct = await productCollection.insertOne(makeFakeAddProduct())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
-        .get(`/api/products/${stringfiedId}/product`)
+        .get(`/api/products/${stringfiedId}`)
         .set('x-access-token', accessToken)
         .expect(200)
     })

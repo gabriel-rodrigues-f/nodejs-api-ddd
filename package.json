@@ -4,7 +4,7 @@
   "description": "NodeJs Rest API using TDD, Clean Architecture, Typescript and Design Patterns",
   "main": "dist/main/server.js",
   "scripts": {
-    "start": "node dist/main/server.js",
+    "start": "npm run build && node dist/main/server.js",
     "start:dev": "ts-node src/main/server.ts",
     "build": "rimraf dist && tsc -p tsconfig-build.json",
     "up": "npm run build && docker-compose up -d",

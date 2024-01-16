@@ -32,7 +32,7 @@ const makeLoadProductById = (): LoadProductById => {
 
 const makeFakeRequest = (): HttpRequest => ({
   params: {
-    productId: 'any_productId'
+    id: 'any_productId'
   }
 })
 
