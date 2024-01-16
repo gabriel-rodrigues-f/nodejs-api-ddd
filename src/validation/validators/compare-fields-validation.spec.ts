@@ -1,9 +1,7 @@
 import { InvalidParamError } from '@/presentation/errors'
 import { CompareFieldsValidation } from './compare-fields-validation'
 
-const makeSut = (): CompareFieldsValidation => {
-  return new CompareFieldsValidation('field', 'fieldToCompare')
-}
+const makeSut = (): CompareFieldsValidation => new CompareFieldsValidation('field', 'fieldToCompare')
 
 describe('Compare Fields validation', () => {
   test('Should return a InvalidParamError if validation fails', () => {

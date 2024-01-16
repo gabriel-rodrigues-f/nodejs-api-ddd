@@ -7,9 +7,6 @@ export class LoadProductByidController implements Controller {
       const { id } = request.params
       const product = await this.loadProductById.loadById(id)
       return product ? ok(product) : noContent()
-    } catch (error) {
-      console.log(error)
-      return serverError(error)
-    }
+    } catch (error) { return serverError(error) }
   }
 }
