@@ -14,6 +14,7 @@ const makeDecrypterStub = (): Decrypter => {
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
+  cpf: 'valid_cpf',
   name: 'valid_name',
   email: 'valid_email@mail.com',
   password: 'hashed_password'

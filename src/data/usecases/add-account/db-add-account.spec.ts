@@ -12,6 +12,7 @@ const makeHasher = (): Hasher => {
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
+  cpf: 'valid_cpf',
   name: 'valid_name',
   email: 'valid_email@mail.com',
   password: 'hashed_password'
@@ -19,6 +20,7 @@ const makeFakeAccount = (): AccountModel => ({
 
 const makeFakeAccountData = (): AddAccountModel => ({
   name: 'valid_name',
+  cpf: 'valid_cpf',
   email: 'valid_email@mail.com',
   password: 'hashed_password'
 })
@@ -82,6 +84,7 @@ describe('DbAddAccount Usecase', () => {
     await sut.add(makeFakeAccountData())
     expect(addSpy).toHaveBeenCalledWith({
       name: 'valid_name',
+      cpf: 'valid_cpf',
       email: 'valid_email@mail.com',
       password: 'hashed_password'
     })

@@ -3,6 +3,7 @@ import { type AccountModel, type AuthenticationModel, type HashComparer, type Lo
 
 const makeFakeAccount = (): AccountModel => ({
   name: 'any_name',
+  cpf: 'any_cpf',
   email: 'any_email@mail.com',
   password: 'hashed_password',
   id: 'any_id'

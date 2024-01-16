@@ -10,9 +10,11 @@ describe('CPF Validation', () => {
     expect(error).toEqual(new InvalidParamError('cpf'))
   })
 
-  test('Should return not return if a valid cpf is provided', () => {
+  test('Should not return if a valid cpf is provided', () => {
     const sut = makeSut()
-    const error = sut.validate('123.456.789-09')
+    const error = sut.validate({
+      cpf: '123.456.789-09'
+    })
     expect(error).toBeFalsy()
   })
 })

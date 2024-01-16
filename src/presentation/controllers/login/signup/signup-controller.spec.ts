@@ -6,6 +6,7 @@ import { ok, badRequest, serverError, forbidden } from '../../../helpers/http/ht
 const makeFakeRequest = (): HttpRequest => ({
   body: {
     name: 'any_name',
+    cpf: 'valid_cpf',
     email: 'any_email@mail.com',
     password: 'any_password',
     passwordConfirmation: 'any_password'
@@ -14,6 +15,7 @@ const makeFakeRequest = (): HttpRequest => ({
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
+  cpf: 'valid_cpf',
   name: 'valid_name',
   email: 'valid_email@mail.com',
   password: 'valid_password'
@@ -21,6 +23,7 @@ const makeFakeAccount = (): AccountModel => ({
 
 const makeFakeAddAccount = (): AddAccountModel => ({
   name: 'any_name',
+  cpf: 'valid_cpf',
   email: 'any_email@mail.com',
   password: 'any_password'
 })

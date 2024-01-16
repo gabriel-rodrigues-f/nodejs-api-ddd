@@ -4,6 +4,7 @@ import { AccessDeniedError } from '../errors'
 
 const makeFakeAccount = (): AccountModel => ({
   id: 'valid_id',
+  cpf: 'any_cpf',
   name: 'any_name',
   email: 'any_email@mail.com',
   password: 'hashed_password'
