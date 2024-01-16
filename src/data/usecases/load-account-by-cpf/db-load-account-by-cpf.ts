@@ -3,7 +3,6 @@ import { type LoadAccountByCpf, type AccountModel, type LoadAccountByCpfReposito
 export class DbLoadAccountByCpf implements LoadAccountByCpf {
   constructor (private readonly loadAccountByCpfRepository: LoadAccountByCpfRepository) { }
   async loadByCpf (cpf: string): Promise<AccountModel> {
-    await this.loadAccountByCpfRepository.loadByCpf(cpf)
-    return await Promise.resolve(null)
+    return await this.loadAccountByCpfRepository.loadByCpf(cpf)
   }
 }
