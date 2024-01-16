@@ -3,7 +3,6 @@ import { type LoadProductById, type ProductModel, type LoadProductByIdRepository
 export class DbLoadProductById implements LoadProductById {
   constructor (private readonly loadProductByIdRepository: LoadProductByIdRepository) { }
   async loadById (id: string): Promise<ProductModel> {
-    await this.loadProductByIdRepository.loadById(id)
-    return await Promise.resolve(null)
+    return await this.loadProductByIdRepository.loadById(id)
   }
 }
