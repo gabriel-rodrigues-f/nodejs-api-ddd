@@ -1,7 +1,13 @@
-import { type HttpRequest } from '../../../protocols/http'
 import { AddProductController } from './add-product-controller'
-import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
-import { type AddProduct, type AddProductModel, type Validation } from './add-product-controller-protocols'
+import {
+  type HttpRequest,
+  type AddProduct,
+  type AddProductModel,
+  type Validation,
+  serverError,
+  badRequest,
+  noContent
+} from './add-product-controller-protocols'
 
 const makeFakeAddProduct = (): AddProductModel => ({
   category: 'any_category',

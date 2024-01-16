@@ -1,6 +1,13 @@
-import { type AddProduct } from '@/domain/usecases/product/add-product'
-import { type Controller, type HttpRequest, type HttpResponse, type Validation } from './add-product-controller-protocols'
-import { badRequest, noContent, serverError } from '../../../helpers/http/http-helpers'
+import {
+  type AddProduct,
+  type Controller,
+  type HttpRequest,
+  type HttpResponse,
+  type Validation,
+  badRequest,
+  noContent,
+  serverError
+} from './add-product-controller-protocols'
 
 export class AddProductController implements Controller {
   constructor (
