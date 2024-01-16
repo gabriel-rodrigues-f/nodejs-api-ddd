@@ -8,4 +8,5 @@ import { auth } from '../middlewares/auth'
 export default (router: Router): void => {
   router.post('/products', adminAuth, adaptRoute(makeAddProductController()))
   router.get('/products', auth, adaptRoute(makeLoadProductsController()))
+  router.get('/products/:id/product', auth, adaptRoute(makeLoadProductsController()))
 }
