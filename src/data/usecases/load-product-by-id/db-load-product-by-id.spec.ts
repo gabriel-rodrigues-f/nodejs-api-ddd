@@ -57,4 +57,10 @@ describe('LoadProductById Usecase', () => {
     const promise = sut.loadById('any_productId')
     await expect(promise).rejects.toThrow()
   })
+
+  test('Should return a product on success', async () => {
+    const { sut } = makeSut()
+    const product = await sut.loadById('any_productId')
+    expect(product).toEqual(makeFakeProduct())
+  })
 })
