@@ -1,7 +1,9 @@
-import { type ProductModel } from '../../../domain/models/product'
-import { type LoadProducts } from '../../../domain/usecases/load-products'
-import { type LoadProductsRepository } from '../../protocols/db/product/load-products-repository'
 import { DbLoadProducts } from './db-load-products'
+import {
+  type ProductModel,
+  type LoadProductsRepository,
+  type LoadProducts
+} from './db-load-products-protocols'
 
 const makeFakeProducts = (): ProductModel[] => ([
   {

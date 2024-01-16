@@ -1,6 +1,8 @@
 import { type LoadProducts } from '@/domain/usecases/load-products'
-import { type ProductModel } from '../add-product/db-add-product-protocols'
-import { type LoadProductsRepository } from '../../protocols/db/product/load-products-repository'
+import {
+  type LoadProductsRepository,
+  type ProductModel
+} from './db-load-products-protocols'
 
 export class DbLoadProducts implements LoadProducts {
   constructor (private readonly loadProductsRepository: LoadProductsRepository) { }
