@@ -193,4 +193,37 @@ describe('Product Routes', () => {
         .expect(200)
     })
   })
+
+  describe('GET /products/:id/product', () => {
+    test('Should return 403 on product if no accessToken is provided', async () => {
+      await request(app)
+        .get('/api/products/:id/product')
+        .expect(403)
+    })
+
+    test('Should return 204 on delete product usign valid accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      const insertedProduct = await productCollection.insertOne(makeFakeAddProduct())
+      const stringfiedId = insertedProduct.insertedId.toHexString()
+      await request(app)
+        .delete(`/api/products/${stringfiedId}/product`)
+        .set('x-access-token', accessToken)
+        .send(makeFakeAddProduct())
+        .expect(204)
+    })
+  })
 })
