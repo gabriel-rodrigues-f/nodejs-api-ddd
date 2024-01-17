@@ -53,7 +53,7 @@ describe('LoadAccountByCpf Controller', () => {
     expect(loadbyCpfSpy).toHaveBeenCalledWith('valid_cpf')
   })
 
-  test('Should return 204 if LoadAccountByCpf returns empty', async () => {
+  test('Should return 404 if LoadAccountByCpf returns empty', async () => {
     const { sut, loadAccountByCpfStub } = makeSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.resolve(null))
     const httpResponse = await sut.handle(makeFakeRequest())
