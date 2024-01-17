@@ -129,8 +129,8 @@ describe('ProductRepository', () => {
 
   describe('loadById()', () => {
     test('Should load a product on success', async () => {
-      const response = await productCollection.insertOne(makeFakeProduct())
-      const insertedId = response.insertedId.toHexString()
+      const collection = await productCollection.insertOne(makeFakeProduct())
+      const insertedId = collection.insertedId.toHexString()
       const sut = makeSut()
       const product = await sut.loadById(insertedId)
       expect(product).toBeTruthy()
@@ -143,6 +143,17 @@ describe('ProductRepository', () => {
       const sut = makeSut()
       const product = await sut.loadByCategory('any_category')
       expect(product).toBeTruthy()
+    })
+  })
+
+  describe('deleteProduct()', () => {
+    test('Should delete a product on success', async () => {
+      const collection = await productCollection.insertOne(makeFakeProduct())
+      const insertedId = collection.insertedId.toHexString()
+      const sut = makeSut()
+      await sut.delete(insertedId)
+      const product = await sut.loadById(insertedId)
+      expect(product).toBeNull()
     })
   })
 })
