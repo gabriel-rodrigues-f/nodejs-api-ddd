@@ -33,4 +33,11 @@ describe('Delete Product Usecase', () => {
     await sut.delete('any_id')
     expect(deleteSpy).toHaveBeenCalledWith('any_id')
   })
+
+  test('Should throw if DeleteProductRepository throws', async () => {
+    const { sut, deleteProductRepositoryStub } = makeSut()
+    jest.spyOn(deleteProductRepositoryStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.delete('any_id')
+    await expect(promise).rejects.toThrow()
+  })
 })
