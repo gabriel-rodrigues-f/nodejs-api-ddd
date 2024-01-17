@@ -133,7 +133,7 @@ describe('Product Routes', () => {
   describe('GET /products/:productId/product', () => {
     test('Should return 403 on product if no accessToken is provided', async () => {
       await request(app)
-        .get('/api/products/:id')
+        .get('/api/products/:id/product')
         .expect(403)
     })
 
@@ -156,7 +156,39 @@ describe('Product Routes', () => {
       const insertedProduct = await productCollection.insertOne(makeFakeAddProduct())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
-        .get(`/api/products/${stringfiedId}`)
+        .get(`/api/products/${stringfiedId}/product`)
+        .set('x-access-token', accessToken)
+        .expect(200)
+    })
+  })
+
+  describe('GET /products/:category/category', () => {
+    test('Should return 403 on product if no accessToken is provided', async () => {
+      await request(app)
+        .get('/api/products/:id/category')
+        .expect(403)
+    })
+
+    test('Should return 200 on load products with accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      const { category } = makeFakeAddProduct()
+      await productCollection.insertOne(makeFakeAddProduct())
+      await request(app)
+        .get(`/api/products/${category}/category`)
         .set('x-access-token', accessToken)
         .expect(200)
     })
