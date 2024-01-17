@@ -1,5 +1,5 @@
 import { type LoadProductByCategory } from '@/data/protocols/db/product/load-product-by-category'
-import { type ProductModel } from '../load-product-by-id'
+import { notFound, type ProductModel } from '../load-product-by-id'
 import { LoadProductByCategoryController } from './load-product-by-category-controller'
 
 const makeFakeProduct = (): ProductModel => ({
@@ -50,5 +50,12 @@ describe('LoadProductByCategory Controller', () => {
     const loadProductByCategorySpy = jest.spyOn(loadProductByCategoryStub, 'loadByCategory')
     await sut.handle('any_category')
     expect(loadProductByCategorySpy).toHaveBeenCalledWith('any_category')
+  })
+
+  test('Should return 404 if LoadProductByCategory returns empty', async () => {
+    const { sut, loadProductByCategoryStub } = makeSut()
+    jest.spyOn(loadProductByCategoryStub, 'loadByCategory').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await sut.handle('any_category')
+    expect(httpResponse).toEqual(notFound())
   })
 })
