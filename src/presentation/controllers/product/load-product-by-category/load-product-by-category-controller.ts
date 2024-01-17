@@ -5,7 +5,7 @@ import {
   notFound,
   serverError,
   ok
-} from './index'
+} from '.'
 
 export class LoadProductByCategoryController implements Controller {
   constructor (private readonly loadProductByCategory: LoadProductByCategory) { }

@@ -1,7 +1,7 @@
 import validator from 'validator'
 import {
   type EmailValidator
-} from './index'
+} from '.'
 
 export class EmailValidatorAdapter implements EmailValidator {
   isValid (email: string): boolean {

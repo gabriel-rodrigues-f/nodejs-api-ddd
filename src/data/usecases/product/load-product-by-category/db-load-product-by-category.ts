@@ -2,7 +2,7 @@ import {
   type ProductModel,
   type LoadProductByCategory,
   type LoadProductByCategoryRepository
-} from './index'
+} from '.'
 
 export class DbLoadProductByCategory implements LoadProductByCategory {
   constructor (private readonly loadProductByCategoryRepository: LoadProductByCategoryRepository) { }

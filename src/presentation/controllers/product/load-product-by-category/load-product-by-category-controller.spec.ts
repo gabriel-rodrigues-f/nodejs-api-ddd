@@ -6,7 +6,7 @@ import {
   notFound,
   serverError,
   ok
-} from './index'
+} from '.'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',

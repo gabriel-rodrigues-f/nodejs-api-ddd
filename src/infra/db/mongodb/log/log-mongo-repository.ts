@@ -1,7 +1,7 @@
 import {
   type LogErrorRepository,
   MongoHelper
-} from './index'
+} from '.'
 
 export class LogMongoRepository implements LogErrorRepository {
   async logError (stack: string): Promise<void> {

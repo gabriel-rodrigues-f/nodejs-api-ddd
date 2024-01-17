@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt'
 import {
   type Hasher,
   type HashComparer
-} from './index'
+} from '.'
 
 export class BcryptAdapter implements Hasher, HashComparer {
   constructor (private readonly salt: number) { }

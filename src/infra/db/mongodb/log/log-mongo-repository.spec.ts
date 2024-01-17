@@ -2,7 +2,7 @@ import { LogMongoRepository } from './log-mongo-repository'
 import {
   type LogErrorRepository,
   MongoHelper
-} from './index'
+} from '.'
 
 describe('Log Mongo Repository', () => {
   let errorCollection
