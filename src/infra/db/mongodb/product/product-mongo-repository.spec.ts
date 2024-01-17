@@ -136,4 +136,13 @@ describe('ProductRepository', () => {
       expect(product).toBeTruthy()
     })
   })
+
+  describe('loadByCategory()', () => {
+    test('Should load a product on success', async () => {
+      await productCollection.insertOne(makeFakeProduct())
+      const sut = makeSut()
+      const product = await sut.loadByCategory('any_category')
+      expect(product).toBeTruthy()
+    })
+  })
 })
