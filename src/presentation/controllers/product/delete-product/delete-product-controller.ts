@@ -2,7 +2,8 @@ import {
   type DeleteProduct,
   type Controller,
   type HttpResponse,
-  serverError
+  serverError,
+  noContent
 } from '.'
 
 export class DeleteProductController implements Controller {
@@ -11,7 +12,7 @@ export class DeleteProductController implements Controller {
     try {
       const { id } = request.params
       await this.deleteProduct.delete(id)
-      return await Promise.resolve(null)
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
