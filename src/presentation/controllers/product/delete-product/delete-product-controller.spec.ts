@@ -1,7 +1,7 @@
 import { DeleteProductController } from './delete-product-controller'
 import {
   serverError,
-  // noContent,
+  noContent,
   type DeleteProduct,
   type HttpRequest
 } from '.'
@@ -49,29 +49,11 @@ describe('DeleteProduct Controller', () => {
     const httpResponse = await sut.handle(makeFakeRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
-  // test('', async () => {
-  //   const { sut, deleteProductStub } = makeSut()
-  //   jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
-  //   const httpResponse = await sut.handle(makeFakeRequest())
-  //   expect(httpResponse).toEqual(noContent())
-  // })
-  // test('Should return 204 if DeleteProduct returns empty', async () => {
-  //   const { sut, deleteProductStub } = makeSut()
-  //   jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
-  //   const httpResponse = await sut.handle(makeFakeRequest())
-  //   expect(httpResponse).toEqual(noContent())
-  // })
 
-  // test('Should return 500 if LoadProductById throws', async () => {
-  //   const { sut, deleteProductStub } = makeSut()
-  //   jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
-  //   const httpResponse = await sut.handle(makeFakeRequest())
-  //   expect(httpResponse).toEqual(serverError(new Error()))
-  // })
-
-  // test('Should return 204 on success', async () => {
-  //   const { sut } = makeSut()
-  //   const httpResponse = await sut.handle(makeFakeRequest())
-  //   expect(httpResponse).toEqual(noContent(makeFakeProduct()))
-  // })
+  test('Should return 204 if DeleteProduct returns empty', async () => {
+    const { sut, deleteProductStub } = makeSut()
+    jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(noContent())
+  })
 })
