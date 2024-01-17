@@ -4,6 +4,7 @@ import {
   type AddProductModel,
   type AddProductRepository,
   type LoadProductsRepository,
+  type DeleteProductRepository,
   type LoadProductByIdRepository,
   type LoadProductByCategoryRepository,
   MongoHelper
@@ -12,6 +13,7 @@ import {
 export class ProductMongoRepository implements
   AddProductRepository,
   LoadProductsRepository,
+  DeleteProductRepository,
   LoadProductByIdRepository,
   LoadProductByCategoryRepository {
   async add (productData: AddProductModel): Promise<void> {
@@ -33,5 +35,10 @@ export class ProductMongoRepository implements
   async loadByCategory (category: string): Promise<ProductModel> {
     const productsCollection = MongoHelper.getCollection('products')
     return await productsCollection.findOne<ProductModel>({ category })
+  }
+
+  async delete (id: string): Promise<void> {
+    const productsCollection = MongoHelper.getCollection('products')
+    await productsCollection.deleteOne({ _id: new ObjectId(id) })
   }
 }
