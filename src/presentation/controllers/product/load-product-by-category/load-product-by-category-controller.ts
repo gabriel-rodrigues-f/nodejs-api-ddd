@@ -2,14 +2,18 @@ import { type LoadProductByCategory } from '@/data/protocols/db/product/load-pro
 import {
   type HttpResponse,
   type Controller,
-  notFound
+  notFound,
+  serverError
 } from '../add-product'
 
 export class LoadProductByCategoryController implements Controller {
   constructor (private readonly loadProductByCategory: LoadProductByCategory) { }
   async handle (request: any): Promise<HttpResponse> {
-    const product = await this.loadProductByCategory.loadByCategory(request)
-    if (!product) return notFound()
-    return await Promise.resolve(null)
+    try {
+      const product = await this.loadProductByCategory.loadByCategory(request)
+      if (!product) return notFound()
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
