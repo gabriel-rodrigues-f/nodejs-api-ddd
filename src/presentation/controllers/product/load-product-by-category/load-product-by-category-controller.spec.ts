@@ -1,5 +1,5 @@
 import { type LoadProductByCategory } from '@/data/protocols/db/product/load-product-by-category'
-import { notFound, serverError, type ProductModel } from '../load-product-by-id'
+import { notFound, serverError, type ProductModel, ok } from '../load-product-by-id'
 import { LoadProductByCategoryController } from './load-product-by-category-controller'
 
 const makeFakeProduct = (): ProductModel => ({
@@ -64,5 +64,11 @@ describe('LoadProductByCategory Controller', () => {
     jest.spyOn(loadProductByCategoryStub, 'loadByCategory').mockReturnValueOnce(Promise.reject(new Error()))
     const httpResponse = await sut.handle('any_category')
     expect(httpResponse).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 200 if LoadProductByCategory succeeds', async () => {
+    const { sut } = makeSut()
+    const httpResponse = await sut.handle('any_category')
+    expect(httpResponse).toEqual(ok(makeFakeProduct()))
   })
 })

@@ -3,7 +3,8 @@ import {
   type HttpResponse,
   type Controller,
   notFound,
-  serverError
+  serverError,
+  ok
 } from '../add-product'
 
 export class LoadProductByCategoryController implements Controller {
@@ -12,6 +13,7 @@ export class LoadProductByCategoryController implements Controller {
     try {
       const product = await this.loadProductByCategory.loadByCategory(request)
       if (!product) return notFound()
+      return ok(product)
     } catch (error) {
       return serverError(error)
     }
