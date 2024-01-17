@@ -1,5 +1,7 @@
 import { DeleteProductController } from './delete-product-controller'
 import {
+  serverError,
+  // noContent,
   type DeleteProduct,
   type HttpRequest
 } from '.'
@@ -41,6 +43,12 @@ describe('DeleteProduct Controller', () => {
     expect(deleteSpy).toHaveBeenCalledWith('any_id')
   })
 
+  test('Should return 500 if DeleteProduct throws', async () => {
+    const { sut, deleteProductStub } = makeSut()
+    jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
+    const httpResponse = await sut.handle(makeFakeRequest())
+    expect(httpResponse).toEqual(serverError(new Error()))
+  })
   // test('', async () => {
   //   const { sut, deleteProductStub } = makeSut()
   //   jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
