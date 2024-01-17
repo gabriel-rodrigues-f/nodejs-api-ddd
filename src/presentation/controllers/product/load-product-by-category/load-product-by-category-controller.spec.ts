@@ -1,6 +1,11 @@
-import { type LoadProductByCategory } from '@/data/protocols/db/product/load-product-by-category'
-import { notFound, serverError, type ProductModel, ok } from '../load-product-by-id'
 import { LoadProductByCategoryController } from './load-product-by-category-controller'
+import {
+  type LoadProductByCategory,
+  type ProductModel,
+  notFound,
+  serverError,
+  ok
+} from './index'
 
 const makeFakeProduct = (): ProductModel => ({
   id: 'any_id',

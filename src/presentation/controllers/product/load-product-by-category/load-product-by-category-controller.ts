@@ -1,11 +1,11 @@
-import { type LoadProductByCategory } from '@/data/protocols/db/product/load-product-by-category'
 import {
+  type LoadProductByCategory,
   type HttpResponse,
   type Controller,
   notFound,
   serverError,
   ok
-} from '../add-product'
+} from './index'
 
 export class LoadProductByCategoryController implements Controller {
   constructor (private readonly loadProductByCategory: LoadProductByCategory) { }
