@@ -56,20 +56,20 @@ describe('LoadAccountByCpf Controller', () => {
   test('Should return 404 if LoadAccountByCpf returns empty', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(notFound())
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(notFound())
   })
 
   test('Should return 500 if LoadAccountByCpf throws', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(serverError(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 on success', async () => {
     const { sut } = mockSut()
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(ok(mockAccount()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(ok(mockAccount()))
   })
 })

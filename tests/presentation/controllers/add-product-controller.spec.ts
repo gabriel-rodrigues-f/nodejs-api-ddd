@@ -85,8 +85,8 @@ describe('Add Product Controller', () => {
     const { sut, validationStub } = mockSut()
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
     const request = mockRequest()
-    const httpResponse = await sut.handle(request)
-    expect(httpResponse).toEqual(badRequest(new Error()))
+    const response = await sut.handle(request)
+    expect(response).toEqual(badRequest(new Error()))
   })
 
   test('Should call AddProduct usign correct values', async () => {
@@ -100,14 +100,14 @@ describe('Add Product Controller', () => {
   test('Should return 500 if AddProduct throws', async () => {
     const { sut, addProductStub } = mockSut()
     jest.spyOn(addProductStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(serverError(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 
   test('Should return 204 on success', async () => {
     const { sut, addProductStub } = mockSut()
     jest.spyOn(addProductStub, 'add')
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(noContent())
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(noContent())
   })
 })

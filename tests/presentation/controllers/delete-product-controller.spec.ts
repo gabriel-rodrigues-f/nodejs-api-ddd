@@ -46,14 +46,14 @@ describe('DeleteProduct Controller', () => {
   test('Should return 500 if DeleteProduct throws', async () => {
     const { sut, deleteProductStub } = mockSut()
     jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(serverError(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 
   test('Should return 204 if DeleteProduct returns empty', async () => {
     const { sut, deleteProductStub } = mockSut()
     jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(mockRequest())
-    expect(httpResponse).toEqual(noContent())
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(noContent())
   })
 })

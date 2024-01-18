@@ -9,8 +9,8 @@ import { LogControllerDecorator } from '@/main/decorators'
 const mockController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (request: HttpRequest): Promise<HttpResponse> {
-      const httpResponse: HttpResponse = { body: {}, statusCode: 200 }
-      return await Promise.resolve(httpResponse)
+      const response: HttpResponse = { body: {}, statusCode: 200 }
+      return await Promise.resolve(response)
     }
   }
   return new ControllerStub()
@@ -68,8 +68,8 @@ describe('Log Controller Decorator', () => {
       }
     }
     const { sut } = mockSut()
-    const httpResponse = await sut.handle(request)
-    expect(httpResponse).toEqual({ body: {}, statusCode: 200 })
+    const response = await sut.handle(request)
+    expect(response).toEqual({ body: {}, statusCode: 200 })
   })
 
   test('Should  ', async () => {
