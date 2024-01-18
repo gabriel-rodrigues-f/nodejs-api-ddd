@@ -76,25 +76,25 @@ describe('Add Product Controller', () => {
   test('Should call Validation using correct values ', async () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(validationSpy).toHaveBeenCalledWith(httpRequest.body)
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validationSpy).toHaveBeenCalledWith(request.body)
   })
 
   test('Should return 400 if validation fails', async () => {
     const { sut, validationStub } = mockSut()
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
-    const httpRequest = mockRequest()
-    const httpResponse = await sut.handle(httpRequest)
+    const request = mockRequest()
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(badRequest(new Error()))
   })
 
   test('Should call AddProduct usign correct values', async () => {
     const { sut, addProductStub } = mockSut()
     const addProductSpy = jest.spyOn(addProductStub, 'add')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(addProductSpy).toHaveBeenCalledWith(httpRequest.body)
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(addProductSpy).toHaveBeenCalledWith(request.body)
   })
 
   test('Should return 500 if AddProduct throws', async () => {

@@ -73,27 +73,27 @@ describe('LoadProducts Controller', () => {
   test('Should call LoadProducts', async () => {
     const { sut, loadProductsStub } = mockSut()
     const loadSpy = jest.spyOn(loadProductsStub, 'load')
-    await sut.handle({})
+    await sut.handle()
     expect(loadSpy).toHaveBeenCalled()
   })
 
   test('Should return 200 on success', async () => {
     const { sut } = mockSut()
-    const httpResponse = await sut.handle({})
+    const httpResponse = await sut.handle()
     expect(httpResponse).toEqual(ok(mockProducts()))
   })
 
   test('Should return 204 LoadProduct returns empty', async () => {
     const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.resolve([]))
-    const httpResponse = await sut.handle({})
+    const httpResponse = await sut.handle()
     expect(httpResponse).toEqual(noContent())
   })
 
   test('Should 500 if LoadProducts throws', async () => {
     const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle({})
+    const httpResponse = await sut.handle()
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 })

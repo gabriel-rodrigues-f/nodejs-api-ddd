@@ -50,28 +50,28 @@ const mockSut = (role?: string): SutTypes => {
 describe('Auth Middleware', () => {
   test('Should return 403 if no x-access-token exists in headers', async () => {
     const { sut } = mockSut()
-    const httpRequest: HttpRequest = {
+    const request: HttpRequest = {
       headers: {}
     }
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
   })
 
   test('Should call LoadAccountByToken usign correct values', async () => {
     const role = 'any_role'
     const { sut, loadAccountByTokenStub } = mockSut(role)
-    const httpRequest: HttpRequest = mockRequest()
+    const request: HttpRequest = mockRequest()
     const loadSpy = jest.spyOn(loadAccountByTokenStub, 'load')
-    await sut.handle(httpRequest)
+    await sut.handle(request)
     expect(loadSpy).toHaveBeenCalledWith('any_token', 'any_role')
   })
 
   test('Should 403 if LoadAccountByToken returns null', async () => {
     const role = 'any_role'
     const { sut, loadAccountByTokenStub } = mockSut(role)
-    const httpRequest: HttpRequest = mockRequest()
+    const request: HttpRequest = mockRequest()
     jest.spyOn(loadAccountByTokenStub, 'load').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual(forbidden(new AccessDeniedError()))
   })
 

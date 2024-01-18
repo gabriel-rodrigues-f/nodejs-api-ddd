@@ -8,7 +8,7 @@ import { LogControllerDecorator } from '@/main/decorators'
 
 const mockController = (): Controller => {
   class ControllerStub implements Controller {
-    async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+    async handle (request: HttpRequest): Promise<HttpResponse> {
       const httpResponse: HttpResponse = { body: {}, statusCode: 200 }
       return await Promise.resolve(httpResponse)
     }
@@ -44,7 +44,7 @@ const mockSut = (): SutTypes => {
 
 describe('Log Controller Decorator', () => {
   test('Should call controller handle ', async () => {
-    const httpRequest = {
+    const request = {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
@@ -54,12 +54,12 @@ describe('Log Controller Decorator', () => {
     }
     const { sut, controllerStub } = mockSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
-    await sut.handle(httpRequest)
-    expect(handleSpy).toHaveBeenCalledWith(httpRequest)
+    await sut.handle(request)
+    expect(handleSpy).toHaveBeenCalledWith(request)
   })
 
   test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
-    const httpRequest = {
+    const request = {
       body: {
         name: 'any_name',
         email: 'any_email@mail.com',
@@ -68,7 +68,7 @@ describe('Log Controller Decorator', () => {
       }
     }
     const { sut } = mockSut()
-    const httpResponse = await sut.handle(httpRequest)
+    const httpResponse = await sut.handle(request)
     expect(httpResponse).toEqual({ body: {}, statusCode: 200 })
   })
 
@@ -79,10 +79,10 @@ describe('Log Controller Decorator', () => {
     const error = serverError(fakeError)
     const logSpy = jest.spyOn(logErrorRepositoryStub, 'logError')
     jest.spyOn(controllerStub, 'handle').mockReturnValueOnce(Promise.resolve(error))
-    const httpRequest = {
+    const request = {
       body: {}
     }
-    await sut.handle(httpRequest)
+    await sut.handle(request)
     expect(logSpy).toHaveBeenCalledWith('any_stack')
   })
 })

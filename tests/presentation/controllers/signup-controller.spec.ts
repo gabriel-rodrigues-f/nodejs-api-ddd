@@ -108,9 +108,9 @@ describe('SignUp Controller', () => {
   test('Should call Validation using correct value', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
-    const httpRequest = mockRequest()
-    await sut.handle(httpRequest)
-    expect(validateSpy).toHaveBeenCalledWith(httpRequest.body)
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(validateSpy).toHaveBeenCalledWith(request.body)
   })
 
   test('Should return an Error if Validation returns an Error', async () => {

@@ -17,11 +17,11 @@ export class AddProductController implements Controller {
     private readonly addProduct: AddProduct
   ) { }
 
-  async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
+  async handle (request: HttpRequest): Promise<HttpResponse> {
     try {
-      const error = this.validation.validate(httpRequest.body)
+      const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
-      const { category, name, price, nutritionalInformation } = httpRequest.body
+      const { category, name, price, nutritionalInformation } = request.body
       await this.addProduct.add({ category, name, price, nutritionalInformation })
       return noContent()
     } catch (error) {
