@@ -1,10 +1,10 @@
 import request from 'supertest'
-import app from '../config/app'
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import { type Collection } from 'mongodb'
-import { type AddProductModel } from '@/domain/usecases/product/add-product'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import app from '@/main/config/app'
+import { type Collection } from 'mongodb'
+import env from '@/main/config/env'
+import { type AddProductModel } from '@/domain/usecases/product/add-product'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 
 let productCollection: Collection
 let accountCollection: Collection

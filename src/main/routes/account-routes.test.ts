@@ -1,10 +1,10 @@
-import { type AddAccountModel } from '@/domain/usecases/account/add-account'
-import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
-import request from 'supertest'
-import app from '../config/app'
 import { type Collection } from 'mongodb'
 import { sign } from 'jsonwebtoken'
-import env from '../config/env'
+import request from 'supertest'
+import app from '@/main/config/app'
+import env from '@/main/config/env'
+import { type AddAccountModel } from '@/domain/usecases/account/add-account'
+import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
