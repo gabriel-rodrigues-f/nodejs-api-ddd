@@ -1,5 +1,5 @@
 import { InvalidParamError } from '@/presentation/errors'
-import { CpfValidation } from './cpf-validation'
+import { CpfValidation } from '.'
 
 const makeSut = (): CpfValidation => new CpfValidation('cpf')
 
