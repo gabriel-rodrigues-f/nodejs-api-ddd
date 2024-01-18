@@ -22,21 +22,21 @@ describe('Account Mongo Repository', () => {
     await accountCollection.deleteMany({})
   })
 
-  const makeAddAccountParams = (): AddAccountParams => ({
+  const mockAddAccountParams = (): AddAccountParams => ({
     name: 'any_name',
     cpf: 'any_cpf',
     email: 'any_email@mail.com',
     password: 'any_password'
   })
 
-  const makeSut = (): AccountMongoRepository => {
+  const mockSut = (): AccountMongoRepository => {
     return new AccountMongoRepository()
   }
 
   describe('add()', () => {
     test('Should return an account on add success', async () => {
-      const sut = makeSut()
-      const account = await sut.add(makeAddAccountParams())
+      const sut = mockSut()
+      const account = await sut.add(mockAddAccountParams())
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
@@ -48,8 +48,8 @@ describe('Account Mongo Repository', () => {
 
   describe('loadByEmail()', () => {
     test('Should return an account on loadByEmail success', async () => {
-      const sut = makeSut()
-      await accountCollection.insertOne(makeAddAccountParams())
+      const sut = mockSut()
+      await accountCollection.insertOne(mockAddAccountParams())
       const account = await sut.loadByEmail('any_email@mail.com')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
@@ -60,7 +60,7 @@ describe('Account Mongo Repository', () => {
     })
 
     test('Should return null if loadByEmail fails', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       const account = await sut.loadByEmail('any_email@mail.com')
       expect(account).toBeFalsy()
     })
@@ -68,8 +68,8 @@ describe('Account Mongo Repository', () => {
 
   describe('updateAccessToken()', () => {
     test('Should udpate the account accessToken on updateAccessToken success', async () => {
-      const sut = makeSut()
-      const result = await accountCollection.insertOne(makeAddAccountParams())
+      const sut = mockSut()
+      const result = await accountCollection.insertOne(mockAddAccountParams())
       const fakeId = result.insertedId.toHexString()
       const account = await accountCollection.findOne({ _id: result.insertedId })
       if (account) {
@@ -86,7 +86,7 @@ describe('Account Mongo Repository', () => {
 
   describe('loadByToken()', () => {
     test('Should return an account on loadByToken without role', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       await accountCollection.insertOne({
         name: 'any_name',
         cpf: 'any_cpf',
@@ -104,7 +104,7 @@ describe('Account Mongo Repository', () => {
     })
 
     test('Should return an account on loadByToken with admin role', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@mail.com',
@@ -121,7 +121,7 @@ describe('Account Mongo Repository', () => {
     })
 
     test('Should return an account on loadByToken with invalid role', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@mail.com',
@@ -134,13 +134,13 @@ describe('Account Mongo Repository', () => {
     })
 
     test('Should return null if loadByToken fails', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       const account = await sut.loadByEmail('any_token')
       expect(account).toBeFalsy()
     })
 
     test('Should return an account on loadByToken if user is admin', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       await accountCollection.insertOne({
         name: 'any_name',
         email: 'any_email@mail.com',
@@ -159,8 +159,8 @@ describe('Account Mongo Repository', () => {
 
   describe('loadByCpf', () => {
     test('Should load an account on success', async () => {
-      await accountCollection.insertOne(makeAddAccountParams())
-      const sut = makeSut()
+      await accountCollection.insertOne(mockAddAccountParams())
+      const sut = mockSut()
       const account = await sut.loadByCpf('any_cpf')
       expect(account).toBeTruthy()
     })

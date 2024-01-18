@@ -7,7 +7,7 @@ import {
   noContent
 } from '.'
 
-const makeFakeProducts = (): ProductModel[] => ([
+const mockProducts = (): ProductModel[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -46,10 +46,10 @@ const makeFakeProducts = (): ProductModel[] => ([
   }
 ])
 
-const makeLoadProducts = (): LoadProducts => {
+const mockLoadProducts = (): LoadProducts => {
   class LoadProductsStub implements LoadProducts {
     async load (): Promise<ProductModel[]> {
-      return await Promise.resolve(makeFakeProducts())
+      return await Promise.resolve(mockProducts())
     }
   }
   return new LoadProductsStub()
@@ -60,8 +60,8 @@ interface SutType {
   loadProductsStub: LoadProducts
 }
 
-const makeSut = (): SutType => {
-  const loadProductsStub = makeLoadProducts()
+const mockSut = (): SutType => {
+  const loadProductsStub = mockLoadProducts()
   const sut = new LoadProductsController(loadProductsStub)
   return {
     sut,
@@ -71,27 +71,27 @@ const makeSut = (): SutType => {
 
 describe('LoadProducts Controller', () => {
   test('Should call LoadProducts', async () => {
-    const { sut, loadProductsStub } = makeSut()
+    const { sut, loadProductsStub } = mockSut()
     const loadSpy = jest.spyOn(loadProductsStub, 'load')
     await sut.handle({})
     expect(loadSpy).toHaveBeenCalled()
   })
 
   test('Should return 200 on success', async () => {
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const httpResponse = await sut.handle({})
-    expect(httpResponse).toEqual(ok(makeFakeProducts()))
+    expect(httpResponse).toEqual(ok(mockProducts()))
   })
 
   test('Should return 204 LoadProduct returns empty', async () => {
-    const { sut, loadProductsStub } = makeSut()
+    const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.resolve([]))
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(noContent())
   })
 
   test('Should 500 if LoadProducts throws', async () => {
-    const { sut, loadProductsStub } = makeSut()
+    const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
     const httpResponse = await sut.handle({})
     expect(httpResponse).toEqual(serverError(new Error()))

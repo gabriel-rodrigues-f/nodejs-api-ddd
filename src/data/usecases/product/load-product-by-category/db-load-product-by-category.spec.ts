@@ -4,7 +4,7 @@ import {
   type LoadProductByCategoryRepository
 } from '.'
 
-const makeFakeProduct = (): ProductModel => ({
+const mockProduct = (): ProductModel => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
@@ -23,10 +23,10 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeLoadProductByCategoryRepository = (): LoadProductByCategoryRepository => {
+const mockLoadProductByCategoryRepository = (): LoadProductByCategoryRepository => {
   class LoadProductByCategoryRepositoryStub implements LoadProductByCategoryRepository {
     async loadByCategory (category: string): Promise<ProductModel> {
-      return await Promise.resolve(makeFakeProduct())
+      return await Promise.resolve(mockProduct())
     }
   }
   return new LoadProductByCategoryRepositoryStub()
@@ -37,8 +37,8 @@ type SutType = {
   loadProductByCategoryRepositoryStub: LoadProductByCategoryRepository
 }
 
-const makeSut = (): SutType => {
-  const loadProductByCategoryRepositoryStub = makeLoadProductByCategoryRepository()
+const mockSut = (): SutType => {
+  const loadProductByCategoryRepositoryStub = mockLoadProductByCategoryRepository()
   const sut = new DbLoadProductByCategory(loadProductByCategoryRepositoryStub)
   return {
     sut,
@@ -48,21 +48,21 @@ const makeSut = (): SutType => {
 
 describe('DbLoadProductByCategory Usecase', () => {
   test('Should call LoadProductByCategoryRepository with correct values', async () => {
-    const { sut, loadProductByCategoryRepositoryStub } = makeSut()
+    const { sut, loadProductByCategoryRepositoryStub } = mockSut()
     const loadByCategorySpy = jest.spyOn(loadProductByCategoryRepositoryStub, 'loadByCategory')
     await sut.loadByCategory('any_category')
     expect(loadByCategorySpy).toHaveBeenCalledWith('any_category')
   })
   test('Should throw if LoadProductByCategoryRepository throws', async () => {
-    const { sut, loadProductByCategoryRepositoryStub } = makeSut()
+    const { sut, loadProductByCategoryRepositoryStub } = mockSut()
     jest.spyOn(loadProductByCategoryRepositoryStub, 'loadByCategory').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadByCategory('any_category')
     await expect(promise).rejects.toThrow()
   })
 
   test('Should return a product on success', async () => {
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const product = await sut.loadByCategory('any_category')
-    expect(product).toEqual(makeFakeProduct())
+    expect(product).toEqual(mockProduct())
   })
 })

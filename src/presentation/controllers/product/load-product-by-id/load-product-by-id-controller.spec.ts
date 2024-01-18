@@ -8,7 +8,7 @@ import {
   ok
 } from '.'
 
-const makeFakeProduct = (): ProductModel => ({
+const mockProduct = (): ProductModel => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
@@ -27,16 +27,16 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeLoadProductById = (): LoadProductById => {
+const mockLoadProductById = (): LoadProductById => {
   class LoadProductByIdStub implements LoadProductById {
     async loadById (id: string): Promise<ProductModel> {
-      return await Promise.resolve(makeFakeProduct())
+      return await Promise.resolve(mockProduct())
     }
   }
   return new LoadProductByIdStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
+const mockRequest = (): HttpRequest => ({
   params: {
     id: 'any_productId'
   }
@@ -47,8 +47,8 @@ type SutTypes = {
   loadProductByIdStub: LoadProductById
 }
 
-const makeSut = (): SutTypes => {
-  const loadProductByIdStub = makeLoadProductById()
+const mockSut = (): SutTypes => {
+  const loadProductByIdStub = mockLoadProductById()
   const sut = new LoadProductByidController(loadProductByIdStub)
   return {
     sut,
@@ -58,29 +58,29 @@ const makeSut = (): SutTypes => {
 
 describe('LoadProductById Controller', () => {
   test(' Should call LoadProductBy with correct values', async () => {
-    const { sut, loadProductByIdStub } = makeSut()
+    const { sut, loadProductByIdStub } = mockSut()
     const loadProductByIdSpy = jest.spyOn(loadProductByIdStub, 'loadById')
-    await sut.handle(makeFakeRequest())
+    await sut.handle(mockRequest())
     expect(loadProductByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
   test('Should return 204 if LoadProductById returns empty', async () => {
-    const { sut, loadProductByIdStub } = makeSut()
+    const { sut, loadProductByIdStub } = mockSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(noContent())
   })
 
   test('Should return 500 if LoadProductById throws', async () => {
-    const { sut, loadProductByIdStub } = makeSut()
+    const { sut, loadProductByIdStub } = mockSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 on success', async () => {
-    const { sut } = makeSut()
-    const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok(makeFakeProduct()))
+    const { sut } = mockSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(mockProduct()))
   })
 })

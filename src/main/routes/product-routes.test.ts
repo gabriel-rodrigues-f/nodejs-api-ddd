@@ -10,7 +10,7 @@ let productCollection: Collection
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
-const makeFakeAddProduct = (): AddProductParams => ({
+const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -48,7 +48,7 @@ describe('Product Routes', () => {
     test('Should return 403 on product', async () => {
       await request(app)
         .post('/api/products')
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(403)
     })
 
@@ -71,7 +71,7 @@ describe('Product Routes', () => {
       await request(app)
         .post('/api/products')
         .set('x-access-token', accessToken)
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(204)
     })
   })
@@ -80,7 +80,7 @@ describe('Product Routes', () => {
     test('Should return 403 on product', async () => {
       await request(app)
         .post('/api/products')
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(403)
     })
 
@@ -102,7 +102,7 @@ describe('Product Routes', () => {
       })
       await request(app)
         .get('/api/products')
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(403)
     })
 
@@ -125,7 +125,7 @@ describe('Product Routes', () => {
       await request(app)
         .get('/api/products')
         .set('x-access-token', accessToken)
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(204)
     })
   })
@@ -153,7 +153,7 @@ describe('Product Routes', () => {
           accessToken
         }
       })
-      const insertedProduct = await productCollection.insertOne(makeFakeAddProduct())
+      const insertedProduct = await productCollection.insertOne(mockAddProductParams())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
         .get(`/api/products/${stringfiedId}/product`)
@@ -185,8 +185,8 @@ describe('Product Routes', () => {
           accessToken
         }
       })
-      const { category } = makeFakeAddProduct()
-      await productCollection.insertOne(makeFakeAddProduct())
+      const { category } = mockAddProductParams()
+      await productCollection.insertOne(mockAddProductParams())
       await request(app)
         .get(`/api/products/${category}/category`)
         .set('x-access-token', accessToken)
@@ -217,12 +217,12 @@ describe('Product Routes', () => {
           accessToken
         }
       })
-      const insertedProduct = await productCollection.insertOne(makeFakeAddProduct())
+      const insertedProduct = await productCollection.insertOne(mockAddProductParams())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
         .delete(`/api/products/${stringfiedId}/product`)
         .set('x-access-token', accessToken)
-        .send(makeFakeAddProduct())
+        .send(mockAddProductParams())
         .expect(204)
     })
   })

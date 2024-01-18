@@ -22,7 +22,7 @@ beforeEach(async () => {
   await productCollection.deleteMany({})
 })
 
-const makeFakeProducts = (): ProductModel[] => ([
+const mockProducts = (): ProductModel[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -61,7 +61,7 @@ const makeFakeProducts = (): ProductModel[] => ([
   }
 ])
 
-const makeFakeProduct = (): ProductModel => ({
+const mockProduct = (): ProductModel => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
@@ -80,7 +80,7 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeFakeAddProductParams = (): AddProductParams => ({
+const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -98,15 +98,15 @@ const makeFakeAddProductParams = (): AddProductParams => ({
   }
 })
 
-const makeSut = (): ProductMongoRepository => {
+const mockSut = (): ProductMongoRepository => {
   return new ProductMongoRepository()
 }
 
 describe('ProductRepository', () => {
   describe('add()', () => {
     test('Should return a product on AddProduct success', async () => {
-      const sut = makeSut()
-      await sut.add(makeFakeAddProductParams())
+      const sut = mockSut()
+      await sut.add(mockAddProductParams())
       const product = await productCollection.findOne({ name: 'any_name' })
       expect(product).toBeTruthy()
     })
@@ -114,14 +114,14 @@ describe('ProductRepository', () => {
 
   describe('loadAll()', () => {
     test('Should load all products on success', async () => {
-      await productCollection.insertMany(makeFakeProducts())
-      const sut = makeSut()
+      await productCollection.insertMany(mockProducts())
+      const sut = mockSut()
       const products = await sut.loadAll()
       expect(products.length).toBe(2)
     })
 
     test('Should load empty list', async () => {
-      const sut = makeSut()
+      const sut = mockSut()
       const products = await sut.loadAll()
       expect(products.length).toBe(0)
     })
@@ -129,9 +129,9 @@ describe('ProductRepository', () => {
 
   describe('loadById()', () => {
     test('Should load a product on success', async () => {
-      const collection = await productCollection.insertOne(makeFakeProduct())
+      const collection = await productCollection.insertOne(mockProduct())
       const insertedId = collection.insertedId.toHexString()
-      const sut = makeSut()
+      const sut = mockSut()
       const product = await sut.loadById(insertedId)
       expect(product).toBeTruthy()
     })
@@ -139,8 +139,8 @@ describe('ProductRepository', () => {
 
   describe('loadByCategory()', () => {
     test('Should load a product on success', async () => {
-      await productCollection.insertOne(makeFakeProduct())
-      const sut = makeSut()
+      await productCollection.insertOne(mockProduct())
+      const sut = mockSut()
       const product = await sut.loadByCategory('any_category')
       expect(product).toBeTruthy()
     })
@@ -148,9 +148,9 @@ describe('ProductRepository', () => {
 
   describe('deleteProduct()', () => {
     test('Should delete a product on success', async () => {
-      const collection = await productCollection.insertOne(makeFakeProduct())
+      const collection = await productCollection.insertOne(mockProduct())
       const insertedId = collection.insertedId.toHexString()
-      const sut = makeSut()
+      const sut = mockSut()
       await sut.delete(insertedId)
       const product = await sut.loadById(insertedId)
       expect(product).toBeNull()

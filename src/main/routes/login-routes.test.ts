@@ -10,7 +10,7 @@ import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
-const makeFakeAddAccount = (): AddAccountParams => ({
+const mockAddAccountParams = (): AddAccountParams => ({
   cpf: '12345678909',
   name: 'valid_name',
   email: 'valid_email@mail.com',
@@ -104,7 +104,7 @@ describe('Login Routes', () => {
           accessToken
         }
       })
-      await accountCollection.insertOne(makeFakeAddAccount())
+      await accountCollection.insertOne(mockAddAccountParams())
       await request(app)
         .get('/api/accounts/12345678909')
         .set('x-access-token', accessToken)

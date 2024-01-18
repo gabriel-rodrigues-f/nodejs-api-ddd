@@ -4,7 +4,7 @@ import {
   type ProductModel
 } from '.'
 
-const makeFakeProduct = (): ProductModel => ({
+const mockProduct = (): ProductModel => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
@@ -23,10 +23,10 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeLoadProductByIdRepository = (): LoadProductByIdRepository => {
+const mockLoadProductByIdRepository = (): LoadProductByIdRepository => {
   class LoadProductByIdRepositoryStub implements LoadProductByIdRepository {
     async loadById (id: string): Promise<ProductModel> {
-      return await Promise.resolve(makeFakeProduct())
+      return await Promise.resolve(mockProduct())
     }
   }
   return new LoadProductByIdRepositoryStub()
@@ -37,8 +37,8 @@ type SutTypes = {
   loadProductByIdRepositoryStub: LoadProductByIdRepository
 }
 
-const makeSut = (): SutTypes => {
-  const loadProductByIdRepositoryStub = makeLoadProductByIdRepository()
+const mockSut = (): SutTypes => {
+  const loadProductByIdRepositoryStub = mockLoadProductByIdRepository()
   const sut = new DbLoadProductById(loadProductByIdRepositoryStub)
   return {
     sut,
@@ -48,22 +48,22 @@ const makeSut = (): SutTypes => {
 
 describe('LoadProductById Usecase', () => {
   test('Should call LoadProductByIdRepository with correct values', async () => {
-    const { sut, loadProductByIdRepositoryStub } = makeSut()
+    const { sut, loadProductByIdRepositoryStub } = mockSut()
     const loadByIdSpy = jest.spyOn(loadProductByIdRepositoryStub, 'loadById')
     await sut.loadById('any_productId')
     expect(loadByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
   test('Should thorws if LoadProductByIdRepository throws', async () => {
-    const { sut, loadProductByIdRepositoryStub } = makeSut()
+    const { sut, loadProductByIdRepositoryStub } = mockSut()
     jest.spyOn(loadProductByIdRepositoryStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadById('any_productId')
     await expect(promise).rejects.toThrow()
   })
 
   test('Should return a product on success', async () => {
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const product = await sut.loadById('any_productId')
-    expect(product).toEqual(makeFakeProduct())
+    expect(product).toEqual(mockProduct())
   })
 })

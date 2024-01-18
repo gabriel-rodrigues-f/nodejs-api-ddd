@@ -6,7 +6,7 @@ import {
   type HttpRequest
 } from '.'
 
-const makeDeleteProduct = (): DeleteProduct => {
+const mockDeleteProduct = (): DeleteProduct => {
   class DeleteProductStub implements DeleteProduct {
     async delete (id: string): Promise<void> {
       await Promise.resolve(null)
@@ -15,7 +15,7 @@ const makeDeleteProduct = (): DeleteProduct => {
   return new DeleteProductStub()
 }
 
-const makeFakeRequest = (): HttpRequest => ({
+const mockRequest = (): HttpRequest => ({
   params: {
     id: 'any_id'
   }
@@ -26,8 +26,8 @@ type SutTypes = {
   deleteProductStub: DeleteProduct
 }
 
-const makeSut = (): SutTypes => {
-  const deleteProductStub = makeDeleteProduct()
+const mockSut = (): SutTypes => {
+  const deleteProductStub = mockDeleteProduct()
   const sut = new DeleteProductController(deleteProductStub)
   return {
     sut,
@@ -37,23 +37,23 @@ const makeSut = (): SutTypes => {
 
 describe('DeleteProduct Controller', () => {
   test('Should call DeleteProduct with correct values', async () => {
-    const { sut, deleteProductStub } = makeSut()
+    const { sut, deleteProductStub } = mockSut()
     const deleteSpy = jest.spyOn(deleteProductStub, 'delete')
-    await sut.handle(makeFakeRequest())
+    await sut.handle(mockRequest())
     expect(deleteSpy).toHaveBeenCalledWith('any_id')
   })
 
   test('Should return 500 if DeleteProduct throws', async () => {
-    const { sut, deleteProductStub } = makeSut()
+    const { sut, deleteProductStub } = mockSut()
     jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 204 if DeleteProduct returns empty', async () => {
-    const { sut, deleteProductStub } = makeSut()
+    const { sut, deleteProductStub } = mockSut()
     jest.spyOn(deleteProductStub, 'delete').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(noContent())
   })
 })

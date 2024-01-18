@@ -8,7 +8,7 @@ import {
   ok
 } from '.'
 
-const makeFakeProduct = (): ProductModel => ({
+const mockProduct = (): ProductModel => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
@@ -27,16 +27,16 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeFakeRequest = (): HttpRequest => ({
+const mockRequest = (): HttpRequest => ({
   params: {
     id: 'any_category'
   }
 })
 
-const makeLoadProductByCategory = (): LoadProductByCategory => {
+const mockLoadProductByCategory = (): LoadProductByCategory => {
   class LoadProductByCategoryStub implements LoadProductByCategory {
     async loadByCategory (category: string): Promise<ProductModel> {
-      return await Promise.resolve(makeFakeProduct())
+      return await Promise.resolve(mockProduct())
     }
   }
   return new LoadProductByCategoryStub()
@@ -47,8 +47,8 @@ type SutType = {
   loadProductByCategoryStub: LoadProductByCategory
 }
 
-const makeSut = (): SutType => {
-  const loadProductByCategoryStub = makeLoadProductByCategory()
+const mockSut = (): SutType => {
+  const loadProductByCategoryStub = mockLoadProductByCategory()
   const sut = new LoadProductByCategoryController(loadProductByCategoryStub)
   return {
     sut,
@@ -58,29 +58,29 @@ const makeSut = (): SutType => {
 
 describe('LoadProductByCategory Controller', () => {
   test('Should call LoadProductByCategory with correct values', async () => {
-    const { sut, loadProductByCategoryStub } = makeSut()
+    const { sut, loadProductByCategoryStub } = mockSut()
     const loadProductByCategorySpy = jest.spyOn(loadProductByCategoryStub, 'loadByCategory')
-    await sut.handle(makeFakeRequest())
+    await sut.handle(mockRequest())
     expect(loadProductByCategorySpy).toHaveBeenCalledWith('any_category')
   })
 
   test('Should return 404 if LoadProductByCategory returns empty', async () => {
-    const { sut, loadProductByCategoryStub } = makeSut()
+    const { sut, loadProductByCategoryStub } = mockSut()
     jest.spyOn(loadProductByCategoryStub, 'loadByCategory').mockReturnValueOnce(Promise.resolve(null))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(notFound())
   })
 
   test('Should return 500 if LoadProductByCategory throws', async () => {
-    const { sut, loadProductByCategoryStub } = makeSut()
+    const { sut, loadProductByCategoryStub } = mockSut()
     jest.spyOn(loadProductByCategoryStub, 'loadByCategory').mockReturnValueOnce(Promise.reject(new Error()))
-    const httpResponse = await sut.handle(makeFakeRequest())
+    const httpResponse = await sut.handle(mockRequest())
     expect(httpResponse).toEqual(serverError(new Error()))
   })
 
   test('Should return 200 if LoadProductByCategory succeeds', async () => {
-    const { sut } = makeSut()
-    const httpResponse = await sut.handle(makeFakeRequest())
-    expect(httpResponse).toEqual(ok(makeFakeProduct()))
+    const { sut } = mockSut()
+    const httpResponse = await sut.handle(mockRequest())
+    expect(httpResponse).toEqual(ok(mockProduct()))
   })
 })

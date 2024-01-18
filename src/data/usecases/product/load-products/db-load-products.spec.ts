@@ -5,7 +5,7 @@ import {
   type LoadProducts
 } from '.'
 
-const makeFakeProducts = (): ProductModel[] => ([
+const mockProducts = (): ProductModel[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -44,10 +44,10 @@ const makeFakeProducts = (): ProductModel[] => ([
   }
 ])
 
-const makeProductsRepository = (): LoadProductsRepository => {
+const mockProductsRepository = (): LoadProductsRepository => {
   class LoadProductsRepositoryStub implements LoadProductsRepository {
     async loadAll (): Promise<ProductModel[]> {
-      return await Promise.resolve(makeFakeProducts())
+      return await Promise.resolve(mockProducts())
     }
   }
   return new LoadProductsRepositoryStub()
@@ -58,8 +58,8 @@ interface SutTypes {
   loadProductsRepositoryStub: LoadProductsRepository
 }
 
-const makeSut = (): SutTypes => {
-  const loadProductsRepositoryStub = makeProductsRepository()
+const mockSut = (): SutTypes => {
+  const loadProductsRepositoryStub = mockProductsRepository()
   const sut = new DbLoadProducts(loadProductsRepositoryStub)
   return {
     sut,
@@ -69,20 +69,20 @@ const makeSut = (): SutTypes => {
 
 describe('DbLoadProducts', () => {
   test('Should call LoadProductsRepository', async () => {
-    const { sut, loadProductsRepositoryStub } = makeSut()
+    const { sut, loadProductsRepositoryStub } = mockSut()
     const loadAllSpy = jest.spyOn(loadProductsRepositoryStub, 'loadAll')
     await sut.load()
     expect(loadAllSpy).toHaveBeenCalled()
   })
 
   test('Should return a list of Products on success', async () => {
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const products = await sut.load()
-    expect(products).toEqual(makeFakeProducts())
+    expect(products).toEqual(mockProducts())
   })
 
   test('Should throw if LoadProductsRepository throws', async () => {
-    const { sut, loadProductsRepositoryStub } = makeSut()
+    const { sut, loadProductsRepositoryStub } = mockSut()
     jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.load()
     await expect(promise).rejects.toThrow()

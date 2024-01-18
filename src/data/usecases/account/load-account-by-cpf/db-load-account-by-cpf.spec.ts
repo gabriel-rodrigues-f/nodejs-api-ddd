@@ -4,7 +4,7 @@ import {
   type AccountModel
 } from '.'
 
-const makeFakeAccount = (): AccountModel => ({
+const mockAccount = (): AccountModel => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -12,10 +12,10 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'hashed_password'
 })
 
-const makeLoadAccountByRepositoryStub = (): LoadAccountByCpfRepository => {
+const mockLoadAccountByRepositoryStub = (): LoadAccountByCpfRepository => {
   class LoadAccountByCpfRepositoryStub implements LoadAccountByCpfRepository {
     async loadByCpf (cpf: string): Promise<AccountModel> {
-      return await Promise.resolve(makeFakeAccount())
+      return await Promise.resolve(mockAccount())
     }
   }
   return new LoadAccountByCpfRepositoryStub()
@@ -26,8 +26,8 @@ type SutTypes = {
   loadAccountByCpfRepositoryStub: LoadAccountByCpfRepository
 }
 
-const makeSut = (): SutTypes => {
-  const loadAccountByCpfRepositoryStub = makeLoadAccountByRepositoryStub()
+const mockSut = (): SutTypes => {
+  const loadAccountByCpfRepositoryStub = mockLoadAccountByRepositoryStub()
   const sut = new DbLoadAccountByCpf(loadAccountByCpfRepositoryStub)
   return {
     sut,
@@ -37,22 +37,22 @@ const makeSut = (): SutTypes => {
 
 describe('DbLoadAccountByCpf Usecase', () => {
   test('Should call LoadAccountByCpfRepository with correct values', async () => {
-    const { sut, loadAccountByCpfRepositoryStub } = makeSut()
+    const { sut, loadAccountByCpfRepositoryStub } = mockSut()
     const loadByCpfStub = jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf')
     await sut.loadByCpf('valid_cpf')
     expect(loadByCpfStub).toHaveBeenCalledWith('valid_cpf')
   })
 
   test('Should thorws if LoadAccountByCpfRepository throws', async () => {
-    const { sut, loadAccountByCpfRepositoryStub } = makeSut()
+    const { sut, loadAccountByCpfRepositoryStub } = mockSut()
     jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadByCpf('any_cpf')
     await expect(promise).rejects.toThrow()
   })
 
   test('Should return account on success', async () => {
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const account = await sut.loadByCpf('any_cpf')
-    expect(account).toEqual(makeFakeAccount())
+    expect(account).toEqual(mockAccount())
   })
 })

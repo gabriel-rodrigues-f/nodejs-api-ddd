@@ -7,7 +7,7 @@ import {
   serverError
 } from '.'
 
-const makeController = (): Controller => {
+const mockController = (): Controller => {
   class ControllerStub implements Controller {
     async handle (httpRequest: HttpRequest): Promise<HttpResponse> {
       const httpResponse: HttpResponse = { body: {}, statusCode: 200 }
@@ -17,7 +17,7 @@ const makeController = (): Controller => {
   return new ControllerStub()
 }
 
-const makeLogErrorRepository = (): LogErrorRepository => {
+const mockLogErrorRepository = (): LogErrorRepository => {
   class LogErrorRepositoryStub implements LogErrorRepository {
     async logError (stack: string): Promise<void> {
       return await Promise.resolve()
@@ -32,9 +32,9 @@ interface SutTypes {
   logErrorRepositoryStub: LogErrorRepository
 }
 
-const makeSut = (): SutTypes => {
-  const controllerStub = makeController()
-  const logErrorRepositoryStub = makeLogErrorRepository()
+const mockSut = (): SutTypes => {
+  const controllerStub = mockController()
+  const logErrorRepositoryStub = mockLogErrorRepository()
   const sut = new LogControllerDecorator(controllerStub, logErrorRepositoryStub)
   return {
     sut,
@@ -53,7 +53,7 @@ describe('Log Controller Decorator', () => {
         passwordConfirmation: 'any_password'
       }
     }
-    const { sut, controllerStub } = makeSut()
+    const { sut, controllerStub } = mockSut()
     const handleSpy = jest.spyOn(controllerStub, 'handle')
     await sut.handle(httpRequest)
     expect(handleSpy).toHaveBeenCalledWith(httpRequest)
@@ -68,13 +68,13 @@ describe('Log Controller Decorator', () => {
         passwordConfirmation: 'any_password'
       }
     }
-    const { sut } = makeSut()
+    const { sut } = mockSut()
     const httpResponse = await sut.handle(httpRequest)
     expect(httpResponse).toEqual({ body: {}, statusCode: 200 })
   })
 
   test('Should  ', async () => {
-    const { sut, controllerStub, logErrorRepositoryStub } = makeSut()
+    const { sut, controllerStub, logErrorRepositoryStub } = mockSut()
     const fakeError = new Error()
     fakeError.stack = 'any_stack'
     const error = serverError(fakeError)
