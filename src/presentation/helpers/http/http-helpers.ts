@@ -1,6 +1,6 @@
 import { NotFoundError } from '@/presentation/errors/not-found-error'
-import { ServerError, UnauthorizedError } from '../../errors'
-import { type HttpResponse } from '../../protocols/http'
+import { ServerError, UnauthorizedError } from '@/presentation/errors'
+import { type HttpResponse } from '@/presentation/protocols/http'
 
 export const ok = (data: any): HttpResponse => ({
   statusCode: 200,

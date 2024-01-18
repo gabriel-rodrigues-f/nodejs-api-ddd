@@ -1,3 +1,4 @@
+import { AuthMiddleware } from './auth-middleware'
 import {
   type HttpRequest,
   type LoadAccountByToken,
@@ -5,7 +6,6 @@ import {
   ok,
   forbidden,
   serverError,
-  AuthMiddleware,
   AccessDeniedError
 } from '.'
 
