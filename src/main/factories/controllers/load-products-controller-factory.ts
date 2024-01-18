@@ -1,7 +1,7 @@
-import { makeLogControllerDecorator } from '@/main/factories/decorators/log.controller-decorator-factory'
-import { makeDbLoadProducts } from '@/main/factories/usecases/db-load-products-factory'
-import { type Controller } from '@/presentation/protocols/controller'
-import { LoadProductsController } from '@/presentation/controllers/product/load-products/load-products-controller'
+import { makeLogControllerDecorator } from '@/main/factories/decorators'
+import { makeDbLoadProducts } from '@/main/factories/usecases'
+import { type Controller } from '@/presentation/protocols'
+import { LoadProductsController } from '@/presentation/controllers'
 
 export const makeLoadProductsController = (): Controller => {
   const controller = new LoadProductsController(makeDbLoadProducts())

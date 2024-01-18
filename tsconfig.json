@@ -5,15 +5,22 @@
     "module": "commonJS",
     "target": "es2019",
     "esModuleInterop": true,
-    "rootDir": "src",
+    "rootDirs": [
+      "src",
+      "tests"
+    ],
     "baseUrl": "src",
     "paths": {
+      "@/tests/*": [
+        "../tests/*"
+      ],
       "@/*": [
         "*"
       ]
-    },
+    }
   },
   "include": [
-    "src"
+    "src",
+    "tests"
   ]
 }

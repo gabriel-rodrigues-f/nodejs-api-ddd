@@ -1,7 +1,7 @@
 import { type Router } from 'express'
-import { adaptRoute } from '../adapters/express-route-adapter'
-import { makeLoadAccountByCpfController } from '../factories/controllers/load-account-by-cpf-controller-factory'
-import { auth } from '../middlewares/auth'
+import { adaptRoute } from '@/main/adapters'
+import { auth } from '@/main/middlewares'
+import { makeLoadAccountByCpfController } from '@/main/factories/controllers'
 
 export default (router: Router): void => {
   router.get('/accounts/:cpf', auth, adaptRoute(makeLoadAccountByCpfController()))

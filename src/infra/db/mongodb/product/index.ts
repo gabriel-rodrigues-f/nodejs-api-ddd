@@ -1,6 +1,0 @@
-export * from '@/infra/db/mongodb/helpers/mongo-helper'
-export * from '@/data/usecases/product/add-product'
-export * from '@/data/usecases/product/load-product-by-id'
-export * from '@/data/protocols/db/product/load-products-repository'
-export * from '@/data/protocols/db/product/delete-product-repository'
-export * from '@/data/protocols/db/product/load-product-by-category-repository'

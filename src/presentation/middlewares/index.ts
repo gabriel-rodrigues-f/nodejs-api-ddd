@@ -1,5 +1,1 @@
-export * from '@/presentation/errors'
-export * from '@/presentation/protocols'
-export * from '@/presentation/helpers/http/http-helpers'
-export * from '@/domain/models/account'
-export * from '@/domain/usecases/account/load-account-by-token'
+export * from './auth-middleware'

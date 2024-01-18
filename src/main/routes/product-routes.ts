@@ -1,12 +1,13 @@
 import { type Router } from 'express'
-import { adaptRoute } from '@/main/adapters/express-route-adapter'
-import { makeAddProductController } from '@/main/factories/controllers/add-product-controller-factory'
-import { makeLoadProductsController } from '@/main/factories/controllers/load-products-controller-factory'
-import { makeDeleteProductController } from '@/main/factories/controllers/delete-product-controller-factory'
-import { makeLoadProductByIdController } from '@/main/factories/controllers/load-product-by-id-controller-factory'
-import { makeLoadProductByCategoryController } from '@/main/factories/controllers/load-product-by-category-controller-factory'
-import { adminAuth } from '@/main/middlewares/admin-auth'
-import { auth } from '@/main/middlewares/auth'
+import { adaptRoute } from '@/main/adapters'
+import { auth, adminAuth } from '@/main/middlewares'
+import {
+  makeAddProductController,
+  makeLoadProductsController,
+  makeDeleteProductController,
+  makeLoadProductByIdController,
+  makeLoadProductByCategoryController
+} from '@/main/factories/controllers'
 
 export default (router: Router): void => {
   router.get('/products', auth, adaptRoute(makeLoadProductsController()))

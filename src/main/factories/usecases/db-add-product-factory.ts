@@ -1,6 +1,6 @@
-import { DbAddProduct } from '@/data/usecases/product/add-product/db-add-product'
-import { type AddProduct } from '@/domain/usecases/product/add-product'
-import { ProductMongoRepository } from '@/infra/db/mongodb/product/product-mongo-repository'
+import { type AddProduct } from '@/domain/usecases'
+import { DbAddProduct } from '@/data/usecases'
+import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbAddProduct = (): AddProduct => {
   const productMongoRepository = new ProductMongoRepository()

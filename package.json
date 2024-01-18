@@ -13,11 +13,13 @@
     "husky:prepare": "husky install",
     "lint:fix": "eslint 'src/**' --fix",
     "lint-staged:run": "npx lint-staged",
+    "check": "npm-check -s -u",
     "test": "jest --passWithNoTests --noStackTrace --runInBand",
     "test:verbose": "jest --passWithNoTests --runInBand",
     "test:unit": "npm test -- --watch -c jest-unit-config.js",
     "test:integration": "npm test -- --watch -c jest-integration-config.js",
     "test:staged": "npm test -- --findRelatedTests",
+    "test:failures": "jest --onlyFailures",
     "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
