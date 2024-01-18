@@ -2,14 +2,14 @@ import { AddProductController } from './add-product-controller'
 import {
   type HttpRequest,
   type AddProduct,
-  type AddProductModel,
+  type AddProductParams,
   type Validation,
   serverError,
   badRequest,
   noContent
 } from '.'
 
-const makeFakeAddProduct = (): AddProductModel => ({
+const makeFakeAddProduct = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -43,7 +43,7 @@ const makeValidation = (): Validation => {
 
 const makeAddProduct = (): AddProduct => {
   class AddProductStub implements AddProduct {
-    async add (data: AddProductModel): Promise<void> {
+    async add (data: AddProductParams): Promise<void> {
       return await Promise.resolve()
     }
   }

@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import {
   type ProductModel,
-  type AddProductModel,
+  type AddProductParams,
   type AddProductRepository,
   type LoadProductsRepository,
   type DeleteProductRepository,
@@ -16,7 +16,7 @@ export class ProductMongoRepository implements
   DeleteProductRepository,
   LoadProductByIdRepository,
   LoadProductByCategoryRepository {
-  async add (productData: AddProductModel): Promise<void> {
+  async add (productData: AddProductParams): Promise<void> {
     const productCollection = MongoHelper.getCollection('products')
     await productCollection.insertOne(productData)
   }

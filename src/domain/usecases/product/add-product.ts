@@ -1,7 +1,7 @@
 import { type ProductModel } from '@/domain/models/product'
 
-export type AddProductModel = Omit<ProductModel, 'id'>
+export type AddProductParams = Omit<ProductModel, 'id'>
 
 export interface AddProduct {
-  add: (account: AddProductModel) => Promise<void>
+  add: (account: AddProductParams) => Promise<void>
 }

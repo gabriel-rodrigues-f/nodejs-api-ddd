@@ -2,7 +2,7 @@ import { type Collection } from 'mongodb'
 import { AccountMongoRepository } from './account-mongo-repository'
 import {
   MongoHelper,
-  type AddAccountModel
+  type AddAccountParams
 } from '.'
 
 let accountCollection: Collection
@@ -22,7 +22,7 @@ describe('Account Mongo Repository', () => {
     await accountCollection.deleteMany({})
   })
 
-  const makeAddAccountModel = (): AddAccountModel => ({
+  const makeAddAccountParams = (): AddAccountParams => ({
     name: 'any_name',
     cpf: 'any_cpf',
     email: 'any_email@mail.com',
@@ -36,7 +36,7 @@ describe('Account Mongo Repository', () => {
   describe('add()', () => {
     test('Should return an account on add success', async () => {
       const sut = makeSut()
-      const account = await sut.add(makeAddAccountModel())
+      const account = await sut.add(makeAddAccountParams())
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
       expect(account.name).toBe('any_name')
@@ -49,7 +49,7 @@ describe('Account Mongo Repository', () => {
   describe('loadByEmail()', () => {
     test('Should return an account on loadByEmail success', async () => {
       const sut = makeSut()
-      await accountCollection.insertOne(makeAddAccountModel())
+      await accountCollection.insertOne(makeAddAccountParams())
       const account = await sut.loadByEmail('any_email@mail.com')
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
@@ -69,7 +69,7 @@ describe('Account Mongo Repository', () => {
   describe('updateAccessToken()', () => {
     test('Should udpate the account accessToken on updateAccessToken success', async () => {
       const sut = makeSut()
-      const result = await accountCollection.insertOne(makeAddAccountModel())
+      const result = await accountCollection.insertOne(makeAddAccountParams())
       const fakeId = result.insertedId.toHexString()
       const account = await accountCollection.findOne({ _id: result.insertedId })
       if (account) {
@@ -159,7 +159,7 @@ describe('Account Mongo Repository', () => {
 
   describe('loadByCpf', () => {
     test('Should load an account on success', async () => {
-      await accountCollection.insertOne(makeAddAccountModel())
+      await accountCollection.insertOne(makeAddAccountParams())
       const sut = makeSut()
       const account = await sut.loadByCpf('any_cpf')
       expect(account).toBeTruthy()

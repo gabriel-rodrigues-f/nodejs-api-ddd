@@ -4,7 +4,7 @@ import {
   type LoadAccountByEmailRepository,
   type UpdateAccessTokenRepository,
   type LoadAccountByTokenRepository,
-  type AddAccountModel,
+  type AddAccountParams,
   type AccountModel,
   MongoHelper
 } from '.'
@@ -14,7 +14,7 @@ export class AccountMongoRepository implements
   LoadAccountByEmailRepository,
   UpdateAccessTokenRepository,
   LoadAccountByTokenRepository {
-  async add (accountData: AddAccountModel): Promise<AccountModel> {
+  async add (accountData: AddAccountParams): Promise<AccountModel> {
     const accountCollection = MongoHelper.getCollection('accounts')
     const result = await accountCollection.insertOne(accountData)
     const id = result.insertedId.toHexString()

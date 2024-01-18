@@ -1,10 +1,10 @@
 import { DbAddProduct } from './db-add-product'
 import {
-  type AddProductModel,
+  type AddProductParams,
   type AddProductRepository
 } from '.'
 
-const makeFakeAddProduct = (): AddProductModel => ({
+const makeFakeAddProduct = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -29,7 +29,7 @@ interface SutTypes {
 
 const makeAddProductRepository = (): AddProductRepository => {
   class AddProductRepositoryStub implements AddProductRepository {
-    async add (productData: AddProductModel): Promise<void> {
+    async add (productData: AddProductParams): Promise<void> {
       return await Promise.resolve()
     }
   }

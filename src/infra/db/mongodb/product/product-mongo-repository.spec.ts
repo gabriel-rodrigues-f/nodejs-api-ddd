@@ -2,7 +2,7 @@ import { type Collection } from 'mongodb'
 import { ProductMongoRepository } from './product-mongo-repository'
 import {
   MongoHelper,
-  type AddProductModel,
+  type AddProductParams,
   type ProductModel
 } from '.'
 
@@ -80,7 +80,7 @@ const makeFakeProduct = (): ProductModel => ({
   }
 })
 
-const makeFakeAddProductModel = (): AddProductModel => ({
+const makeFakeAddProductParams = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
@@ -106,7 +106,7 @@ describe('ProductRepository', () => {
   describe('add()', () => {
     test('Should return a product on AddProduct success', async () => {
       const sut = makeSut()
-      await sut.add(makeFakeAddProductModel())
+      await sut.add(makeFakeAddProductParams())
       const product = await productCollection.findOne({ name: 'any_name' })
       expect(product).toBeTruthy()
     })

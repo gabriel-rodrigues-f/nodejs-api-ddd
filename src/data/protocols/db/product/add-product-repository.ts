@@ -1,5 +1,5 @@
-import { type AddProductModel } from '@/domain/usecases/product/add-product'
+import { type AddProductParams } from '@/domain/usecases/product/add-product'
 
 export interface AddProductRepository {
-  add: (productData: AddProductModel) => Promise<void>
+  add: (productData: AddProductParams) => Promise<void>
 }

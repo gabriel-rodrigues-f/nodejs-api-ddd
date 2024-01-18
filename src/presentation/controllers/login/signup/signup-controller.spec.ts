@@ -2,9 +2,9 @@ import { SignUpController } from './signup-controller'
 import {
   type HttpRequest,
   type AccountModel,
-  type AddAccountModel,
+  type AddAccountParams,
   type Authentication,
-  type AuthenticationModel,
+  type AuthenticationParams,
   type AddAccount,
   type Validation,
   ok,
@@ -34,7 +34,7 @@ const makeFakeAccount = (): AccountModel => ({
   password: 'valid_password'
 })
 
-const makeFakeAddAccount = (): AddAccountModel => ({
+const makeFakeAddAccount = (): AddAccountParams => ({
   name: 'any_name',
   cpf: 'valid_cpf',
   email: 'any_email@mail.com',
@@ -43,7 +43,7 @@ const makeFakeAddAccount = (): AddAccountModel => ({
 
 const makeAuthentication = (): Authentication => {
   class AuthenticationStub implements Authentication {
-    async auth (authentication: AuthenticationModel): Promise<string> {
+    async auth (authentication: AuthenticationParams): Promise<string> {
       return await Promise.resolve('any_token')
     }
   }
@@ -52,7 +52,7 @@ const makeAuthentication = (): Authentication => {
 
 const makeAddAccount = (): AddAccount => {
   class AddAccountStub implements AddAccount {
-    async add (account: AddAccountModel): Promise<AccountModel> {
+    async add (account: AddAccountParams): Promise<AccountModel> {
       return await Promise.resolve(makeFakeAccount())
     }
   }

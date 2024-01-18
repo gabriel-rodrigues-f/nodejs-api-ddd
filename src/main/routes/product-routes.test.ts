@@ -3,14 +3,14 @@ import { sign } from 'jsonwebtoken'
 import app from '@/main/config/app'
 import { type Collection } from 'mongodb'
 import env from '@/main/config/env'
-import { type AddProductModel } from '@/domain/usecases/product/add-product'
+import { type AddProductParams } from '@/domain/usecases/product/add-product'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 
 let productCollection: Collection
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
-const makeFakeAddProduct = (): AddProductModel => ({
+const makeFakeAddProduct = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',

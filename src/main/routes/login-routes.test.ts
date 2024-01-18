@@ -4,13 +4,13 @@ import request from 'supertest'
 import { type Collection } from 'mongodb'
 import app from '@/main/config/app'
 import env from '@/main/config/env'
-import { type AddAccountModel } from '@/domain/usecases/account/add-account'
+import { type AddAccountParams } from '@/domain/usecases/account/add-account'
 import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
-const makeFakeAddAccount = (): AddAccountModel => ({
+const makeFakeAddAccount = (): AddAccountParams => ({
   cpf: '12345678909',
   name: 'valid_name',
   email: 'valid_email@mail.com',
