@@ -140,9 +140,10 @@ describe('ProductRepository', () => {
   describe('loadByCategory()', () => {
     test('Should load a product on success', async () => {
       await productCollection.insertOne(mockProduct())
+      await productCollection.insertOne(mockProduct())
       const sut = mockSut()
-      const product = await sut.loadByCategory('any_category')
-      expect(product).toBeTruthy()
+      const products = await sut.loadByCategory('any_category')
+      expect(products.length).toBe(2)
     })
   })
 

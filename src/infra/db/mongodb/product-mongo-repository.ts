@@ -32,9 +32,9 @@ export class ProductMongoRepository implements
     return await productsCollection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
   }
 
-  async loadByCategory (category: string): Promise<ProductModel> {
+  async loadByCategory (category: string): Promise<ProductModel[]> {
     const productsCollection = MongoHelper.getCollection('products')
-    return await productsCollection.findOne<ProductModel>({ category })
+    return await productsCollection.find<ProductModel>({ category }).toArray()
   }
 
   async delete (id: string): Promise<void> {
