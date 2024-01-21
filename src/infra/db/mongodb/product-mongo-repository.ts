@@ -5,7 +5,6 @@ import { type AddProductParams } from '@/domain/usecases'
 import {
   type AddProductRepository,
   type DeleteProductRepository,
-  type LoadProductByCategoryRepository,
   type LoadProductByIdRepository,
   type LoadProductsRepository
 } from '@/data/protocols'
@@ -14,8 +13,7 @@ export class ProductMongoRepository implements
   AddProductRepository,
   LoadProductsRepository,
   DeleteProductRepository,
-  LoadProductByIdRepository,
-  LoadProductByCategoryRepository {
+  LoadProductByIdRepository {
   async add (productData: AddProductParams): Promise<void> {
     const productCollection = MongoHelper.getCollection('products')
     await productCollection.insertOne(productData)
@@ -30,11 +28,6 @@ export class ProductMongoRepository implements
   async loadById (id: string): Promise<ProductModel> {
     const productsCollection = MongoHelper.getCollection('products')
     return await productsCollection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
-  }
-
-  async loadByCategory (category: string): Promise<ProductModel[]> {
-    const productsCollection = MongoHelper.getCollection('products')
-    return await productsCollection.find<ProductModel>({ category }).toArray()
   }
 
   async delete (id: string): Promise<void> {

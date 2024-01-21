@@ -1,7 +1,6 @@
 export * from './add-product-controller-factory'
 export * from './delete-product-controller-factory'
 export * from './load-account-by-cpf-controller-factory'
-export * from './load-product-by-category-controller-factory'
 export * from './load-product-by-id-controller-factory'
 export * from './load-products-controller-factory'
 export * from './login-controller-factory'

@@ -156,38 +156,6 @@ describe('Product Routes', () => {
     })
   })
 
-  describe('GET /products/:category/category', () => {
-    test('Should return 403 on product if no accessToken is provided', async () => {
-      await request(app)
-        .get('/api/products/:id/category')
-        .expect(403)
-    })
-
-    test('Should return 200 on load products with accessToken', async () => {
-      const reponse = await accountCollection.insertOne({
-        name: 'Gabriel',
-        email: 'gabriel.rodrigues@gmail.com',
-        password: 123,
-        role: 'admin'
-      })
-      const id = reponse.insertedId
-      const accessToken = sign({ id }, env.JWT_SECRET)
-      await accountCollection.updateOne({
-        _id: id
-      }, {
-        $set: {
-          accessToken
-        }
-      })
-      const { category } = mockAddProductParams()
-      await productCollection.insertOne(mockAddProductParams())
-      await request(app)
-        .get(`/api/products/${category}/category`)
-        .set('x-access-token', accessToken)
-        .expect(200)
-    })
-  })
-
   describe('GET /products/:id/product', () => {
     test('Should return 403 on product if no accessToken is provided', async () => {
       await request(app)
