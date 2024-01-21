@@ -1,5 +1,6 @@
 import { type ProductModel } from '@/domain/models'
 import { type LoadProducts } from '@/domain/usecases'
+import { type HttpRequest } from '@/presentation/protocols'
 import { LoadProductsController } from '@/presentation/controllers'
 import {
   ok,
@@ -35,6 +36,12 @@ const mockLoadProducts = (): LoadProducts => {
   return new LoadProductsStub()
 }
 
+const mockRequest = (): HttpRequest => ({
+  query: {
+    category: 'any_category'
+  }
+})
+
 interface SutType {
   sut: LoadProductsController
   loadProductsStub: LoadProducts
@@ -53,27 +60,34 @@ describe('LoadProducts Controller', () => {
   test('Should call LoadProducts', async () => {
     const { sut, loadProductsStub } = mockSut()
     const loadSpy = jest.spyOn(loadProductsStub, 'load')
-    await sut.handle()
-    expect(loadSpy).toHaveBeenCalled()
+    await sut.handle({})
+    expect(loadSpy).toHaveBeenCalledWith({})
   })
 
   test('Should return 200 on success', async () => {
     const { sut } = mockSut()
-    const response = await sut.handle()
+    const response = await sut.handle({})
     expect(response).toEqual(ok(mockProducts()))
+  })
+
+  test('Should return a product on success', async () => {
+    const { sut, loadProductsStub } = mockSut()
+    jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.resolve([mockProducts()[1]]))
+    const response = await sut.handle(mockRequest())
+    expect(response.body.length).toEqual(1)
   })
 
   test('Should return 204 LoadProduct returns empty', async () => {
     const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.resolve([]))
-    const response = await sut.handle()
+    const response = await sut.handle({})
     expect(response).toEqual(noContent())
   })
 
   test('Should 500 if LoadProducts throws', async () => {
     const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
-    const response = await sut.handle()
+    const response = await sut.handle({})
     expect(response).toEqual(serverError(new Error()))
   })
 })
