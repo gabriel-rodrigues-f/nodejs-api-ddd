@@ -13,36 +13,16 @@ const mockProducts = (): ProductModel[] => ([
     category: 'any_category',
     name: 'any_name',
     price: 'any_price',
-    nutritionalInformation: {
-      calorie: 'any_calorie',
-      carbohydrate: 'any_carbohydrate',
-      total_sugars: 'any_total_sugars',
-      added_sugars: 'any_added_sugars',
-      proteins: 'any_proteins',
-      total_fat: 'any_total_fat',
-      saturated_fat: 'any_saturated_fat',
-      trans_fats: 'any_trans_fats',
-      dietary_fiber: 'any_dietary_fiber',
-      sodium: 'any_sodium'
-    }
+    description: 'any_description',
+    image: 'any_image'
   },
   {
     id: 'other_id',
     category: 'other_category',
     name: 'other_name',
     price: 'other_price',
-    nutritionalInformation: {
-      calorie: 'other_calorie',
-      carbohydrate: 'other_carbohydrate',
-      total_sugars: 'other_total_sugars',
-      added_sugars: 'other_added_sugars',
-      proteins: 'other_proteins',
-      total_fat: 'other_total_fat',
-      saturated_fat: 'other_saturated_fat',
-      trans_fats: 'other_trans_fats',
-      dietary_fiber: 'other_dietary_fiber',
-      sodium: 'other_sodium'
-    }
+    description: 'other_description',
+    image: 'other_image'
   }
 ])
 

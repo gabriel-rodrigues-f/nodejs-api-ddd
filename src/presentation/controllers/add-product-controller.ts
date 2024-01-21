@@ -21,8 +21,8 @@ export class AddProductController implements Controller {
     try {
       const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
-      const { category, name, price, nutritionalInformation } = request.body
-      await this.addProduct.add({ category, name, price, nutritionalInformation })
+      const { category, name, price, description, image } = request.body
+      await this.addProduct.add({ category, name, price, description, image })
       return noContent()
     } catch (error) {
       return serverError(error)

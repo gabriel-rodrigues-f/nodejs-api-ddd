@@ -17,18 +17,8 @@ const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',
   name: 'any_name',
   price: 'any_price',
-  nutritionalInformation: {
-    calorie: 'any_calorie',
-    carbohydrate: 'any_carbohydrate',
-    total_sugars: 'any_total_sugars',
-    added_sugars: 'any_added_sugars',
-    proteins: 'any_proteins',
-    total_fat: 'any_total_fat',
-    saturated_fat: 'any_saturated_fat',
-    trans_fats: 'any_trans_fats',
-    dietary_fiber: 'any_dietary_fiber',
-    sodium: 'any_sodium'
-  }
+  description: 'any_description',
+  image: 'any_image'
 })
 
 describe('Product Routes', () => {
