@@ -76,13 +76,29 @@ describe('ProductRepository', () => {
     test('Should load all products on success', async () => {
       await productCollection.insertMany(mockProducts())
       const sut = mockSut()
-      const products = await sut.loadAll()
+      const products = await sut.loadAll({})
       expect(products.length).toBe(2)
     })
 
     test('Should load empty list', async () => {
       const sut = mockSut()
-      const products = await sut.loadAll()
+      const products = await sut.loadAll({})
+      expect(products.length).toBe(0)
+    })
+  })
+
+  describe('loadAll()', () => {
+    test('Should load all products on success', async () => {
+      await productCollection.insertMany(mockProducts())
+      const sut = mockSut()
+      const products = await sut.loadAll({ category: 'any_category' })
+      console.log(products)
+      expect(products.length).toBe(1)
+    })
+
+    test('Should load empty list', async () => {
+      const sut = mockSut()
+      const products = await sut.loadAll({ category: 'any_category' })
       expect(products.length).toBe(0)
     })
   })
