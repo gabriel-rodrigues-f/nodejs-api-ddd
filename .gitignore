@@ -6,3 +6,4 @@ data
 !tests/data
 .vscode
 globalConfig.json
+status
