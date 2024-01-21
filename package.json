@@ -6,8 +6,7 @@
   "scripts": {
     "start": "npm run build && node dist/main/server.js",
     "start:dev": "ts-node src/main/server.ts",
-    "build": "rimraf dist && tsc -p tsconfig-build.json",
-    "build:test": "tsc -p tsconfig-build.json",
+    "build": "rimraf dist && tsc -p tsconfig-build.json",    
     "up": "npm run build && docker-compose up -d",
     "up:locally": "npm run build && docker build -t nodejs-api-ddd . && docker-compose up -d",
     "down": "docker-compose down",

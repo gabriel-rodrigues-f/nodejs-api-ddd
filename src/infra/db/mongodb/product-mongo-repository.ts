@@ -19,15 +19,16 @@ export class ProductMongoRepository implements
     await productCollection.insertOne(productData)
   }
 
-  async loadAll (): Promise<ProductModel[]> {
+  async loadAll (filter: any): Promise<ProductModel[]> {
     const productsCollection = MongoHelper.getCollection('products')
-    const products = await productsCollection.find<ProductModel>({}).toArray()
-    return products
+    const products = await productsCollection.find<ProductModel>(filter).toArray()
+    return products.map(product => MongoHelper.map(product))
   }
 
   async loadById (id: string): Promise<ProductModel> {
     const productsCollection = MongoHelper.getCollection('products')
-    return await productsCollection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
+    const product = productsCollection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
+    return product && MongoHelper.map(product)
   }
 
   async delete (id: string): Promise<void> {
