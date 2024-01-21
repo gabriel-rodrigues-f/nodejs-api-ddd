@@ -10,7 +10,7 @@ import {
 
 export default (router: Router): void => {
   router.get('/products', auth, adaptRoute(makeLoadProductsController()))
-  router.get('/products/:id/product', auth, adaptRoute(makeLoadProductByIdController()))
+  router.get('/products/:id', auth, adaptRoute(makeLoadProductByIdController()))
   router.post('/products', adminAuth, adaptRoute(makeAddProductController()))
-  router.delete('/products/:id/product', auth, adaptRoute(makeDeleteProductController()))
+  router.delete('/products/:id', adminAuth, adaptRoute(makeDeleteProductController()))
 }

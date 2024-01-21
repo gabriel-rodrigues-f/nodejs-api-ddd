@@ -92,7 +92,6 @@ describe('ProductRepository', () => {
       await productCollection.insertMany(mockProducts())
       const sut = mockSut()
       const products = await sut.loadAll({ category: 'any_category' })
-      console.log(products)
       expect(products.length).toBe(1)
     })
 

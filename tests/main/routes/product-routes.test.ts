@@ -1,10 +1,10 @@
 import { type Collection } from 'mongodb'
+import { type Express } from 'express'
 import { type AddProductParams } from '@/domain/usecases'
 import request from 'supertest'
-import { sign } from 'jsonwebtoken'
-import { type Express } from 'express'
-import { setupApp } from '@/main/config/app'
 import env from '@/main/config/env'
+import { sign } from 'jsonwebtoken'
+import { setupApp } from '@/main/config/app'
 import { MongoHelper } from '@/infra/db/mongodb'
 
 let productCollection: Collection
@@ -38,42 +38,10 @@ describe('Product Routes', () => {
     await accountCollection.deleteMany({})
   })
 
-  describe('POST /products', () => {
-    test('Should return 403 on product', async () => {
-      await request(app)
-        .post('/api/products')
-        .send(mockAddProductParams())
-        .expect(403)
-    })
-
-    test('Should return 204 on add product usign valid accessToken', async () => {
-      const reponse = await accountCollection.insertOne({
-        name: 'Gabriel',
-        email: 'gabriel.rodrigues@gmail.com',
-        password: 123,
-        role: 'admin'
-      })
-      const id = reponse.insertedId
-      const accessToken = sign({ id }, env.JWT_SECRET)
-      await accountCollection.updateOne({
-        _id: id
-      }, {
-        $set: {
-          accessToken
-        }
-      })
-      await request(app)
-        .post('/api/products')
-        .set('x-access-token', accessToken)
-        .send(mockAddProductParams())
-        .expect(204)
-    })
-  })
-
   describe('GET /products', () => {
-    test('Should return 403 on product', async () => {
+    test('Should return 403 on get products', async () => {
       await request(app)
-        .post('/api/products')
+        .get('/api/products')
         .send(mockAddProductParams())
         .expect(403)
     })
@@ -124,10 +92,10 @@ describe('Product Routes', () => {
     })
   })
 
-  describe('GET /products/:productId/product', () => {
-    test('Should return 403 on product if no accessToken is provided', async () => {
+  describe('GET /products by id', () => {
+    test('Should return 403 on get product by id if no accessToken is provided', async () => {
       await request(app)
-        .get('/api/products/:id/product')
+        .get('/api/products/:id')
         .expect(403)
     })
 
@@ -150,16 +118,48 @@ describe('Product Routes', () => {
       const insertedProduct = await productCollection.insertOne(mockAddProductParams())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
-        .get(`/api/products/${stringfiedId}/product`)
+        .get(`/api/products/${stringfiedId}`)
         .set('x-access-token', accessToken)
         .expect(200)
     })
   })
 
-  describe('GET /products/:id/product', () => {
-    test('Should return 403 on product if no accessToken is provided', async () => {
+  describe('POST /products', () => {
+    test('Should return 403 on create product without admin role', async () => {
       await request(app)
-        .get('/api/products/:id/product')
+        .post('/api/products')
+        .send(mockAddProductParams())
+        .expect(403)
+    })
+
+    test('Should return 204 on add product usign valid accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      await request(app)
+        .post('/api/products')
+        .set('x-access-token', accessToken)
+        .send(mockAddProductParams())
+        .expect(204)
+    })
+  })
+
+  describe('DELETE /products/:id', () => {
+    test('Should return 403 on delete product if no accessToken is provided', async () => {
+      await request(app)
+        .delete('/api/products/:id')
         .expect(403)
     })
 
@@ -182,7 +182,7 @@ describe('Product Routes', () => {
       const insertedProduct = await productCollection.insertOne(mockAddProductParams())
       const stringfiedId = insertedProduct.insertedId.toHexString()
       await request(app)
-        .delete(`/api/products/${stringfiedId}/product`)
+        .delete(`/api/products/${stringfiedId}`)
         .set('x-access-token', accessToken)
         .send(mockAddProductParams())
         .expect(204)
