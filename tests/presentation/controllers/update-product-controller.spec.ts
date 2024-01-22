@@ -23,7 +23,6 @@ const mockValidation = (): Validation => {
 
 const mockRequest = (): HttpRequest => ({
   body: {
-    id: 'any_id',
     category: 'other_category',
     name: 'any_name',
     price: 'any_price',
@@ -60,7 +59,6 @@ describe('UpdateProductContrller', () => {
     expect(updateSpy).toHaveBeenCalledWith({
       id: 'any_id',
       body: {
-        id: 'any_id',
         category: 'other_category',
         name: 'any_name',
         price: 'any_price',
