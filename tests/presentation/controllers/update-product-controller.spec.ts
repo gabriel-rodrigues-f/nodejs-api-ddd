@@ -1,7 +1,7 @@
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
 import { type UpdateProductParams, type UpdateProduct } from '@/domain/usecases'
 import { UpdateProductController } from '@/presentation/controllers'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, serverError } from '@/presentation/helpers'
 
 const mockUpdateProduct = (): UpdateProduct => {
   class UpdateProductStub implements UpdateProduct {
@@ -83,5 +83,12 @@ describe('UpdateProductContrller', () => {
     const request = mockRequest()
     const response = await sut.handle(request)
     expect(response).toEqual(badRequest(new Error()))
+  })
+
+  test('Should return 500 if UpdateProduct throws', async () => {
+    const { sut, updateProductStub } = mockSut()
+    jest.spyOn(updateProductStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 })
