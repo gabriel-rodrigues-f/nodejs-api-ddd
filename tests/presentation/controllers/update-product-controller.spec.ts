@@ -70,6 +70,13 @@ describe('UpdateProductContrller', () => {
     })
   })
 
+  test('Should call validation with correct values', async () => {
+    const { sut, validationStub } = mockSut()
+    const validationSpy = jest.spyOn(validationStub, 'validate')
+    await sut.handle(mockRequest())
+    expect(validationSpy).toHaveBeenCalledWith(mockRequest())
+  })
+
   test('Should return 400 if validation fails', async () => {
     const { sut, validationStub } = mockSut()
     jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
