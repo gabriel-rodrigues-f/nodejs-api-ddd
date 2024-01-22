@@ -5,7 +5,7 @@ import {
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
-import { badRequest } from '../helpers'
+import { badRequest, serverError } from '../helpers'
 
 export class UpdateProductController implements Controller {
   constructor (
@@ -14,11 +14,15 @@ export class UpdateProductController implements Controller {
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
-    const error = this.validation.validate(request)
-    if (error) return badRequest(error)
-    const { body } = request
-    const { id } = request.params
-    await this.updateProduct.update({ id, body })
-    return await Promise.resolve(null)
+    try {
+      const error = this.validation.validate(request)
+      if (error) return badRequest(error)
+      const { body } = request
+      const { id } = request.params
+      await this.updateProduct.update({ id, body })
+      return await Promise.resolve(null)
+    } catch (error) {
+      return serverError(error)
+    }
   }
 }
