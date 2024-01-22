@@ -72,7 +72,7 @@ describe('UpdateProductContrller', () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(mockRequest())
-    expect(validationSpy).toHaveBeenCalledWith(mockRequest())
+    expect(validationSpy).toHaveBeenCalledWith(mockRequest().body)
   })
 
   test('Should return 400 if validation fails', async () => {

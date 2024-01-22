@@ -12,7 +12,7 @@ import { makeSignUpValidation } from '@/main/factories/validations/signup-valida
 jest.mock('@/validation/validators/validation-composite')
 
 describe('SignUp Validation Factory', () => {
-  test('Should call validation using all validations ', () => {
+  test('Should call validation with all validations ', () => {
     makeSignUpValidation()
     const validations: Validation[] = []
     for (const field of ['name', 'cpf', 'email', 'password', 'passwordConfirmation']) { validations.push(new RequiredFieldsValidation(field)) }

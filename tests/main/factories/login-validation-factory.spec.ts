@@ -10,7 +10,7 @@ import {
 jest.mock('@/validation/validators/validation-composite')
 
 describe('Login Validation Factory', () => {
-  test('Should call validation using all validations ', () => {
+  test('Should call validation with all validations ', () => {
     makeLoginValidation()
     const validations: Validation[] = []
     for (const field of ['email', 'password']) {

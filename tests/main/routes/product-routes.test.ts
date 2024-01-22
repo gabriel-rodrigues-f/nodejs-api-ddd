@@ -1,6 +1,6 @@
 import { type Collection } from 'mongodb'
 import { type Express } from 'express'
-import { type AddProductParams } from '@/domain/usecases'
+import { type UpdateProductParams, type AddProductParams } from '@/domain/usecases'
 import request from 'supertest'
 import env from '@/main/config/env'
 import { sign } from 'jsonwebtoken'
@@ -19,6 +19,17 @@ const mockAddProductParams = (): AddProductParams => ({
   price: 'any_price',
   description: 'any_description',
   image: 'any_image'
+})
+
+const mockUpdateProductParams = (): UpdateProductParams => ({
+  id: 'any_id',
+  body: {
+    category: 'other_category',
+    name: 'any_name',
+    price: 'any_price',
+    description: 'any_description',
+    image: 'any_image'
+  }
 })
 
 describe('Product Routes', () => {
@@ -185,6 +196,41 @@ describe('Product Routes', () => {
         .delete(`/api/products/${stringfiedId}`)
         .set('x-access-token', accessToken)
         .send(mockAddProductParams())
+        .expect(204)
+    })
+  })
+
+  describe('PATCH /product', () => {
+    test('Should return 403 on create product without admin role', async () => {
+      await request(app)
+        .patch('/api/products/:id')
+        .send(mockAddProductParams())
+        .expect(403)
+    })
+
+    test('Should return 204 on update product usign valid accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      const insertedProduct = await productCollection.insertOne(mockAddProductParams())
+      const stringfiedId = insertedProduct.insertedId.toHexString()
+
+      await request(app)
+        .patch(`/api/products/${stringfiedId}`)
+        .set('x-access-token', accessToken)
+        .send(mockUpdateProductParams().body)
         .expect(204)
     })
   })

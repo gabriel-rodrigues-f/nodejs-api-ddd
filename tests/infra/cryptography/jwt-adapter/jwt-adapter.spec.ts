@@ -16,7 +16,7 @@ const mockSut = (): JwtAdapter => {
 
 describe('JWT Adapter', () => {
   describe('sign()', () => {
-    test('Should call sign using correct values', async () => {
+    test('Should call sign with correct values', async () => {
       const sut = mockSut()
       const signSpy = jest.spyOn(jwt, 'sign')
       await sut.encrypt('any_id')

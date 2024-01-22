@@ -25,7 +25,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('Email Validation', () => {
-  test('Should call EmailValidator using correct email', () => {
+  test('Should call EmailValidator with correct email', () => {
     const { sut, emailValidatorStub } = mockSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
     sut.validate({ email: 'any_email@mail.com' })

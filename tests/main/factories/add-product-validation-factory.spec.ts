@@ -5,7 +5,7 @@ import { RequiredFieldsValidation, ValidationComposite } from '@/validation/vali
 jest.mock('@/validation/validators/validation-composite')
 
 describe('Add Product Validation Factory', () => {
-  test('Should call validation using all validations ', () => {
+  test('Should call validation with all validations ', () => {
     makeAddProductValidation()
     const validations: Validation[] = []
     for (const field of ['name', 'category', 'price', 'description', 'image']) {

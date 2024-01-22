@@ -56,7 +56,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('Login Controller', () => {
-  test('Should call Authentication using correct values', async () => {
+  test('Should call Authentication with correct values', async () => {
     const { sut, authenticationStub } = mockSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(mockRequest())
@@ -86,7 +86,7 @@ describe('Login Controller', () => {
     expect(response).toEqual(ok({ accessToken: 'any_token' }))
   })
 
-  test('Should call Validation using correct value', async () => {
+  test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const request = mockRequest()

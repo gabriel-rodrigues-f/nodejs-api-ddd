@@ -105,7 +105,7 @@ describe('SignUp Controller', () => {
     expect(addSpy).toHaveBeenCalledWith(mockAddAccountParams())
   })
 
-  test('Should call Validation using correct value', async () => {
+  test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     const request = mockRequest()
@@ -120,7 +120,7 @@ describe('SignUp Controller', () => {
     expect(response).toEqual(badRequest(new MissingParamError('any_field')))
   })
 
-  test('Should call Authentication using correct values', async () => {
+  test('Should call Authentication with correct values', async () => {
     const { sut, authenticationStub } = mockSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(mockRequest())

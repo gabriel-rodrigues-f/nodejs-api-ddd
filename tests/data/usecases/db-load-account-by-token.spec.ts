@@ -49,7 +49,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbLoadAccountByToken Usecase', () => {
-  test('Should call Decrypter using correct values', async () => {
+  test('Should call Decrypter with correct values', async () => {
     const { sut, decrypterStub } = mockSut()
     const decryptSpy = jest.spyOn(decrypterStub, 'decrypt')
     await sut.load('any_token', 'any_role')

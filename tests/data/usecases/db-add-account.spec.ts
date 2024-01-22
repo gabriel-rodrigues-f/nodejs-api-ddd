@@ -70,7 +70,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbAddAccount Usecase', () => {
-  test('Shoud call Hasher using correct password', async () => {
+  test('Shoud call Hasher with correct password', async () => {
     const { sut, hasherStub } = mockSut()
     const hasherSpy = jest.spyOn(hasherStub, 'hash')
     await sut.add(mockAccountData())
