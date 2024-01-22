@@ -8,7 +8,7 @@ describe('Add Product Validation Factory', () => {
   test('Should call validation using all validations ', () => {
     makeAddProductValidation()
     const validations: Validation[] = []
-    for (const field of ['name', 'category', 'price']) {
+    for (const field of ['name', 'category', 'price', 'description', 'image']) {
       validations.push(new RequiredFieldsValidation(field))
     }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)
