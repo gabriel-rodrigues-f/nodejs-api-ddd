@@ -5,7 +5,7 @@ import {
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
-import { badRequest, serverError } from '../helpers'
+import { badRequest, noContent, serverError } from '../helpers'
 
 export class UpdateProductController implements Controller {
   constructor (
@@ -20,7 +20,7 @@ export class UpdateProductController implements Controller {
       const { body } = request
       const { id } = request.params
       await this.updateProduct.update({ id, body })
-      return await Promise.resolve(null)
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
