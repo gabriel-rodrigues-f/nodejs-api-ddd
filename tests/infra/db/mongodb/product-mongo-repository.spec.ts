@@ -1,8 +1,6 @@
 import { type Collection } from 'mongodb'
 import { type ProductModel } from '@/domain/models'
-import {
-  type AddProductParams
-} from '@/domain/usecases'
+import { type AddProductParams } from '@/domain/usecases'
 import {
   MongoHelper,
   ProductMongoRepository
@@ -141,7 +139,6 @@ describe('ProductRepository', () => {
       }
       await sut.update(params)
       const product = await sut.loadById(insertedId)
-      console.log(product)
       expect(product.name).toBe('other_name')
       expect(product.image).toBe('other_image')
       expect(product.price).toBe('other_price')
