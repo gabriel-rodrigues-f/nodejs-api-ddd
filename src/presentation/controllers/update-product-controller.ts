@@ -14,7 +14,7 @@ export class UpdateProductController implements Controller {
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
-    const error = this.validation.validate(request.body)
+    const error = this.validation.validate(request)
     if (error) return badRequest(error)
     const { body } = request
     const { id } = request.params
