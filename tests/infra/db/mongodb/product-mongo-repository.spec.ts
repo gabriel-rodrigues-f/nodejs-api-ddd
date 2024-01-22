@@ -1,6 +1,8 @@
 import { type Collection } from 'mongodb'
 import { type ProductModel } from '@/domain/models'
-import { type AddProductParams } from '@/domain/usecases'
+import {
+  type AddProductParams
+} from '@/domain/usecases'
 import {
   MongoHelper,
   ProductMongoRepository
@@ -57,7 +59,6 @@ const mockAddProductParams = (): AddProductParams => ({
   description: 'any_description',
   image: 'any_image'
 })
-
 const mockSut = (): ProductMongoRepository => {
   return new ProductMongoRepository()
 }
@@ -112,7 +113,7 @@ describe('ProductRepository', () => {
     })
   })
 
-  describe('deleteProduct()', () => {
+  describe('delete()', () => {
     test('Should delete a product on success', async () => {
       const collection = await productCollection.insertOne(mockProduct())
       const insertedId = collection.insertedId.toHexString()
@@ -120,6 +121,32 @@ describe('ProductRepository', () => {
       await sut.delete(insertedId)
       const product = await sut.loadById(insertedId)
       expect(product).toBeNull()
+    })
+  })
+
+  describe('update()', () => {
+    test('Should delete a product on success', async () => {
+      const collection = await productCollection.insertOne(mockAddProductParams())
+      const insertedId = collection.insertedId.toHexString()
+      const sut = mockSut()
+      const params = {
+        id: insertedId,
+        body: {
+          category: 'other_category',
+          name: 'other_name',
+          price: 'other_price',
+          description: 'other_description',
+          image: 'other_image'
+        }
+      }
+      await sut.update(params)
+      const product = await sut.loadById(insertedId)
+      console.log(product)
+      expect(product.name).toBe('other_name')
+      expect(product.image).toBe('other_image')
+      expect(product.price).toBe('other_price')
+      expect(product.category).toBe('other_category')
+      expect(product.description).toBe('other_description')
     })
   })
 })
