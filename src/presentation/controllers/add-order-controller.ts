@@ -3,7 +3,7 @@ import {
   type Controller,
   type Validation
 } from '@/presentation/protocols'
-import { badRequest, serverError } from '../helpers'
+import { badRequest, noContent, serverError } from '../helpers'
 import { type AddOrder } from '@/domain/usecases/add-order'
 
 export class AddOrderController implements Controller {
@@ -17,6 +17,7 @@ export class AddOrderController implements Controller {
       const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
       await this.addOrder.add(request.body)
+      return noContent()
     } catch (error) { return serverError(error) }
   }
 }
