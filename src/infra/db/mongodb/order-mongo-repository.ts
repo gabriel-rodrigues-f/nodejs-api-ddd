@@ -9,6 +9,8 @@ import { MongoHelper } from '@/infra/db'
 
 export class OrderMongoRepository implements AddOrderRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
+    const { products, ...order } = params
+    await this.addOrder(order)
     return await Promise.resolve(null)
   }
 
