@@ -3,7 +3,7 @@ import {
   type Controller,
   type Validation
 } from '@/presentation/protocols'
-import { badRequest } from '../helpers'
+import { badRequest, serverError } from '../helpers'
 import { type AddOrder } from '@/domain/usecases/add-order'
 
 export class AddOrderController implements Controller {
@@ -13,9 +13,10 @@ export class AddOrderController implements Controller {
   ) { }
 
   async handle (request: any): Promise<HttpResponse> {
-    const error = this.validation.validate(request.body)
-    if (error) return badRequest(error)
-    await this.addOrder.add(request.body)
-    return await Promise.resolve(null)
+    try {
+      const error = this.validation.validate(request.body)
+      if (error) return badRequest(error)
+      await this.addOrder.add(request.body)
+    } catch (error) { return serverError(error) }
   }
 }
