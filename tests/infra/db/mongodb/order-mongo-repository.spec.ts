@@ -1,33 +1,34 @@
 import {
   type AddOrderItemParams,
-  type AddOrderDetailsParams
+  type AddOrderDetailsParams,
+  type AddOrderParams
 } from '@/domain/usecases'
 import { MongoHelper, OrderMongoRepository } from '@/infra/db'
 import { type Collection } from 'mongodb'
 
 const mockSut = (): OrderMongoRepository => new OrderMongoRepository()
 
-// const mockAddOrderParams = (): AddOrderParams => ({
-//   customer: 'any_customer',
-//   products: [
-//     {
-//       id: '65aa013deca75aaae89c3a1b',
-//       totalItems: 2,
-//       unitPrice: 2000,
-//       amount: 4000
-//     },
-//     {
-//       id: '65aa013deca75aaae89c3a1c',
-//       totalItems: 3,
-//       unitPrice: 6000,
-//       amount: 6000
-//     }
-//   ],
-//   status: 'any_status',
-//   createdAt: new Date(),
-//   updatedAt: new Date(),
-//   amount: 4000
-// })
+const mockAddOrderParams = (): AddOrderParams => ({
+  customer: 'any_customer',
+  products: [
+    {
+      id: '65aa013deca75aaae89c3a1b',
+      totalItems: 2,
+      unitPrice: 2000,
+      amount: 4000
+    },
+    {
+      id: '65aa013deca75aaae89c3a1c',
+      totalItems: 3,
+      unitPrice: 6000,
+      amount: 6000
+    }
+  ],
+  status: 'any_status',
+  createdAt: new Date(),
+  updatedAt: new Date(),
+  amount: 4000
+})
 
 const mockOrderItemParams = (): AddOrderItemParams => ({
   orderId: '65aa013deca75aaae89c3a1c',
@@ -66,7 +67,7 @@ describe('OrderRepository', () => {
 
   test('Should create an order on success', async () => {
     const sut = mockSut()
-    await sut.addOrder(mockAddOrderDetailsParams())
+    await sut.addOrderTransaction(mockAddOrderParams())
     const order = await orderCollection.findOne({ customer: 'any_customer' })
     expect(order).toBeTruthy()
   })
@@ -75,6 +76,13 @@ describe('OrderRepository', () => {
     const sut = mockSut()
     await sut.addOrderItem(mockOrderItemParams())
     const order = await orderItemsCollection.findOne({ orderId: '65aa013deca75aaae89c3a1c' })
+    expect(order).toBeTruthy()
+  })
+
+  test('Should create an order on success', async () => {
+    const sut = mockSut()
+    await sut.addOrder(mockAddOrderDetailsParams())
+    const order = await orderCollection.findOne({ customer: 'any_customer' })
     expect(order).toBeTruthy()
   })
 })
