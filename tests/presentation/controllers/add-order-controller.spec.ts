@@ -3,6 +3,7 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { AddOrderController } from '@/presentation/controllers'
+import { badRequest } from '@/presentation/helpers'
 
 const mockAddOrderParams = (): any => ({
   customer: 'any_customer',
@@ -54,5 +55,13 @@ describe('', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validationSpy).toHaveBeenCalledWith(request.body)
+  })
+
+  test('Should return 400 if validation fails', async () => {
+    const { sut, validationStub } = mockSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new Error())
+    const request = mockRequest()
+    const response = await sut.handle(request)
+    expect(response).toEqual(badRequest(new Error()))
   })
 })
