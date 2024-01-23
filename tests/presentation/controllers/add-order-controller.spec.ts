@@ -4,8 +4,10 @@ import {
 } from '@/presentation/protocols'
 import { AddOrderController } from '@/presentation/controllers'
 import { badRequest } from '@/presentation/helpers'
+import { type Order } from '@/domain/models'
+import { type AddOrder, type AddOrderParams } from '@/domain/usecases/add-order'
 
-const mockAddOrderParams = (): any => ({
+const mockAddOrderParams = (): AddOrderParams => ({
   customer: 'any_customer',
   products: [
     {
@@ -34,21 +36,33 @@ const mockValidation = (): Validation => {
   return new ValidationStub()
 }
 
+const mockAddOrder = (): AddOrder => {
+  class AddOrderStub implements AddOrder {
+    async add (order: AddOrderParams): Promise<Order> {
+      return await Promise.resolve(null)
+    }
+  }
+  return new AddOrderStub()
+}
+
 type SutTypes = {
   sut: AddOrderController
+  addOrderStub: AddOrder
   validationStub: Validation
 }
 
 const mockSut = (): SutTypes => {
   const validationStub = mockValidation()
-  const sut = new AddOrderController(validationStub)
+  const addOrderStub = mockAddOrder()
+  const sut = new AddOrderController(validationStub, addOrderStub)
   return {
     sut,
-    validationStub
+    validationStub,
+    addOrderStub
   }
 }
 
-describe('', () => {
+describe('AddOrderController', () => {
   test('Should call AddOrder Usecase with a correct values ', async () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
@@ -63,5 +77,13 @@ describe('', () => {
     const request = mockRequest()
     const response = await sut.handle(request)
     expect(response).toEqual(badRequest(new Error()))
+  })
+
+  test('Should call AddProduct with correct values', async () => {
+    const { sut, addOrderStub } = mockSut()
+    const addProductSpy = jest.spyOn(addOrderStub, 'add')
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(addProductSpy).toHaveBeenCalledWith(request.body)
   })
 })
