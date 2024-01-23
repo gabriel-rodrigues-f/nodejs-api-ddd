@@ -23,7 +23,7 @@ const mockAddOrderParams = (): AddOrderParams => ({
 
 const mockAddOrderRepository = (): AddOrderRepository => {
   class AddOrderRepositoryStub implements AddOrderRepository {
-    async add (params: AddOrderParams): Promise<Order> {
+    async addOrderTransaction (params: AddOrderParams): Promise<Order> {
       return await Promise.resolve(null)
     }
   }
@@ -48,7 +48,7 @@ const mockSut = (): SutTypes => {
 describe('AddOrder Usecase', () => {
   test('Should call AddOrderRepository usign correct values', async () => {
     const { sut, addOrderRepositoryStub } = mockSut()
-    const addSpy = jest.spyOn(addOrderRepositoryStub, 'add')
+    const addSpy = jest.spyOn(addOrderRepositoryStub, 'addOrderTransaction')
     const addOrderData = mockAddOrderParams()
     await sut.add(addOrderData)
     expect(addSpy).toHaveBeenCalledWith(addOrderData)
@@ -56,7 +56,7 @@ describe('AddOrder Usecase', () => {
 
   test('Shoud throw Error if Hasher Throw Error', async () => {
     const { sut, addOrderRepositoryStub } = mockSut()
-    jest.spyOn(addOrderRepositoryStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
+    jest.spyOn(addOrderRepositoryStub, 'addOrderTransaction').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(mockAddOrderParams())
     await expect(promise).rejects.toThrow()
   })
