@@ -3,7 +3,7 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { AddOrderController } from '@/presentation/controllers'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, serverError } from '@/presentation/helpers'
 import { type Order } from '@/domain/models'
 import { type AddOrder, type AddOrderParams } from '@/domain/usecases/add-order'
 
@@ -85,5 +85,12 @@ describe('AddOrderController', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(addProductSpy).toHaveBeenCalledWith(request.body)
+  })
+
+  test('Should return 500 if AddProduct throws', async () => {
+    const { sut, addOrderStub } = mockSut()
+    jest.spyOn(addOrderStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 })
