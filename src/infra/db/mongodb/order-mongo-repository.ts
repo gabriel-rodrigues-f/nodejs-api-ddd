@@ -1,7 +1,7 @@
 import { type Order } from '@/domain/models'
 import {
   type AddOrderDetailsParams,
-  // type AddOrderItemParams,
+  type AddOrderItemParams,
   type AddOrderParams
 } from '@/domain/usecases'
 import { type AddOrderRepository } from '@/data/protocols'
@@ -18,10 +18,9 @@ export class OrderMongoRepository implements AddOrderRepository {
     return await Promise.resolve(null)
   }
 
-  // async addOrderItem (params: AddOrderItemParams): Promise<Order> {
-  //   const { products, ...order } = params
-  //   const productCollection = MongoHelper.getCollection('orders')
-  //   await productCollection.insertOne(order)
-  //   return await Promise.resolve(null)
-  // }
+  async addOrderItem (params: AddOrderItemParams): Promise<Order> {
+    const orderItemCollection = MongoHelper.getCollection('orderItems')
+    await orderItemCollection.insertOne(params)
+    return await Promise.resolve(null)
+  }
 }
