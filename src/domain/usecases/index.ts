@@ -1,3 +1,4 @@
+export * from './add-order'
 export * from './add-account'
 export * from './add-product'
 export * from './authentication'

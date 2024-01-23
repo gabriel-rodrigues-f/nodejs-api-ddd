@@ -1,3 +1,4 @@
+export * from './add-order-repository'
 export * from './add-account-repository'
 export * from './add-product-repository'
 export * from './load-account-by-cpf-repository'
