@@ -4,7 +4,7 @@ import {
   type AddOrderParams
 } from '@/domain/usecases'
 import { MongoHelper, OrderMongoRepository } from '@/infra/db'
-import { type Collection } from 'mongodb'
+import { ObjectId, type Collection } from 'mongodb'
 
 const mockSut = (): OrderMongoRepository => new OrderMongoRepository()
 
@@ -31,7 +31,7 @@ const mockAddOrderParams = (): AddOrderParams => ({
 })
 
 const mockOrderItemParams = (): AddOrderItemParams => ({
-  orderId: '65aa013deca75aaae89c3a1c',
+  orderId: new ObjectId('65aa013deca75aaae89c3a1c'),
   id: '65aa013deca75aaae89c3a1c',
   totalItems: 3,
   unitPrice: 6000,
@@ -72,10 +72,19 @@ describe('OrderRepository', () => {
     expect(order).toBeTruthy()
   })
 
+  test('Should create an orderItem on transaction success', async () => {
+    const sut = mockSut()
+    await sut.addOrderTransaction(mockAddOrderParams())
+    const insertedTotalItems = await orderItemsCollection.findOne({ totalItems: 2 })
+    const insertedUnitPrice = await orderItemsCollection.findOne({ unitPrice: 6000 })
+    expect(insertedTotalItems).toBeTruthy()
+    expect(insertedUnitPrice).toBeTruthy()
+  })
+
   test('Should create an orderItem on success', async () => {
     const sut = mockSut()
     await sut.addOrderItem(mockOrderItemParams())
-    const order = await orderItemsCollection.findOne({ orderId: '65aa013deca75aaae89c3a1c' })
+    const order = await orderItemsCollection.findOne({ orderId: new ObjectId('65aa013deca75aaae89c3a1c') })
     expect(order).toBeTruthy()
   })
 
