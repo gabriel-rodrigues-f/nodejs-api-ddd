@@ -47,7 +47,7 @@ const mockAddOrderDetailsParams = (): AddOrderDetailsParams => ({
   amount: 4000
 })
 
-let orderCollection: Collection
+let ordersCollection: Collection
 let orderItemsCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
@@ -61,16 +61,16 @@ describe('OrderRepository', () => {
   })
 
   beforeEach(async () => {
-    orderCollection = MongoHelper.getCollection('orders')
+    ordersCollection = MongoHelper.getCollection('orders')
     orderItemsCollection = MongoHelper.getCollection('orderItems')
-    await orderCollection.deleteMany({})
+    await ordersCollection.deleteMany({})
     await orderItemsCollection.deleteMany({})
   })
 
   test('Should create an order on success', async () => {
     const sut = mockSut()
     await sut.addOrderTransaction(mockAddOrderParams())
-    const order = await orderCollection.findOne({ customer: 'any_customer' })
+    const order = await ordersCollection.findOne({ customer: 'any_customer' })
     expect(order).toBeTruthy()
   })
 
@@ -93,17 +93,17 @@ describe('OrderRepository', () => {
   test('Should create an order on success', async () => {
     const sut = mockSut()
     await sut.addOrder(mockAddOrderDetailsParams())
-    const order = await orderCollection.findOne({ customer: 'any_customer' })
+    const order = await ordersCollection.findOne({ customer: 'any_customer' })
     expect(order).toBeTruthy()
   })
 
   describe('addOrderTransaction()', () => {
     test('Should delete a product on success', async () => {
-      const response = await orderCollection.insertOne(mockAddOrderParams())
+      const response = await ordersCollection.insertOne(mockAddOrderParams())
       const insertedId = response.insertedId.toHexString()
       const sut = mockSut()
       await sut.updateOrder({ id: String(insertedId), status: 'updated_status' })
-      const order = await orderCollection.findOne<Order>({ _id: new ObjectId(insertedId) })
+      const order = await ordersCollection.findOne<Order>({ _id: new ObjectId(insertedId) })
       expect(order.status).toBe('updated_status')
     })
   })
@@ -113,6 +113,15 @@ describe('OrderRepository', () => {
       const sut = mockSut()
       const orders = await sut.loadAll({ category: 'any_category' })
       expect(orders.length).toBe(0)
+    })
+  })
+
+  describe('loadById()', () => {
+    test('Should load all orders on success', async () => {
+      await ordersCollection.insertMany([mockAddOrderParams()])
+      const sut = mockSut()
+      const orderss = await sut.loadAll({ customer: 'any_customer' })
+      expect(orderss.length).toBe(1)
     })
   })
 })

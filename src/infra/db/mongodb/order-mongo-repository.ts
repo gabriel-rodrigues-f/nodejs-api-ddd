@@ -7,14 +7,16 @@ import {
 } from '@/domain/usecases'
 import {
   type UpdateOrderRepository,
-  type AddOrderRepository
+  type AddOrderRepository,
+  type LoadOrdersRepository
 } from '@/data/protocols'
 import { MongoHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 
 export class OrderMongoRepository implements
   AddOrderRepository,
-  UpdateOrderRepository {
+  UpdateOrderRepository,
+  LoadOrdersRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
     const session = await MongoHelper.startTransaction()
     try {
