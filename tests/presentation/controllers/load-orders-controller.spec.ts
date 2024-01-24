@@ -1,6 +1,7 @@
 import { type Order } from '@/domain/models'
 import { type LoadOrders } from '@/domain/usecases'
 import { LoadOrdersController } from '@/presentation/controllers'
+import { ok } from '@/presentation/helpers'
 
 const mockOrders = (): Order[] => ([
   {
@@ -56,5 +57,11 @@ describe('LoadOrder Controller', () => {
     const loadSpy = jest.spyOn(loadOrdersStub, 'load')
     await sut.handle({})
     expect(loadSpy).toHaveBeenCalledWith({})
+  })
+
+  test('Should return 200 on success', async () => {
+    const { sut } = mockSut()
+    const response = await sut.handle({})
+    expect(response).toEqual(ok(mockOrders()))
   })
 })
