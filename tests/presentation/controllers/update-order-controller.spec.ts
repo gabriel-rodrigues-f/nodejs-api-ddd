@@ -3,7 +3,7 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { UpdateOrderController } from '@/presentation/controllers'
-import { badRequest } from '@/presentation/helpers'
+import { badRequest, serverError } from '@/presentation/helpers'
 import {
   type UpdateOrder,
   type UpdateOrderParams
@@ -77,5 +77,12 @@ describe('UpdateOrder Controller', () => {
       id: 'any_id',
       status: 'any_status'
     })
+  })
+
+  test('Should return 500 if UpdateProduct throws', async () => {
+    const { sut, updateOrderStub } = mockSut()
+    jest.spyOn(updateOrderStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(serverError(new Error()))
   })
 })
