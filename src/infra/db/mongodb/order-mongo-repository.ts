@@ -51,6 +51,6 @@ export class OrderMongoRepository implements
   async loadAll (filter: any): Promise<Order[]> {
     const ordersCollection = MongoHelper.getCollection('orders')
     const orders = await ordersCollection.find<Order>(filter).toArray()
-    return orders.map(product => MongoHelper.map(product))
+    return orders.map(orders => MongoHelper.map(orders))
   }
 }
