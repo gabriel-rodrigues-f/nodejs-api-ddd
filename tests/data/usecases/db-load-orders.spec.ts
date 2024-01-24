@@ -74,4 +74,11 @@ describe('LoadOrders Usecase', () => {
     const orders = await sut.loadAll({})
     expect(orders).toEqual(mockOrders())
   })
+
+  test('Should throw if LoadOrdersRepository throws', async () => {
+    const { sut, loadOrdersRepositoryStub } = mockSut()
+    jest.spyOn(loadOrdersRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.loadAll({})
+    await expect(promise).rejects.toThrow()
+  })
 })
