@@ -2,7 +2,7 @@ import { type Order } from '@/domain/models'
 import { type LoadOrders } from '@/domain/usecases'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadOrdersController } from '@/presentation/controllers'
-import { noContent } from '@/presentation/helpers'
+import { noContent, serverError } from '@/presentation/helpers'
 
 const mockOrders = (): Order[] => ([
   {
@@ -78,5 +78,12 @@ describe('LoadOrder Controller', () => {
     jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.resolve([]))
     const response = await sut.handle({})
     expect(response).toEqual(noContent())
+  })
+
+  test('Should 500 if LoadOrders throws', async () => {
+    const { sut, loadOrdersStub } = mockSut()
+    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
+    const response = await sut.handle({})
+    expect(response).toEqual(serverError(new Error()))
   })
 })
