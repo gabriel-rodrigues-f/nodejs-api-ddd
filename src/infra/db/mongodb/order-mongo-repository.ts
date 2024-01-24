@@ -1,14 +1,20 @@
 import { type Order } from '@/domain/models'
 import {
+  type UpdateOrderParams,
   type AddOrderDetailsParams,
   type AddOrderItemParams,
   type AddOrderParams
 } from '@/domain/usecases'
-import { type AddOrderRepository } from '@/data/protocols'
+import {
+  type UpdateOrderRepository,
+  type AddOrderRepository
+} from '@/data/protocols'
 import { MongoHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 
-export class OrderMongoRepository implements AddOrderRepository {
+export class OrderMongoRepository implements
+  AddOrderRepository,
+  UpdateOrderRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
     const session = await MongoHelper.startTransaction()
     try {
@@ -32,5 +38,11 @@ export class OrderMongoRepository implements AddOrderRepository {
   async addOrderItem (orderItem: AddOrderItemParams): Promise<void> {
     const orderItemCollection = MongoHelper.getCollection('orderItems')
     await orderItemCollection.insertOne(orderItem)
+  }
+
+  async updateOrder (params: UpdateOrderParams): Promise<void> {
+    const productCollection = MongoHelper.getCollection('orders')
+    const { id, status } = params
+    await productCollection.updateOne({ _id: new ObjectId(id) }, { $set: { status } })
   }
 }

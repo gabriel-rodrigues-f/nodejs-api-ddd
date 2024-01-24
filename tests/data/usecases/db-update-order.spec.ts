@@ -9,7 +9,7 @@ const mockUpdateParams = (): UpdateOrderParams => ({
 
 const mockUpdateOrderRepositoryStub = (): UpdateOrderRepository => {
   class UpdateOrderStub implements UpdateOrderRepository {
-    async update (params: any): Promise<void> {
+    async updateOrder (params: any): Promise<void> {
       await Promise.resolve(null)
     }
   }
@@ -33,14 +33,14 @@ const mockSut = (): SutTypes => {
 describe('UpdateOrder Usecase', () => {
   test('Should call UpdateOrder Repository with correct values', async () => {
     const { sut, updateOrderRepositoryStub } = mockSut()
-    const updateSpy = jest.spyOn(updateOrderRepositoryStub, 'update')
+    const updateSpy = jest.spyOn(updateOrderRepositoryStub, 'updateOrder')
     await sut.update(mockUpdateParams())
     expect(updateSpy).toHaveBeenCalledWith(mockUpdateParams())
   })
 
   test('Shoud throw Error if UpdateOrderRepository Throw Error', async () => {
     const { sut, updateOrderRepositoryStub } = mockSut()
-    jest.spyOn(updateOrderRepositoryStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
+    jest.spyOn(updateOrderRepositoryStub, 'updateOrder').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.update(mockUpdateParams())
     await expect(promise).rejects.toThrow()
   })

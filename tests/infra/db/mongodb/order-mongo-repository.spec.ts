@@ -1,3 +1,4 @@
+import { type Order } from '@/domain/models'
 import {
   type AddOrderItemParams,
   type AddOrderDetailsParams,
@@ -63,6 +64,7 @@ describe('OrderRepository', () => {
     orderCollection = MongoHelper.getCollection('orders')
     orderItemsCollection = MongoHelper.getCollection('orderItems')
     await orderCollection.deleteMany({})
+    await orderItemsCollection.deleteMany({})
   })
 
   test('Should create an order on success', async () => {
@@ -93,5 +95,16 @@ describe('OrderRepository', () => {
     await sut.addOrder(mockAddOrderDetailsParams())
     const order = await orderCollection.findOne({ customer: 'any_customer' })
     expect(order).toBeTruthy()
+  })
+
+  describe('update()', () => {
+    test('Should delete a product on success', async () => {
+      const response = await orderCollection.insertOne(mockAddOrderParams())
+      const insertedId = response.insertedId.toHexString()
+      const sut = mockSut()
+      await sut.updateOrder({ id: String(insertedId), status: 'updated_status' })
+      const order = await orderCollection.findOne<Order>({ _id: new ObjectId(insertedId) })
+      expect(order.status).toBe('updated_status')
+    })
   })
 })
