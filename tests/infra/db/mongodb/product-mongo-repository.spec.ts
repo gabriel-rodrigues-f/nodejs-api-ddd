@@ -123,7 +123,7 @@ describe('ProductRepository', () => {
   })
 
   describe('update()', () => {
-    test('Should delete a product on success', async () => {
+    test('Should update a product on success', async () => {
       const response = await productCollection.insertOne(mockAddProductParams())
       const insertedId = response.insertedId.toHexString()
       const sut = mockSut()

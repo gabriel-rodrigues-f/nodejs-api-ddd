@@ -45,4 +45,10 @@ export class OrderMongoRepository implements
     const { id, status } = params
     await productCollection.updateOne({ _id: new ObjectId(id) }, { $set: { status } })
   }
+
+  async loadAll (filter: any): Promise<Order[]> {
+    const ordersCollection = MongoHelper.getCollection('orders')
+    const orders = await ordersCollection.find<Order>(filter).toArray()
+    return orders.map(product => MongoHelper.map(product))
+  }
 }
