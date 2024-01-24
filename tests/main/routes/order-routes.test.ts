@@ -48,14 +48,14 @@ describe('Product Routes', () => {
   })
 
   describe('POST /orders', () => {
-    test('Should return 403 on create order without admin role', async () => {
+    test('Should return 403 on create order without accessToken', async () => {
       await request(app)
         .post('/api/orders')
         .send(mockAddOrderParams())
         .expect(403)
     })
 
-    test('Should return 204 on add product usign valid accessToken', async () => {
+    test('Should return 204 on add product with valid accessToken', async () => {
       const reponse = await accountCollection.insertOne({
         name: 'Gabriel',
         email: 'gabriel.rodrigues@gmail.com',
@@ -75,6 +75,40 @@ describe('Product Routes', () => {
         .post('/api/orders')
         .set('x-access-token', accessToken)
         .send(mockAddOrderParams())
+        .expect(204)
+    })
+  })
+
+  describe('PATCH /orders', () => {
+    test('Should return 403 on create order without accessToken', async () => {
+      await request(app)
+        .post('/api/orders')
+        .send(mockAddOrderParams())
+        .expect(403)
+    })
+
+    test('Should return 204 on update order usign valid accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      const insertedProduct = await orderCollection.insertOne(mockAddOrderParams())
+      const stringfiedId = insertedProduct.insertedId.toHexString()
+
+      await request(app)
+        .patch(`/api/orders/${stringfiedId}`)
+        .set('x-access-token', accessToken)
+        .send({ status: 'any_status' })
         .expect(204)
     })
   })
