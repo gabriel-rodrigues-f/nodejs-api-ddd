@@ -68,4 +68,10 @@ describe('LoadOrders Usecase', () => {
     await sut.loadAll({})
     expect(loadAllSpy).toHaveBeenCalled()
   })
+
+  test('Should return a list of Orders on success', async () => {
+    const { sut } = mockSut()
+    const orders = await sut.loadAll({})
+    expect(orders).toEqual(mockOrders())
+  })
 })
