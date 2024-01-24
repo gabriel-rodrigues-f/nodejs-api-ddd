@@ -4,7 +4,7 @@ import {
   type Validation,
   type HttpRequest
 } from '@/presentation/protocols'
-import { badRequest, serverError } from '../helpers'
+import { badRequest, noContent, serverError } from '../helpers'
 import { type UpdateOrder } from '@/domain/usecases'
 
 export class UpdateOrderController implements Controller {
@@ -20,9 +20,9 @@ export class UpdateOrderController implements Controller {
       const { id } = request.params
       const { status } = request.body
       await this.updateOrder.update({ id, status })
+      return noContent()
     } catch (error) {
       return serverError(error)
     }
-    return await Promise.resolve(null)
   }
 }

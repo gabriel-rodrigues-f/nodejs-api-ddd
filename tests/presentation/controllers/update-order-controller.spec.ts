@@ -3,7 +3,7 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { UpdateOrderController } from '@/presentation/controllers'
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import {
   type UpdateOrder,
   type UpdateOrderParams
@@ -84,5 +84,11 @@ describe('UpdateOrder Controller', () => {
     jest.spyOn(updateOrderStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 on success', async () => {
+    const { sut } = mockSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(noContent())
   })
 })

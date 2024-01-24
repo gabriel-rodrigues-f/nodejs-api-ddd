@@ -91,8 +91,7 @@ describe('UpdateProductContrller', () => {
   })
 
   test('Should return 204 on success', async () => {
-    const { sut, updateProductStub } = mockSut()
-    jest.spyOn(updateProductStub, 'update')
+    const { sut } = mockSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(noContent())
   })
