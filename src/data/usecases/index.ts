@@ -1,6 +1,7 @@
 export * from './add-order'
 export * from './db-add-account'
 export * from './db-add-product'
+export * from './db-load-orders'
 export * from './db-load-products'
 export * from './db-authentication'
 export * from './db-delete-product'

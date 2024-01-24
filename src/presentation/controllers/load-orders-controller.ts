@@ -11,7 +11,7 @@ export class LoadOrdersController implements Controller {
     try {
       const { query } = request
       const filter = query ? { ...query } : {}
-      const orders = await this.repository.load(filter)
+      const orders = await this.repository.loadAll(filter)
       return (orders.length > 0) ? ok(orders) : noContent()
     } catch (error) {
       return serverError(error)

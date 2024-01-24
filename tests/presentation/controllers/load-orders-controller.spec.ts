@@ -37,7 +37,7 @@ const mockRequest = (): HttpRequest => ({
 
 const mockLoadOrderStub = (): LoadOrders => {
   class LoadOrdersStub implements LoadOrders {
-    async load (): Promise<Order[]> {
+    async loadAll (): Promise<Order[]> {
       return await Promise.resolve(mockOrders())
     }
   }
@@ -61,28 +61,28 @@ const mockSut = (): SutType => {
 describe('LoadOrder Controller', () => {
   test('Should call LoadOrders', async () => {
     const { sut, loadOrdersStub } = mockSut()
-    const loadSpy = jest.spyOn(loadOrdersStub, 'load')
+    const loadSpy = jest.spyOn(loadOrdersStub, 'loadAll')
     await sut.handle({})
     expect(loadSpy).toHaveBeenCalledWith({})
   })
 
   test('Should return an order on success', async () => {
     const { sut, loadOrdersStub } = mockSut()
-    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.resolve([mockOrders()[1]]))
+    jest.spyOn(loadOrdersStub, 'loadAll').mockReturnValueOnce(Promise.resolve([mockOrders()[1]]))
     const response = await sut.handle(mockRequest())
     expect(response.body.length).toEqual(1)
   })
 
   test('Should return 204 LoadOrder returns empty', async () => {
     const { sut, loadOrdersStub } = mockSut()
-    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.resolve([]))
+    jest.spyOn(loadOrdersStub, 'loadAll').mockReturnValueOnce(Promise.resolve([]))
     const response = await sut.handle({})
     expect(response).toEqual(noContent())
   })
 
   test('Should 500 if LoadOrders throws', async () => {
     const { sut, loadOrdersStub } = mockSut()
-    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
+    jest.spyOn(loadOrdersStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle({})
     expect(response).toEqual(serverError(new Error()))
   })
