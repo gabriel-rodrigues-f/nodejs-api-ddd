@@ -1,4 +1,5 @@
 export * from './db-add-order-factory'
+export * from './db-load-orders-factory'
 export * from './db-add-account-factory'
 export * from './db-add-product-factory'
 export * from './db-load-products-factory'

@@ -112,4 +112,35 @@ describe('Product Routes', () => {
         .expect(204)
     })
   })
+
+  describe('GET /products', () => {
+    test('Should return 403 on get orders without accessToken', async () => {
+      await request(app)
+        .get('/api/orders')
+        .send(mockAddOrderParams())
+        .expect(403)
+    })
+
+    test('Should return 200 on load orders without accessToken', async () => {
+      const reponse = await accountCollection.insertOne({
+        name: 'Gabriel',
+        email: 'gabriel.rodrigues@gmail.com',
+        password: 123,
+        role: 'admin'
+      })
+      const id = reponse.insertedId
+      const accessToken = sign({ id }, env.JWT_SECRET)
+      await accountCollection.updateOne({
+        _id: id
+      }, {
+        $set: {
+          accessToken
+        }
+      })
+      await request(app)
+        .get('/api/products?customer="any_customer"')
+        .set('x-access-token', accessToken)
+        .expect(204)
+    })
+  })
 })
