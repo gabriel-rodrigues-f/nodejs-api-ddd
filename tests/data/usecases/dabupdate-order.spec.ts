@@ -37,4 +37,11 @@ describe('UpdateOrder Usecase', () => {
     await sut.update(mockUpdateParams())
     expect(updateSpy).toHaveBeenCalledWith(mockUpdateParams())
   })
+
+  test('Shoud throw Error if UpdateOrderRepository Throw Error', async () => {
+    const { sut, updateOrderRepositoryStub } = mockSut()
+    jest.spyOn(updateOrderRepositoryStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
+    const promise = sut.update(mockUpdateParams())
+    await expect(promise).rejects.toThrow()
+  })
 })

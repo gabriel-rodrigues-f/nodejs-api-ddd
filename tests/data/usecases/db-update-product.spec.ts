@@ -46,7 +46,7 @@ describe('UpdateProduct Usecase', () => {
     expect(updateSpy).toHaveBeenCalledWith(updateParams())
   })
 
-  test('Shoud throw Error if Hasher Throw Error', async () => {
+  test('Shoud throw Error if UpdateProductRepository Throw Error', async () => {
     const { sut, updateProductRepositoryStub } = mockSut()
     jest.spyOn(updateProductRepositoryStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.update(updateParams())
