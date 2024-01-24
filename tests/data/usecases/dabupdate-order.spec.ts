@@ -1,0 +1,40 @@
+import { DbUpdateOrder } from '@/data/usecases'
+import { type UpdateOrderRepository } from '@/data/protocols'
+import { type UpdateOrderParams } from '@/domain/usecases'
+
+const mockUpdateParams = (): UpdateOrderParams => ({
+  id: 'any_id',
+  status: 'any_status'
+})
+
+const mockUpdateOrderRepositoryStub = (): UpdateOrderRepository => {
+  class UpdateOrderStub implements UpdateOrderRepository {
+    async update (params: any): Promise<void> {
+      await Promise.resolve(null)
+    }
+  }
+  return new UpdateOrderStub()
+}
+
+type SutTypes = {
+  sut: DbUpdateOrder
+  updateOrderRepositoryStub: UpdateOrderRepository
+}
+
+const mockSut = (): SutTypes => {
+  const updateOrderRepositoryStub = mockUpdateOrderRepositoryStub()
+  const sut = new DbUpdateOrder(updateOrderRepositoryStub)
+  return {
+    sut,
+    updateOrderRepositoryStub
+  }
+}
+
+describe('UpdateOrder Usecase', () => {
+  test('Should call UpdateOrder Repository with correct values', async () => {
+    const { sut, updateOrderRepositoryStub } = mockSut()
+    const updateSpy = jest.spyOn(updateOrderRepositoryStub, 'update')
+    await sut.update(mockUpdateParams())
+    expect(updateSpy).toHaveBeenCalledWith(mockUpdateParams())
+  })
+})
