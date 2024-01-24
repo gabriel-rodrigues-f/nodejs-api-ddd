@@ -25,13 +25,12 @@ export class OrderMongoRepository implements AddOrderRepository {
 
   async addOrder (order: AddOrderDetailsParams): Promise<string> {
     const orderCollection = MongoHelper.getCollection('orders')
-    await orderCollection.insertOne(order)
-    return await Promise.resolve(null)
+    const id = await orderCollection.insertOne(order)
+    return id.insertedId.toHexString()
   }
 
-  async addOrderItem (orderItem: AddOrderItemParams): Promise<Order> {
+  async addOrderItem (orderItem: AddOrderItemParams): Promise<void> {
     const orderItemCollection = MongoHelper.getCollection('orderItems')
     await orderItemCollection.insertOne(orderItem)
-    return await Promise.resolve(null)
   }
 }
