@@ -1,7 +1,8 @@
 import { type Order } from '@/domain/models'
 import { type LoadOrders } from '@/domain/usecases'
+import { type HttpRequest } from '@/presentation/protocols'
 import { LoadOrdersController } from '@/presentation/controllers'
-import { ok } from '@/presentation/helpers'
+import { noContent } from '@/presentation/helpers'
 
 const mockOrders = (): Order[] => ([
   {
@@ -27,6 +28,12 @@ const mockOrders = (): Order[] => ([
     amount: 4000
   }
 ])
+
+const mockRequest = (): HttpRequest => ({
+  query: {
+    status: 'any_status'
+  }
+})
 
 const mockLoadOrderStub = (): LoadOrders => {
   class LoadOrdersStub implements LoadOrders {
@@ -59,9 +66,17 @@ describe('LoadOrder Controller', () => {
     expect(loadSpy).toHaveBeenCalledWith({})
   })
 
-  test('Should return 200 on success', async () => {
-    const { sut } = mockSut()
+  test('Should return an order on success', async () => {
+    const { sut, loadOrdersStub } = mockSut()
+    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.resolve([mockOrders()[1]]))
+    const response = await sut.handle(mockRequest())
+    expect(response.body.length).toEqual(1)
+  })
+
+  test('Should return 204 LoadOrder returns empty', async () => {
+    const { sut, loadOrdersStub } = mockSut()
+    jest.spyOn(loadOrdersStub, 'load').mockReturnValueOnce(Promise.resolve([]))
     const response = await sut.handle({})
-    expect(response).toEqual(ok(mockOrders()))
+    expect(response).toEqual(noContent())
   })
 })
