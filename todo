@@ -1,0 +1,9 @@
+# Pendencias
+
+- Melhorar o processo de autenticação para que utilize refresh token
+- Criar rota de logou
+- Criar swagger
+- Criar log das requisições HTTP
+- Criar middleware de HATEOAS
+- Simplificar diretórios
+- Melhorar nomenclaturas
