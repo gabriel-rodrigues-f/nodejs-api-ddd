@@ -111,7 +111,7 @@ describe('Login Routes', () => {
       await accountCollection.insertOne(mockAddAccountParams())
       await request(app)
         .get('/api/accounts/12345678909')
-        .set('x-access-token', accessToken)
+        .set('authorization', `Bearer ${accessToken}`)
         .expect(200)
     })
   })

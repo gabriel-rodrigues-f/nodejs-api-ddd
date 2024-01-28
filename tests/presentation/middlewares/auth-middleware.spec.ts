@@ -19,7 +19,7 @@ const mockAccount = (): AccountModel => ({
 
 const mockRequest = (): HttpRequest => ({
   headers: {
-    'x-access-token': 'any_token'
+    authorization: 'Bearer any_token'
   }
 })
 
@@ -48,7 +48,7 @@ const mockSut = (role?: string): SutTypes => {
 }
 
 describe('Auth Middleware', () => {
-  test('Should return 403 if no x-access-token exists in headers', async () => {
+  test('Should return 403 if no Authorization exists in headers', async () => {
     const { sut } = mockSut()
     const request: HttpRequest = {
       headers: {}
