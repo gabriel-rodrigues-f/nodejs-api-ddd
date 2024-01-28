@@ -50,7 +50,38 @@ export class OrderMongoRepository implements
 
   async loadAll (filter: any): Promise<Order[]> {
     const ordersCollection = MongoHelper.getCollection('orders')
-    const orders = await ordersCollection.find<Order>(filter).toArray()
+    const orders = await ordersCollection.aggregate<Order>([
+      {
+        $match: filter
+      },
+      {
+        $lookup: {
+          from: 'orderItems',
+          localField: '_id',
+          foreignField: 'orderId',
+          as: 'items'
+        }
+      },
+      {
+        $addFields: {
+          items: {
+            $filter: {
+              input: '$items',
+              as: 'orderItem',
+              cond: {
+                $eq: ['$$orderItem.orderId', '$_id']
+              }
+            }
+          }
+        }
+      },
+      {
+        $project: {
+          'items._id': 0 // Alterado para 'items'
+        }
+      }
+    ]
+    ).toArray()
     return orders.map(orders => MongoHelper.map(orders))
   }
 }
