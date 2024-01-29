@@ -6,7 +6,7 @@ import {
   type IAddProductRepository,
   type LoadProductByIdRepository,
   type LoadProductsRepository,
-  type DeleteProductRepository,
+  type IDeleteProductRepository,
   type UpdateProductRepository,
   type UpdateProductParams
 } from '@/data/adapters'
@@ -15,7 +15,7 @@ export class ProductMongoRepository implements
   IAddProductRepository,
   LoadProductsRepository,
   LoadProductByIdRepository,
-  DeleteProductRepository,
+  IDeleteProductRepository,
   UpdateProductRepository {
   async add (params: AddProductParams): Promise<void> {
     const collection = MongoHelper.getCollection('products')

@@ -1,9 +1,9 @@
 import { type DeleteProduct } from '@/domain/ports'
-import { type DeleteProductRepository } from '@/data/adapters/db'
+import { type IDeleteProductRepository } from '@/data/adapters/db'
 
 export class DbDeleteProduct implements DeleteProduct {
-  constructor (private readonly deleteProductRepository: DeleteProductRepository) { }
+  constructor (private readonly repository: IDeleteProductRepository) { }
   async delete (id: string): Promise<void> {
-    await this.deleteProductRepository.delete(id)
+    await this.repository.delete(id)
   }
 }

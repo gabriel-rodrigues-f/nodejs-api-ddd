@@ -1,8 +1,8 @@
-import { type DeleteProductRepository } from '@/data/adapters'
+import { type IDeleteProductRepository } from '@/data/adapters'
 import { DbDeleteProduct } from '@/data/ports'
 
-const mockDeleteProductRepository = (): DeleteProductRepository => {
-  class DeleteProductRepositoryStub implements DeleteProductRepository {
+const mockDeleteProductRepository = (): IDeleteProductRepository => {
+  class DeleteProductRepositoryStub implements IDeleteProductRepository {
     async delete (id: string): Promise<void> {
       return await Promise.resolve()
     }
@@ -12,7 +12,7 @@ const mockDeleteProductRepository = (): DeleteProductRepository => {
 
 type SutTypes = {
   sut: DbDeleteProduct
-  deleteProductRepositoryStub: DeleteProductRepository
+  deleteProductRepositoryStub: IDeleteProductRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -32,7 +32,7 @@ describe('Delete Product Usecase', () => {
     expect(deleteSpy).toHaveBeenCalledWith('any_id')
   })
 
-  test('Should throw if DeleteProductRepository throws', async () => {
+  test('Should throw if IDeleteProductRepository throws', async () => {
     const { sut, deleteProductRepositoryStub } = mockSut()
     jest.spyOn(deleteProductRepositoryStub, 'delete').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.delete('any_id')
