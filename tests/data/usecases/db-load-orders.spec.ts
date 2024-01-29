@@ -1,5 +1,5 @@
 import { type Order } from '@/domain/models'
-import { type LoadOrders } from '@/domain/ports'
+import { type ILoadOrders } from '@/domain/ports'
 import { type ILoadOrdersRepository } from '@/data/adapters'
 import { DbLoadOrders } from '@/data/ports'
 
@@ -48,7 +48,7 @@ const mockOrdersRepository = (): ILoadOrdersRepository => {
 }
 
 interface SutTypes {
-  sut: LoadOrders
+  sut: ILoadOrders
   loadOrdersRepositoryStub: ILoadOrdersRepository
 }
 
@@ -61,7 +61,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('LoadOrders Usecase', () => {
+describe('ILoadOrders Usecase', () => {
   test('Should call ILoadOrdersRepository', async () => {
     const { sut, loadOrdersRepositoryStub } = mockSut()
     const loadAllSpy = jest.spyOn(loadOrdersRepositoryStub, 'loadAll')

@@ -1,5 +1,5 @@
 import { type Order } from '@/domain/models'
-import { type LoadOrders } from '@/domain/ports'
+import { type ILoadOrders } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadOrdersController } from '@/presentation/controllers'
 import { noContent, serverError } from '@/presentation/helpers'
@@ -35,8 +35,8 @@ const mockRequest = (): HttpRequest => ({
   }
 })
 
-const mockLoadOrderStub = (): LoadOrders => {
-  class LoadOrdersStub implements LoadOrders {
+const mockLoadOrderStub = (): ILoadOrders => {
+  class LoadOrdersStub implements ILoadOrders {
     async loadAll (): Promise<Order[]> {
       return await Promise.resolve(mockOrders())
     }
@@ -46,7 +46,7 @@ const mockLoadOrderStub = (): LoadOrders => {
 
 interface SutType {
   sut: LoadOrdersController
-  loadOrdersStub: LoadOrders
+  loadOrdersStub: ILoadOrders
 }
 
 const mockSut = (): SutType => {
@@ -59,7 +59,7 @@ const mockSut = (): SutType => {
 }
 
 describe('LoadOrder Controller', () => {
-  test('Should call LoadOrders', async () => {
+  test('Should call ILoadOrders', async () => {
     const { sut, loadOrdersStub } = mockSut()
     const loadSpy = jest.spyOn(loadOrdersStub, 'loadAll')
     await sut.handle({})
@@ -80,7 +80,7 @@ describe('LoadOrder Controller', () => {
     expect(response).toEqual(noContent())
   })
 
-  test('Should 500 if LoadOrders throws', async () => {
+  test('Should 500 if ILoadOrders throws', async () => {
     const { sut, loadOrdersStub } = mockSut()
     jest.spyOn(loadOrdersStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle({})
