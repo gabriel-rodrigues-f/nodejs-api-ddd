@@ -1,4 +1,4 @@
-import { type LoadProductById } from '@/domain/ports'
+import { type ILoadProductById } from '@/domain/ports'
 import {
   ok,
   noContent,
@@ -10,7 +10,7 @@ import {
 } from '@/presentation/protocols'
 
 export class LoadProductByidController implements Controller {
-  constructor (private readonly loadProductById: LoadProductById) { }
+  constructor (private readonly loadProductById: ILoadProductById) { }
   async handle (request: any): Promise<HttpResponse> {
     try {
       const { id } = request.params

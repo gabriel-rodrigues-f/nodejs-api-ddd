@@ -1,5 +1,5 @@
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductById } from '@/domain/ports'
+import { type ILoadProductById } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadProductByidController } from '@/presentation/controllers'
 import {
@@ -17,8 +17,8 @@ const mockProduct = (): ProductModel => ({
   image: 'any_image'
 })
 
-const mockLoadProductById = (): LoadProductById => {
-  class LoadProductByIdStub implements LoadProductById {
+const mockLoadProductById = (): ILoadProductById => {
+  class LoadProductByIdStub implements ILoadProductById {
     async loadById (id: string): Promise<ProductModel> {
       return await Promise.resolve(mockProduct())
     }
@@ -34,7 +34,7 @@ const mockRequest = (): HttpRequest => ({
 
 type SutTypes = {
   sut: LoadProductByidController
-  loadProductByIdStub: LoadProductById
+  loadProductByIdStub: ILoadProductById
 }
 
 const mockSut = (): SutTypes => {
@@ -46,7 +46,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('LoadProductById Controller', () => {
+describe('ILoadProductById Controller', () => {
   test(' Should call LoadProductBy with correct values', async () => {
     const { sut, loadProductByIdStub } = mockSut()
     const loadProductByIdSpy = jest.spyOn(loadProductByIdStub, 'loadById')
@@ -54,14 +54,14 @@ describe('LoadProductById Controller', () => {
     expect(loadProductByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
-  test('Should return 204 if LoadProductById returns empty', async () => {
+  test('Should return 204 if ILoadProductById returns empty', async () => {
     const { sut, loadProductByIdStub } = mockSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.resolve(null))
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(noContent())
   })
 
-  test('Should return 500 if LoadProductById throws', async () => {
+  test('Should return 500 if ILoadProductById throws', async () => {
     const { sut, loadProductByIdStub } = mockSut()
     jest.spyOn(loadProductByIdStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
