@@ -2,6 +2,6 @@ import { type Order } from '@/domain/models'
 
 export type AddOrderParams = Omit<Order, 'number'>
 
-export interface AddOrderRepository {
+export interface IAddOrderRepository {
   addOrderTransaction: (params: AddOrderParams) => Promise<Order>
 }

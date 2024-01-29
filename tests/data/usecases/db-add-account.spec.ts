@@ -33,7 +33,7 @@ const mockAccountData = (): AddAccountParams => ({
 
 const mockAddAccountRepository = (): IAddAccountRepository => {
   class AddAccountRepositoryStub implements IAddAccountRepository {
-    async add (data: AddAccountParams): Promise<AccountModel> {
+    async add (params: AddAccountParams): Promise<AccountModel> {
       return await Promise.resolve(mockAccount())
     }
   }

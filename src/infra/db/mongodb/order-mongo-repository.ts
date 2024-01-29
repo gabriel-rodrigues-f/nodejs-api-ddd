@@ -7,14 +7,14 @@ import {
 } from '@/domain/ports'
 import {
   type UpdateOrderRepository,
-  type AddOrderRepository,
+  type IAddOrderRepository,
   type LoadOrdersRepository
 } from '@/data/adapters'
 import { MongoHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 
 export class OrderMongoRepository implements
-  AddOrderRepository,
+  IAddOrderRepository,
   UpdateOrderRepository,
   LoadOrdersRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
@@ -31,26 +31,26 @@ export class OrderMongoRepository implements
     }
   }
 
-  async addOrder (order: AddOrderDetailsParams): Promise<string> {
-    const orderCollection = MongoHelper.getCollection('orders')
-    const id = await orderCollection.insertOne(order)
+  async addOrder (params: AddOrderDetailsParams): Promise<string> {
+    const collection = MongoHelper.getCollection('orders')
+    const id = await collection.insertOne(params)
     return id.insertedId.toHexString()
   }
 
-  async addOrderItem (orderItem: AddOrderItemParams): Promise<void> {
-    const orderItemCollection = MongoHelper.getCollection('orderItems')
-    await orderItemCollection.insertOne(orderItem)
+  async addOrderItem (params: AddOrderItemParams): Promise<void> {
+    const collection = MongoHelper.getCollection('orderItems')
+    await collection.insertOne(params)
   }
 
   async updateOrder (params: UpdateOrderParams): Promise<void> {
-    const productCollection = MongoHelper.getCollection('orders')
+    const collection = MongoHelper.getCollection('orders')
     const { id, status } = params
-    await productCollection.updateOne({ _id: new ObjectId(id) }, { $set: { status } })
+    await collection.updateOne({ _id: new ObjectId(id) }, { $set: { status } })
   }
 
   async loadAll (filter: any): Promise<Order[]> {
-    const ordersCollection = MongoHelper.getCollection('orders')
-    const orders = await ordersCollection.aggregate<Order>([
+    const collection = MongoHelper.getCollection('orders')
+    const orders = await collection.aggregate<Order>([
       {
         $match: filter
       },

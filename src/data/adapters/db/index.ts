@@ -1,4 +1,4 @@
-export * from './add-order-repository'
+export * from './IAddOrderRepository'
 export * from './IAddAccountRepository'
 export * from './add-product-repository'
 export * from './load-orders'

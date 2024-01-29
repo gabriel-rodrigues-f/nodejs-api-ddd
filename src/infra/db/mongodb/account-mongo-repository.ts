@@ -16,11 +16,11 @@ export class AccountMongoRepository implements
   LoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
   DeleteAccessTokenRepository {
-  async add (data: AddAccountParams): Promise<AccountModel> {
+  async add (params: AddAccountParams): Promise<AccountModel> {
     const collection = MongoHelper.getCollection('accounts')
-    const result = await collection.insertOne(data)
+    const result = await collection.insertOne(params)
     const id = result.insertedId.toHexString()
-    return MongoHelper.map(data, id)
+    return MongoHelper.map(params, id)
   }
 
   async loadByEmail (email: string): Promise<AccountModel> {

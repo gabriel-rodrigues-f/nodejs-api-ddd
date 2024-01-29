@@ -1,7 +1,7 @@
 import { type Order } from '@/domain/models'
 import {
   type AddOrderParams,
-  type AddOrderRepository
+  type IAddOrderRepository
 } from '@/data/adapters'
 import { DbAddOrder } from '@/data/ports'
 
@@ -21,8 +21,8 @@ const mockAddOrderParams = (): AddOrderParams => ({
   amount: 4000
 })
 
-const mockAddOrderRepository = (): AddOrderRepository => {
-  class AddOrderRepositoryStub implements AddOrderRepository {
+const mockAddOrderRepository = (): IAddOrderRepository => {
+  class AddOrderRepositoryStub implements IAddOrderRepository {
     async addOrderTransaction (params: AddOrderParams): Promise<Order> {
       return await Promise.resolve(null)
     }
@@ -33,7 +33,7 @@ const mockAddOrderRepository = (): AddOrderRepository => {
 
 type SutTypes = {
   sut: DbAddOrder
-  addOrderRepositoryStub: AddOrderRepository
+  addOrderRepositoryStub: IAddOrderRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -46,7 +46,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('AddOrder Usecase', () => {
-  test('Should call AddOrderRepository usign correct values', async () => {
+  test('Should call IAddOrderRepository usign correct values', async () => {
     const { sut, addOrderRepositoryStub } = mockSut()
     const addSpy = jest.spyOn(addOrderRepositoryStub, 'addOrderTransaction')
     const addOrderData = mockAddOrderParams()
