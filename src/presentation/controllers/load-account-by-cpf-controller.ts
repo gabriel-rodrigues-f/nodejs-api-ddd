@@ -1,4 +1,4 @@
-import { type LoadAccountByCpf } from '@/domain/ports'
+import { type ILoadAccountByCPF } from '@/domain/ports'
 import {
   ok,
   notFound,
@@ -10,7 +10,7 @@ import {
 } from '@/presentation/protocols'
 
 export class LoadAccountByCpfController implements Controller {
-  constructor (private readonly loadAccountByCpf: LoadAccountByCpf) { }
+  constructor (private readonly loadAccountByCpf: ILoadAccountByCPF) { }
   async handle (request: any): Promise<HttpResponse> {
     try {
       const { cpf } = request.params

@@ -1,6 +1,6 @@
 import { type AccountModel } from '@/domain/models'
 import { type HttpRequest } from '@/presentation/protocols'
-import { type LoadAccountByCpf } from '@/domain/ports'
+import { type ILoadAccountByCPF } from '@/domain/ports'
 import { LoadAccountByCpfController } from '@/presentation/controllers'
 import {
   notFound,
@@ -22,8 +22,8 @@ const mockAccount = (): AccountModel => ({
   password: 'hashed_password'
 })
 
-const mockLoadAccountByCpf = (): LoadAccountByCpf => {
-  class LoadAccountByCpfStub implements LoadAccountByCpf {
+const mockLoadAccountByCpf = (): ILoadAccountByCPF => {
+  class LoadAccountByCpfStub implements ILoadAccountByCPF {
     async loadByCpf (cpf: string): Promise<AccountModel> {
       return await Promise.resolve(mockAccount())
     }
@@ -33,7 +33,7 @@ const mockLoadAccountByCpf = (): LoadAccountByCpf => {
 
 type SutTypes = {
   sut: LoadAccountByCpfController
-  loadAccountByCpfStub: LoadAccountByCpf
+  loadAccountByCpfStub: ILoadAccountByCPF
 }
 
 const mockSut = (): SutTypes => {
@@ -45,7 +45,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('LoadAccountByCpf Controller', () => {
+describe('ILoadAccountByCPF Controller', () => {
   test('Should call LoadAccountById with correct values', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     const loadbyCpfSpy = jest.spyOn(loadAccountByCpfStub, 'loadByCpf')
@@ -53,14 +53,14 @@ describe('LoadAccountByCpf Controller', () => {
     expect(loadbyCpfSpy).toHaveBeenCalledWith('valid_cpf')
   })
 
-  test('Should return 404 if LoadAccountByCpf returns empty', async () => {
+  test('Should return 404 if ILoadAccountByCPF returns empty', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.resolve(null))
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(notFound())
   })
 
-  test('Should return 500 if LoadAccountByCpf throws', async () => {
+  test('Should return 500 if ILoadAccountByCPF throws', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     jest.spyOn(loadAccountByCpfStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
