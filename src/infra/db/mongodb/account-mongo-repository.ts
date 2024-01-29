@@ -4,34 +4,34 @@ import { type AccountModel } from '@/domain/models'
 import { type AddAccountParams } from '@/domain/ports'
 import {
   type DeleteAccessTokenRepository,
-  type AddAccountRepository,
+  type IAddAccountRepository,
   type LoadAccountByEmailRepository,
   type LoadAccountByTokenRepository,
   type UpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class AccountMongoRepository implements
-  AddAccountRepository,
+  IAddAccountRepository,
   LoadAccountByEmailRepository,
   LoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
   DeleteAccessTokenRepository {
-  async add (accountData: AddAccountParams): Promise<AccountModel> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    const result = await accountCollection.insertOne(accountData)
+  async add (data: AddAccountParams): Promise<AccountModel> {
+    const collection = MongoHelper.getCollection('accounts')
+    const result = await collection.insertOne(data)
     const id = result.insertedId.toHexString()
-    return MongoHelper.map(accountData, id)
+    return MongoHelper.map(data, id)
   }
 
   async loadByEmail (email: string): Promise<AccountModel> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    const account = await accountCollection.findOne({ email })
+    const collection = MongoHelper.getCollection('accounts')
+    const account = await collection.findOne({ email })
     return account && MongoHelper.map(account)
   }
 
   async updateAccessToken (id: string, token: string): Promise<void> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    await accountCollection.updateOne({
+    const collection = MongoHelper.getCollection('accounts')
+    await collection.updateOne({
       _id: new ObjectId(id)
     }, {
       $set: { accessToken: token }
@@ -39,8 +39,8 @@ export class AccountMongoRepository implements
   }
 
   async loadByToken (token: string, role?: string): Promise<AccountModel> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    const account = await accountCollection.findOne({
+    const collection = MongoHelper.getCollection('accounts')
+    const account = await collection.findOne({
       accessToken: token,
       $or: [{
         role
@@ -52,12 +52,12 @@ export class AccountMongoRepository implements
   }
 
   async loadByCpf (cpf: string): Promise<AccountModel> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    return await accountCollection.findOne<AccountModel>({ cpf })
+    const collection = MongoHelper.getCollection('accounts')
+    return await collection.findOne<AccountModel>({ cpf })
   }
 
   async deleteAccessToken (email: string): Promise<void> {
-    const accountCollection = MongoHelper.getCollection('accounts')
-    await accountCollection.updateOne({ email }, { $unset: { accessToken: '' } })
+    const collection = MongoHelper.getCollection('accounts')
+    await collection.updateOne({ email }, { $unset: { accessToken: '' } })
   }
 }

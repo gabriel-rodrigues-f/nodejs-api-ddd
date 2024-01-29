@@ -3,7 +3,7 @@ import { type AddAccountParams } from '@/domain/ports'
 import { type AccountModel } from '@/domain/models'
 import {
   type IHasher,
-  type AddAccountRepository,
+  type IAddAccountRepository,
   type LoadAccountByEmailRepository
 } from '@/data/adapters'
 
@@ -31,9 +31,9 @@ const mockAccountData = (): AddAccountParams => ({
   password: 'hashed_password'
 })
 
-const mockAddAccountRepository = (): AddAccountRepository => {
-  class AddAccountRepositoryStub implements AddAccountRepository {
-    async add (accountData: AddAccountParams): Promise<AccountModel> {
+const mockAddAccountRepository = (): IAddAccountRepository => {
+  class AddAccountRepositoryStub implements IAddAccountRepository {
+    async add (data: AddAccountParams): Promise<AccountModel> {
       return await Promise.resolve(mockAccount())
     }
   }
@@ -52,7 +52,7 @@ const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 interface SutTypes {
   sut: DbAddAccount
   hasherStub: IHasher
-  addAccountRepositoryStub: AddAccountRepository
+  addAccountRepositoryStub: IAddAccountRepository
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
 }
 
@@ -84,7 +84,7 @@ describe('DbAddAccount Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Shoud call AddAccountRepository with correct values', async () => {
+  test('Shoud call IAddAccountRepository with correct values', async () => {
     const { sut, addAccountRepositoryStub } = mockSut()
     const addSpy = jest.spyOn(addAccountRepositoryStub, 'add')
     await sut.add(mockAccountData())

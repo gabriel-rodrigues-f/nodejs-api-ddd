@@ -1,5 +1,5 @@
 export * from './add-order-repository'
-export * from './add-account-repository'
+export * from './IAddAccountRepository'
 export * from './add-product-repository'
 export * from './load-orders'
 export * from './load-account-by-cpf-repository'
