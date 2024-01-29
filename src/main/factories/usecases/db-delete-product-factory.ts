@@ -1,8 +1,8 @@
 import { DbDeleteProduct } from '@/data/ports'
-import { type DeleteProduct } from '@/domain/ports'
+import { type IDeleteProduct } from '@/domain/ports'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
-export const makeDbDeleteProduct = (): DeleteProduct => {
+export const makeDbDeleteProduct = (): IDeleteProduct => {
   const repository = new ProductMongoRepository()
   return new DbDeleteProduct(repository)
 }

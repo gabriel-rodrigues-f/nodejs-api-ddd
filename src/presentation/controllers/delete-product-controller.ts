@@ -1,4 +1,4 @@
-import { type DeleteProduct } from '@/domain/ports'
+import { type IDeleteProduct } from '@/domain/ports'
 import {
   noContent,
   serverError
@@ -9,7 +9,7 @@ import {
 } from '@/presentation/protocols'
 
 export class DeleteProductController implements Controller {
-  constructor (private readonly deleteProduct: DeleteProduct) { }
+  constructor (private readonly deleteProduct: IDeleteProduct) { }
   async handle (request: any): Promise<HttpResponse> {
     try {
       const { id } = request.params

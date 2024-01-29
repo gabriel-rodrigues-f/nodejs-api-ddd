@@ -25,7 +25,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('Delete Product Usecase', () => {
-  test('Should call DeleteProduct Repository with correct values', async () => {
+  test('Should call IDeleteProduct Repository with correct values', async () => {
     const { sut, deleteProductRepositoryStub } = mockSut()
     const deleteSpy = jest.spyOn(deleteProductRepositoryStub, 'delete')
     await sut.delete('any_id')
