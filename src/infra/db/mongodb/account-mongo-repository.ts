@@ -6,14 +6,14 @@ import {
   type IDeleteAccessTokenRepository,
   type IAddAccountRepository,
   type ILoadAccountByEmailRepository,
-  type LoadAccountByTokenRepository,
+  type ILoadAccountByTokenRepository,
   type UpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class AccountMongoRepository implements
   IAddAccountRepository,
   ILoadAccountByEmailRepository,
-  LoadAccountByTokenRepository,
+  ILoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
   IDeleteAccessTokenRepository {
   async add (params: AddAccountParams): Promise<AccountModel> {
