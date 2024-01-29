@@ -1,8 +1,8 @@
 import {
   type UpdateOrderParams,
   type UpdateOrder
-} from '@/domain/usecases'
-import { type UpdateOrderRepository } from '@/data/protocols'
+} from '@/domain/ports'
+import { type UpdateOrderRepository } from '@/data/adapters'
 
 export class DbUpdateOrder implements UpdateOrder {
   constructor (private readonly repository: UpdateOrderRepository) { }

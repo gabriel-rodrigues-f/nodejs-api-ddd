@@ -1,6 +1,6 @@
 import env from '@/main/config/env'
-import { type LoadAccountByToken } from '@/domain/usecases'
-import { DbLoadAccountByToken } from '@/data/usecases'
+import { type LoadAccountByToken } from '@/domain/ports'
+import { DbLoadAccountByToken } from '@/data/ports'
 import { JwtAdapter } from '@/infra/criptography'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 

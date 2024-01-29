@@ -1,4 +1,4 @@
-import { type Logout } from '@/domain/usecases'
+import { type Logout } from '@/domain/ports'
 import { type HttpResponse, type Controller, type Validation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
@@ -12,8 +12,8 @@ export class LogoutController implements Controller {
     try {
       const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
-      const { accessToken, email } = request.body
-      await this.repository.logout(accessToken, email)
+      const { email } = request.body
+      await this.repository.logout(email)
       return noContent()
     } catch (error) {
       return serverError(error)

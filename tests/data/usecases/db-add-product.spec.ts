@@ -1,6 +1,6 @@
-import { DbAddProduct } from '@/data/usecases'
-import { type AddProductParams } from '@/domain/usecases'
-import { type AddProductRepository } from '@/data/protocols'
+import { DbAddProduct } from '@/data/ports'
+import { type AddProductParams } from '@/domain/ports'
+import { type AddProductRepository } from '@/data/adapters'
 
 const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',

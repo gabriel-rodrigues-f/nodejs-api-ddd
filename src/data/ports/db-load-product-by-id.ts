@@ -1,6 +1,6 @@
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductById } from '@/domain/usecases'
-import { type LoadProductByIdRepository } from '@/data/protocols'
+import { type LoadProductById } from '@/domain/ports'
+import { type LoadProductByIdRepository } from '@/data/adapters'
 
 export class DbLoadProductById implements LoadProductById {
   constructor (private readonly loadProductByIdRepository: LoadProductByIdRepository) { }

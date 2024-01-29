@@ -1,5 +1,5 @@
-import { type AddProduct } from '@/domain/usecases'
-import { DbAddProduct } from '@/data/usecases'
+import { type AddProduct } from '@/domain/ports'
+import { DbAddProduct } from '@/data/ports'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbAddProduct = (): AddProduct => {

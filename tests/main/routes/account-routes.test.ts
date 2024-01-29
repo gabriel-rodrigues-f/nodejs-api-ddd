@@ -1,5 +1,5 @@
 import { type Collection } from 'mongodb'
-import { type AddAccountParams } from '@/domain/usecases'
+import { type AddAccountParams } from '@/domain/ports'
 import { sign } from 'jsonwebtoken'
 import request from 'supertest'
 import { type Express } from 'express'

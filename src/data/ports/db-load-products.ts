@@ -1,6 +1,6 @@
-import { type LoadProducts } from '@/domain/usecases'
+import { type LoadProducts } from '@/domain/ports'
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductsRepository } from '@/data/protocols/db'
+import { type LoadProductsRepository } from '@/data/adapters/db'
 
 export class DbLoadProducts implements LoadProducts {
   constructor (private readonly loadProductsRepository: LoadProductsRepository) { }

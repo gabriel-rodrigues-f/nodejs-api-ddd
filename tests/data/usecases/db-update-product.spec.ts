@@ -1,8 +1,8 @@
 import {
   type UpdateProductParams,
   type UpdateProductRepository
-} from '@/data/protocols'
-import { DbUpdateProduct } from '@/data/usecases'
+} from '@/data/adapters'
+import { DbUpdateProduct } from '@/data/ports'
 
 const updateParams = (): UpdateProductParams => ({
   body: {

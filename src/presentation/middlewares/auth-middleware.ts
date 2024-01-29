@@ -1,4 +1,4 @@
-import { type LoadAccountByToken } from '@/domain/usecases'
+import { type LoadAccountByToken } from '@/domain/ports'
 import {
   type Middleware,
   type HttpRequest,

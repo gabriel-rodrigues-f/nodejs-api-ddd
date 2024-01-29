@@ -1,11 +1,11 @@
-import { DbAddAccount } from '@/data/usecases'
-import { type AddAccountParams } from '@/domain/usecases'
+import { DbAddAccount } from '@/data/ports'
+import { type AddAccountParams } from '@/domain/ports'
 import { type AccountModel } from '@/domain/models'
 import {
   type Hasher,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 const mockHasher = (): Hasher => {
   class HasherStub implements Hasher {

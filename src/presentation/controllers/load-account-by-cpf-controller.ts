@@ -1,4 +1,4 @@
-import { type LoadAccountByCpf } from '@/domain/usecases'
+import { type LoadAccountByCpf } from '@/domain/ports'
 import {
   ok,
   notFound,

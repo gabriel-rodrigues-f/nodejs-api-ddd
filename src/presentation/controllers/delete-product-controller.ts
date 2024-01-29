@@ -1,4 +1,4 @@
-import { type DeleteProduct } from '@/domain/usecases'
+import { type DeleteProduct } from '@/domain/ports'
 import {
   noContent,
   serverError

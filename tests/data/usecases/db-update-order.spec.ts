@@ -1,6 +1,6 @@
-import { DbUpdateOrder } from '@/data/usecases'
-import { type UpdateOrderRepository } from '@/data/protocols'
-import { type UpdateOrderParams } from '@/domain/usecases'
+import { DbUpdateOrder } from '@/data/ports'
+import { type UpdateOrderRepository } from '@/data/adapters'
+import { type UpdateOrderParams } from '@/domain/ports'
 
 const mockUpdateParams = (): UpdateOrderParams => ({
   id: 'any_id',

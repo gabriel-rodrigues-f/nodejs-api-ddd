@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import { MongoHelper } from '.'
 import { type ProductModel } from '@/domain/models'
-import { type AddProductParams } from '@/domain/usecases'
+import { type AddProductParams } from '@/domain/ports'
 import {
   type AddProductRepository,
   type LoadProductByIdRepository,
@@ -9,7 +9,7 @@ import {
   type DeleteProductRepository,
   type UpdateProductRepository,
   type UpdateProductParams
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 export class ProductMongoRepository implements
   AddProductRepository,

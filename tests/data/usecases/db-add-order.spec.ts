@@ -2,8 +2,8 @@ import { type Order } from '@/domain/models'
 import {
   type AddOrderParams,
   type AddOrderRepository
-} from '@/data/protocols'
-import { DbAddOrder } from '@/data/usecases'
+} from '@/data/adapters'
+import { DbAddOrder } from '@/data/ports'
 
 const mockAddOrderParams = (): AddOrderParams => ({
   customer: 'any_customer',

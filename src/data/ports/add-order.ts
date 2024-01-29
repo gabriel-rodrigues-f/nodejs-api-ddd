@@ -1,6 +1,6 @@
 import { type Order } from '@/domain/models'
-import { type AddOrder, type AddOrderParams } from '@/domain/usecases'
-import { type AddOrderRepository } from '@/data/protocols'
+import { type AddOrder, type AddOrderParams } from '@/domain/ports'
+import { type AddOrderRepository } from '@/data/adapters'
 
 export class DbAddOrder implements AddOrder {
   constructor (private readonly repository: AddOrderRepository) { }

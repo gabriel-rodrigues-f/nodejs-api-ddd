@@ -1,7 +1,7 @@
 import {
   type AddProductParams,
   type AddProduct
-} from '@/domain/usecases'
+} from '@/domain/ports'
 import {
   type HttpRequest,
   type Validation

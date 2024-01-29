@@ -4,7 +4,7 @@ import {
   type Validation
 } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '../helpers'
-import { type AddOrder } from '@/domain/usecases/add-order'
+import { type AddOrder } from '@/domain/ports/add-order'
 
 export class AddOrderController implements Controller {
   constructor (

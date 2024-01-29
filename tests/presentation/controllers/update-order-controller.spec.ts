@@ -7,7 +7,7 @@ import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import {
   type UpdateOrder,
   type UpdateOrderParams
-} from '@/domain/usecases'
+} from '@/domain/ports'
 
 const mockRequest = (): HttpRequest => ({
   params: {

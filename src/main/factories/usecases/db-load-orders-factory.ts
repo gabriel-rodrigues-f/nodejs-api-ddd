@@ -1,5 +1,5 @@
-import { type LoadOrders } from '@/domain/usecases'
-import { DbLoadOrders } from '@/data/usecases'
+import { type LoadOrders } from '@/domain/ports'
+import { DbLoadOrders } from '@/data/ports'
 import { OrderMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadOrders = (): LoadOrders => {

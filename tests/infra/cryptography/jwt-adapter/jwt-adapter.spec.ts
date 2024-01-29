@@ -20,7 +20,7 @@ describe('JWT Adapter', () => {
       const sut = mockSut()
       const signSpy = jest.spyOn(jwt, 'sign')
       await sut.encrypt('any_id')
-      expect(signSpy).toHaveBeenCalledWith({ id: 'any_id' }, 'secret', { expiresIn: 20 })
+      expect(signSpy).toHaveBeenCalledWith({ id: 'any_id' }, 'secret', { expiresIn: 1800 })
     })
 
     test('Should throw if sign throws', async () => {

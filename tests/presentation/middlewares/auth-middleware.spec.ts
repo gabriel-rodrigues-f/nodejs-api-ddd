@@ -1,5 +1,5 @@
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByToken } from '@/domain/usecases'
+import { type LoadAccountByToken } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { AuthMiddleware } from '@/presentation/middlewares'
 import { AccessDeniedError } from '@/presentation/errors'

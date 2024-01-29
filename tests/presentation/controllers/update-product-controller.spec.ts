@@ -1,5 +1,5 @@
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
-import { type UpdateProductParams, type UpdateProduct } from '@/domain/usecases'
+import { type UpdateProductParams, type UpdateProduct } from '@/domain/ports'
 import { UpdateProductController } from '@/presentation/controllers'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 

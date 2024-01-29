@@ -1,5 +1,5 @@
-import { type LoadAccountByCpf } from '@/domain/usecases'
-import { DbLoadAccountByCpf } from '@/data/usecases'
+import { type LoadAccountByCpf } from '@/domain/ports'
+import { DbLoadAccountByCpf } from '@/data/ports'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadAccountByCpf = (): LoadAccountByCpf => {

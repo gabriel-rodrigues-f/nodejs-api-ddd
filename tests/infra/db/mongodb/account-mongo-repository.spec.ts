@@ -1,5 +1,5 @@
 import { type Collection } from 'mongodb'
-import { type AddAccountParams } from '@/domain/usecases'
+import { type AddAccountParams } from '@/domain/ports'
 import {
   MongoHelper,
   AccountMongoRepository
@@ -170,7 +170,7 @@ describe('Account Mongo Repository', () => {
       const result = await accountCollection.insertOne({ ...mockAddAccountParams(), accessToken: 'any_token' })
       const account = await accountCollection.findOne({ _id: result.insertedId })
       if (account) expect(account.accessToken).toBeTruthy()
-      await sut.deleteAccessToken('any_token')
+      await sut.deleteAccessToken('any_email@mail.com')
       const accountWithoutAccessToken = await accountCollection.findOne({ _id: result.insertedId })
       if (accountWithoutAccessToken) expect(accountWithoutAccessToken.accessToken).toBeFalsy()
     })

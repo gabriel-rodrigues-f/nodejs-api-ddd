@@ -1,8 +1,8 @@
 import {
   type UpdateProductParams,
   type UpdateProduct
-} from '@/domain/usecases'
-import { type UpdateProductRepository } from '@/data/protocols'
+} from '@/domain/ports'
+import { type UpdateProductRepository } from '@/data/adapters'
 
 export class DbUpdateProduct implements UpdateProduct {
   constructor (private readonly updateProductRepository: UpdateProductRepository) { }

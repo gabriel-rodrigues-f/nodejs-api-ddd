@@ -1,5 +1,6 @@
 export * from './load-orders-controller'
 export * from './login-controller-factory'
+export * from './logout-controller-factory'
 export * from './signup-controller-factory'
 export * from './add-order-controller-factory'
 export * from './add-product-controller-factory'

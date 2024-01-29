@@ -1,12 +1,12 @@
-import { DbAuthentication } from '@/data/usecases'
+import { DbAuthentication } from '@/data/ports'
 import { type AccountModel } from '@/domain/models'
-import { type AuthenticationParams } from '@/domain/usecases'
+import { type AuthenticationParams } from '@/domain/ports'
 import {
   type Encrypter,
   type HashComparer,
   type UpdateAccessTokenRepository,
   type LoadAccountByEmailRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 const mockAccount = (): AccountModel => ({
   name: 'any_name',

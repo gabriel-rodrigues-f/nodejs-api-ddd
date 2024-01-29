@@ -1,6 +1,6 @@
-import { DbLoadAccountByCpf } from '@/data/usecases'
+import { DbLoadAccountByCpf } from '@/data/ports'
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByCpfRepository } from '@/data/protocols'
+import { type LoadAccountByCpfRepository } from '@/data/adapters'
 
 const mockAccount = (): AccountModel => ({
   id: 'valid_id',

@@ -4,7 +4,7 @@ import {
   type Authentication,
   type AuthenticationParams,
   type AddAccount
-} from '@/domain/usecases'
+} from '@/domain/ports'
 import { SignUpController } from '@/presentation/controllers'
 import { type HttpRequest, type Validation } from '@/presentation/protocols'
 import { ServerError, MissingParamError, EmailInUseError } from '@/presentation/errors'

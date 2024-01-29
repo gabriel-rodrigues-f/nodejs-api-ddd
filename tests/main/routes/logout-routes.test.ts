@@ -38,7 +38,7 @@ describe('Login Routes', () => {
     test('Should return 403 on logout', async () => {
       await request(app)
         .post('/api/logout')
-        .send({ accessToken: 'any_token', email: 'any_email' })
+        .send({ email: 'any_email' })
         .expect(403)
     })
   })
@@ -56,7 +56,7 @@ describe('Login Routes', () => {
       await request(app)
         .post('/api/logout')
         .set('authorization', `Bearer ${accessToken}`)
-        .send({ accessToken, email: 'any_mail' })
+        .send({ email: 'any_mail' })
         .expect(204)
     })
   })

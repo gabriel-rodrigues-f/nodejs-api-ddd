@@ -1,5 +1,5 @@
 import { type Order } from '@/domain/models'
-import { type LoadOrders } from '@/domain/usecases'
+import { type LoadOrders } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadOrdersController } from '@/presentation/controllers'
 import { noContent, serverError } from '@/presentation/helpers'

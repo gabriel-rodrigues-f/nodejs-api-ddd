@@ -1,6 +1,6 @@
 import { type Order } from '@/domain/models'
-import { type LoadOrders } from '@/domain/usecases'
-import { type LoadOrdersRepository } from '@/data/protocols'
+import { type LoadOrders } from '@/domain/ports'
+import { type LoadOrdersRepository } from '@/data/adapters'
 
 export class DbLoadOrders implements LoadOrders {
   constructor (private readonly repository: LoadOrdersRepository) { }

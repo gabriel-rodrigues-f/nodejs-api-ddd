@@ -1,4 +1,4 @@
-import { type LoadProductById } from '@/domain/usecases'
+import { type LoadProductById } from '@/domain/ports'
 import {
   ok,
   noContent,

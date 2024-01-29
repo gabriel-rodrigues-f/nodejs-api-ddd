@@ -1,4 +1,4 @@
-import { type LoadOrders } from '@/domain/usecases'
+import { type LoadOrders } from '@/domain/ports'
 import {
   type HttpResponse,
   type Controller

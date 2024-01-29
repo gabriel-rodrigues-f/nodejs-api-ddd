@@ -1,7 +1,7 @@
 import {
   type AddAccount,
   type Authentication
-} from '@/domain/usecases'
+} from '@/domain/ports'
 import {
   ok,
   forbidden,

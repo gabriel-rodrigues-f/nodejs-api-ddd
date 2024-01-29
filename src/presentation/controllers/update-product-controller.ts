@@ -1,4 +1,4 @@
-import { type UpdateProduct } from '@/domain/usecases/update-product'
+import { type UpdateProduct } from '@/domain/ports/update-product'
 import {
   type Validation,
   type Controller,

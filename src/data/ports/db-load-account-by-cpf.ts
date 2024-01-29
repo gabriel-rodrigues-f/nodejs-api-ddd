@@ -1,6 +1,6 @@
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByCpf } from '@/domain/usecases'
-import { type LoadAccountByCpfRepository } from '@/data/protocols'
+import { type LoadAccountByCpf } from '@/domain/ports'
+import { type LoadAccountByCpfRepository } from '@/data/adapters'
 
 export class DbLoadAccountByCpf implements LoadAccountByCpf {
   constructor (private readonly loadAccountByCpfRepository: LoadAccountByCpfRepository) { }

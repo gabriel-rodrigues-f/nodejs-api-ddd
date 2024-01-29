@@ -1,4 +1,4 @@
-import { type Logout } from '@/domain/usecases'
+import { type Logout } from '@/domain/ports'
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
 import { LogoutController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
@@ -73,9 +73,9 @@ describe('Logout Controller', () => {
     const { sut, logoutStub } = mockSut()
     const logoutSpy = jest.spyOn(logoutStub, 'logout')
     const request = mockRequest()
-    const { accessToken, email } = request.body
+    const { email } = request.body
     await sut.handle(request)
-    expect(logoutSpy).toHaveBeenCalledWith(accessToken, email)
+    expect(logoutSpy).toHaveBeenCalledWith(email)
   })
 
   test('Should return 500 if Logout throws', async () => {

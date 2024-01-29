@@ -5,7 +5,7 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '../helpers'
-import { type UpdateOrder } from '@/domain/usecases'
+import { type UpdateOrder } from '@/domain/ports'
 
 export class UpdateOrderController implements Controller {
   constructor (

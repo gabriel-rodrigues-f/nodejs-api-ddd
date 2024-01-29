@@ -1,6 +1,6 @@
-import { DbLoadProductById } from '@/data/usecases'
+import { DbLoadProductById } from '@/data/ports'
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductByIdRepository } from '@/data/protocols'
+import { type LoadProductByIdRepository } from '@/data/adapters'
 
 const mockProduct = (): ProductModel => ({
   id: 'any_id',

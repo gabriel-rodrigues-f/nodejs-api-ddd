@@ -1,6 +1,6 @@
 import {
   type Authentication, type AuthenticationParams
-} from '@/domain/usecases'
+} from '@/domain/ports'
 import {
   type HttpRequest, type Validation
 } from '@/presentation/protocols'

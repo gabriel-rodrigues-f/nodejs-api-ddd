@@ -4,12 +4,12 @@ import {
   type AddOrderDetailsParams,
   type AddOrderItemParams,
   type AddOrderParams
-} from '@/domain/usecases'
+} from '@/domain/ports'
 import {
   type UpdateOrderRepository,
   type AddOrderRepository,
   type LoadOrdersRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 import { MongoHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 

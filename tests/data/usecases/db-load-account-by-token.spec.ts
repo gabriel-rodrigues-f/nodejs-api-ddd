@@ -1,9 +1,9 @@
 import { type AccountModel } from '@/domain/models'
-import { DbLoadAccountByToken } from '@/data/usecases'
+import { DbLoadAccountByToken } from '@/data/ports'
 import {
   type Decrypter,
   type LoadAccountByTokenRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 const mockDecrypterStub = (): Decrypter => {
   class DecrypterStub implements Decrypter {

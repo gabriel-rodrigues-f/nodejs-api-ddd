@@ -1,10 +1,10 @@
 import { type AccountModel } from '@/domain/models'
-import { type AddAccountParams, type AddAccount } from '@/domain/usecases'
+import { type AddAccountParams, type AddAccount } from '@/domain/ports'
 import {
   type Hasher,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 export class DbAddAccount implements AddAccount {
   constructor (

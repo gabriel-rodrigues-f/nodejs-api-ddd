@@ -1,7 +1,7 @@
-import { DbLoadProducts } from '@/data/usecases'
+import { DbLoadProducts } from '@/data/ports'
 import { type ProductModel } from '@/domain/models'
-import { type LoadProducts } from '@/domain/usecases'
-import { type LoadProductsRepository } from '@/data/protocols'
+import { type LoadProducts } from '@/domain/ports'
+import { type LoadProductsRepository } from '@/data/adapters'
 
 const mockProducts = (): ProductModel[] => ([
   {

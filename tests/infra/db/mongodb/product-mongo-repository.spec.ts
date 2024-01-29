@@ -1,6 +1,6 @@
 import { type Collection } from 'mongodb'
 import { type ProductModel } from '@/domain/models'
-import { type AddProductParams } from '@/domain/usecases'
+import { type AddProductParams } from '@/domain/ports'
 import {
   MongoHelper,
   ProductMongoRepository

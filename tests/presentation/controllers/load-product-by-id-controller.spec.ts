@@ -1,5 +1,5 @@
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductById } from '@/domain/usecases'
+import { type LoadProductById } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadProductByidController } from '@/presentation/controllers'
 import {

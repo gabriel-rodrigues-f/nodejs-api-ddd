@@ -1,6 +1,6 @@
 import { type AccountModel } from '@/domain/models'
 import { type HttpRequest } from '@/presentation/protocols'
-import { type LoadAccountByCpf } from '@/domain/usecases'
+import { type LoadAccountByCpf } from '@/domain/ports'
 import { LoadAccountByCpfController } from '@/presentation/controllers'
 import {
   notFound,

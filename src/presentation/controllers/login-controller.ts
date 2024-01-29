@@ -1,4 +1,4 @@
-import { type Authentication } from '@/domain/usecases'
+import { type Authentication } from '@/domain/ports'
 import {
   ok,
   badRequest,

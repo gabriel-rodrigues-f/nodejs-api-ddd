@@ -11,7 +11,7 @@ describe('Logout Validation Factory', () => {
   test('Should call validation with all validations ', () => {
     makeLogoutValidation()
     const validations: Validation[] = []
-    for (const field of ['accessToken', 'email']) {
+    for (const field of ['email']) {
       validations.push(new RequiredFieldsValidation(field))
     }
     expect(ValidationComposite).toHaveBeenCalledWith(validations)

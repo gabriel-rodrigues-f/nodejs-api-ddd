@@ -1,5 +1,5 @@
-import { type DeleteProduct } from '@/domain/usecases'
-import { type DeleteProductRepository } from '@/data/protocols/db'
+import { type DeleteProduct } from '@/domain/ports'
+import { type DeleteProductRepository } from '@/data/adapters/db'
 
 export class DbDeleteProduct implements DeleteProduct {
   constructor (private readonly deleteProductRepository: DeleteProductRepository) { }

@@ -1,5 +1,5 @@
-import { type DeleteProductRepository } from '@/data/protocols'
-import { DbDeleteProduct } from '@/data/usecases'
+import { type DeleteProductRepository } from '@/data/adapters'
+import { DbDeleteProduct } from '@/data/ports'
 
 const mockDeleteProductRepository = (): DeleteProductRepository => {
   class DeleteProductRepositoryStub implements DeleteProductRepository {

@@ -1,4 +1,4 @@
-import { type LogErrorRepository } from '@/data/protocols/db'
+import { type LogErrorRepository } from '@/data/adapters/db'
 import {
   type Controller,
   type HttpRequest,

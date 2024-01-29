@@ -1,5 +1,5 @@
-import { type AddAccount } from '@/domain/usecases'
-import { DbAddAccount } from '@/data/usecases'
+import { type AddAccount } from '@/domain/ports'
+import { DbAddAccount } from '@/data/ports'
 import { BcryptAdapter } from '@/infra/criptography'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 

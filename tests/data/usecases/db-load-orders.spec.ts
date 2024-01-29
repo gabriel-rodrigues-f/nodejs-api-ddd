@@ -1,7 +1,7 @@
 import { type Order } from '@/domain/models'
-import { type LoadOrders } from '@/domain/usecases'
-import { type LoadOrdersRepository } from '@/data/protocols'
-import { DbLoadOrders } from '@/data/usecases'
+import { type LoadOrders } from '@/domain/ports'
+import { type LoadOrdersRepository } from '@/data/adapters'
+import { DbLoadOrders } from '@/data/ports'
 
 const mockOrders = (): Order[] => ([
   {

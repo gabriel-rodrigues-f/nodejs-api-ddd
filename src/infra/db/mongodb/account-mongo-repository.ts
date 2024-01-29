@@ -1,14 +1,14 @@
 import { MongoHelper } from '.'
 import { ObjectId } from 'mongodb'
 import { type AccountModel } from '@/domain/models'
-import { type AddAccountParams } from '@/domain/usecases'
+import { type AddAccountParams } from '@/domain/ports'
 import {
   type DeleteAccessTokenRepository,
   type AddAccountRepository,
   type LoadAccountByEmailRepository,
   type LoadAccountByTokenRepository,
   type UpdateAccessTokenRepository
-} from '@/data/protocols'
+} from '@/data/adapters'
 
 export class AccountMongoRepository implements
   AddAccountRepository,
@@ -56,12 +56,8 @@ export class AccountMongoRepository implements
     return await accountCollection.findOne<AccountModel>({ cpf })
   }
 
-  async deleteAccessToken (accessToken: string, email: string): Promise<void> {
+  async deleteAccessToken (email: string): Promise<void> {
     const accountCollection = MongoHelper.getCollection('accounts')
-    await accountCollection.updateOne({
-      email
-    }, {
-      $unset: { accessToken: '' }
-    })
+    await accountCollection.updateOne({ email }, { $unset: { accessToken: '' } })
   }
 }

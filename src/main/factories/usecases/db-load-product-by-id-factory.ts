@@ -1,5 +1,5 @@
-import { type LoadProductById } from '@/domain/usecases'
-import { DbLoadProductById } from '@/data/usecases'
+import { type LoadProductById } from '@/domain/ports'
+import { DbLoadProductById } from '@/data/ports'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadProductById = (): LoadProductById => {

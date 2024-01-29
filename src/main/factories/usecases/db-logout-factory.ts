@@ -1,5 +1,5 @@
-import { type Logout } from '@/domain/usecases'
-import { DbLogout } from '@/data/usecases'
+import { type Logout } from '@/domain/ports'
+import { DbLogout } from '@/data/ports'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLogout = (): Logout => {
