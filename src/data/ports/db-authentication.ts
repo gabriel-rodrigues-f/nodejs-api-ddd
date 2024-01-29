@@ -1,4 +1,4 @@
-import { type Authentication, type AuthenticationParams } from '@/domain/ports'
+import { type IAuthentication, type AuthenticationParams } from '@/domain/ports'
 import {
   type IHashComparer,
   type ILoadAccountByEmailRepository,
@@ -6,7 +6,7 @@ import {
   type IUpdateAccessTokenRepository
 } from '@/data/adapters'
 
-export class DbAuthentication implements Authentication {
+export class DbAuthentication implements IAuthentication {
   constructor (
     private readonly loadRepository: ILoadAccountByEmailRepository,
     private readonly hashComparer: IHashComparer,

@@ -1,4 +1,4 @@
-import { type Authentication } from '@/domain/ports'
+import { type IAuthentication } from '@/domain/ports'
 import {
   ok,
   badRequest,
@@ -14,7 +14,7 @@ import {
 
 export class LoginController implements Controller {
   constructor (
-    private readonly authentication: Authentication,
+    private readonly authentication: IAuthentication,
     private readonly validation: Validation
   ) { }
 

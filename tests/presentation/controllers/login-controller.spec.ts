@@ -1,5 +1,5 @@
 import {
-  type Authentication, type AuthenticationParams
+  type IAuthentication, type AuthenticationParams
 } from '@/domain/ports'
 import {
   type HttpRequest, type Validation
@@ -13,8 +13,8 @@ import {
   badRequest
 } from '@/presentation/helpers'
 
-const mockAuthentication = (): Authentication => {
-  class AuthenticationStub implements Authentication {
+const mockAuthentication = (): IAuthentication => {
+  class AuthenticationStub implements IAuthentication {
     async auth (authentication: AuthenticationParams): Promise<string> {
       return await Promise.resolve('any_token')
     }
@@ -40,7 +40,7 @@ const mockValidation = (): Validation => {
 
 interface SutTypes {
   sut: LoginController
-  authenticationStub: Authentication
+  authenticationStub: IAuthentication
   validationStub: Validation
 }
 
@@ -56,7 +56,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('Login Controller', () => {
-  test('Should call Authentication with correct values', async () => {
+  test('Should call IAuthentication with correct values', async () => {
     const { sut, authenticationStub } = mockSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(mockRequest())
@@ -73,7 +73,7 @@ describe('Login Controller', () => {
     expect(response).toEqual(unauthorized())
   })
 
-  test('Should return 500 if Authentication throws', async () => {
+  test('Should return 500 if IAuthentication throws', async () => {
     const { sut, authenticationStub } = mockSut()
     jest.spyOn(authenticationStub, 'auth').mockReturnValue(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())

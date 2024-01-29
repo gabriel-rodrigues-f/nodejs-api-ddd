@@ -1,7 +1,7 @@
 import { type AccountModel } from '@/domain/models'
 import {
   type AddAccountParams,
-  type Authentication,
+  type IAuthentication,
   type AuthenticationParams,
   type IAddAccount
 } from '@/domain/ports'
@@ -35,8 +35,8 @@ const mockAddAccountParams = (): AddAccountParams => ({
   password: 'any_password'
 })
 
-const mockAuthentication = (): Authentication => {
-  class AuthenticationStub implements Authentication {
+const mockAuthentication = (): IAuthentication => {
+  class AuthenticationStub implements IAuthentication {
     async auth (authentication: AuthenticationParams): Promise<string> {
       return await Promise.resolve('any_token')
     }
@@ -66,7 +66,7 @@ interface SutTypes {
   sut: SignUpController
   addAccountStub: IAddAccount
   validationStub: Validation
-  authenticationStub: Authentication
+  authenticationStub: IAuthentication
 }
 
 const mockSut = (): SutTypes => {
@@ -120,7 +120,7 @@ describe('SignUp Controller', () => {
     expect(response).toEqual(badRequest(new MissingParamError('any_field')))
   })
 
-  test('Should call Authentication with correct values', async () => {
+  test('Should call IAuthentication with correct values', async () => {
     const { sut, authenticationStub } = mockSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')
     await sut.handle(mockRequest())
@@ -130,7 +130,7 @@ describe('SignUp Controller', () => {
     })
   })
 
-  test('Should return 500 if Authentication throws', async () => {
+  test('Should return 500 if IAuthentication throws', async () => {
     const { sut, authenticationStub } = mockSut()
     jest.spyOn(authenticationStub, 'auth').mockReturnValue(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())

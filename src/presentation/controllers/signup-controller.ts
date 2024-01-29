@@ -1,6 +1,6 @@
 import {
   type IAddAccount,
-  type Authentication
+  type IAuthentication
 } from '@/domain/ports'
 import {
   ok,
@@ -20,7 +20,7 @@ export class SignUpController implements Controller {
   constructor (
     private readonly addAccount: IAddAccount,
     private readonly validation: Validation,
-    private readonly authentication: Authentication
+    private readonly authentication: IAuthentication
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
