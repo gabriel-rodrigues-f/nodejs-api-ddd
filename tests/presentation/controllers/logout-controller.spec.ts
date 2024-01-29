@@ -2,7 +2,7 @@ import { type Logout } from '@/domain/usecases'
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
 import { LogoutController } from '@/presentation/controllers'
 import { MissingParamError } from '@/presentation/errors'
-import { badRequest, serverError } from '@/presentation/helpers'
+import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
 const mockRequest = (): HttpRequest => {
   return {
@@ -82,5 +82,11 @@ describe('Logout Controller', () => {
     jest.spyOn(logoutStub, 'logout').mockReturnValue(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(serverError(new Error()))
+  })
+
+  test('Should return 204 on success', async () => {
+    const { sut } = mockSut()
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(noContent())
   })
 })
