@@ -1,5 +1,5 @@
 import { type AccountModel } from '@/domain/models/account'
 
-export interface LoadAccountByCpfRepository {
+export interface ILoadAccountByCPFRepository {
   loadByCpf: (cpf: string) => Promise<AccountModel>
 }

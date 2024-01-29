@@ -1,6 +1,6 @@
 import { DbLoadAccountByCpf } from '@/data/ports'
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByCpfRepository } from '@/data/adapters'
+import { type ILoadAccountByCPFRepository } from '@/data/adapters'
 
 const mockAccount = (): AccountModel => ({
   id: 'valid_id',
@@ -10,40 +10,40 @@ const mockAccount = (): AccountModel => ({
   password: 'hashed_password'
 })
 
-const mockLoadAccountByRepositoryStub = (): LoadAccountByCpfRepository => {
-  class LoadAccountByCpfRepositoryStub implements LoadAccountByCpfRepository {
+const mockLoadAccountByRepositoryStub = (): ILoadAccountByCPFRepository => {
+  class LoadAccountByCPFRepositoryStub implements ILoadAccountByCPFRepository {
     async loadByCpf (cpf: string): Promise<AccountModel> {
       return await Promise.resolve(mockAccount())
     }
   }
-  return new LoadAccountByCpfRepositoryStub()
+  return new LoadAccountByCPFRepositoryStub()
 }
 
 type SutTypes = {
   sut: DbLoadAccountByCpf
-  loadAccountByCpfRepositoryStub: LoadAccountByCpfRepository
+  loadAccountByCPFRepositoryStub: ILoadAccountByCPFRepository
 }
 
 const mockSut = (): SutTypes => {
-  const loadAccountByCpfRepositoryStub = mockLoadAccountByRepositoryStub()
-  const sut = new DbLoadAccountByCpf(loadAccountByCpfRepositoryStub)
+  const loadAccountByCPFRepositoryStub = mockLoadAccountByRepositoryStub()
+  const sut = new DbLoadAccountByCpf(loadAccountByCPFRepositoryStub)
   return {
     sut,
-    loadAccountByCpfRepositoryStub
+    loadAccountByCPFRepositoryStub
   }
 }
 
 describe('DbLoadAccountByCpf Usecase', () => {
-  test('Should call LoadAccountByCpfRepository with correct values', async () => {
-    const { sut, loadAccountByCpfRepositoryStub } = mockSut()
-    const loadByCpfStub = jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf')
+  test('Should call ILoadAccountByCPFRepository with correct values', async () => {
+    const { sut, loadAccountByCPFRepositoryStub } = mockSut()
+    const loadByCpfStub = jest.spyOn(loadAccountByCPFRepositoryStub, 'loadByCpf')
     await sut.loadByCpf('valid_cpf')
     expect(loadByCpfStub).toHaveBeenCalledWith('valid_cpf')
   })
 
-  test('Should thorws if LoadAccountByCpfRepository throws', async () => {
-    const { sut, loadAccountByCpfRepositoryStub } = mockSut()
-    jest.spyOn(loadAccountByCpfRepositoryStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
+  test('Should thorws if ILoadAccountByCPFRepository throws', async () => {
+    const { sut, loadAccountByCPFRepositoryStub } = mockSut()
+    jest.spyOn(loadAccountByCPFRepositoryStub, 'loadByCpf').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadByCpf('any_cpf')
     await expect(promise).rejects.toThrow()
   })

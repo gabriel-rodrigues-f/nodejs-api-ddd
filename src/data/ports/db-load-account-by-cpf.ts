@@ -1,10 +1,10 @@
 import { type AccountModel } from '@/domain/models'
 import { type LoadAccountByCpf } from '@/domain/ports'
-import { type LoadAccountByCpfRepository } from '@/data/adapters'
+import { type ILoadAccountByCPFRepository } from '@/data/adapters'
 
 export class DbLoadAccountByCpf implements LoadAccountByCpf {
-  constructor (private readonly loadAccountByCpfRepository: LoadAccountByCpfRepository) { }
+  constructor (private readonly repository: ILoadAccountByCPFRepository) { }
   async loadByCpf (cpf: string): Promise<AccountModel> {
-    return await this.loadAccountByCpfRepository.loadByCpf(cpf)
+    return await this.repository.loadByCpf(cpf)
   }
 }
