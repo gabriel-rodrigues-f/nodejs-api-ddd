@@ -1,6 +1,6 @@
 import { type Order } from '@/domain/models'
 import { type LoadOrders } from '@/domain/ports'
-import { type LoadOrdersRepository } from '@/data/adapters'
+import { type ILoadOrdersRepository } from '@/data/adapters'
 import { DbLoadOrders } from '@/data/ports'
 
 const mockOrders = (): Order[] => ([
@@ -38,8 +38,8 @@ const mockOrders = (): Order[] => ([
   }
 ])
 
-const mockOrdersRepository = (): LoadOrdersRepository => {
-  class LoadOrdersRepositoryStub implements LoadOrdersRepository {
+const mockOrdersRepository = (): ILoadOrdersRepository => {
+  class LoadOrdersRepositoryStub implements ILoadOrdersRepository {
     async loadAll (): Promise<Order[]> {
       return await Promise.resolve(mockOrders())
     }
@@ -49,7 +49,7 @@ const mockOrdersRepository = (): LoadOrdersRepository => {
 
 interface SutTypes {
   sut: LoadOrders
-  loadOrdersRepositoryStub: LoadOrdersRepository
+  loadOrdersRepositoryStub: ILoadOrdersRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -62,7 +62,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('LoadOrders Usecase', () => {
-  test('Should call LoadOrdersRepository', async () => {
+  test('Should call ILoadOrdersRepository', async () => {
     const { sut, loadOrdersRepositoryStub } = mockSut()
     const loadAllSpy = jest.spyOn(loadOrdersRepositoryStub, 'loadAll')
     await sut.loadAll({})
@@ -75,7 +75,7 @@ describe('LoadOrders Usecase', () => {
     expect(orders).toEqual(mockOrders())
   })
 
-  test('Should throw if LoadOrdersRepository throws', async () => {
+  test('Should throw if ILoadOrdersRepository throws', async () => {
     const { sut, loadOrdersRepositoryStub } = mockSut()
     jest.spyOn(loadOrdersRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadAll({})

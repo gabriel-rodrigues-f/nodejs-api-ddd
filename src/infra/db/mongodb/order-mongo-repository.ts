@@ -8,7 +8,7 @@ import {
 import {
   type UpdateOrderRepository,
   type IAddOrderRepository,
-  type LoadOrdersRepository
+  type ILoadOrdersRepository
 } from '@/data/adapters'
 import { MongoHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
@@ -16,7 +16,7 @@ import { ObjectId } from 'mongodb'
 export class OrderMongoRepository implements
   IAddOrderRepository,
   UpdateOrderRepository,
-  LoadOrdersRepository {
+  ILoadOrdersRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
     const session = await MongoHelper.startTransaction()
     try {
