@@ -5,13 +5,13 @@ import {
   serverError
 } from '@/presentation/helpers'
 import {
-  type Controller,
+  type IController,
   type Validation,
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
 
-export class AddProductController implements Controller {
+export class AddProductController implements IController {
   constructor (
     private readonly validation: Validation,
     private readonly addProduct: IAddProduct

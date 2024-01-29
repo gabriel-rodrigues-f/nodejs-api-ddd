@@ -1,13 +1,13 @@
 import { type IUpdateProduct } from '@/domain/ports/IUpdateProducts'
 import {
   type Validation,
-  type Controller,
+  type IController,
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
-export class UpdateProductController implements Controller {
+export class UpdateProductController implements IController {
   constructor (
     private readonly validation: Validation,
     private readonly updateProduct: IUpdateProduct

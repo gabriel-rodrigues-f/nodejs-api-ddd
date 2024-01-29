@@ -1,8 +1,8 @@
 import { type Logout } from '@/domain/ports'
-import { type HttpResponse, type Controller, type Validation } from '@/presentation/protocols'
+import { type HttpResponse, type IController, type Validation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
-export class LogoutController implements Controller {
+export class LogoutController implements IController {
   constructor (
     private readonly validation: Validation,
     private readonly repository: Logout

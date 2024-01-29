@@ -35,7 +35,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('IDeleteProduct Controller', () => {
+describe('IDeleteProduct IController', () => {
   test('Should call IDeleteProduct with correct values', async () => {
     const { sut, deleteProductStub } = mockSut()
     const deleteSpy = jest.spyOn(deleteProductStub, 'delete')

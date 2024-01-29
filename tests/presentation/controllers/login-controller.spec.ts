@@ -55,7 +55,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('Login Controller', () => {
+describe('Login IController', () => {
   test('Should call IAuthentication with correct values', async () => {
     const { sut, authenticationStub } = mockSut()
     const authSpy = jest.spyOn(authenticationStub, 'auth')

@@ -9,14 +9,14 @@ import {
   serverError
 } from '@/presentation/helpers'
 import {
-  type Controller,
+  type IController,
   type Validation,
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
 import { EmailInUseError } from '../errors'
 
-export class SignUpController implements Controller {
+export class SignUpController implements IController {
   constructor (
     private readonly addAccount: IAddAccount,
     private readonly validation: Validation,

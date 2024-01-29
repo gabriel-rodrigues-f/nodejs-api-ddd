@@ -82,7 +82,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('SignUp Controller', () => {
+describe('SignUp IController', () => {
   test('Should return 500 if IAddAccount throws Exception', async () => {
     const { sut, addAccountStub } = mockSut()
     jest.spyOn(addAccountStub, 'add').mockImplementationOnce(async () => {

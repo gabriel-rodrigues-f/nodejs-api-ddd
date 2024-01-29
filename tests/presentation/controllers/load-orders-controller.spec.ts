@@ -58,7 +58,7 @@ const mockSut = (): SutType => {
   }
 }
 
-describe('LoadOrder Controller', () => {
+describe('LoadOrder IController', () => {
   test('Should call ILoadOrders', async () => {
     const { sut, loadOrdersStub } = mockSut()
     const loadSpy = jest.spyOn(loadOrdersStub, 'loadAll')

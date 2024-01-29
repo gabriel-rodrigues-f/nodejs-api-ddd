@@ -53,7 +53,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('IUpdateOrder Controller', () => {
+describe('IUpdateOrder IController', () => {
   test('Should call IUpdateOrder with correct values', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')

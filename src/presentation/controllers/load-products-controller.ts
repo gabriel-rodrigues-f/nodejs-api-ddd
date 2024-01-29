@@ -5,11 +5,11 @@ import {
   serverError
 } from '@/presentation/helpers'
 import {
-  type Controller,
+  type IController,
   type HttpResponse
 } from '@/presentation/protocols'
 
-export class LoadProductsController implements Controller {
+export class LoadProductsController implements IController {
   constructor (private readonly loadProducts: ILoadProducts) { }
   async handle (request: any): Promise<HttpResponse> {
     try {

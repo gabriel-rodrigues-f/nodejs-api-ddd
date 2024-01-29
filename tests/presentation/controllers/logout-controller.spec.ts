@@ -53,7 +53,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('Logout Controller', () => {
+describe('Logout IController', () => {
   test('Should call Validation with correct value', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')

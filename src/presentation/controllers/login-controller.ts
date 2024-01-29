@@ -6,13 +6,13 @@ import {
   unauthorized
 } from '@/presentation/helpers'
 import {
-  type Controller,
+  type IController,
   type Validation,
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
 
-export class LoginController implements Controller {
+export class LoginController implements IController {
   constructor (
     private readonly authentication: IAuthentication,
     private readonly validation: Validation

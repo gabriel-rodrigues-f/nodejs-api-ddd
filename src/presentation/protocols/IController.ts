@@ -1,5 +1,5 @@
 import { type HttpResponse } from '.'
 
-export interface Controller<T = any> {
+export interface IController<T = any> {
   handle: (request: T) => Promise<HttpResponse>
 }

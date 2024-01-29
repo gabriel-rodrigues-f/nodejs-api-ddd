@@ -1,13 +1,13 @@
 import { type ILogErrorRepository } from '@/data/adapters/db'
 import {
-  type Controller,
+  type IController,
   type HttpRequest,
   type HttpResponse
 } from '@/presentation/protocols'
 
-export class LogControllerDecorator implements Controller {
+export class LogControllerDecorator implements IController {
   constructor (
-    private readonly controller: Controller,
+    private readonly controller: IController,
     private readonly repository: ILogErrorRepository
   ) { }
 

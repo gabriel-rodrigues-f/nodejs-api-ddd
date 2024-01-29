@@ -45,7 +45,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('ILoadAccountByCPF Controller', () => {
+describe('ILoadAccountByCPF IController', () => {
   test('Should call LoadAccountById with correct values', async () => {
     const { sut, loadAccountByCpfStub } = mockSut()
     const loadbyCpfSpy = jest.spyOn(loadAccountByCpfStub, 'loadByCpf')

@@ -4,11 +4,11 @@ import {
   serverError
 } from '@/presentation/helpers'
 import {
-  type Controller,
+  type IController,
   type HttpResponse
 } from '@/presentation/protocols'
 
-export class DeleteProductController implements Controller {
+export class DeleteProductController implements IController {
   constructor (private readonly deleteProduct: IDeleteProduct) { }
   async handle (request: any): Promise<HttpResponse> {
     try {

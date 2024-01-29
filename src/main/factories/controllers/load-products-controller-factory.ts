@@ -1,9 +1,9 @@
 import { makeLogControllerDecorator } from '@/main/factories/decorators'
 import { makeDbLoadProducts } from '@/main/factories/usecases'
-import { type Controller } from '@/presentation/protocols'
+import { type IController } from '@/presentation/protocols'
 import { LoadProductsController } from '@/presentation/controllers'
 
-export const makeLoadProductsController = (): Controller => {
+export const makeLoadProductsController = (): IController => {
   const controller = new LoadProductsController(makeDbLoadProducts())
   return makeLogControllerDecorator(controller)
 }
