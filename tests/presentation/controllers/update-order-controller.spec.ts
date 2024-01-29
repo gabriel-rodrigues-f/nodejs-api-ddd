@@ -5,7 +5,7 @@ import {
 import { UpdateOrderController } from '@/presentation/controllers'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import {
-  type UpdateOrder,
+  type IUpdateOrder,
   type UpdateOrderParams
 } from '@/domain/ports'
 
@@ -27,8 +27,8 @@ const mockValidation = (): Validation => {
   return new ValidationStub()
 }
 
-const mockUpdateOrder = (): UpdateOrder => {
-  class UpdateOrderStub implements UpdateOrder {
+const mockUpdateOrder = (): IUpdateOrder => {
+  class UpdateOrderStub implements IUpdateOrder {
     async update (params: UpdateOrderParams): Promise<void> {
       return await Promise.resolve(null)
     }
@@ -39,7 +39,7 @@ const mockUpdateOrder = (): UpdateOrder => {
 type SutTypes = {
   sut: UpdateOrderController
   validationStub: Validation
-  updateOrderStub: UpdateOrder
+  updateOrderStub: IUpdateOrder
 }
 
 const mockSut = (): SutTypes => {
@@ -53,8 +53,8 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('UpdateOrder Controller', () => {
-  test('Should call UpdateOrder with correct values', async () => {
+describe('IUpdateOrder Controller', () => {
+  test('Should call IUpdateOrder with correct values', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
     await sut.handle(mockRequest())
@@ -69,7 +69,7 @@ describe('UpdateOrder Controller', () => {
     expect(response).toEqual(badRequest(new Error()))
   })
 
-  test('Should call UpdateOrder with correct values', async () => {
+  test('Should call IUpdateOrder with correct values', async () => {
     const { sut, updateOrderStub } = mockSut()
     const updateSpy = jest.spyOn(updateOrderStub, 'update')
     await sut.handle(mockRequest())
@@ -79,7 +79,7 @@ describe('UpdateOrder Controller', () => {
     })
   })
 
-  test('Should return 500 if UpdateProduct throws', async () => {
+  test('Should return 500 if IUpdateOrder throws', async () => {
     const { sut, updateOrderStub } = mockSut()
     jest.spyOn(updateOrderStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())

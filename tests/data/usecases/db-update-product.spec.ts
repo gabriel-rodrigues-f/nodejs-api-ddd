@@ -38,8 +38,8 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('UpdateProduct Usecase', () => {
-  test('Should call UpdateProduct Repository with correct values', async () => {
+describe('IUpdateProduct Usecase', () => {
+  test('Should call IUpdateProduct Repository with correct values', async () => {
     const { sut, updateProductRepositoryStub } = mockSut()
     const updateSpy = jest.spyOn(updateProductRepositoryStub, 'update')
     await sut.update(updateParams())

@@ -5,12 +5,12 @@ import {
   type HttpRequest
 } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '../helpers'
-import { type UpdateOrder } from '@/domain/ports'
+import { type IUpdateOrder } from '@/domain/ports'
 
 export class UpdateOrderController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly updateOrder: UpdateOrder
+    private readonly updateOrder: IUpdateOrder
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {

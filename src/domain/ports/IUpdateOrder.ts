@@ -3,6 +3,6 @@ export type UpdateOrderParams = {
   status: string
 }
 
-export interface UpdateOrder {
+export interface IUpdateOrder {
   update: (params: UpdateOrderParams) => Promise<void>
 }

@@ -30,8 +30,8 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('UpdateOrder Usecase', () => {
-  test('Should call UpdateOrder Repository with correct values', async () => {
+describe('IUpdateOrder Usecase', () => {
+  test('Should call IUpdateOrder Repository with correct values', async () => {
     const { sut, updateOrderRepositoryStub } = mockSut()
     const updateSpy = jest.spyOn(updateOrderRepositoryStub, 'updateOrder')
     await sut.update(mockUpdateParams())

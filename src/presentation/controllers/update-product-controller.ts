@@ -1,4 +1,4 @@
-import { type UpdateProduct } from '@/domain/ports/update-product'
+import { type IUpdateProduct } from '@/domain/ports/IUpdateProducts'
 import {
   type Validation,
   type Controller,
@@ -10,7 +10,7 @@ import { badRequest, noContent, serverError } from '@/presentation/helpers'
 export class UpdateProductController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly updateProduct: UpdateProduct
+    private readonly updateProduct: IUpdateProduct
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {

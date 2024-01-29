@@ -1,10 +1,10 @@
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
-import { type UpdateProductParams, type UpdateProduct } from '@/domain/ports'
+import { type UpdateProductParams, type IUpdateProduct } from '@/domain/ports'
 import { UpdateProductController } from '@/presentation/controllers'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
-const mockUpdateProduct = (): UpdateProduct => {
-  class UpdateProductStub implements UpdateProduct {
+const mockUpdateProduct = (): IUpdateProduct => {
+  class UpdateProductStub implements IUpdateProduct {
     async update (params: UpdateProductParams): Promise<void> {
       return await Promise.resolve(null)
     }
@@ -36,7 +36,7 @@ const mockRequest = (): HttpRequest => ({
 
 type SutTypes = {
   sut: UpdateProductController
-  updateProductStub: UpdateProduct
+  updateProductStub: IUpdateProduct
   validationStub: Validation
 }
 
@@ -52,7 +52,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('UpdateProductContrller', () => {
-  test('Should call UpdateProduct with correct values', async () => {
+  test('Should call IUpdateProduct with correct values', async () => {
     const { sut, updateProductStub } = mockSut()
     const updateSpy = jest.spyOn(updateProductStub, 'update')
     await sut.handle(mockRequest())
@@ -83,7 +83,7 @@ describe('UpdateProductContrller', () => {
     expect(response).toEqual(badRequest(new Error()))
   })
 
-  test('Should return 500 if UpdateProduct throws', async () => {
+  test('Should return 500 if IUpdateProduct throws', async () => {
     const { sut, updateProductStub } = mockSut()
     jest.spyOn(updateProductStub, 'update').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
