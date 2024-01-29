@@ -1,5 +1,5 @@
 import { type IDeleteAccessTokenRepository } from '@/data/adapters'
-import { DbLogout } from '@/data/ports'
+import { Logout } from '@/data/ports'
 
 const mockDeleteAccesstokenRepository = (): IDeleteAccessTokenRepository => {
   class DeleteAccessTokenRepositoryStub implements IDeleteAccessTokenRepository {
@@ -12,12 +12,12 @@ const mockDeleteAccesstokenRepository = (): IDeleteAccessTokenRepository => {
 
 type SutTypes = {
   deleteAccessTokenStub: IDeleteAccessTokenRepository
-  sut: DbLogout
+  sut: Logout
 }
 
 const mockSut = (): SutTypes => {
   const deleteAccessTokenStub = mockDeleteAccesstokenRepository()
-  const sut = new DbLogout(deleteAccessTokenStub)
+  const sut = new Logout(deleteAccessTokenStub)
   return {
     sut,
     deleteAccessTokenStub

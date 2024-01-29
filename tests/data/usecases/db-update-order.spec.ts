@@ -1,4 +1,4 @@
-import { DbUpdateOrder } from '@/data/ports'
+import { UpdateOrder } from '@/data/ports'
 import { type IUpdateOrderRepository } from '@/data/adapters'
 import { type UpdateOrderParams } from '@/domain/ports'
 
@@ -17,13 +17,13 @@ const mockUpdateOrderRepositoryStub = (): IUpdateOrderRepository => {
 }
 
 type SutTypes = {
-  sut: DbUpdateOrder
+  sut: UpdateOrder
   updateOrderRepositoryStub: IUpdateOrderRepository
 }
 
 const mockSut = (): SutTypes => {
   const updateOrderRepositoryStub = mockUpdateOrderRepositoryStub()
-  const sut = new DbUpdateOrder(updateOrderRepositoryStub)
+  const sut = new UpdateOrder(updateOrderRepositoryStub)
   return {
     sut,
     updateOrderRepositoryStub

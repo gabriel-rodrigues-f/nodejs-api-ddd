@@ -1,7 +1,7 @@
 import { type Order } from '@/domain/entities'
 import { type ILoadOrders } from '@/domain/ports'
 import { type ILoadOrdersRepository } from '@/data/adapters'
-import { DbLoadOrders } from '@/data/ports'
+import { LoadOrders } from '@/data/ports'
 
 const mockOrders = (): Order[] => ([
   {
@@ -54,7 +54,7 @@ interface SutTypes {
 
 const mockSut = (): SutTypes => {
   const loadOrdersRepositoryStub = mockOrdersRepository()
-  const sut = new DbLoadOrders(loadOrdersRepositoryStub)
+  const sut = new LoadOrders(loadOrdersRepositoryStub)
   return {
     sut,
     loadOrdersRepositoryStub

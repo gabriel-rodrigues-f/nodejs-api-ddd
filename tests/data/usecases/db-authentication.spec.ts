@@ -1,4 +1,4 @@
-import { DbAuthentication } from '@/data/ports'
+import { Authentication } from '@/data/ports'
 import { type Account } from '@/domain/entities'
 import { type AuthenticationParams } from '@/domain/ports'
 import {
@@ -58,7 +58,7 @@ const mockUpdateAccessTokenRepositoryStub = (): IUpdateAccessTokenRepository => 
 }
 
 interface SutTypes {
-  sut: DbAuthentication
+  sut: Authentication
   hashComparerStub: IHashComparer
   loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository
   encrypterStub: IEncrypter
@@ -70,7 +70,7 @@ const mockSut = (): SutTypes => {
   const hashComparerStub = mockHashComparer()
   const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
   const updateAccessTokenRepositoryStub = mockUpdateAccessTokenRepositoryStub()
-  const sut = new DbAuthentication(
+  const sut = new Authentication(
     loadAccountByEmailRepositoryStub,
     hashComparerStub,
     encrypterStub,
@@ -85,7 +85,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('DbAuthentication UseCase', () => {
+describe('Authentication UseCase', () => {
   test('Should call ILoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = mockSut()
     const loadByEmailSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')

@@ -2,7 +2,7 @@ import { type Account } from '@/domain/entities'
 import { type ILoadAccountByToken } from '@/domain/ports'
 import { type IDecrypter, type ILoadAccountByTokenRepository } from '@/data/adapters'
 
-export class DbLoadAccountByToken implements ILoadAccountByToken {
+export class LoadAccountByToken implements ILoadAccountByToken {
   constructor (
     private readonly decrypt: IDecrypter,
     private readonly repository: ILoadAccountByTokenRepository

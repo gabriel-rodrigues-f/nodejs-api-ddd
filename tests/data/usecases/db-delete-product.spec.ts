@@ -1,5 +1,5 @@
 import { type IDeleteProductRepository } from '@/data/adapters'
-import { DbDeleteProduct } from '@/data/ports'
+import { DeleteProduct } from '@/data/ports'
 
 const mockDeleteProductRepository = (): IDeleteProductRepository => {
   class DeleteProductRepositoryStub implements IDeleteProductRepository {
@@ -11,13 +11,13 @@ const mockDeleteProductRepository = (): IDeleteProductRepository => {
 }
 
 type SutTypes = {
-  sut: DbDeleteProduct
+  sut: DeleteProduct
   deleteProductRepositoryStub: IDeleteProductRepository
 }
 
 const mockSut = (): SutTypes => {
   const deleteProductRepositoryStub = mockDeleteProductRepository()
-  const sut = new DbDeleteProduct(deleteProductRepositoryStub)
+  const sut = new DeleteProduct(deleteProductRepositoryStub)
   return {
     sut,
     deleteProductRepositoryStub

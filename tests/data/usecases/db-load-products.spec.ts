@@ -1,4 +1,4 @@
-import { DbLoadProducts } from '@/data/ports'
+import { LoadProducts } from '@/data/ports'
 import { type Product } from '@/domain/entities'
 import { type ILoadProducts } from '@/domain/ports'
 import { type ILoadProductsRepository } from '@/data/adapters'
@@ -38,14 +38,14 @@ interface SutTypes {
 
 const mockSut = (): SutTypes => {
   const loadProductsRepositoryStub = mockProductsRepository()
-  const sut = new DbLoadProducts(loadProductsRepositoryStub)
+  const sut = new LoadProducts(loadProductsRepositoryStub)
   return {
     sut,
     loadProductsRepositoryStub
   }
 }
 
-describe('DbLoadProducts', () => {
+describe('LoadProducts', () => {
   test('Should call ILoadProductsRepository', async () => {
     const { sut, loadProductsRepositoryStub } = mockSut()
     const loadAllSpy = jest.spyOn(loadProductsRepositoryStub, 'loadAll')

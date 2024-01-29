@@ -3,7 +3,7 @@ import {
   type AddOrderParams,
   type IAddOrderRepository
 } from '@/data/adapters'
-import { DbAddOrder } from '@/data/ports'
+import { AddOrder } from '@/data/ports'
 
 const mockAddOrderParams = (): AddOrderParams => ({
   customer: 'any_customer',
@@ -32,13 +32,13 @@ const mockAddOrderRepository = (): IAddOrderRepository => {
 }
 
 type SutTypes = {
-  sut: DbAddOrder
+  sut: AddOrder
   addOrderRepositoryStub: IAddOrderRepository
 }
 
 const mockSut = (): SutTypes => {
   const addOrderRepositoryStub = mockAddOrderRepository()
-  const sut = new DbAddOrder(addOrderRepositoryStub)
+  const sut = new AddOrder(addOrderRepositoryStub)
   return {
     sut,
     addOrderRepositoryStub

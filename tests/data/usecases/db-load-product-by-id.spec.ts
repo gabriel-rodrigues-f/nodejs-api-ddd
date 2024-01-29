@@ -1,4 +1,4 @@
-import { DbLoadProductById } from '@/data/ports'
+import { LoadProductById } from '@/data/ports'
 import { type Product } from '@/domain/entities'
 import { type ILoadProductByIdRepository } from '@/data/adapters'
 
@@ -21,13 +21,13 @@ const mockLoadProductByIdRepository = (): ILoadProductByIdRepository => {
 }
 
 type SutTypes = {
-  sut: DbLoadProductById
+  sut: LoadProductById
   loadProductByIdRepositoryStub: ILoadProductByIdRepository
 }
 
 const mockSut = (): SutTypes => {
   const loadProductByIdRepositoryStub = mockLoadProductByIdRepository()
-  const sut = new DbLoadProductById(loadProductByIdRepositoryStub)
+  const sut = new LoadProductById(loadProductByIdRepositoryStub)
   return {
     sut,
     loadProductByIdRepositoryStub

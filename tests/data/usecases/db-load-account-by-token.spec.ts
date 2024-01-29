@@ -1,5 +1,5 @@
 import { type Account } from '@/domain/entities'
-import { DbLoadAccountByToken } from '@/data/ports'
+import { LoadAccountByToken } from '@/data/ports'
 import {
   type IDecrypter,
   type ILoadAccountByTokenRepository
@@ -32,7 +32,7 @@ const mockLoadAccountByTokenRepository = (): ILoadAccountByTokenRepository => {
 }
 
 interface SutTypes {
-  sut: DbLoadAccountByToken
+  sut: LoadAccountByToken
   decrypterStub: IDecrypter
   loadAccountByTokenRepositoryStub: ILoadAccountByTokenRepository
 }
@@ -40,7 +40,7 @@ interface SutTypes {
 const mockSut = (): SutTypes => {
   const decrypterStub = mockDecrypterStub()
   const loadAccountByTokenRepositoryStub = mockLoadAccountByTokenRepository()
-  const sut = new DbLoadAccountByToken(decrypterStub, loadAccountByTokenRepositoryStub)
+  const sut = new LoadAccountByToken(decrypterStub, loadAccountByTokenRepositoryStub)
   return {
     sut,
     decrypterStub,
@@ -48,7 +48,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('DbLoadAccountByToken Usecase', () => {
+describe('LoadAccountByToken Usecase', () => {
   test('Should call IDecrypter with correct values', async () => {
     const { sut, decrypterStub } = mockSut()
     const decryptSpy = jest.spyOn(decrypterStub, 'decrypt')

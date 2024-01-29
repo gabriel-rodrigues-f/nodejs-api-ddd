@@ -1,4 +1,4 @@
-import { DbAddAccount } from '@/data/ports'
+import { AddAccount } from '@/data/ports'
 import { type AddAccountParams } from '@/domain/ports'
 import { type Account } from '@/domain/entities'
 import {
@@ -50,7 +50,7 @@ const mockLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
 }
 
 interface SutTypes {
-  sut: DbAddAccount
+  sut: AddAccount
   hasherStub: IHasher
   addAccountRepositoryStub: IAddAccountRepository
   loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository
@@ -60,7 +60,7 @@ const mockSut = (): SutTypes => {
   const hasherStub = mockHasher()
   const addAccountRepositoryStub = mockAddAccountRepository()
   const loadAccountByEmailRepositoryStub = mockLoadAccountByEmailRepository()
-  const sut = new DbAddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepositoryStub)
+  const sut = new AddAccount(hasherStub, addAccountRepositoryStub, loadAccountByEmailRepositoryStub)
   return {
     sut,
     hasherStub,
@@ -69,7 +69,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('DbAddAccount Usecase', () => {
+describe('AddAccount Usecase', () => {
   test('Shoud call IHasher with correct password', async () => {
     const { sut, hasherStub } = mockSut()
     const hasherSpy = jest.spyOn(hasherStub, 'hash')

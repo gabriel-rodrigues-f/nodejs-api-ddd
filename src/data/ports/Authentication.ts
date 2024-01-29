@@ -6,7 +6,7 @@ import {
   type IUpdateAccessTokenRepository
 } from '@/data/adapters'
 
-export class DbAuthentication implements IAuthentication {
+export class Authentication implements IAuthentication {
   constructor (
     private readonly loadRepository: ILoadAccountByEmailRepository,
     private readonly hashComparer: IHashComparer,

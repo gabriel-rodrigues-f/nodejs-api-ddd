@@ -1,4 +1,4 @@
-import { DbLoadAccountByCpf } from '@/data/ports'
+import { LoadACcountByCPF } from '@/data/ports'
 import { type Account } from '@/domain/entities'
 import { type ILoadAccountByCPFRepository } from '@/data/adapters'
 
@@ -20,20 +20,20 @@ const mockLoadAccountByRepositoryStub = (): ILoadAccountByCPFRepository => {
 }
 
 type SutTypes = {
-  sut: DbLoadAccountByCpf
+  sut: LoadACcountByCPF
   loadAccountByCPFRepositoryStub: ILoadAccountByCPFRepository
 }
 
 const mockSut = (): SutTypes => {
   const loadAccountByCPFRepositoryStub = mockLoadAccountByRepositoryStub()
-  const sut = new DbLoadAccountByCpf(loadAccountByCPFRepositoryStub)
+  const sut = new LoadACcountByCPF(loadAccountByCPFRepositoryStub)
   return {
     sut,
     loadAccountByCPFRepositoryStub
   }
 }
 
-describe('DbLoadAccountByCpf Usecase', () => {
+describe('LoadACcountByCPF Usecase', () => {
   test('Should call ILoadAccountByCPFRepository with correct values', async () => {
     const { sut, loadAccountByCPFRepositoryStub } = mockSut()
     const loadByCpfStub = jest.spyOn(loadAccountByCPFRepositoryStub, 'loadByCpf')

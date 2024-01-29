@@ -2,7 +2,7 @@ import {
   type UpdateProductParams,
   type IUpdateProductRepository
 } from '@/data/adapters'
-import { DbUpdateProduct } from '@/data/ports'
+import { UpdateProduct } from '@/data/ports'
 
 const updateParams = (): UpdateProductParams => ({
   body: {
@@ -25,13 +25,13 @@ const mockUpdateProductRepositoryStub = (): IUpdateProductRepository => {
 }
 
 type SutTypes = {
-  sut: DbUpdateProduct
+  sut: UpdateProduct
   updateProductRepositoryStub: IUpdateProductRepository
 }
 
 const mockSut = (): SutTypes => {
   const updateProductRepositoryStub = mockUpdateProductRepositoryStub()
-  const sut = new DbUpdateProduct(updateProductRepositoryStub)
+  const sut = new UpdateProduct(updateProductRepositoryStub)
   return {
     sut,
     updateProductRepositoryStub

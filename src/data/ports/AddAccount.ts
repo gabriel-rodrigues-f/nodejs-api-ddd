@@ -6,7 +6,7 @@ import {
   type ILoadAccountByEmailRepository
 } from '@/data/adapters'
 
-export class DbAddAccount implements IAddAccount {
+export class AddAccount implements IAddAccount {
   constructor (
     private readonly hasher: IHasher,
     private readonly addRepository: IAddAccountRepository,
