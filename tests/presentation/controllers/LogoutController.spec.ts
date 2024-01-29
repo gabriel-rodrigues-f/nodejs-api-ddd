@@ -1,4 +1,4 @@
-import { type Logout } from '@/domain/ports'
+import { type ILogout } from '@/domain/ports'
 import { type IValidation, type IHTTPRequest } from '@/presentation/protocols'
 import { LogoutController } from '@/presentation/controllers'
 import { MissingParam } from '@/presentation/errors'
@@ -18,8 +18,8 @@ export type IRequestLogout = {
   id: string
 }
 
-const mockDeleteAccessToken = (): Logout => {
-  class LogoutStub implements Logout {
+const mockDeleteAccessToken = (): ILogout => {
+  class LogoutStub implements ILogout {
     async logout (token: string): Promise<void> {
       await Promise.resolve()
     }
@@ -37,7 +37,7 @@ const mockValidation = (): IValidation => {
 }
 
 type SutTypes = {
-  logoutStub: Logout
+  logoutStub: ILogout
   validationStub: IValidation
   sut: LogoutController
 }
@@ -53,7 +53,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('Logout IController', () => {
+describe('ILogout IController', () => {
   test('Should call IValidation with correct value', async () => {
     const { sut, validationStub } = mockSut()
     const validateSpy = jest.spyOn(validationStub, 'validate')
@@ -69,7 +69,7 @@ describe('Logout IController', () => {
     expect(response).toEqual(badRequest(new MissingParam('any_field')))
   })
 
-  test('Should call Logout with correct values', async () => {
+  test('Should call ILogout with correct values', async () => {
     const { sut, logoutStub } = mockSut()
     const logoutSpy = jest.spyOn(logoutStub, 'logout')
     const request = mockRequest()
@@ -78,7 +78,7 @@ describe('Logout IController', () => {
     expect(logoutSpy).toHaveBeenCalledWith(email)
   })
 
-  test('Should return 500 if Logout throws', async () => {
+  test('Should return 500 if ILogout throws', async () => {
     const { sut, logoutStub } = mockSut()
     jest.spyOn(logoutStub, 'logout').mockReturnValue(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())

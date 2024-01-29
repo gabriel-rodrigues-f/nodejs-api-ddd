@@ -3,7 +3,7 @@ import { makeDbLoadAccountByCpf } from '@/main/factories/usecases'
 import { type IController } from '@/presentation/protocols'
 import { LoadAccountByCPFController } from '@/presentation/controllers'
 
-export const makeLoadAccountByCpfController = (): IController => {
+export const makeLoadAccountByCPFController = (): IController => {
   const controller = new LoadAccountByCPFController(makeDbLoadAccountByCpf())
   return makeLogControllerDecorator(controller)
 }

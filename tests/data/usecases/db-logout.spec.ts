@@ -24,7 +24,7 @@ const mockSut = (): SutTypes => {
   }
 }
 
-describe('Logout Usecase', () => {
+describe('ILogout Usecase', () => {
   test('Should call DeleteAccesstoken with correct values', async () => {
     const { sut, deleteAccessTokenStub } = mockSut()
     const loadSpy = jest.spyOn(deleteAccessTokenStub, 'deleteAccessToken')

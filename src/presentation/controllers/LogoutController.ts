@@ -1,11 +1,11 @@
-import { type Logout } from '@/domain/ports'
+import { type ILogout } from '@/domain/ports'
 import { type IHTTPResponse, type IController, type IValidation } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 
 export class LogoutController implements IController {
   constructor (
     private readonly validation: IValidation,
-    private readonly repository: Logout
+    private readonly repository: ILogout
   ) { }
 
   async handle (request: any): Promise<IHTTPResponse> {

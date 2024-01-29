@@ -1,4 +1,4 @@
-export * from './logout'
+export * from './Ilogout'
 export * from './IAddOrder'
 export * from './IAddAccount'
 export * from './IAddProduc'

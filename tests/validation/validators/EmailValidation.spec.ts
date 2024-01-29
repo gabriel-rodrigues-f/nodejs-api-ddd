@@ -1,8 +1,8 @@
-import { type EmailValidator } from '@/validation/protocols/EmailValidator'
+import { type IEmailValidator } from '@/validation/protocols/IEmailValidator'
 import { EmailValidation } from '@/validation/validators'
 
-const mockEmailValidator = (): EmailValidator => {
-  class EmailValidatorStub implements EmailValidator {
+const mockEmailValidator = (): IEmailValidator => {
+  class EmailValidatorStub implements IEmailValidator {
     isValid (email: string): boolean {
       return true
     }
@@ -12,7 +12,7 @@ const mockEmailValidator = (): EmailValidator => {
 
 interface SutTypes {
   sut: EmailValidation
-  emailValidatorStub: EmailValidator
+  emailValidatorStub: IEmailValidator
 }
 
 const mockSut = (): SutTypes => {
@@ -25,14 +25,14 @@ const mockSut = (): SutTypes => {
 }
 
 describe('Email IValidation', () => {
-  test('Should call EmailValidator with correct email', () => {
+  test('Should call IEmailValidator with correct email', () => {
     const { sut, emailValidatorStub } = mockSut()
     const isValidSpy = jest.spyOn(emailValidatorStub, 'isValid')
     sut.validate({ email: 'any_email@mail.com' })
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
-  test('Should throw if EmailValidator throws', () => {
+  test('Should throw if IEmailValidator throws', () => {
     const { sut, emailValidatorStub } = mockSut()
     jest.spyOn(emailValidatorStub, 'isValid').mockImplementation(() => {
       throw new Error()
