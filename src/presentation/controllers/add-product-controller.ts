@@ -1,4 +1,4 @@
-import { type AddProduct } from '@/domain/ports'
+import { type IAddProduct } from '@/domain/ports'
 import {
   badRequest,
   noContent,
@@ -14,7 +14,7 @@ import {
 export class AddProductController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly addProduct: AddProduct
+    private readonly addProduct: IAddProduct
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {

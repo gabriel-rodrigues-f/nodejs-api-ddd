@@ -1,6 +1,6 @@
 import {
   type AddProductParams,
-  type AddProduct
+  type IAddProduct
 } from '@/domain/ports'
 import {
   type HttpRequest,
@@ -35,8 +35,8 @@ const mockValidation = (): Validation => {
   return validationStub
 }
 
-const mockAddProduct = (): AddProduct => {
-  class AddProductStub implements AddProduct {
+const mockAddProduct = (): IAddProduct => {
+  class AddProductStub implements IAddProduct {
     async add (data: AddProductParams): Promise<void> {
       return await Promise.resolve()
     }
@@ -48,7 +48,7 @@ const mockAddProduct = (): AddProduct => {
 interface SutTypes {
   sut: AddProductController
   validationStub: Validation
-  addProductStub: AddProduct
+  addProductStub: IAddProduct
 }
 
 const mockSut = (): SutTypes => {
@@ -79,7 +79,7 @@ describe('Add Product Controller', () => {
     expect(response).toEqual(badRequest(new Error()))
   })
 
-  test('Should call AddProduct usign correct values', async () => {
+  test('Should call IAddProduct usign correct values', async () => {
     const { sut, addProductStub } = mockSut()
     const addProductSpy = jest.spyOn(addProductStub, 'add')
     const request = mockRequest()
@@ -87,7 +87,7 @@ describe('Add Product Controller', () => {
     expect(addProductSpy).toHaveBeenCalledWith(request.body)
   })
 
-  test('Should return 500 if AddProduct throws', async () => {
+  test('Should return 500 if IAddProduct throws', async () => {
     const { sut, addProductStub } = mockSut()
     jest.spyOn(addProductStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())

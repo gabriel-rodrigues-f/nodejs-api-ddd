@@ -79,7 +79,7 @@ describe('AddOrderController', () => {
     expect(response).toEqual(badRequest(new Error()))
   })
 
-  test('Should call AddProduct with correct values', async () => {
+  test('Should call IAddProduct with correct values', async () => {
     const { sut, addOrderStub } = mockSut()
     const addProductSpy = jest.spyOn(addOrderStub, 'add')
     const request = mockRequest()
@@ -87,14 +87,14 @@ describe('AddOrderController', () => {
     expect(addProductSpy).toHaveBeenCalledWith(request.body)
   })
 
-  test('Should return 500 if AddProduct throws', async () => {
+  test('Should return 500 if IAddProduct throws', async () => {
     const { sut, addOrderStub } = mockSut()
     jest.spyOn(addOrderStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(serverError(new Error()))
   })
 
-  test('Should return 500 if AddProduct throws', async () => {
+  test('Should return 500 if IAddProduct throws', async () => {
     const { sut } = mockSut()
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(noContent())
