@@ -3,6 +3,7 @@ import { ObjectId } from 'mongodb'
 import { type AccountModel } from '@/domain/models'
 import { type AddAccountParams } from '@/domain/usecases'
 import {
+  type DeleteAccessTokenRepository,
   type AddAccountRepository,
   type LoadAccountByEmailRepository,
   type LoadAccountByTokenRepository,
@@ -12,8 +13,9 @@ import {
 export class AccountMongoRepository implements
   AddAccountRepository,
   LoadAccountByEmailRepository,
+  LoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
-  LoadAccountByTokenRepository {
+  DeleteAccessTokenRepository {
   async add (accountData: AddAccountParams): Promise<AccountModel> {
     const accountCollection = MongoHelper.getCollection('accounts')
     const result = await accountCollection.insertOne(accountData)
@@ -52,5 +54,11 @@ export class AccountMongoRepository implements
   async loadByCpf (cpf: string): Promise<AccountModel> {
     const accountCollection = MongoHelper.getCollection('accounts')
     return await accountCollection.findOne<AccountModel>({ cpf })
+  }
+
+  async deleteAccessToken (token: string): Promise<void> {
+    const accountCollection = MongoHelper.getCollection('accounts')
+    await accountCollection.updateOne({ accessToken: token },
+      { $unset: { accessToken: '' } })
   }
 }

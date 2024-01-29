@@ -72,9 +72,7 @@ describe('Account Mongo Repository', () => {
       const result = await accountCollection.insertOne(mockAddAccountParams())
       const fakeId = result.insertedId.toHexString()
       const account = await accountCollection.findOne({ _id: result.insertedId })
-      if (account) {
-        expect(account.accessToken).toBeFalsy()
-      }
+      if (account) expect(account.accessToken).toBeFalsy()
       await sut.updateAccessToken(fakeId, 'any_token')
       const accountWithAccessToken = await accountCollection.findOne({ _id: result.insertedId })
       if (accountWithAccessToken) {
@@ -163,6 +161,18 @@ describe('Account Mongo Repository', () => {
       const sut = mockSut()
       const account = await sut.loadByCpf('any_cpf')
       expect(account).toBeTruthy()
+    })
+  })
+
+  describe('deleteAccessToken()', () => {
+    test('Should delete accessToken', async () => {
+      const sut = mockSut()
+      const result = await accountCollection.insertOne({ ...mockAddAccountParams(), accessToken: 'any_token' })
+      const account = await accountCollection.findOne({ _id: result.insertedId })
+      if (account) expect(account.accessToken).toBeTruthy()
+      await sut.deleteAccessToken('any_token')
+      const accountWithoutAccessToken = await accountCollection.findOne({ _id: result.insertedId })
+      if (accountWithoutAccessToken) expect(accountWithoutAccessToken.accessToken).toBeFalsy()
     })
   })
 })
