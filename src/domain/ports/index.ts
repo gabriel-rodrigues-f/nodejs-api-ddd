@@ -1,5 +1,5 @@
 export * from './logout'
-export * from './add-order'
+export * from './IAddOrder'
 export * from './IAddAccount'
 export * from './add-product'
 export * from './authentication'

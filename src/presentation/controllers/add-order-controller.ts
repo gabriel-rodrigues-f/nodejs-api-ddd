@@ -4,12 +4,12 @@ import {
   type Validation
 } from '@/presentation/protocols'
 import { badRequest, noContent, serverError } from '../helpers'
-import { type AddOrder } from '@/domain/ports/add-order'
+import { type IAddOrder } from '@/domain/ports/IAddOrder'
 
 export class AddOrderController implements Controller {
   constructor (
     private readonly validation: Validation,
-    private readonly addOrder: AddOrder
+    private readonly addOrder: IAddOrder
   ) { }
 
   async handle (request: any): Promise<HttpResponse> {

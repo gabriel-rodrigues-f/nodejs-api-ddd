@@ -5,7 +5,7 @@ import {
 import { AddOrderController } from '@/presentation/controllers'
 import { badRequest, noContent, serverError } from '@/presentation/helpers'
 import { type Order } from '@/domain/models'
-import { type AddOrder, type AddOrderParams } from '@/domain/ports/add-order'
+import { type IAddOrder, type AddOrderParams } from '@/domain/ports/IAddOrder'
 
 const mockAddOrderParams = (): AddOrderParams => ({
   customer: 'any_customer',
@@ -36,8 +36,8 @@ const mockValidation = (): Validation => {
   return new ValidationStub()
 }
 
-const mockAddOrder = (): AddOrder => {
-  class AddOrderStub implements AddOrder {
+const mockAddOrder = (): IAddOrder => {
+  class AddOrderStub implements IAddOrder {
     async add (order: AddOrderParams): Promise<Order> {
       return await Promise.resolve(null)
     }
@@ -47,7 +47,7 @@ const mockAddOrder = (): AddOrder => {
 
 type SutTypes = {
   sut: AddOrderController
-  addOrderStub: AddOrder
+  addOrderStub: IAddOrder
   validationStub: Validation
 }
 
@@ -63,7 +63,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('AddOrderController', () => {
-  test('Should call AddOrder Usecase with a correct values ', async () => {
+  test('Should call IAddOrder Usecase with a correct values ', async () => {
     const { sut, validationStub } = mockSut()
     const validationSpy = jest.spyOn(validationStub, 'validate')
     const request = mockRequest()
