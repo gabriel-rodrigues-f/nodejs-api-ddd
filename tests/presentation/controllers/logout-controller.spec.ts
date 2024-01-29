@@ -20,7 +20,7 @@ export type IRequestLogout = {
 
 const mockDeleteAccessToken = (): Logout => {
   class LogoutStub implements Logout {
-    async logout ({ accessToken, id }: IRequestLogout): Promise<void> {
+    async logout (token: string): Promise<void> {
       await Promise.resolve()
     }
   }
@@ -73,8 +73,9 @@ describe('Logout Controller', () => {
     const { sut, logoutStub } = mockSut()
     const logoutSpy = jest.spyOn(logoutStub, 'logout')
     const request = mockRequest()
+    const { accessToken, email } = request.body
     await sut.handle(request)
-    expect(logoutSpy).toHaveBeenCalledWith(request.body)
+    expect(logoutSpy).toHaveBeenCalledWith(accessToken, email)
   })
 
   test('Should return 500 if Logout throws', async () => {

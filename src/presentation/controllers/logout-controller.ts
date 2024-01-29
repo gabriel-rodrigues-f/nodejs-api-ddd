@@ -12,7 +12,8 @@ export class LogoutController implements Controller {
     try {
       const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
-      await this.repository.logout(request.body)
+      const { accessToken, email } = request.body
+      await this.repository.logout(accessToken, email)
       return noContent()
     } catch (error) {
       return serverError(error)

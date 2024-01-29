@@ -5,6 +5,6 @@ import { type Controller } from '@/presentation/protocols'
 import { SignUpController } from '@/presentation/controllers/signup-controller'
 
 export const makeSignUpController = (): Controller => {
-  const sighUpController = new SignUpController(makeDbAddAccount(), makeSignUpValidation(), makeDbAuthentication())
-  return makeLogControllerDecorator(sighUpController)
+  const controller = new SignUpController(makeDbAddAccount(), makeSignUpValidation(), makeDbAuthentication())
+  return makeLogControllerDecorator(controller)
 }

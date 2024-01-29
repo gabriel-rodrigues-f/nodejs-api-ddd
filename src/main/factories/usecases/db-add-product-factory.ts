@@ -3,6 +3,6 @@ import { DbAddProduct } from '@/data/usecases'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbAddProduct = (): AddProduct => {
-  const productMongoRepository = new ProductMongoRepository()
-  return new DbAddProduct(productMongoRepository)
+  const repository = new ProductMongoRepository()
+  return new DbAddProduct(repository)
 }

@@ -1,3 +1,3 @@
 export interface DeleteAccessTokenRepository {
-  deleteAccessToken: (token: string) => Promise<void>
+  deleteAccessToken: (token: string, email: string) => Promise<void>
 }

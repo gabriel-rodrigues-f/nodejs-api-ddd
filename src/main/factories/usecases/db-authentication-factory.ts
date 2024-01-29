@@ -5,8 +5,8 @@ import { AccountMongoRepository } from '@/infra/db/mongodb'
 import { BcryptAdapter, JwtAdapter } from '@/infra/criptography'
 
 export const makeDbAuthentication = (): Authentication => {
-  const accountMongoRepository = new AccountMongoRepository()
-  const bcryptAdapter = new BcryptAdapter(12)
-  const jwtAdapter = new JwtAdapter(env.JWT_SECRET)
-  return new DbAuthentication(accountMongoRepository, bcryptAdapter, jwtAdapter, accountMongoRepository)
+  const repository = new AccountMongoRepository()
+  const bcrypt = new BcryptAdapter(12)
+  const jwt = new JwtAdapter(env.JWT_SECRET)
+  return new DbAuthentication(repository, bcrypt, jwt, repository)
 }

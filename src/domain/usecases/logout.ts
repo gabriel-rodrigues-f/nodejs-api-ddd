@@ -1,3 +1,3 @@
 export interface Logout {
-  logout: (accessToken: string) => Promise<void>
+  logout: (accessToken: string, email: string) => Promise<void>
 }

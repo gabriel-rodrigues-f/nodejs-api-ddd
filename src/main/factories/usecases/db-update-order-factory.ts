@@ -3,6 +3,6 @@ import { DbUpdateOrder } from '@/data/usecases'
 import { OrderMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbUpdateOrder = (): UpdateOrder => {
-  const orderMongoRepository = new OrderMongoRepository()
-  return new DbUpdateOrder(orderMongoRepository)
+  const repository = new OrderMongoRepository()
+  return new DbUpdateOrder(repository)
 }

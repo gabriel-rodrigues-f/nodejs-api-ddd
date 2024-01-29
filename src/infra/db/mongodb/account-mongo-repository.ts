@@ -56,9 +56,12 @@ export class AccountMongoRepository implements
     return await accountCollection.findOne<AccountModel>({ cpf })
   }
 
-  async deleteAccessToken (token: string): Promise<void> {
+  async deleteAccessToken (accessToken: string, email: string): Promise<void> {
     const accountCollection = MongoHelper.getCollection('accounts')
-    await accountCollection.updateOne({ accessToken: token },
-      { $unset: { accessToken: '' } })
+    await accountCollection.updateOne({
+      email
+    }, {
+      $unset: { accessToken: '' }
+    })
   }
 }
