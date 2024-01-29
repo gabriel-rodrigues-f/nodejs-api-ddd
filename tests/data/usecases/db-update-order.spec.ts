@@ -1,5 +1,5 @@
 import { DbUpdateOrder } from '@/data/ports'
-import { type UpdateOrderRepository } from '@/data/adapters'
+import { type IUpdateOrderRepository } from '@/data/adapters'
 import { type UpdateOrderParams } from '@/domain/ports'
 
 const mockUpdateParams = (): UpdateOrderParams => ({
@@ -7,8 +7,8 @@ const mockUpdateParams = (): UpdateOrderParams => ({
   status: 'any_status'
 })
 
-const mockUpdateOrderRepositoryStub = (): UpdateOrderRepository => {
-  class UpdateOrderStub implements UpdateOrderRepository {
+const mockUpdateOrderRepositoryStub = (): IUpdateOrderRepository => {
+  class UpdateOrderStub implements IUpdateOrderRepository {
     async updateOrder (params: any): Promise<void> {
       await Promise.resolve(null)
     }
@@ -18,7 +18,7 @@ const mockUpdateOrderRepositoryStub = (): UpdateOrderRepository => {
 
 type SutTypes = {
   sut: DbUpdateOrder
-  updateOrderRepositoryStub: UpdateOrderRepository
+  updateOrderRepositoryStub: IUpdateOrderRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -38,7 +38,7 @@ describe('UpdateOrder Usecase', () => {
     expect(updateSpy).toHaveBeenCalledWith(mockUpdateParams())
   })
 
-  test('Shoud throw Error if UpdateOrderRepository Throw Error', async () => {
+  test('Shoud throw Error if IUpdateOrderRepository Throw Error', async () => {
     const { sut, updateOrderRepositoryStub } = mockSut()
     jest.spyOn(updateOrderRepositoryStub, 'updateOrder').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.update(mockUpdateParams())

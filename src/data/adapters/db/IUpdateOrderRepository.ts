@@ -1,5 +1,5 @@
 import { type UpdateOrderParams } from '@/domain/ports'
 
-export interface UpdateOrderRepository {
+export interface IUpdateOrderRepository {
   updateOrder: (params: UpdateOrderParams) => Promise<void>
 }
