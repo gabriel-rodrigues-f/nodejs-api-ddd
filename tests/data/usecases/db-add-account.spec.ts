@@ -2,13 +2,13 @@ import { DbAddAccount } from '@/data/ports'
 import { type AddAccountParams } from '@/domain/ports'
 import { type AccountModel } from '@/domain/models'
 import {
-  type Hasher,
+  type IHasher,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
 } from '@/data/adapters'
 
-const mockHasher = (): Hasher => {
-  class HasherStub implements Hasher {
+const mockHasher = (): IHasher => {
+  class HasherStub implements IHasher {
     async hash (value: string): Promise<string> {
       return await Promise.resolve('hashed_password')
     }
@@ -51,7 +51,7 @@ const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
 
 interface SutTypes {
   sut: DbAddAccount
-  hasherStub: Hasher
+  hasherStub: IHasher
   addAccountRepositoryStub: AddAccountRepository
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
 }
@@ -70,14 +70,14 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbAddAccount Usecase', () => {
-  test('Shoud call Hasher with correct password', async () => {
+  test('Shoud call IHasher with correct password', async () => {
     const { sut, hasherStub } = mockSut()
     const hasherSpy = jest.spyOn(hasherStub, 'hash')
     await sut.add(mockAccountData())
     expect(hasherSpy).toHaveBeenCalledWith('hashed_password')
   })
 
-  test('Shoud throw Error if Hasher Throw Error', async () => {
+  test('Shoud throw Error if IHasher Throw Error', async () => {
     const { sut, hasherStub } = mockSut()
     jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(mockAccountData())
@@ -102,7 +102,7 @@ describe('DbAddAccount Usecase', () => {
     expect(account).toEqual(mockAccount())
   })
 
-  test('Shoud throw Error if Hasher Throw Error', async () => {
+  test('Shoud throw Error if IHasher Throw Error', async () => {
     const { sut, addAccountRepositoryStub } = mockSut()
     jest.spyOn(addAccountRepositoryStub, 'add').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(mockAccountData())

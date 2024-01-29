@@ -54,7 +54,7 @@ describe('AddOrder Usecase', () => {
     expect(addSpy).toHaveBeenCalledWith(addOrderData)
   })
 
-  test('Shoud throw Error if Hasher Throw Error', async () => {
+  test('Shoud throw Error if IHasher Throw Error', async () => {
     const { sut, addOrderRepositoryStub } = mockSut()
     jest.spyOn(addOrderRepositoryStub, 'addOrderTransaction').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.add(mockAddOrderParams())

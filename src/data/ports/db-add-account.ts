@@ -1,14 +1,14 @@
 import { type AccountModel } from '@/domain/models'
 import { type AddAccountParams, type AddAccount } from '@/domain/ports'
 import {
-  type Hasher,
+  type IHasher,
   type AddAccountRepository,
   type LoadAccountByEmailRepository
 } from '@/data/adapters'
 
 export class DbAddAccount implements AddAccount {
   constructor (
-    private readonly hasher: Hasher,
+    private readonly hasher: IHasher,
     private readonly addAccountRepository: AddAccountRepository,
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository
   ) { }
