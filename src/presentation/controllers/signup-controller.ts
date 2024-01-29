@@ -1,5 +1,5 @@
 import {
-  type AddAccount,
+  type IAddAccount,
   type Authentication
 } from '@/domain/ports'
 import {
@@ -18,7 +18,7 @@ import { EmailInUseError } from '../errors'
 
 export class SignUpController implements Controller {
   constructor (
-    private readonly addAccount: AddAccount,
+    private readonly addAccount: IAddAccount,
     private readonly validation: Validation,
     private readonly authentication: Authentication
   ) { }

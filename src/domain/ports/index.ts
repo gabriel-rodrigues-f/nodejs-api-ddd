@@ -1,6 +1,6 @@
 export * from './logout'
 export * from './add-order'
-export * from './add-account'
+export * from './IAddAccount'
 export * from './add-product'
 export * from './authentication'
 export * from './delete-product'
