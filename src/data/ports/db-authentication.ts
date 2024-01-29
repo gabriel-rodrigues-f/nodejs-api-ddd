@@ -1,6 +1,6 @@
 import { type Authentication, type AuthenticationParams } from '@/domain/ports'
 import {
-  type HashComparer,
+  type IHashComparer,
   type LoadAccountByEmailRepository,
   type IEncrypter,
   type UpdateAccessTokenRepository
@@ -9,7 +9,7 @@ import {
 export class DbAuthentication implements Authentication {
   constructor (
     private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
-    private readonly hashComparer: HashComparer,
+    private readonly hashComparer: IHashComparer,
     private readonly encrypter: IEncrypter,
     private readonly updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
   ) { }

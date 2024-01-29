@@ -3,7 +3,7 @@ import { type AccountModel } from '@/domain/models'
 import { type AuthenticationParams } from '@/domain/ports'
 import {
   type IEncrypter,
-  type HashComparer,
+  type IHashComparer,
   type UpdateAccessTokenRepository,
   type LoadAccountByEmailRepository
 } from '@/data/adapters'
@@ -39,8 +39,8 @@ const mockEncrypter = (): IEncrypter => {
   return new EcrypterStub()
 }
 
-const mockHashComparer = (): HashComparer => {
-  class HasComparerStub implements HashComparer {
+const mockHashComparer = (): IHashComparer => {
+  class HasComparerStub implements IHashComparer {
     async compare (value: string, hash: string): Promise<boolean> {
       return await Promise.resolve(true)
     }
@@ -59,7 +59,7 @@ const mockUpdateAccessTokenRepositoryStub = (): UpdateAccessTokenRepository => {
 
 interface SutTypes {
   sut: DbAuthentication
-  hashComparerStub: HashComparer
+  hashComparerStub: IHashComparer
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
   encrypterStub: IEncrypter
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
@@ -107,7 +107,7 @@ describe('DbAuthentication UseCase', () => {
     expect(accessToken).toBeNull()
   })
 
-  test('Should call HashComparer with correct values', async () => {
+  test('Should call IHashComparer with correct values', async () => {
     const { sut, hashComparerStub } = mockSut()
     const compareSpy = jest.spyOn(hashComparerStub, 'compare')
     await sut.auth(mockAuthentication())
@@ -121,7 +121,7 @@ describe('DbAuthentication UseCase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should return null if HashComparer returns false', async () => {
+  test('Should return null if IHashComparer returns false', async () => {
     const { sut, hashComparerStub } = mockSut()
     jest.spyOn(hashComparerStub, 'compare').mockReturnValueOnce(Promise.resolve(false))
     const accessToken = await sut.auth(mockAuthentication())
