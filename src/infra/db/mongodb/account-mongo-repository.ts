@@ -5,14 +5,14 @@ import { type AddAccountParams } from '@/domain/ports'
 import {
   type IDeleteAccessTokenRepository,
   type IAddAccountRepository,
-  type LoadAccountByEmailRepository,
+  type ILoadAccountByEmailRepository,
   type LoadAccountByTokenRepository,
   type UpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class AccountMongoRepository implements
   IAddAccountRepository,
-  LoadAccountByEmailRepository,
+  ILoadAccountByEmailRepository,
   LoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
   IDeleteAccessTokenRepository {

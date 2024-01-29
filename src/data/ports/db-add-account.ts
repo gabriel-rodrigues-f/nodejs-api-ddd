@@ -3,14 +3,14 @@ import { type AddAccountParams, type AddAccount } from '@/domain/ports'
 import {
   type IHasher,
   type IAddAccountRepository,
-  type LoadAccountByEmailRepository
+  type ILoadAccountByEmailRepository
 } from '@/data/adapters'
 
 export class DbAddAccount implements AddAccount {
   constructor (
     private readonly hasher: IHasher,
     private readonly addRepository: IAddAccountRepository,
-    private readonly loadRepository: LoadAccountByEmailRepository
+    private readonly loadRepository: ILoadAccountByEmailRepository
   ) { }
 
   async add (params: AddAccountParams): Promise<AccountModel> {

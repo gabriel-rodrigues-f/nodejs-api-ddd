@@ -4,7 +4,7 @@ import { type AccountModel } from '@/domain/models'
 import {
   type IHasher,
   type IAddAccountRepository,
-  type LoadAccountByEmailRepository
+  type ILoadAccountByEmailRepository
 } from '@/data/adapters'
 
 const mockHasher = (): IHasher => {
@@ -40,8 +40,8 @@ const mockAddAccountRepository = (): IAddAccountRepository => {
   return new AddAccountRepositoryStub()
 }
 
-const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
-  class LoadAccountByEmailRepositoryStub implements LoadAccountByEmailRepository {
+const mockLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
+  class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
     async loadByEmail (email: string): Promise<AccountModel> {
       return await Promise.resolve(null)
     }
@@ -53,7 +53,7 @@ interface SutTypes {
   sut: DbAddAccount
   hasherStub: IHasher
   addAccountRepositoryStub: IAddAccountRepository
-  loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
+  loadAccountByEmailRepositoryStub: ILoadAccountByEmailRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -109,7 +109,7 @@ describe('DbAddAccount Usecase', () => {
     await expect(promise).rejects.toThrow()
   })
 
-  test('Should call LoadAccountByEmailRepository with correct email', async () => {
+  test('Should call ILoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositoryStub } = mockSut()
     const loadByEmailSpy = jest.spyOn(loadAccountByEmailRepositoryStub, 'loadByEmail')
     await sut.add(mockAccountData())

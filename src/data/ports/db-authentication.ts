@@ -1,26 +1,26 @@
 import { type Authentication, type AuthenticationParams } from '@/domain/ports'
 import {
   type IHashComparer,
-  type LoadAccountByEmailRepository,
+  type ILoadAccountByEmailRepository,
   type IEncrypter,
   type UpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class DbAuthentication implements Authentication {
   constructor (
-    private readonly loadAccountByEmailRepository: LoadAccountByEmailRepository,
+    private readonly loadRepository: ILoadAccountByEmailRepository,
     private readonly hashComparer: IHashComparer,
     private readonly encrypter: IEncrypter,
-    private readonly updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
+    private readonly updateRepository: UpdateAccessTokenRepository
   ) { }
 
-  async auth (authentication: AuthenticationParams): Promise<string> {
-    const account = await this.loadAccountByEmailRepository.loadByEmail(authentication.email)
+  async auth (params: AuthenticationParams): Promise<string> {
+    const account = await this.loadRepository.loadByEmail(params.email)
     if (account) {
-      const isValid = await this.hashComparer.compare(authentication.password, account.password)
+      const isValid = await this.hashComparer.compare(params.password, account.password)
       if (isValid) {
         const accessToken = await this.encrypter.encrypt(account.id)
-        await this.updateAccessTokenRepositoryStub.updateAccessToken(account.id, accessToken)
+        await this.updateRepository.updateAccessToken(account.id, accessToken)
         return accessToken
       }
     }
