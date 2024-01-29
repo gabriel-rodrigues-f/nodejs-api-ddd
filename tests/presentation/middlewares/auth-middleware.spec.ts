@@ -1,5 +1,5 @@
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByToken } from '@/domain/ports'
+import { type ILoadAccountByToken } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { AuthMiddleware } from '@/presentation/middlewares'
 import { AccessDeniedError } from '@/presentation/errors'
@@ -25,11 +25,11 @@ const mockRequest = (): HttpRequest => ({
 
 interface SutTypes {
   sut: AuthMiddleware
-  loadAccountByTokenStub: LoadAccountByToken
+  loadAccountByTokenStub: ILoadAccountByToken
 }
 
-const mockLoadAccountByToken = (): LoadAccountByToken => {
-  class LoadAccountByTokenStub implements LoadAccountByToken {
+const mockLoadAccountByToken = (): ILoadAccountByToken => {
+  class LoadAccountByTokenStub implements ILoadAccountByToken {
     async load (accessToken: string, role?: string): Promise<AccountModel> {
       return await Promise.resolve(mockAccount())
     }
@@ -57,7 +57,7 @@ describe('Auth Middleware', () => {
     expect(response).toEqual(forbidden(new AccessDeniedError()))
   })
 
-  test('Should call LoadAccountByToken usign correct values', async () => {
+  test('Should call ILoadAccountByToken usign correct values', async () => {
     const role = 'any_role'
     const { sut, loadAccountByTokenStub } = mockSut(role)
     const request: HttpRequest = mockRequest()
@@ -66,7 +66,7 @@ describe('Auth Middleware', () => {
     expect(loadSpy).toHaveBeenCalledWith('any_token', 'any_role')
   })
 
-  test('Should 403 if LoadAccountByToken returns null', async () => {
+  test('Should 403 if ILoadAccountByToken returns null', async () => {
     const role = 'any_role'
     const { sut, loadAccountByTokenStub } = mockSut(role)
     const request: HttpRequest = mockRequest()
@@ -75,14 +75,14 @@ describe('Auth Middleware', () => {
     expect(response).toEqual(forbidden(new AccessDeniedError()))
   })
 
-  test('Should 200 if LoadAccountByToken returns an account', async () => {
+  test('Should 200 if ILoadAccountByToken returns an account', async () => {
     const role = 'any_role'
     const { sut } = mockSut(role)
     const response = await sut.handle(mockRequest())
     expect(response).toEqual(ok({ accountId: 'valid_id' }))
   })
 
-  test('Should return 500 if LoadAccountByToken throws', async () => {
+  test('Should return 500 if ILoadAccountByToken throws', async () => {
     const { sut, loadAccountByTokenStub } = mockSut()
     jest.spyOn(loadAccountByTokenStub, 'load').mockImplementationOnce(() => {
       throw new Error()

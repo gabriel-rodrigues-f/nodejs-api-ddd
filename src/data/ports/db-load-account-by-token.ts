@@ -1,8 +1,8 @@
 import { type AccountModel } from '@/domain/models'
-import { type LoadAccountByToken } from '@/domain/ports'
+import { type ILoadAccountByToken } from '@/domain/ports'
 import { type IDecrypter, type ILoadAccountByTokenRepository } from '@/data/adapters'
 
-export class DbLoadAccountByToken implements LoadAccountByToken {
+export class DbLoadAccountByToken implements ILoadAccountByToken {
   constructor (
     private readonly decrypt: IDecrypter,
     private readonly repository: ILoadAccountByTokenRepository

@@ -1,4 +1,4 @@
-import { type LoadAccountByToken } from '@/domain/ports'
+import { type ILoadAccountByToken } from '@/domain/ports'
 import {
   type Middleware,
   type HttpRequest,
@@ -9,7 +9,7 @@ import { ok, forbidden, serverError } from '@/presentation/helpers'
 
 export class AuthMiddleware implements Middleware {
   constructor (
-    private readonly loadAccountByToken: LoadAccountByToken,
+    private readonly loadAccountByToken: ILoadAccountByToken,
     private readonly role?: string
   ) { }
 
