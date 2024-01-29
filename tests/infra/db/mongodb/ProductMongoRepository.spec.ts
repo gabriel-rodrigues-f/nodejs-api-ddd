@@ -1,8 +1,8 @@
 import { type Collection } from 'mongodb'
-import { type Product } from '@/domain/models'
+import { type Product } from '@/domain/entities'
 import { type AddProductParams } from '@/domain/ports'
 import {
-  MongoHelper,
+  MongoDBHelper,
   ProductMongoRepository
 } from '@/infra/db'
 
@@ -10,15 +10,15 @@ let productCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
 
 beforeAll(async () => {
-  await MongoHelper.connect(MONGO_URL)
+  await MongoDBHelper.connect(MONGO_URL)
 })
 
 afterAll(async () => {
-  await MongoHelper.disconnect()
+  await MongoDBHelper.disconnect()
 })
 
 beforeEach(async () => {
-  productCollection = MongoHelper.getCollection('products')
+  productCollection = MongoDBHelper.getCollection('products')
   await productCollection.deleteMany({})
 })
 

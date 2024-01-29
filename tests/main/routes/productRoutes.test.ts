@@ -5,7 +5,7 @@ import request from 'supertest'
 import env from '@/main/config/env'
 import { sign } from 'jsonwebtoken'
 import { setupApp } from '@/main/config/app'
-import { MongoHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infra/db/mongodb'
 
 let productCollection: Collection
 let accountCollection: Collection
@@ -35,17 +35,17 @@ const mockUpdateProductParams = (): UpdateProductParams => ({
 describe('Product Routes', () => {
   beforeAll(async () => {
     app = setupApp()
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    productCollection = MongoHelper.getCollection('products')
+    productCollection = MongoDBHelper.getCollection('products')
     await productCollection.deleteMany({})
-    accountCollection = MongoHelper.getCollection('accounts')
+    accountCollection = MongoDBHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 

@@ -1,5 +1,5 @@
 import { DbLoadProducts } from '@/data/ports'
-import { type Product } from '@/domain/models'
+import { type Product } from '@/domain/entities'
 import { type ILoadProducts } from '@/domain/ports'
 import { type ILoadProductsRepository } from '@/data/adapters'
 

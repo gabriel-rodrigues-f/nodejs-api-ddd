@@ -1,5 +1,5 @@
 import { DbAuthentication } from '@/data/ports'
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import { type AuthenticationParams } from '@/domain/ports'
 import {
   type IEncrypter,

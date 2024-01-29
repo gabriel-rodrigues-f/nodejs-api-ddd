@@ -5,7 +5,7 @@ import { type Collection } from 'mongodb'
 
 import env from '@/main/config/env'
 import { setupApp } from '@/main/config/app'
-import { MongoHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infra/db/mongodb'
 import { type AddOrderParams } from '@/domain/ports'
 
 let orderCollection: Collection
@@ -33,17 +33,17 @@ const mockAddOrderParams = (): AddOrderParams => ({
 describe('Order Routes', () => {
   beforeAll(async () => {
     app = setupApp()
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    orderCollection = MongoHelper.getCollection('orders')
+    orderCollection = MongoDBHelper.getCollection('orders')
     await orderCollection.deleteMany({})
-    accountCollection = MongoHelper.getCollection('accounts')
+    accountCollection = MongoDBHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 

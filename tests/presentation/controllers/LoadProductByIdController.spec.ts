@@ -1,4 +1,4 @@
-import { type Product } from '@/domain/models'
+import { type Product } from '@/domain/entities'
 import { type ILoadProductById } from '@/domain/ports'
 import { type IHTTPRequest } from '@/presentation/protocols'
 import { LoadProductByidController } from '@/presentation/controllers'

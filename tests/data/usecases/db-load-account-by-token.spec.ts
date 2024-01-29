@@ -1,4 +1,4 @@
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import { DbLoadAccountByToken } from '@/data/ports'
 import {
   type IDecrypter,

@@ -1,4 +1,4 @@
-import { type Item, type Order } from '@/domain/models'
+import { type Item, type Order } from '@/domain/entities'
 import { type ObjectId } from 'mongodb'
 
 export type AddOrderParams = Omit<Order, 'number'>

@@ -1,4 +1,4 @@
-import { type Order } from '@/domain/models'
+import { type Order } from '@/domain/entities'
 import { type IAddOrder, type AddOrderParams } from '@/domain/ports'
 import { type IAddOrderRepository } from '@/data/adapters'
 

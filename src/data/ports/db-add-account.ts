@@ -1,4 +1,4 @@
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import { type AddAccountParams, type IAddAccount } from '@/domain/ports'
 import {
   type IHasher,

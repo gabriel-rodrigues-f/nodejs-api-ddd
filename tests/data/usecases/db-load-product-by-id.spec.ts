@@ -1,5 +1,5 @@
 import { DbLoadProductById } from '@/data/ports'
-import { type Product } from '@/domain/models'
+import { type Product } from '@/domain/entities'
 import { type ILoadProductByIdRepository } from '@/data/adapters'
 
 const mockProduct = (): Product => ({

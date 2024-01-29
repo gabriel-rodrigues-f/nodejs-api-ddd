@@ -1,5 +1,5 @@
 import {
-  MongoHelper,
+  MongoDBHelper,
   LogMongoRepository
 } from '@/infra/db'
 import { type ILogErrorRepository } from '@/data/adapters'
@@ -9,15 +9,15 @@ describe('Log Mongo Repository', () => {
   const MONGO_URL = process.env.MONGO_URL || ''
 
   beforeAll(async () => {
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    errorCollection = MongoHelper.getCollection('errors')
+    errorCollection = MongoDBHelper.getCollection('errors')
     await errorCollection.deleteMany({})
   })
 

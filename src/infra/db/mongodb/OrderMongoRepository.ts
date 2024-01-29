@@ -1,4 +1,4 @@
-import { type Order } from '@/domain/models'
+import { type Order } from '@/domain/entities'
 import {
   type UpdateOrderParams,
   type AddOrderDetailsParams,
@@ -10,7 +10,7 @@ import {
   type IAddOrderRepository,
   type ILoadOrdersRepository
 } from '@/data/adapters'
-import { MongoHelper } from '@/infra/db'
+import { MongoDBHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 
 export class OrderMongoRepository implements
@@ -18,38 +18,38 @@ export class OrderMongoRepository implements
   IUpdateOrderRepository,
   ILoadOrdersRepository {
   async addOrderTransaction (params: AddOrderParams): Promise<Order> {
-    const session = await MongoHelper.startTransaction()
+    const session = await MongoDBHelper.startTransaction()
     try {
       const { products, ...order } = params
       const insertedId = await this.addOrder(order)
       products.forEach(async product => await this.addOrderItem({ orderId: new ObjectId(insertedId), ...product }))
-      await MongoHelper.commitTransaction(session)
+      await MongoDBHelper.commitTransaction(session)
       return await Promise.resolve(null)
     } catch (error) {
-      await MongoHelper.abortTransaction(session)
+      await MongoDBHelper.abortTransaction(session)
       throw error
     }
   }
 
   async addOrder (params: AddOrderDetailsParams): Promise<string> {
-    const collection = MongoHelper.getCollection('orders')
+    const collection = MongoDBHelper.getCollection('orders')
     const id = await collection.insertOne(params)
     return id.insertedId.toHexString()
   }
 
   async addOrderItem (params: AddOrderItemParams): Promise<void> {
-    const collection = MongoHelper.getCollection('orderItems')
+    const collection = MongoDBHelper.getCollection('orderItems')
     await collection.insertOne(params)
   }
 
   async updateOrder (params: UpdateOrderParams): Promise<void> {
-    const collection = MongoHelper.getCollection('orders')
+    const collection = MongoDBHelper.getCollection('orders')
     const { id, status } = params
     await collection.updateOne({ _id: new ObjectId(id) }, { $set: { status } })
   }
 
   async loadAll (filter: any): Promise<Order[]> {
-    const collection = MongoHelper.getCollection('orders')
+    const collection = MongoDBHelper.getCollection('orders')
     const orders = await collection.aggregate<Order>([
       {
         $match: filter
@@ -82,6 +82,6 @@ export class OrderMongoRepository implements
       }
     ]
     ).toArray()
-    return orders.map(orders => MongoHelper.map(orders))
+    return orders.map(orders => MongoDBHelper.map(orders))
   }
 }

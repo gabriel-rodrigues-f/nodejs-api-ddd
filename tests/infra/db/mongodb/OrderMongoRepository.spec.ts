@@ -1,10 +1,10 @@
-import { type Order } from '@/domain/models'
+import { type Order } from '@/domain/entities'
 import {
   type AddOrderItemParams,
   type AddOrderDetailsParams,
   type AddOrderParams
 } from '@/domain/ports'
-import { MongoHelper, OrderMongoRepository } from '@/infra/db'
+import { MongoDBHelper, OrderMongoRepository } from '@/infra/db'
 import { ObjectId, type Collection } from 'mongodb'
 
 const mockSut = (): OrderMongoRepository => new OrderMongoRepository()
@@ -53,16 +53,16 @@ const MONGO_URL = process.env.MONGO_URL || ''
 
 describe('OrderRepository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    ordersCollection = MongoHelper.getCollection('orders')
-    orderItemsCollection = MongoHelper.getCollection('orderItems')
+    ordersCollection = MongoDBHelper.getCollection('orders')
+    orderItemsCollection = MongoDBHelper.getCollection('orderItems')
     await ordersCollection.deleteMany({})
     await orderItemsCollection.deleteMany({})
   })

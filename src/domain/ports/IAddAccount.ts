@@ -1,4 +1,4 @@
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 
 export type AddAccountParams = Omit<Account, 'id'>
 

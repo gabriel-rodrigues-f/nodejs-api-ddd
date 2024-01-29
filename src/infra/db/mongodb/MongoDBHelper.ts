@@ -5,7 +5,7 @@ import {
 } from 'mongodb'
 import env from '@/main/config/env'
 
-export const MongoHelper = {
+export const MongoDBHelper = {
   client: null as MongoClient,
 
   async connect (uri: string): Promise<void> {

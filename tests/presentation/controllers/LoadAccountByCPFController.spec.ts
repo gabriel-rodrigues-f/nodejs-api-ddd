@@ -1,4 +1,4 @@
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import { type IHTTPRequest } from '@/presentation/protocols'
 import { type ILoadAccountByCPF } from '@/domain/ports'
 import { LoadAccountByCPFController } from '@/presentation/controllers'

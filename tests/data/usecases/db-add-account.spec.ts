@@ -1,6 +1,6 @@
 import { DbAddAccount } from '@/data/ports'
 import { type AddAccountParams } from '@/domain/ports'
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import {
   type IHasher,
   type IAddAccountRepository,

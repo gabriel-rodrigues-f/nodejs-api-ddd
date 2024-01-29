@@ -1,5 +1,5 @@
 import { DbLoadAccountByCpf } from '@/data/ports'
-import { type Account } from '@/domain/models'
+import { type Account } from '@/domain/entities'
 import { type ILoadAccountByCPFRepository } from '@/data/adapters'
 
 const mockAccount = (): Account => ({

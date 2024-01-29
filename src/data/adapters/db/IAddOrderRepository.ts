@@ -1,4 +1,4 @@
-import { type Order } from '@/domain/models'
+import { type Order } from '@/domain/entities'
 
 export type AddOrderParams = Omit<Order, 'number'>
 

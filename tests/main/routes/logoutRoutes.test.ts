@@ -2,7 +2,7 @@ import { ObjectId, type Collection } from 'mongodb'
 import request from 'supertest'
 import { type Express } from 'express'
 import { setupApp } from '@/main/config/app'
-import { MongoHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infra/db/mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '@/main/config/env'
 
@@ -22,15 +22,15 @@ const mockAddAccountParams = (): any => ({
 describe('Login Routes', () => {
   beforeAll(async () => {
     app = setupApp()
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    accountCollection = MongoHelper.getCollection('accounts')
+    accountCollection = MongoDBHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 

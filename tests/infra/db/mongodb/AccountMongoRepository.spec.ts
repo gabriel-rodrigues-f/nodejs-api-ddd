@@ -1,7 +1,7 @@
 import { type Collection } from 'mongodb'
 import { type AddAccountParams } from '@/domain/ports'
 import {
-  MongoHelper,
+  MongoDBHelper,
   AccountMongoRepository
 } from '@/infra/db'
 
@@ -10,15 +10,15 @@ const MONGO_URL = process.env.MONGO_URL || ''
 
 describe('Account Mongo Repository', () => {
   beforeAll(async () => {
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    accountCollection = MongoHelper.getCollection('accounts')
+    accountCollection = MongoDBHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 

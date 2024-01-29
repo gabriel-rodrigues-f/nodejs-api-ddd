@@ -1,4 +1,4 @@
-import { type Order } from '@/domain/models'
+import { type Order } from '@/domain/entities'
 import { type ILoadOrders } from '@/domain/ports'
 import { type ILoadOrdersRepository } from '@/data/adapters'
 import { DbLoadOrders } from '@/data/ports'

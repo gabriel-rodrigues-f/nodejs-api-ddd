@@ -5,7 +5,7 @@ import request from 'supertest'
 import { type Express } from 'express'
 import { setupApp } from '@/main/config/app'
 import env from '@/main/config/env'
-import { MongoHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infra/db/mongodb'
 
 let app: Express
 let accountCollection: Collection
@@ -21,15 +21,15 @@ const mockAddAccountParams = (): AddAccountParams => ({
 describe('Login Routes', () => {
   beforeAll(async () => {
     app = setupApp()
-    await MongoHelper.connect(MONGO_URL)
+    await MongoDBHelper.connect(MONGO_URL)
   })
 
   afterAll(async () => {
-    await MongoHelper.disconnect()
+    await MongoDBHelper.disconnect()
   })
 
   beforeEach(async () => {
-    accountCollection = MongoHelper.getCollection('accounts')
+    accountCollection = MongoDBHelper.getCollection('accounts')
     await accountCollection.deleteMany({})
   })
 
