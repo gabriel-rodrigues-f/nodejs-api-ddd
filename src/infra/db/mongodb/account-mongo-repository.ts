@@ -7,14 +7,14 @@ import {
   type IAddAccountRepository,
   type ILoadAccountByEmailRepository,
   type ILoadAccountByTokenRepository,
-  type UpdateAccessTokenRepository
+  type IUpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class AccountMongoRepository implements
   IAddAccountRepository,
   ILoadAccountByEmailRepository,
   ILoadAccountByTokenRepository,
-  UpdateAccessTokenRepository,
+  IUpdateAccessTokenRepository,
   IDeleteAccessTokenRepository {
   async add (params: AddAccountParams): Promise<AccountModel> {
     const collection = MongoHelper.getCollection('accounts')

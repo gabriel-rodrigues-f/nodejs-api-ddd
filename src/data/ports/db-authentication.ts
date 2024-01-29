@@ -3,7 +3,7 @@ import {
   type IHashComparer,
   type ILoadAccountByEmailRepository,
   type IEncrypter,
-  type UpdateAccessTokenRepository
+  type IUpdateAccessTokenRepository
 } from '@/data/adapters'
 
 export class DbAuthentication implements Authentication {
@@ -11,7 +11,7 @@ export class DbAuthentication implements Authentication {
     private readonly loadRepository: ILoadAccountByEmailRepository,
     private readonly hashComparer: IHashComparer,
     private readonly encrypter: IEncrypter,
-    private readonly updateRepository: UpdateAccessTokenRepository
+    private readonly updateRepository: IUpdateAccessTokenRepository
   ) { }
 
   async auth (params: AuthenticationParams): Promise<string> {
