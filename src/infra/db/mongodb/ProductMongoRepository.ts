@@ -1,6 +1,6 @@
 import { ObjectId } from 'mongodb'
 import { MongoHelper } from '.'
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 import { type AddProductParams } from '@/domain/ports'
 import {
   type IAddProductRepository,
@@ -22,15 +22,15 @@ export class ProductMongoRepository implements
     await collection.insertOne(params)
   }
 
-  async loadAll (filter: any): Promise<ProductModel[]> {
+  async loadAll (filter: any): Promise<Product[]> {
     const collection = MongoHelper.getCollection('products')
-    const products = await collection.find<ProductModel>(filter).toArray()
+    const products = await collection.find<Product>(filter).toArray()
     return products.map(product => MongoHelper.map(product))
   }
 
-  async loadById (id: string): Promise<ProductModel> {
+  async loadById (id: string): Promise<Product> {
     const collection = MongoHelper.getCollection('products')
-    const product = collection.findOne<ProductModel>({ _id: { $eq: new ObjectId(id) } })
+    const product = collection.findOne<Product>({ _id: { $eq: new ObjectId(id) } })
     return product && MongoHelper.map(product)
   }
 

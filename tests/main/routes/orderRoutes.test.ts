@@ -30,7 +30,7 @@ const mockAddOrderParams = (): AddOrderParams => ({
   amount: 4000
 })
 
-describe('Product Routes', () => {
+describe('Order Routes', () => {
   beforeAll(async () => {
     app = setupApp()
     await MongoHelper.connect(MONGO_URL)

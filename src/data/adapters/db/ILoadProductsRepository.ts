@@ -1,5 +1,5 @@
-import { type ProductModel } from '@/domain/models/product'
+import { type Product } from '@/domain/models'
 
 export interface ILoadProductsRepository {
-  loadAll: (filter: any) => Promise<ProductModel[]>
+  loadAll: (filter: any) => Promise<Product[]>
 }

@@ -1,9 +1,9 @@
 import { DbLoadProducts } from '@/data/ports'
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 import { type ILoadProducts } from '@/domain/ports'
 import { type ILoadProductsRepository } from '@/data/adapters'
 
-const mockProducts = (): ProductModel[] => ([
+const mockProducts = (): Product[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -24,7 +24,7 @@ const mockProducts = (): ProductModel[] => ([
 
 const mockProductsRepository = (): ILoadProductsRepository => {
   class LoadProductsRepositoryStub implements ILoadProductsRepository {
-    async loadAll (): Promise<ProductModel[]> {
+    async loadAll (): Promise<Product[]> {
       return await Promise.resolve(mockProducts())
     }
   }

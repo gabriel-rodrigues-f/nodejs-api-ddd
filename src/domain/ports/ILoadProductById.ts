@@ -1,5 +1,5 @@
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 
 export interface ILoadProductById {
-  loadById: (id: string) => Promise<ProductModel>
+  loadById: (id: string) => Promise<Product>
 }

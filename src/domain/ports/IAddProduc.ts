@@ -1,6 +1,6 @@
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 
-export type AddProductParams = Omit<ProductModel, 'id'>
+export type AddProductParams = Omit<Product, 'id'>
 
 export interface IAddProduct {
   add: (params: AddProductParams) => Promise<void>

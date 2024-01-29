@@ -1,4 +1,4 @@
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 import { type ILoadProducts } from '@/domain/ports'
 import { type IHTTPRequest } from '@/presentation/protocols'
 import { LoadProductsController } from '@/presentation/controllers'
@@ -8,7 +8,7 @@ import {
   serverError
 } from '@/presentation/helpers'
 
-const mockProducts = (): ProductModel[] => ([
+const mockProducts = (): Product[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -29,7 +29,7 @@ const mockProducts = (): ProductModel[] => ([
 
 const mockLoadProducts = (): ILoadProducts => {
   class LoadProductsStub implements ILoadProducts {
-    async load (): Promise<ProductModel[]> {
+    async load (): Promise<Product[]> {
       return await Promise.resolve(mockProducts())
     }
   }

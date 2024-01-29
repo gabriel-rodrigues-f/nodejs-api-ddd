@@ -1,5 +1,5 @@
 import { type Collection } from 'mongodb'
-import { type ProductModel } from '@/domain/models'
+import { type Product } from '@/domain/models'
 import { type AddProductParams } from '@/domain/ports'
 import {
   MongoHelper,
@@ -22,7 +22,7 @@ beforeEach(async () => {
   await productCollection.deleteMany({})
 })
 
-const mockProducts = (): ProductModel[] => ([
+const mockProducts = (): Product[] => ([
   {
     id: 'any_id',
     category: 'any_category',
@@ -41,7 +41,7 @@ const mockProducts = (): ProductModel[] => ([
   }
 ])
 
-const mockProduct = (): ProductModel => ({
+const mockProduct = (): Product => ({
   id: 'any_id',
   category: 'any_category',
   name: 'any_name',
