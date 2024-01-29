@@ -2,7 +2,7 @@ import { DbAuthentication } from '@/data/ports'
 import { type AccountModel } from '@/domain/models'
 import { type AuthenticationParams } from '@/domain/ports'
 import {
-  type Encrypter,
+  type IEncrypter,
   type HashComparer,
   type UpdateAccessTokenRepository,
   type LoadAccountByEmailRepository
@@ -30,8 +30,8 @@ const mockLoadAccountByEmailRepository = (): LoadAccountByEmailRepository => {
   return new LoadAccountByEmailRepositoryStub()
 }
 
-const mockEncrypter = (): Encrypter => {
-  class EcrypterStub implements Encrypter {
+const mockEncrypter = (): IEncrypter => {
+  class EcrypterStub implements IEncrypter {
     async encrypt (id: string): Promise<string> {
       return await Promise.resolve('any_token')
     }
@@ -61,7 +61,7 @@ interface SutTypes {
   sut: DbAuthentication
   hashComparerStub: HashComparer
   loadAccountByEmailRepositoryStub: LoadAccountByEmailRepository
-  encrypterStub: Encrypter
+  encrypterStub: IEncrypter
   updateAccessTokenRepositoryStub: UpdateAccessTokenRepository
 }
 
@@ -128,14 +128,14 @@ describe('DbAuthentication UseCase', () => {
     expect(accessToken).toBeNull()
   })
 
-  test('Should call Encrypter usign correct id', async () => {
+  test('Should call IEncrypter usign correct id', async () => {
     const { sut, encrypterStub } = mockSut()
     const encryptSpy = jest.spyOn(encrypterStub, 'encrypt')
     await sut.auth(mockAuthentication())
     expect(encryptSpy).toHaveBeenCalledWith('any_id')
   })
 
-  test('Should throw if Encrypter throws', async () => {
+  test('Should throw if IEncrypter throws', async () => {
     const { sut, encrypterStub } = mockSut()
     jest.spyOn(encrypterStub, 'encrypt').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.auth(mockAuthentication())
