@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { DbLoadAccountByToken } from '@/data/ports'
 import {
   type IDecrypter,
@@ -14,7 +14,7 @@ const mockDecrypterStub = (): IDecrypter => {
   return new DecrypterStub()
 }
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -24,7 +24,7 @@ const mockAccount = (): AccountModel => ({
 
 const mockLoadAccountByTokenRepository = (): ILoadAccountByTokenRepository => {
   class LoadAccountByTokenRepositoryStub implements ILoadAccountByTokenRepository {
-    async loadByToken (token: string, role?: string): Promise<AccountModel> {
+    async loadByToken (token: string, role?: string): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

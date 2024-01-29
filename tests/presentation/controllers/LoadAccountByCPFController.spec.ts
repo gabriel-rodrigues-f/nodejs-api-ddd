@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type IHTTPRequest } from '@/presentation/protocols'
 import { type ILoadAccountByCPF } from '@/domain/ports'
 import { LoadAccountByCPFController } from '@/presentation/controllers'
@@ -14,7 +14,7 @@ const mockRequest = (): IHTTPRequest => ({
   }
 })
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -24,7 +24,7 @@ const mockAccount = (): AccountModel => ({
 
 const mockLoadAccountByCpf = (): ILoadAccountByCPF => {
   class LoadAccountByCpfStub implements ILoadAccountByCPF {
-    async loadByCpf (cpf: string): Promise<AccountModel> {
+    async loadByCpf (cpf: string): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

@@ -1,8 +1,8 @@
 import { DbLoadAccountByCpf } from '@/data/ports'
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type ILoadAccountByCPFRepository } from '@/data/adapters'
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -12,7 +12,7 @@ const mockAccount = (): AccountModel => ({
 
 const mockLoadAccountByRepositoryStub = (): ILoadAccountByCPFRepository => {
   class LoadAccountByCPFRepositoryStub implements ILoadAccountByCPFRepository {
-    async loadByCpf (cpf: string): Promise<AccountModel> {
+    async loadByCpf (cpf: string): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type ILoadAccountByToken } from '@/domain/ports'
 import { type IHTTPRequest } from '@/presentation/protocols'
 import { AuthMiddleware } from '@/presentation/middlewares'
@@ -9,7 +9,7 @@ import {
   serverError
 } from '@/presentation/helpers'
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'any_cpf',
   name: 'any_name',
@@ -30,7 +30,7 @@ interface SutTypes {
 
 const mockLoadAccountByToken = (): ILoadAccountByToken => {
   class LoadAccountByTokenStub implements ILoadAccountByToken {
-    async load (accessToken: string, role?: string): Promise<AccountModel> {
+    async load (accessToken: string, role?: string): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

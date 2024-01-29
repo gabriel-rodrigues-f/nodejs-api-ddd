@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type AddAccountParams, type IAddAccount } from '@/domain/ports'
 import {
   type IHasher,
@@ -13,7 +13,7 @@ export class DbAddAccount implements IAddAccount {
     private readonly loadRepository: ILoadAccountByEmailRepository
   ) { }
 
-  async add (params: AddAccountParams): Promise<AccountModel> {
+  async add (params: AddAccountParams): Promise<Account> {
     const account = await this.loadRepository.loadByEmail(params.email)
     if (!account) {
       const hashedPassword = await this.hasher.hash(params.password)

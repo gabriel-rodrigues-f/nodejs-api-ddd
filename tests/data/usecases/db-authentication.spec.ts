@@ -1,5 +1,5 @@
 import { DbAuthentication } from '@/data/ports'
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type AuthenticationParams } from '@/domain/ports'
 import {
   type IEncrypter,
@@ -8,7 +8,7 @@ import {
   type ILoadAccountByEmailRepository
 } from '@/data/adapters'
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   name: 'any_name',
   cpf: 'any_cpf',
   email: 'any_email@mail.com',
@@ -23,7 +23,7 @@ const mockAuthentication = (): AuthenticationParams => ({
 
 const mockLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
+    async loadByEmail (email: string): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

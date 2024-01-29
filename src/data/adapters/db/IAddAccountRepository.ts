@@ -1,6 +1,6 @@
-import { type AddAccountParams } from '@/domain/ports/IAddAccount'
-import { type AccountModel } from '@/domain/models/account'
+import { type AddAccountParams } from '@/domain/ports'
+import { type Account } from '@/domain/models'
 
 export interface IAddAccountRepository {
-  add: (params: AddAccountParams) => Promise<AccountModel>
+  add: (params: AddAccountParams) => Promise<Account>
 }

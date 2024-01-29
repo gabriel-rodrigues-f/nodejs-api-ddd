@@ -1,6 +1,6 @@
 import { MongoHelper } from '.'
 import { ObjectId } from 'mongodb'
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type AddAccountParams } from '@/domain/ports'
 import {
   type IDeleteAccessTokenRepository,
@@ -16,14 +16,14 @@ export class AccountMongoRepository implements
   ILoadAccountByTokenRepository,
   IUpdateAccessTokenRepository,
   IDeleteAccessTokenRepository {
-  async add (params: AddAccountParams): Promise<AccountModel> {
+  async add (params: AddAccountParams): Promise<Account> {
     const collection = MongoHelper.getCollection('accounts')
     const result = await collection.insertOne(params)
     const id = result.insertedId.toHexString()
     return MongoHelper.map(params, id)
   }
 
-  async loadByEmail (email: string): Promise<AccountModel> {
+  async loadByEmail (email: string): Promise<Account> {
     const collection = MongoHelper.getCollection('accounts')
     const account = await collection.findOne({ email })
     return account && MongoHelper.map(account)
@@ -38,7 +38,7 @@ export class AccountMongoRepository implements
     })
   }
 
-  async loadByToken (token: string, role?: string): Promise<AccountModel> {
+  async loadByToken (token: string, role?: string): Promise<Account> {
     const collection = MongoHelper.getCollection('accounts')
     const account = await collection.findOne({
       accessToken: token,
@@ -51,9 +51,9 @@ export class AccountMongoRepository implements
     return account && MongoHelper.map(account)
   }
 
-  async loadByCpf (cpf: string): Promise<AccountModel> {
+  async loadByCpf (cpf: string): Promise<Account> {
     const collection = MongoHelper.getCollection('accounts')
-    return await collection.findOne<AccountModel>({ cpf })
+    return await collection.findOne<Account>({ cpf })
   }
 
   async deleteAccessToken (email: string): Promise<void> {

@@ -1,5 +1,5 @@
-import { type AccountModel } from '@/domain/models/account'
+import { type Account } from '@/domain/models'
 
 export interface ILoadAccountByCPFRepository {
-  loadByCpf: (cpf: string) => Promise<AccountModel>
+  loadByCpf: (cpf: string) => Promise<Account>
 }

@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import { type ILoadAccountByToken } from '@/domain/ports'
 import { type IDecrypter, type ILoadAccountByTokenRepository } from '@/data/adapters'
 
@@ -8,7 +8,7 @@ export class DbLoadAccountByToken implements ILoadAccountByToken {
     private readonly repository: ILoadAccountByTokenRepository
   ) { }
 
-  async load (accessToken: string, role?: string): Promise<AccountModel> {
+  async load (accessToken: string, role?: string): Promise<Account> {
     let token: string
     try { token = await this.decrypt.decrypt(accessToken) } catch (error) { return null }
     if (token) {

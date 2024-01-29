@@ -1,4 +1,4 @@
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import {
   type AddAccountParams,
   type IAuthentication,
@@ -20,7 +20,7 @@ const mockRequest = (): IHTTPRequest => ({
   }
 })
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -46,7 +46,7 @@ const mockAuthentication = (): IAuthentication => {
 
 const mockAddAccount = (): IAddAccount => {
   class AddAccountStub implements IAddAccount {
-    async add (account: AddAccountParams): Promise<AccountModel> {
+    async add (account: AddAccountParams): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }

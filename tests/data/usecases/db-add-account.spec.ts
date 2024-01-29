@@ -1,6 +1,6 @@
 import { DbAddAccount } from '@/data/ports'
 import { type AddAccountParams } from '@/domain/ports'
-import { type AccountModel } from '@/domain/models'
+import { type Account } from '@/domain/models'
 import {
   type IHasher,
   type IAddAccountRepository,
@@ -16,7 +16,7 @@ const mockHasher = (): IHasher => {
   return new HasherStub()
 }
 
-const mockAccount = (): AccountModel => ({
+const mockAccount = (): Account => ({
   id: 'valid_id',
   cpf: 'valid_cpf',
   name: 'valid_name',
@@ -33,7 +33,7 @@ const mockAccountData = (): AddAccountParams => ({
 
 const mockAddAccountRepository = (): IAddAccountRepository => {
   class AddAccountRepositoryStub implements IAddAccountRepository {
-    async add (params: AddAccountParams): Promise<AccountModel> {
+    async add (params: AddAccountParams): Promise<Account> {
       return await Promise.resolve(mockAccount())
     }
   }
@@ -42,7 +42,7 @@ const mockAddAccountRepository = (): IAddAccountRepository => {
 
 const mockLoadAccountByEmailRepository = (): ILoadAccountByEmailRepository => {
   class LoadAccountByEmailRepositoryStub implements ILoadAccountByEmailRepository {
-    async loadByEmail (email: string): Promise<AccountModel> {
+    async loadByEmail (email: string): Promise<Account> {
       return await Promise.resolve(null)
     }
   }
