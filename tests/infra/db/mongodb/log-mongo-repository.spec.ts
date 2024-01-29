@@ -2,7 +2,7 @@ import {
   MongoHelper,
   LogMongoRepository
 } from '@/infra/db'
-import { type LogErrorRepository } from '@/data/adapters'
+import { type ILogErrorRepository } from '@/data/adapters'
 
 describe('Log Mongo Repository', () => {
   let errorCollection
@@ -21,7 +21,7 @@ describe('Log Mongo Repository', () => {
     await errorCollection.deleteMany({})
   })
 
-  const mockSut = (): LogErrorRepository => {
+  const mockSut = (): ILogErrorRepository => {
     return new LogMongoRepository()
   }
 

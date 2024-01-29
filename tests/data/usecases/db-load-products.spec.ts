@@ -1,7 +1,7 @@
 import { DbLoadProducts } from '@/data/ports'
 import { type ProductModel } from '@/domain/models'
 import { type LoadProducts } from '@/domain/ports'
-import { type LoadProductsRepository } from '@/data/adapters'
+import { type ILoadProductsRepository } from '@/data/adapters'
 
 const mockProducts = (): ProductModel[] => ([
   {
@@ -22,8 +22,8 @@ const mockProducts = (): ProductModel[] => ([
   }
 ])
 
-const mockProductsRepository = (): LoadProductsRepository => {
-  class LoadProductsRepositoryStub implements LoadProductsRepository {
+const mockProductsRepository = (): ILoadProductsRepository => {
+  class LoadProductsRepositoryStub implements ILoadProductsRepository {
     async loadAll (): Promise<ProductModel[]> {
       return await Promise.resolve(mockProducts())
     }
@@ -33,7 +33,7 @@ const mockProductsRepository = (): LoadProductsRepository => {
 
 interface SutTypes {
   sut: LoadProducts
-  loadProductsRepositoryStub: LoadProductsRepository
+  loadProductsRepositoryStub: ILoadProductsRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -46,7 +46,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbLoadProducts', () => {
-  test('Should call LoadProductsRepository', async () => {
+  test('Should call ILoadProductsRepository', async () => {
     const { sut, loadProductsRepositoryStub } = mockSut()
     const loadAllSpy = jest.spyOn(loadProductsRepositoryStub, 'loadAll')
     await sut.load({})
@@ -59,7 +59,7 @@ describe('DbLoadProducts', () => {
     expect(products).toEqual(mockProducts())
   })
 
-  test('Should throw if LoadProductsRepository throws', async () => {
+  test('Should throw if ILoadProductsRepository throws', async () => {
     const { sut, loadProductsRepositoryStub } = mockSut()
     jest.spyOn(loadProductsRepositoryStub, 'loadAll').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.load({})

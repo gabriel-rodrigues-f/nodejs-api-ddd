@@ -1,10 +1,10 @@
-import { type LogErrorRepository } from '@/data/adapters'
+import { type ILogErrorRepository } from '@/data/adapters'
 import { MongoHelper } from '.'
 
-export class LogMongoRepository implements LogErrorRepository {
+export class LogMongoRepository implements ILogErrorRepository {
   async logError (stack: string): Promise<void> {
-    const errorsRollection = MongoHelper.getCollection('errors')
-    await errorsRollection.insertOne({
+    const collection = MongoHelper.getCollection('errors')
+    await collection.insertOne({
       data: stack,
       date: new Date()
     })

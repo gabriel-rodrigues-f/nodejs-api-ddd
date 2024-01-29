@@ -5,7 +5,7 @@ import { type AddProductParams } from '@/domain/ports'
 import {
   type IAddProductRepository,
   type ILoadProductByIdRepository,
-  type LoadProductsRepository,
+  type ILoadProductsRepository,
   type IDeleteProductRepository,
   type UpdateProductRepository,
   type UpdateProductParams
@@ -13,7 +13,7 @@ import {
 
 export class ProductMongoRepository implements
   IAddProductRepository,
-  LoadProductsRepository,
+  ILoadProductsRepository,
   ILoadProductByIdRepository,
   IDeleteProductRepository,
   UpdateProductRepository {

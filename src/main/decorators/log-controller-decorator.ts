@@ -1,4 +1,4 @@
-import { type LogErrorRepository } from '@/data/adapters/db'
+import { type ILogErrorRepository } from '@/data/adapters/db'
 import {
   type Controller,
   type HttpRequest,
@@ -8,13 +8,13 @@ import {
 export class LogControllerDecorator implements Controller {
   constructor (
     private readonly controller: Controller,
-    private readonly logErrorRepository: LogErrorRepository
+    private readonly repository: ILogErrorRepository
   ) { }
 
   async handle (request: HttpRequest): Promise<HttpResponse> {
     const response = await this.controller.handle(request)
     if (response.statusCode === 500) {
-      await this.logErrorRepository.logError(response.body.stack)
+      await this.repository.logError(response.body.stack)
     }
     return response
   }

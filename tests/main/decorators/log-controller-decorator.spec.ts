@@ -1,4 +1,4 @@
-import { type LogErrorRepository } from '@/data/adapters'
+import { type ILogErrorRepository } from '@/data/adapters'
 import {
   type Controller,
   type HttpRequest, type HttpResponse
@@ -16,8 +16,8 @@ const mockController = (): Controller => {
   return new ControllerStub()
 }
 
-const mockLogErrorRepository = (): LogErrorRepository => {
-  class LogErrorRepositoryStub implements LogErrorRepository {
+const mockLogErrorRepository = (): ILogErrorRepository => {
+  class LogErrorRepositoryStub implements ILogErrorRepository {
     async logError (stack: string): Promise<void> {
       return await Promise.resolve()
     }
@@ -28,7 +28,7 @@ const mockLogErrorRepository = (): LogErrorRepository => {
 interface SutTypes {
   sut: LogControllerDecorator
   controllerStub: Controller
-  logErrorRepositoryStub: LogErrorRepository
+  logErrorRepositoryStub: ILogErrorRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -58,7 +58,7 @@ describe('Log Controller Decorator', () => {
     expect(handleSpy).toHaveBeenCalledWith(request)
   })
 
-  test('Should call LogErrorRepository with correct error if controller returns a server error', async () => {
+  test('Should call ILogErrorRepository with correct error if controller returns a server error', async () => {
     const request = {
       body: {
         name: 'any_name',
