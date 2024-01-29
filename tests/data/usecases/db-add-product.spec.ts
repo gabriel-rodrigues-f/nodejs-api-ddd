@@ -1,6 +1,6 @@
 import { DbAddProduct } from '@/data/ports'
 import { type AddProductParams } from '@/domain/ports'
-import { type AddProductRepository } from '@/data/adapters'
+import { type IAddProductRepository } from '@/data/adapters'
 
 const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',
@@ -12,12 +12,12 @@ const mockAddProductParams = (): AddProductParams => ({
 
 interface SutTypes {
   sut: DbAddProduct
-  addProductRepositoryStub: AddProductRepository
+  addProductRepositoryStub: IAddProductRepository
 }
 
-const mockAddProductRepository = (): AddProductRepository => {
-  class AddProductRepositoryStub implements AddProductRepository {
-    async add (productData: AddProductParams): Promise<void> {
+const mockAddProductRepository = (): IAddProductRepository => {
+  class AddProductRepositoryStub implements IAddProductRepository {
+    async add (params: AddProductParams): Promise<void> {
       return await Promise.resolve()
     }
   }
@@ -35,7 +35,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbAddProduct Usecase', () => {
-  test('Should call AddProductRepository usign correct values', async () => {
+  test('Should call IAddProductRepository usign correct values', async () => {
     const { sut, addProductRepositoryStub } = mockSut()
     const addSpy = jest.spyOn(addProductRepositoryStub, 'add')
     const addProductData = mockAddProductParams()

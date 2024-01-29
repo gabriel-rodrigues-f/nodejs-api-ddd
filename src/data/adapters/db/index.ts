@@ -1,6 +1,6 @@
 export * from './IAddOrderRepository'
 export * from './IAddAccountRepository'
-export * from './add-product-repository'
+export * from './IAddProductRepository'
 export * from './load-orders'
 export * from './load-account-by-cpf-repository'
 export * from './load-account-by-email-repository'

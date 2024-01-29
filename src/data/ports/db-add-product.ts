@@ -1,9 +1,9 @@
 import { type AddProduct, type AddProductParams } from '@/domain/ports'
-import { type AddProductRepository } from '@/data/adapters'
+import { type IAddProductRepository } from '@/data/adapters'
 
 export class DbAddProduct implements AddProduct {
-  constructor (private readonly addProductRepository: AddProductRepository) { }
-  async add (data: AddProductParams): Promise<void> {
-    await this.addProductRepository.add(data)
+  constructor (private readonly repository: IAddProductRepository) { }
+  async add (params: AddProductParams): Promise<void> {
+    await this.repository.add(params)
   }
 }
