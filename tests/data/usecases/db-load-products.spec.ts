@@ -1,6 +1,6 @@
 import { DbLoadProducts } from '@/data/ports'
 import { type ProductModel } from '@/domain/models'
-import { type LoadProducts } from '@/domain/ports'
+import { type ILoadProducts } from '@/domain/ports'
 import { type ILoadProductsRepository } from '@/data/adapters'
 
 const mockProducts = (): ProductModel[] => ([
@@ -32,7 +32,7 @@ const mockProductsRepository = (): ILoadProductsRepository => {
 }
 
 interface SutTypes {
-  sut: LoadProducts
+  sut: ILoadProducts
   loadProductsRepositoryStub: ILoadProductsRepository
 }
 

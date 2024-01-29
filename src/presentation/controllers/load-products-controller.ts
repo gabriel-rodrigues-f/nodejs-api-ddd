@@ -1,4 +1,4 @@
-import { type LoadProducts } from '@/domain/ports'
+import { type ILoadProducts } from '@/domain/ports'
 import {
   ok,
   noContent,
@@ -10,7 +10,7 @@ import {
 } from '@/presentation/protocols'
 
 export class LoadProductsController implements Controller {
-  constructor (private readonly loadProducts: LoadProducts) { }
+  constructor (private readonly loadProducts: ILoadProducts) { }
   async handle (request: any): Promise<HttpResponse> {
     try {
       const { query } = request

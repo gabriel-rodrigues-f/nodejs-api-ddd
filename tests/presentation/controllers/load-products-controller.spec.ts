@@ -1,5 +1,5 @@
 import { type ProductModel } from '@/domain/models'
-import { type LoadProducts } from '@/domain/ports'
+import { type ILoadProducts } from '@/domain/ports'
 import { type HttpRequest } from '@/presentation/protocols'
 import { LoadProductsController } from '@/presentation/controllers'
 import {
@@ -27,8 +27,8 @@ const mockProducts = (): ProductModel[] => ([
   }
 ])
 
-const mockLoadProducts = (): LoadProducts => {
-  class LoadProductsStub implements LoadProducts {
+const mockLoadProducts = (): ILoadProducts => {
+  class LoadProductsStub implements ILoadProducts {
     async load (): Promise<ProductModel[]> {
       return await Promise.resolve(mockProducts())
     }
@@ -44,7 +44,7 @@ const mockRequest = (): HttpRequest => ({
 
 interface SutType {
   sut: LoadProductsController
-  loadProductsStub: LoadProducts
+  loadProductsStub: ILoadProducts
 }
 
 const mockSut = (): SutType => {
@@ -56,8 +56,8 @@ const mockSut = (): SutType => {
   }
 }
 
-describe('LoadProducts Controller', () => {
-  test('Should call LoadProducts', async () => {
+describe('ILoadProducts Controller', () => {
+  test('Should call ILoadProducts', async () => {
     const { sut, loadProductsStub } = mockSut()
     const loadSpy = jest.spyOn(loadProductsStub, 'load')
     await sut.handle({})
@@ -84,7 +84,7 @@ describe('LoadProducts Controller', () => {
     expect(response).toEqual(noContent())
   })
 
-  test('Should 500 if LoadProducts throws', async () => {
+  test('Should 500 if ILoadProducts throws', async () => {
     const { sut, loadProductsStub } = mockSut()
     jest.spyOn(loadProductsStub, 'load').mockReturnValueOnce(Promise.reject(new Error()))
     const response = await sut.handle({})
