@@ -1,10 +1,10 @@
 import { type AccountModel } from '@/domain/models'
 import { type LoadAccountByToken } from '@/domain/ports'
-import { type Decrypter, type LoadAccountByTokenRepository } from '@/data/adapters'
+import { type IDecrypter, type LoadAccountByTokenRepository } from '@/data/adapters'
 
 export class DbLoadAccountByToken implements LoadAccountByToken {
   constructor (
-    private readonly decrypt: Decrypter,
+    private readonly decrypt: IDecrypter,
     private readonly loadAccountByTokenRepository: LoadAccountByTokenRepository
   ) { }
 

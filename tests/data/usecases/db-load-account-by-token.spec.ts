@@ -1,12 +1,12 @@
 import { type AccountModel } from '@/domain/models'
 import { DbLoadAccountByToken } from '@/data/ports'
 import {
-  type Decrypter,
+  type IDecrypter,
   type LoadAccountByTokenRepository
 } from '@/data/adapters'
 
-const mockDecrypterStub = (): Decrypter => {
-  class DecrypterStub implements Decrypter {
+const mockDecrypterStub = (): IDecrypter => {
+  class DecrypterStub implements IDecrypter {
     async decrypt (value: string): Promise<string> {
       return await Promise.resolve('any_token')
     }
@@ -33,7 +33,7 @@ const mockLoadAccountByTokenRepository = (): LoadAccountByTokenRepository => {
 
 interface SutTypes {
   sut: DbLoadAccountByToken
-  decrypterStub: Decrypter
+  decrypterStub: IDecrypter
   loadAccountByTokenRepositoryStub: LoadAccountByTokenRepository
 }
 
@@ -49,7 +49,7 @@ const mockSut = (): SutTypes => {
 }
 
 describe('DbLoadAccountByToken Usecase', () => {
-  test('Should call Decrypter with correct values', async () => {
+  test('Should call IDecrypter with correct values', async () => {
     const { sut, decrypterStub } = mockSut()
     const decryptSpy = jest.spyOn(decrypterStub, 'decrypt')
     await sut.load('any_token', 'any_role')
@@ -84,7 +84,7 @@ describe('DbLoadAccountByToken Usecase', () => {
     expect(account).toEqual(mockAccount())
   })
 
-  test('Shoud throw Error if Decrypter Throw Error', async () => {
+  test('Shoud throw Error if IDecrypter Throw Error', async () => {
     const { sut, decrypterStub } = mockSut()
     jest.spyOn(decrypterStub, 'decrypt').mockReturnValueOnce(Promise.reject(new Error()))
     const account = await sut.load('any_token', 'any_role')
