@@ -7,7 +7,7 @@ import {
   type ILoadProductByIdRepository,
   type ILoadProductsRepository,
   type IDeleteProductRepository,
-  type UpdateProductRepository,
+  type IUpdateProductRepository,
   type UpdateProductParams
 } from '@/data/adapters'
 
@@ -16,7 +16,7 @@ export class ProductMongoRepository implements
   ILoadProductsRepository,
   ILoadProductByIdRepository,
   IDeleteProductRepository,
-  UpdateProductRepository {
+  IUpdateProductRepository {
   async add (params: AddProductParams): Promise<void> {
     const collection = MongoHelper.getCollection('products')
     await collection.insertOne(params)

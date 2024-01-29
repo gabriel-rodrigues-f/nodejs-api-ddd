@@ -5,6 +5,6 @@ export type UpdateProductParams = {
   body: Partial<ProductModel>
 }
 
-export interface UpdateProductRepository {
+export interface IUpdateProductRepository {
   update: (params: UpdateProductParams) => Promise<void>
 }
