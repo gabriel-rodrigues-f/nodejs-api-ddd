@@ -3,7 +3,7 @@ import { ObjectId } from 'mongodb'
 import { type AccountModel } from '@/domain/models'
 import { type AddAccountParams } from '@/domain/ports'
 import {
-  type DeleteAccessTokenRepository,
+  type IDeleteAccessTokenRepository,
   type IAddAccountRepository,
   type LoadAccountByEmailRepository,
   type LoadAccountByTokenRepository,
@@ -15,7 +15,7 @@ export class AccountMongoRepository implements
   LoadAccountByEmailRepository,
   LoadAccountByTokenRepository,
   UpdateAccessTokenRepository,
-  DeleteAccessTokenRepository {
+  IDeleteAccessTokenRepository {
   async add (params: AddAccountParams): Promise<AccountModel> {
     const collection = MongoHelper.getCollection('accounts')
     const result = await collection.insertOne(params)

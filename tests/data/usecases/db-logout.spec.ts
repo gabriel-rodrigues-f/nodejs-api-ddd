@@ -1,8 +1,8 @@
-import { type DeleteAccessTokenRepository } from '@/data/adapters'
+import { type IDeleteAccessTokenRepository } from '@/data/adapters'
 import { DbLogout } from '@/data/ports'
 
-const mockDeleteAccesstokenRepository = (): DeleteAccessTokenRepository => {
-  class DeleteAccessTokenRepositoryStub implements DeleteAccessTokenRepository {
+const mockDeleteAccesstokenRepository = (): IDeleteAccessTokenRepository => {
+  class DeleteAccessTokenRepositoryStub implements IDeleteAccessTokenRepository {
     async deleteAccessToken (email: string): Promise<void> {
       await Promise.resolve()
     }
@@ -11,7 +11,7 @@ const mockDeleteAccesstokenRepository = (): DeleteAccessTokenRepository => {
 }
 
 type SutTypes = {
-  deleteAccessTokenStub: DeleteAccessTokenRepository
+  deleteAccessTokenStub: IDeleteAccessTokenRepository
   sut: DbLogout
 }
 
