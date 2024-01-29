@@ -1,4 +1,4 @@
-import { type Validation } from '@/presentation/protocols'
+import { type IValidation } from '@/presentation/protocols'
 import { makeLogoutValidation } from '@/main/factories/validations'
 import {
   RequiredFieldsValidation,
@@ -7,10 +7,10 @@ import {
 
 jest.mock('@/validation/validators/validation-composite')
 
-describe('Logout Validation Factory', () => {
+describe('Logout IValidation Factory', () => {
   test('Should call validation with all validations ', () => {
     makeLogoutValidation()
-    const validations: Validation[] = []
+    const validations: IValidation[] = []
     for (const field of ['email']) {
       validations.push(new RequiredFieldsValidation(field))
     }

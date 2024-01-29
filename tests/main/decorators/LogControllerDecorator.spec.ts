@@ -1,15 +1,15 @@
 import { type ILogErrorRepository } from '@/data/adapters'
 import {
   type IController,
-  type HttpRequest, type HttpResponse
+  type IHTTPRequest, type IHTTPResponse
 } from '@/presentation/protocols'
 import { serverError } from '@/presentation/helpers'
 import { LogControllerDecorator } from '@/main/decorators'
 
 const mockController = (): IController => {
   class ControllerStub implements IController {
-    async handle (request: HttpRequest): Promise<HttpResponse> {
-      const response: HttpResponse = { body: {}, statusCode: 200 }
+    async handle (request: IHTTPRequest): Promise<IHTTPResponse> {
+      const response: IHTTPResponse = { body: {}, statusCode: 200 }
       return await Promise.resolve(response)
     }
   }

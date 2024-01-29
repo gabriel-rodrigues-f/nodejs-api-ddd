@@ -1,7 +1,7 @@
 import { makeDbLoadAccountByToken } from '@/main/factories/usecases'
 import { AuthMiddleware } from '@/presentation/middlewares'
-import { type Middleware } from '@/presentation/protocols'
+import { type IMiddleware } from '@/presentation/protocols'
 
-export const makeAuthMiddleware = (role?: string): Middleware => {
+export const makeAuthMiddleware = (role?: string): IMiddleware => {
   return new AuthMiddleware(makeDbLoadAccountByToken(), role)
 }

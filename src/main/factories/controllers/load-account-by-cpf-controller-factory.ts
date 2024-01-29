@@ -1,9 +1,9 @@
 import { makeLogControllerDecorator } from '@/main/factories/decorators'
 import { makeDbLoadAccountByCpf } from '@/main/factories/usecases'
 import { type IController } from '@/presentation/protocols'
-import { LoadAccountByCpfController } from '@/presentation/controllers'
+import { LoadAccountByCPFController } from '@/presentation/controllers'
 
 export const makeLoadAccountByCpfController = (): IController => {
-  const controller = new LoadAccountByCpfController(makeDbLoadAccountByCpf())
+  const controller = new LoadAccountByCPFController(makeDbLoadAccountByCpf())
   return makeLogControllerDecorator(controller)
 }

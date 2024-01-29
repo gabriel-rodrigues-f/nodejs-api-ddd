@@ -5,11 +5,11 @@ import {
   CompareFieldsValidation,
   RequiredFieldsValidation
 } from '@/validation/validators'
-import { type Validation } from '@/presentation/protocols'
+import { type IValidation } from '@/presentation/protocols'
 import { EmailValidatorAdapter } from '@/infra/validators'
 
 export const makeSignUpValidation = (): ValidationComposite => {
-  const validations: Validation[] = []
+  const validations: IValidation[] = []
   for (const field of ['name', 'cpf', 'email', 'password', 'passwordConfirmation']) {
     validations.push(new RequiredFieldsValidation(field))
   }

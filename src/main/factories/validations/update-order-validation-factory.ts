@@ -1,8 +1,8 @@
 import { RequiredFieldsValidation, ValidationComposite } from '@/validation/validators'
-import { type Validation } from '@/presentation/protocols'
+import { type IValidation } from '@/presentation/protocols'
 
-export const makeUpdateOrderValidation = (): Validation => {
-  const validations: Validation[] = []
+export const makeUpdateOrderValidation = (): IValidation => {
+  const validations: IValidation[] = []
   for (const field of ['status']) {
     validations.push(new RequiredFieldsValidation(field))
   }

@@ -1,7 +1,7 @@
-import { InvalidParamError } from '@/presentation/errors'
-import { type Validation } from '@/presentation/protocols'
+import { InvalidParam } from '@/presentation/errors'
+import { type IValidation } from '@/presentation/protocols'
 
-export class CpfValidation implements Validation {
+export class CpfValidation implements IValidation {
   constructor (private readonly field: string) { }
   validate (input: any): Error {
     const errors: string[] = []
@@ -46,6 +46,6 @@ export class CpfValidation implements Validation {
       if (rest === 10 || rest === 11) rest = 0
       if (rest !== parseInt(input[this.field].substring(10, 11), 10)) errors.push('Invalid CPF')
     }
-    if (errors.length) return new InvalidParamError(this.field)
+    if (errors.length) return new InvalidParam(this.field)
   }
 }

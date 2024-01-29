@@ -6,12 +6,12 @@ import {
 } from '@/presentation/helpers'
 import {
   type IController,
-  type HttpResponse
+  type IHTTPResponse
 } from '@/presentation/protocols'
 
 export class LoadProductByidController implements IController {
   constructor (private readonly loadProductById: ILoadProductById) { }
-  async handle (request: any): Promise<HttpResponse> {
+  async handle (request: any): Promise<IHTTPResponse> {
     try {
       const { id } = request.params
       const product = await this.loadProductById.loadById(id)
