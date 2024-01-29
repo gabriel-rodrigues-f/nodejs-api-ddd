@@ -1,6 +1,8 @@
 import { type Logout } from '@/domain/usecases'
 import { type Validation, type HttpRequest } from '@/presentation/protocols'
 import { LogoutController } from '@/presentation/controllers'
+import { MissingParamError } from '@/presentation/errors'
+import { badRequest } from '@/presentation/helpers'
 
 const mockRequest = (): HttpRequest => {
   return {
@@ -58,5 +60,20 @@ describe('Logout Controller', () => {
     const request = mockRequest()
     await sut.handle(request)
     expect(validateSpy).toHaveBeenCalledWith(request.body)
+  })
+
+  test('Should return an Error if Validation returns an Error', async () => {
+    const { sut, validationStub } = mockSut()
+    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('any_field'))
+    const response = await sut.handle(mockRequest())
+    expect(response).toEqual(badRequest(new MissingParamError('any_field')))
+  })
+
+  test('Should call Logout with correct values', async () => {
+    const { sut, logoutStub } = mockSut()
+    const logoutSpy = jest.spyOn(logoutStub, 'logout')
+    const request = mockRequest()
+    await sut.handle(request)
+    expect(logoutSpy).toHaveBeenCalledWith(request.body)
   })
 })
