@@ -1,6 +1,6 @@
 import { DbLoadProductById } from '@/data/ports'
 import { type ProductModel } from '@/domain/models'
-import { type LoadProductByIdRepository } from '@/data/adapters'
+import { type ILoadProductByIdRepository } from '@/data/adapters'
 
 const mockProduct = (): ProductModel => ({
   id: 'any_id',
@@ -11,8 +11,8 @@ const mockProduct = (): ProductModel => ({
   image: 'any_image'
 })
 
-const mockLoadProductByIdRepository = (): LoadProductByIdRepository => {
-  class LoadProductByIdRepositoryStub implements LoadProductByIdRepository {
+const mockLoadProductByIdRepository = (): ILoadProductByIdRepository => {
+  class LoadProductByIdRepositoryStub implements ILoadProductByIdRepository {
     async loadById (id: string): Promise<ProductModel> {
       return await Promise.resolve(mockProduct())
     }
@@ -22,7 +22,7 @@ const mockLoadProductByIdRepository = (): LoadProductByIdRepository => {
 
 type SutTypes = {
   sut: DbLoadProductById
-  loadProductByIdRepositoryStub: LoadProductByIdRepository
+  loadProductByIdRepositoryStub: ILoadProductByIdRepository
 }
 
 const mockSut = (): SutTypes => {
@@ -35,14 +35,14 @@ const mockSut = (): SutTypes => {
 }
 
 describe('LoadProductById Usecase', () => {
-  test('Should call LoadProductByIdRepository with correct values', async () => {
+  test('Should call ILoadProductByIdRepository with correct values', async () => {
     const { sut, loadProductByIdRepositoryStub } = mockSut()
     const loadByIdSpy = jest.spyOn(loadProductByIdRepositoryStub, 'loadById')
     await sut.loadById('any_productId')
     expect(loadByIdSpy).toHaveBeenCalledWith('any_productId')
   })
 
-  test('Should thorws if LoadProductByIdRepository throws', async () => {
+  test('Should thorws if ILoadProductByIdRepository throws', async () => {
     const { sut, loadProductByIdRepositoryStub } = mockSut()
     jest.spyOn(loadProductByIdRepositoryStub, 'loadById').mockReturnValueOnce(Promise.reject(new Error()))
     const promise = sut.loadById('any_productId')

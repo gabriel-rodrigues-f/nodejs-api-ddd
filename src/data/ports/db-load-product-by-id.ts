@@ -1,10 +1,10 @@
 import { type ProductModel } from '@/domain/models'
 import { type LoadProductById } from '@/domain/ports'
-import { type LoadProductByIdRepository } from '@/data/adapters'
+import { type ILoadProductByIdRepository } from '@/data/adapters'
 
 export class DbLoadProductById implements LoadProductById {
-  constructor (private readonly loadProductByIdRepository: LoadProductByIdRepository) { }
+  constructor (private readonly repository: ILoadProductByIdRepository) { }
   async loadById (id: string): Promise<ProductModel> {
-    return await this.loadProductByIdRepository.loadById(id)
+    return await this.repository.loadById(id)
   }
 }

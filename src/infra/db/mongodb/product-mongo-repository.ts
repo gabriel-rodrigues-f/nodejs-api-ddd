@@ -4,7 +4,7 @@ import { type ProductModel } from '@/domain/models'
 import { type AddProductParams } from '@/domain/ports'
 import {
   type IAddProductRepository,
-  type LoadProductByIdRepository,
+  type ILoadProductByIdRepository,
   type LoadProductsRepository,
   type IDeleteProductRepository,
   type UpdateProductRepository,
@@ -14,7 +14,7 @@ import {
 export class ProductMongoRepository implements
   IAddProductRepository,
   LoadProductsRepository,
-  LoadProductByIdRepository,
+  ILoadProductByIdRepository,
   IDeleteProductRepository,
   UpdateProductRepository {
   async add (params: AddProductParams): Promise<void> {
