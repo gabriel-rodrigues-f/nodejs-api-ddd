@@ -1,5 +1,5 @@
 import {
-  CpfValidation,
+  CPFValidation,
   EmailValidation,
   ValidationComposite,
   CompareFieldsValidation,
@@ -15,6 +15,6 @@ export const makeSignUpValidation = (): ValidationComposite => {
   }
   validations.push(new CompareFieldsValidation('password', 'passwordConfirmation'))
   validations.push(new EmailValidation('email', new EmailValidatorAdapter()))
-  validations.push(new CpfValidation('cpf'))
+  validations.push(new CPFValidation('cpf'))
   return new ValidationComposite(validations)
 }

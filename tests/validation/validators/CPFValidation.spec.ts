@@ -1,7 +1,7 @@
 import { InvalidParam } from '@/presentation/errors'
-import { CpfValidation } from '@/validation/validators'
+import { CPFValidation } from '@/validation/validators'
 
-const mockSut = (): CpfValidation => new CpfValidation('cpf')
+const mockSut = (): CPFValidation => new CPFValidation('cpf')
 
 describe('CPF IValidation', () => {
   test('Should return a InvalidParam if validation fails', () => {

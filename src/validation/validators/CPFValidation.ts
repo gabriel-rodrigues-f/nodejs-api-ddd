@@ -1,7 +1,7 @@
 import { InvalidParam } from '@/presentation/errors'
 import { type IValidation } from '@/presentation/protocols'
 
-export class CpfValidation implements IValidation {
+export class CPFValidation implements IValidation {
   constructor (private readonly field: string) { }
   validate (input: any): Error {
     const errors: string[] = []
