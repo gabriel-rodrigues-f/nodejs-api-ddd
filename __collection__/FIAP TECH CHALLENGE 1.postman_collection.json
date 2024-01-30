@@ -1,0 +1,1266 @@
+{
+	"info": {
+		"_postman_id": "c86ae23a-80e4-4b9a-ba8d-3902b53f5d41",
+		"name": "FIAP TECH CHALLENGE 1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27330482"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "[Customer] SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"poc\",\n    \"cpf\": \"123.456.789-09\",\n    \"email\": \"poc@mail.com\",\n    \"password\": \"123\",\n    \"passwordConfirmation\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/signup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[Customer] SignUp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"poc\",\n    \"cpf\": \"123.456.789-09\",\n    \"email\": \"poc@mail.com\",\n    \"password\": \"123\",\n    \"passwordConfirmation\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/signup",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-uYzCpIo/GdD9pEx59me17EqxM8U\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:00:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjg1ODMwYzFjOWJmNjZjMjdjZDU5MiIsImlhdCI6MTcwNjU4MDAxNiwiZXhwIjoxNzA2NTgxODE2fQ.lTCQahkohQsrPKspsv6U8dq9uCDXNKXdkVuOAPmTEkE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "[Admin] SignUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"fiap\",\n    \"email\": \"fiap@mail.com\",\n    \"cpf\": \"890.962.540-66\",\n    \"password\": \"123\",\n    \"passwordConfirmation\": \"123\",\n    \"role\":\"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/signup",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[Admin] SignUp",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"fiap\",\n    \"email\": \"fiap@mail.com\",\n    \"cpf\": \"890.962.540-66\",\n    \"password\": \"123\",\n    \"passwordConfirmation\": \"123\",\n    \"role\":\"admin\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/signup",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"signup"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "189"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"bd-zstiFODOmpXdtlt9qF9AnUSHmm4\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:00:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjg1ODQ2YzFjOWJmNjZjMjdjZDU5MyIsImlhdCI6MTcwNjU4MDAzOSwiZXhwIjoxNzA2NTgxODM5fQ.p6zkJUdVnMv5neK3PD7gM2bUwh42hY3qubXAY9Vdc0s\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const responseJson  = pm.response.json()",
+									"const access_token  = responseJson.access_token",
+									"",
+									"pm.environment.set(\"TOKEN\", access_token)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"fiap@mail.com\",\n    \"password\": \"123\"\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/login",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"fiap@mail.com\",\n    \"password\": \"123\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/login",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "190"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"be-Mf4NqsQPgBEJq7yqlkUV/LhnXhU\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:00:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1Yjg1ODQ2YzFjOWJmNjZjMjdjZDU5MyIsImlhdCI6MTcwNjU4MDA0MywiZXhwIjoxNzA2NTgxODQzfQ.ikeB5R2UEAazm-rlD4oFsiqsA_hUxpyM1UqUdVw_pBY\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"email\": \"fiap@mail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/Logout",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"Logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n   \"email\": \"fiap@mail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/Logout",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"Logout"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:00:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "Load Account by CPF",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/accounts/12345678909",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"accounts",
+								"12345678909"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Load Account by CPF",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/accounts/12345678909",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"accounts",
+										"12345678909"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "356"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"164-dIJXY0xNbgcboedAX3mQRfcC1Is\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:00:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"_id\": \"65a6cedc37bdbcc02d1d7986\",\n    \"name\": \"teste\",\n    \"cpf\": \"12345678909\",\n    \"email\": \"teste@mail.com\",\n    \"password\": \"$2b$12$KCPEgnj4IqASou0gYg0Lu./WfbjI5JIeTmcNkzrwFHUi88xBjJPi6\",\n    \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1YTZjZWRjMzdiZGJjYzAyZDFkNzk4NiIsImlhdCI6MTcwNjU0NTM0OCwiZXhwIjoxNzA2NTQ3MTQ4fQ._UJw0qF1ZG06OA6rTBMMVqotNuZvyIaQFqaLyg6ZcJI\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Load Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Load Products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/products",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2164"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"874-qZp7RsVZ8ps6o3bLKk731rIpQ5Q\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:01:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"category\": \"Beverage\",\n        \"name\": \"Aqua Floyd Elixir\",\n        \"price\": \"52.49\",\n        \"description\": \"A fizzy elixir that echoes the psychedelic vibes of Pink Floyd.\",\n        \"image\": \"aqua_floyd_elixir_image_url\",\n        \"id\": \"65aa013deca75aaae89c3a1b\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.49\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65aa014aeca75aaae89c3a1c\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.99\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65ade914956127dcba30d95c\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.49\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65b31dc73eab5bffb769b9db\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.49\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65b7d204a3dad52d9621ec8e\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.49\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65b84a8b110a7e3f1dfb6931\"\n    },\n    {\n        \"category\": \"Appetizer\",\n        \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n        \"price\": \"63.49\",\n        \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n        \"image\": \"guns_n_roses_fries_image_url\",\n        \"id\": \"65b856599c7c3bcd1d08a524\"\n    },\n    {\n        \"category\": \"Accompaniment\",\n        \"name\": \"Zesty Nacho Avalanche\",\n        \"price\": \"29.99\",\n        \"description\": \"A mountain of nachos showered in zesty flavors for the ultimate crunch experience.\",\n        \"image\": \"zesty_nacho_avalanche_image_url\",\n        \"id\": \"65b85769c1c9bf66c27cd590\"\n    },\n    {\n        \"category\": \"Snack\",\n        \"name\": \"Mystic Popcorn Fusion\",\n        \"price\": \"18.50\",\n        \"description\": \"Popcorn infused with mysterious flavors, creating a fusion of taste that will keep you craving for more.\",\n        \"image\": \"mystic_popcorn_fusion_image_url\",\n        \"id\": \"65b85770c1c9bf66c27cd591\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "[ADM] Add Products",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": \"Snack\",\n    \"name\": \"Mystic Popcorn Fusion 2\",\n    \"price\": \"18.50\",\n    \"description\": \"Popcorn infused with mysterious flavors, creating a fusion of taste that will keep you craving for more.\",\n    \"image\": \"mystic_popcorn_fusion_image_url\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[ADM] Add Products",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\": \"Snack\",\n    \"name\": \"Mystic Popcorn Fusion 2\",\n    \"price\": \"18.50\",\n    \"description\": \"Popcorn infused with mysterious flavors, creating a fusion of taste that will keep you craving for more.\",\n    \"image\": \"mystic_popcorn_fusion_image_url\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/products",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:01:16 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "[ADM] Update Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"category\": \"Appetizer\",\n    \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n    \"price\": \"63.99\",\n    \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n    \"image\": \"guns_n_roses_fries_image_url\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/products/65ade914956127dcba30d95c",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"65ade914956127dcba30d95c"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[ADM] Update Product",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"category\": \"Appetizer\",\n    \"name\": \"Guns 'n' Roses Fries Extravaganza\",\n    \"price\": \"63.99\",\n    \"description\": \"Fries with an appetite for destruction, inspired by Guns 'n' Roses.\",\n    \"image\": \"guns_n_roses_fries_image_url\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/products/65ade914956127dcba30d95c",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"65ade914956127dcba30d95c"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:01:25 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "[ADM] Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/products/65abfbebf159756af802edb0",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"65abfbebf159756af802edb0"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "[ADM] Delete Product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{BASE_URL}}/api/products/65abfbebf159756af802edb0",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"65abfbebf159756af802edb0"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:01:31 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Create Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"customer\": \"fiap\",\n    \"products\": [\n        {\n            \"id\": \"65aa013deca75aaae89c3a1b\",\n            \"totalItems\": 2,\n            \"unitPrice\": 2000,\n            \"amount\": 4000\n        },\n        {\n            \"id\": \"65aa013deca75aaae89c3a1c\",\n            \"totalItems\": 3,\n            \"unitPrice\": 6000,\n            \"amount\": 7000\n        }\n    ],\n    \"status\": \"Recebido\",\n    \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n    \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n    \"amount\": 11000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/orders",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"customer\": \"fiap\",\n    \"products\": [\n        {\n            \"id\": \"65aa013deca75aaae89c3a1b\",\n            \"totalItems\": 2,\n            \"unitPrice\": 2000,\n            \"amount\": 4000\n        },\n        {\n            \"id\": \"65aa013deca75aaae89c3a1c\",\n            \"totalItems\": 3,\n            \"unitPrice\": 6000,\n            \"amount\": 7000\n        }\n    ],\n    \"status\": \"Recebido\",\n    \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n    \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n    \"amount\": 11000\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/orders",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:02:12 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Load Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/orders",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Load Orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/orders",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "2922"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b6a-AdeJ6NCqE9HBLZ7xhfThtjsowJw\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:02:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"Recebido\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 4000,\n        \"items\": [\n            {\n                \"orderId\": \"65b07186c727633420c50fab\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b07186c727633420c50fab\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 6000\n            }\n        ],\n        \"id\": \"65b07186c727633420c50fab\"\n    },\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"Finalizado\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 10000,\n        \"items\": [\n            {\n                \"orderId\": \"65b1032ab711ad0b1cc885bb\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b1032ab711ad0b1cc885bb\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 6000\n            }\n        ],\n        \"id\": \"65b1032ab711ad0b1cc885bb\"\n    },\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"Em preparação\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 11000,\n        \"items\": [\n            {\n                \"orderId\": \"65b10369852bad7464a2f289\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b10369852bad7464a2f289\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 7000\n            }\n        ],\n        \"id\": \"65b10369852bad7464a2f289\"\n    },\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"any_status\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 11000,\n        \"items\": [\n            {\n                \"orderId\": \"65b536b2d198fa0acc3321e9\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b536b2d198fa0acc3321e9\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 7000\n            }\n        ],\n        \"id\": \"65b536b2d198fa0acc3321e9\"\n    },\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"any_status\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 11000,\n        \"items\": [\n            {\n                \"orderId\": \"65b7d20da3dad52d9621ec8f\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b7d20da3dad52d9621ec8f\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 7000\n            }\n        ],\n        \"id\": \"65b7d20da3dad52d9621ec8f\"\n    },\n    {\n        \"customer\": \"any_customer\",\n        \"status\": \"Pronto\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 11000,\n        \"items\": [\n            {\n                \"orderId\": \"65b84a92110a7e3f1dfb6932\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b84a92110a7e3f1dfb6932\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 7000\n            }\n        ],\n        \"id\": \"65b84a92110a7e3f1dfb6932\"\n    },\n    {\n        \"customer\": \"fiap\",\n        \"status\": \"Recebido\",\n        \"createdAt\": \"2024-01-24T01:45:48.079Z\",\n        \"updatedAt\": \"2024-01-24T01:45:48.079Z\",\n        \"amount\": 11000,\n        \"items\": [\n            {\n                \"orderId\": \"65b858a3c1c9bf66c27cd595\",\n                \"id\": \"65aa013deca75aaae89c3a1b\",\n                \"totalItems\": 2,\n                \"unitPrice\": 2000,\n                \"amount\": 4000\n            },\n            {\n                \"orderId\": \"65b858a3c1c9bf66c27cd595\",\n                \"id\": \"65aa013deca75aaae89c3a1c\",\n                \"totalItems\": 3,\n                \"unitPrice\": 6000,\n                \"amount\": 7000\n            }\n        ],\n        \"id\": \"65b858a3c1c9bf66c27cd595\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Update Order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"status\": \"Pronto\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/orders/65b84a92110a7e3f1dfb6932",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"65b84a92110a7e3f1dfb6932"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Order",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \"status\": \"Pronto\" }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{BASE_URL}}/api/orders/65b84a92110a7e3f1dfb6932",
+									"host": [
+										"{{BASE_URL}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"65b84a92110a7e3f1dfb6932"
+									]
+								}
+							},
+							"status": "No Content",
+							"code": 204,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "access-control-allow-origin",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-methods",
+									"value": "*"
+								},
+								{
+									"key": "access-control-allow-headers",
+									"value": "*"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"4-K+iMpCQsduglOsYkdIUQZQMtaDM\""
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 30 Jan 2024 02:02:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		}
+	]
+}
