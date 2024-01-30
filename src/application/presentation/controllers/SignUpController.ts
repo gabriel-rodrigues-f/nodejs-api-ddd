@@ -27,12 +27,13 @@ export class SignUpController implements IController {
     try {
       const error = this.validation.validate(request.body)
       if (error) return badRequest(error)
-      const { name, cpf, email, password } = request.body
+      const { name, cpf, email, password, role } = request.body
       const account = await this.addAccount.add({
         name,
         cpf,
         email,
-        password
+        password,
+        role
       })
       if (!account) return forbidden(new EmailInUse())
       const accessToken = await this.authentication.auth({ email, password })
