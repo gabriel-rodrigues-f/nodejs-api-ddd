@@ -3,7 +3,7 @@
 </h1>
 <p align="center">Arquitetura Hexagonal e Domain-Driven Design - CRUD</p>
 
-Subject
+Tópicos
 =================
    * [Tecnologias](#technology)
       * [Tecnologias utilizadas no projeto](#technologies-used-in-the-project)
@@ -16,7 +16,7 @@ Subject
    * [Execute os teste](#execute-os-testes)
 
 
-##  Technology 
+##  Tecnologias 
 
 ### Tecnologias utilizadas no projeto
 
