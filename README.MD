@@ -5,8 +5,8 @@
 
 Tópicos
 =================
-   * [Tecnologias](#technology)
-      * [Tecnologias utilizadas no projeto](#technologies-used-in-the-project)
+   * [Tecnologias](#tecnologias)
+      * [Tecnologias utilizadas no projeto](#tecnologias-utilizadas-no-projeto)
    * [Serviços](#serviços)
    * [Getting started](#getting-started)
       * [Dependências de Produção](#dependências-de-produção)
