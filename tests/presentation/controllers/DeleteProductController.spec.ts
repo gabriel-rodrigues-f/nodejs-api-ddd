@@ -1,10 +1,10 @@
-import { type IDeleteProduct } from '@/domain/ports'
-import { type IHTTPRequest } from '@/presentation/protocols'
-import { DeleteProductController } from '@/presentation/controllers'
+import { type IDeleteProduct } from '@/core/ports/driving/services'
+import { type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { DeleteProductController } from '@/application/presentation/controllers'
 import {
   serverError,
   noContent
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockDeleteProduct = (): IDeleteProduct => {
   class DeleteProductStub implements IDeleteProduct {

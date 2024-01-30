@@ -1,12 +1,12 @@
-import { type Account } from '@/domain/entities'
-import { type IHTTPRequest } from '@/presentation/protocols'
-import { type ILoadAccountByCPF } from '@/domain/ports'
-import { LoadAccountByCPFController } from '@/presentation/controllers'
+import { type Account } from '@/core/entities'
+import { type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { type ILoadAccountByCPF } from '@/core/ports/driving/services'
+import { LoadAccountByCPFController } from '@/application/presentation/controllers'
 import {
   notFound,
   serverError,
   ok
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockRequest = (): IHTTPRequest => ({
   params: {

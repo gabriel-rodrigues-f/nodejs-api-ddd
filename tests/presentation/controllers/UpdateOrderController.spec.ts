@@ -1,13 +1,13 @@
 import {
   type IValidation,
   type IHTTPRequest
-} from '@/presentation/protocols'
-import { UpdateOrderController } from '@/presentation/controllers'
-import { badRequest, noContent, serverError } from '@/presentation/helpers'
+} from '@/core/ports/driving/presentation'
+import { UpdateOrderController } from '@/application/presentation/controllers'
+import { badRequest, noContent, serverError } from '@/application/presentation/helpers'
 import {
   type IUpdateOrder,
   type UpdateOrderParams
-} from '@/domain/ports'
+} from '@/core/ports/driving/services'
 
 const mockRequest = (): IHTTPRequest => ({
   params: {

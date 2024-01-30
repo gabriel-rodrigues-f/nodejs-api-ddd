@@ -1,12 +1,12 @@
-import { type Product } from '@/domain/entities'
-import { type ILoadProductById } from '@/domain/ports'
-import { type IHTTPRequest } from '@/presentation/protocols'
-import { LoadProductByidController } from '@/presentation/controllers'
+import { type Product } from '@/core/entities'
+import { type ILoadProductById } from '@/core/ports/driving/services'
+import { type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { LoadProductByIdController } from '@/application/presentation/controllers'
 import {
   noContent,
   serverError,
   ok
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockProduct = (): Product => ({
   id: 'any_id',
@@ -33,13 +33,13 @@ const mockRequest = (): IHTTPRequest => ({
 })
 
 type SutTypes = {
-  sut: LoadProductByidController
+  sut: LoadProductByIdController
   loadProductByIdStub: ILoadProductById
 }
 
 const mockSut = (): SutTypes => {
   const loadProductByIdStub = mockLoadProductById()
-  const sut = new LoadProductByidController(loadProductByIdStub)
+  const sut = new LoadProductByIdController(loadProductByIdStub)
   return {
     sut,
     loadProductByIdStub

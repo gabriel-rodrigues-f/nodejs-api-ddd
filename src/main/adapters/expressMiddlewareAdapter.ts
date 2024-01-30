@@ -1,4 +1,4 @@
-import { type IMiddleware } from '@/presentation/protocols'
+import { type IMiddleware } from '@/core/ports/driving/presentation'
 import { type NextFunction, type Request, type Response } from 'express'
 
 export const adaptMiddleware = (middleware: IMiddleware) => {

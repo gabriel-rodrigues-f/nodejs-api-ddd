@@ -1,5 +1,5 @@
-import { type IAddProduct } from '@/domain/ports'
-import { AddProduct } from '@/data/ports'
+import { type IAddProduct } from '@/core/ports/driving/services'
+import { AddProduct } from '@/application/services'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbAddProduct = (): IAddProduct => {

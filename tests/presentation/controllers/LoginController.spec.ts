@@ -1,17 +1,17 @@
 import {
   type IAuthentication, type AuthenticationParams
-} from '@/domain/ports'
+} from '@/core/ports/driving/services'
 import {
   type IHTTPRequest, type IValidation
-} from '@/presentation/protocols'
-import { LoginController } from '@/presentation/controllers'
-import { MissingParam } from '@/presentation/errors'
+} from '@/core/ports/driving/presentation'
+import { LoginController } from '@/application/presentation/controllers'
+import { MissingParam } from '@/application/presentation/errors'
 import {
   unauthorized,
   serverError,
   ok,
   badRequest
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockAuthentication = (): IAuthentication => {
   class AuthenticationStub implements IAuthentication {

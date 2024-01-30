@@ -1,5 +1,5 @@
-import { type IUpdateProduct } from '@/domain/ports'
-import { UpdateProduct } from '@/data/ports'
+import { type IUpdateProduct } from '@/core/ports/driving/services'
+import { UpdateProduct } from '@/application/services'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbUpdateProduct = (): IUpdateProduct => {

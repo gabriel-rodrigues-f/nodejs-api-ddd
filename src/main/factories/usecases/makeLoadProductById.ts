@@ -1,5 +1,5 @@
-import { type ILoadProductById } from '@/domain/ports'
-import { LoadProductById } from '@/data/ports'
+import { type ILoadProductById } from '@/core/ports/driving/services'
+import { LoadProductById } from '@/application/services'
 import { ProductMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadProductById = (): ILoadProductById => {

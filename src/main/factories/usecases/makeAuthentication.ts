@@ -1,6 +1,6 @@
 import env from '@/main/config/env'
-import { type IAuthentication } from '@/domain/ports'
-import { Authentication } from '@/data/ports'
+import { type IAuthentication } from '@/core/ports/driving/services'
+import { Authentication } from '@/application/services'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 import { BcryptAdapter, JwtAdapter } from '@/infra/criptography'
 

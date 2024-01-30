@@ -1,4 +1,4 @@
-import { InvalidParam } from '@/presentation/errors'
+import { InvalidParam } from '@/application/presentation/errors'
 import { CPFValidation } from '@/validation/validators'
 
 const mockSut = (): CPFValidation => new CPFValidation('cpf')

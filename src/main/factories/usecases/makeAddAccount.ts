@@ -1,5 +1,5 @@
-import { type IAddAccount } from '@/domain/ports'
-import { AddAccount } from '@/data/ports'
+import { type IAddAccount } from '@/core/ports/driving/services'
+import { AddAccount } from '@/application/services'
 import { BcryptAdapter } from '@/infra/criptography'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 

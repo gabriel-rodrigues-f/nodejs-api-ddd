@@ -6,7 +6,7 @@ import { type Collection } from 'mongodb'
 import env from '@/main/config/env'
 import { setupApp } from '@/main/config/app'
 import { MongoDBHelper } from '@/infra/db/mongodb'
-import { type AddOrderParams } from '@/domain/ports'
+import { type AddOrderParams } from '@/core/ports/driving/services'
 
 let orderCollection: Collection
 let accountCollection: Collection

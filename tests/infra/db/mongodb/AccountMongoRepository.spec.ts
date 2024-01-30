@@ -1,5 +1,5 @@
 import { type Collection } from 'mongodb'
-import { type AddAccountParams } from '@/domain/ports'
+import { type AddAccountParams } from '@/core/ports/driving/services'
 import {
   MongoDBHelper,
   AccountMongoRepository

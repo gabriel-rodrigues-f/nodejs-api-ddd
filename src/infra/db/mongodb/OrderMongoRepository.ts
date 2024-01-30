@@ -1,15 +1,15 @@
-import { type Order } from '@/domain/entities'
+import { type Order } from '@/core/entities'
 import {
   type UpdateOrderParams,
   type AddOrderDetailsParams,
   type AddOrderItemParams,
   type AddOrderParams
-} from '@/domain/ports'
+} from '@/core/ports/driving/services'
 import {
   type IUpdateOrderRepository,
   type IAddOrderRepository,
   type ILoadOrdersRepository
-} from '@/data/adapters'
+} from '@/core/ports/driven'
 import { MongoDBHelper } from '@/infra/db'
 import { ObjectId } from 'mongodb'
 

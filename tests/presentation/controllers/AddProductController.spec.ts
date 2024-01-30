@@ -1,17 +1,17 @@
 import {
   type AddProductParams,
   type IAddProduct
-} from '@/domain/ports'
+} from '@/core/ports/driving/services'
 import {
   type IHTTPRequest,
   type IValidation
-} from '@/presentation/protocols'
-import { AddProductController } from '@/presentation/controllers'
+} from '@/core/ports/driving/presentation'
+import { AddProductController } from '@/application/presentation/controllers'
 import {
   badRequest,
   serverError,
   noContent
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockAddProductParams = (): AddProductParams => ({
   category: 'any_category',

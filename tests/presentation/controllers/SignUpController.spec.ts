@@ -1,14 +1,14 @@
-import { type Account } from '@/domain/entities'
+import { type Account } from '@/core/entities'
 import {
   type AddAccountParams,
   type IAuthentication,
   type AuthenticationParams,
   type IAddAccount
-} from '@/domain/ports'
-import { SignUpController } from '@/presentation/controllers'
-import { type IHTTPRequest, type IValidation } from '@/presentation/protocols'
-import { ServerError, MissingParam, EmailInUse } from '@/presentation/errors'
-import { serverError, ok, badRequest, forbidden } from '@/presentation/helpers'
+} from '@/core/ports/driving/services'
+import { SignUpController } from '@/application/presentation/controllers'
+import { type IHTTPRequest, type IValidation } from '@/core/ports/driving/presentation'
+import { ServerError, MissingParam, EmailInUse } from '@/application/presentation/errors'
+import { serverError, ok, badRequest, forbidden } from '@/application/presentation/helpers'
 
 const mockRequest = (): IHTTPRequest => ({
   body: {

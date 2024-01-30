@@ -1,5 +1,5 @@
-import { type ILoadOrders } from '@/domain/ports'
-import { LoadOrders } from '@/data/ports'
+import { type ILoadOrders } from '@/core/ports/driving/services'
+import { LoadOrders } from '@/application/services'
 import { OrderMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadOrders = (): ILoadOrders => {

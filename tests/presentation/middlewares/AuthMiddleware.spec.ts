@@ -1,13 +1,13 @@
-import { type Account } from '@/domain/entities'
-import { type ILoadAccountByToken } from '@/domain/ports'
-import { type IHTTPRequest } from '@/presentation/protocols'
-import { AuthMiddleware } from '@/presentation/middlewares'
-import { AccessDenied } from '@/presentation/errors'
+import { type Account } from '@/core/entities'
+import { type ILoadAccountByToken } from '@/core/ports/driving/services'
+import { type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { AuthMiddleware } from '@/application/presentation/middlewares'
+import { AccessDenied } from '@/application/presentation/errors'
 import {
   forbidden,
   ok,
   serverError
-} from '@/presentation/helpers'
+} from '@/application/presentation/helpers'
 
 const mockAccount = (): Account => ({
   id: 'valid_id',

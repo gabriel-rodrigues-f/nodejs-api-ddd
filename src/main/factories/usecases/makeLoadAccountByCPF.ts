@@ -1,5 +1,5 @@
-import { type ILoadAccountByCPF } from '@/domain/ports'
-import { LoadACcountByCPF } from '@/data/ports'
+import { type ILoadAccountByCPF } from '@/core/ports/driving/services'
+import { LoadACcountByCPF } from '@/application/services'
 import { AccountMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbLoadAccountByCpf = (): ILoadAccountByCPF => {

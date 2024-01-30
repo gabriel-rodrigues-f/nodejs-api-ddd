@@ -1,8 +1,8 @@
-import { type ILogout } from '@/domain/ports'
-import { type IValidation, type IHTTPRequest } from '@/presentation/protocols'
-import { LogoutController } from '@/presentation/controllers'
-import { MissingParam } from '@/presentation/errors'
-import { badRequest, noContent, serverError } from '@/presentation/helpers'
+import { type ILogout } from '@/core/ports/driving/services'
+import { type IValidation, type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { LogoutController } from '@/application/presentation/controllers'
+import { MissingParam } from '@/application/presentation/errors'
+import { badRequest, noContent, serverError } from '@/application/presentation/helpers'
 
 const mockRequest = (): IHTTPRequest => {
   return {

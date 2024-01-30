@@ -1,4 +1,4 @@
-import { MissingParam } from '@/presentation/errors'
+import { MissingParam } from '@/application/presentation/errors'
 import { RequiredFieldsValidation } from '@/validation/validators'
 
 const mockSut = (): RequiredFieldsValidation => new RequiredFieldsValidation('any_field')

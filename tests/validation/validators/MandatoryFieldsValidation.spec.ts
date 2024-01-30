@@ -1,4 +1,4 @@
-import { MissingField } from '@/presentation/errors'
+import { MissingField } from '@/application/presentation/errors'
 import { MandatoryFieldValidation } from '@/validation/validators'
 
 const mandatoryFields: string[] = ['name', 'description', 'price', 'image', 'category']

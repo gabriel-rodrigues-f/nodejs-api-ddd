@@ -1,5 +1,5 @@
-import { type IUpdateOrder } from '@/domain/ports'
-import { UpdateOrder } from '@/data/ports'
+import { type IUpdateOrder } from '@/core/ports/driving/services'
+import { UpdateOrder } from '@/application/services'
 import { OrderMongoRepository } from '@/infra/db/mongodb'
 
 export const makeDbUpdateOrder = (): IUpdateOrder => {

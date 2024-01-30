@@ -1,8 +1,8 @@
-import { type Order } from '@/domain/entities'
-import { type ILoadOrders } from '@/domain/ports'
-import { type IHTTPRequest } from '@/presentation/protocols'
-import { LoadOrdersController } from '@/presentation/controllers'
-import { noContent, serverError } from '@/presentation/helpers'
+import { type Order } from '@/core/entities'
+import { type ILoadOrders } from '@/core/ports/driving/services'
+import { type IHTTPRequest } from '@/core/ports/driving/presentation'
+import { LoadOrdersController } from '@/application/presentation/controllers'
+import { noContent, serverError } from '@/application/presentation/helpers'
 
 const mockOrders = (): Order[] => ([
   {
