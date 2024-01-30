@@ -10,7 +10,7 @@ import {
   type IAddOrderRepository,
   type ILoadOrdersRepository
 } from '@/core/ports/driven'
-import { MongoDBHelper } from '@/infra/db'
+import { MongoDBHelper } from '@/infrastructure/db'
 import { ObjectId } from 'mongodb'
 
 export class OrderMongoRepository implements

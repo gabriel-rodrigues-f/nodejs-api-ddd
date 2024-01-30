@@ -3,9 +3,9 @@ import { makeLogoutValidation } from '@/main/factories/validations'
 import {
   RequiredFieldsValidation,
   ValidationComposite
-} from '@/validation/validators'
+} from '@/application/validation'
 
-jest.mock('@/validation/validators/ValidationComposite')
+jest.mock('@/application/validation/ValidationComposite')
 
 describe('Logout IValidation Factory', () => {
   test('Should call validation with all validations ', () => {

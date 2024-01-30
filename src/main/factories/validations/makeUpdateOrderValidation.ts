@@ -1,4 +1,4 @@
-import { RequiredFieldsValidation, ValidationComposite } from '@/validation/validators'
+import { RequiredFieldsValidation, ValidationComposite } from '@/application/validation'
 import { type IValidation } from '@/core/ports/driving/presentation'
 
 export const makeUpdateOrderValidation = (): IValidation => {

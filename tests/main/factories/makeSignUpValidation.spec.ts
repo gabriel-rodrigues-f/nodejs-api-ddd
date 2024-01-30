@@ -4,12 +4,12 @@ import {
   EmailValidation,
   RequiredFieldsValidation,
   ValidationComposite
-} from '@/validation/validators'
-import { CPFValidation } from '@/validation/validators/CPFValidation'
-import { EmailValidatorAdapter } from '@/infra/validators/EmailValidatorAdapter'
+} from '@/application/validation'
+import { CPFValidation } from '@/application/validation/CPFValidation'
+import { EmailValidatorAdapter } from '@/infrastructure/validators/EmailValidatorAdapter'
 import { makeSignUpValidation } from '@/main/factories/validations/makeSignUpValidation'
 
-jest.mock('@/validation/validators/ValidationComposite')
+jest.mock('@/application/validation/ValidationComposite')
 
 describe('SignUp IValidation Factory', () => {
   test('Should call validation with all validations ', () => {

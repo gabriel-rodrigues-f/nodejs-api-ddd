@@ -3,9 +3,9 @@ import { makeUpdateProductValidation } from '@/main/factories/validations'
 import {
   MandatoryFieldValidation,
   ValidationComposite
-} from '@/validation/validators'
+} from '@/application/validation'
 
-jest.mock('@/validation/validators/ValidationComposite')
+jest.mock('@/application/validation/ValidationComposite')
 
 describe('Update Product IValidation Factory', () => {
   test('Should call validation with all validations ', () => {

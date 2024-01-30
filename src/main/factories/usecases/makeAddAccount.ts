@@ -1,7 +1,7 @@
 import { type IAddAccount } from '@/core/ports/driving/services'
 import { AddAccount } from '@/application/services'
-import { BcryptAdapter } from '@/infra/criptography'
-import { AccountMongoRepository } from '@/infra/db/mongodb'
+import { BcryptAdapter } from '@/infrastructure/criptography'
+import { AccountMongoRepository } from '@/infrastructure/db/mongodb'
 
 export const makeDbAddAccount = (): IAddAccount => {
   const salt = 12

@@ -2,7 +2,7 @@ import { type IValidation } from '@/core/ports/driving/presentation'
 import {
   MandatoryFieldValidation,
   ValidationComposite
-} from '@/validation/validators'
+} from '@/application/validation'
 
 export const makeUpdateProductValidation = (): IValidation => {
   const validations: IValidation[] = []

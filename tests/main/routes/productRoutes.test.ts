@@ -5,7 +5,7 @@ import request from 'supertest'
 import env from '@/main/config/env'
 import { sign } from 'jsonwebtoken'
 import { setupApp } from '@/main/config/app'
-import { MongoDBHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infrastructure/db/mongodb'
 
 let productCollection: Collection
 let accountCollection: Collection

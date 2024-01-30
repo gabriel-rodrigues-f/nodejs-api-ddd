@@ -2,7 +2,7 @@ import { ObjectId, type Collection } from 'mongodb'
 import request from 'supertest'
 import { type Express } from 'express'
 import { setupApp } from '@/main/config/app'
-import { MongoDBHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infrastructure/db/mongodb'
 import { sign } from 'jsonwebtoken'
 import env from '@/main/config/env'
 

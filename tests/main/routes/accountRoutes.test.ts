@@ -5,7 +5,7 @@ import request from 'supertest'
 import { type Express } from 'express'
 import { setupApp } from '@/main/config/app'
 import env from '@/main/config/env'
-import { MongoDBHelper } from '@/infra/db/mongodb'
+import { MongoDBHelper } from '@/infrastructure/db/mongodb'
 
 let app: Express
 let accountCollection: Collection

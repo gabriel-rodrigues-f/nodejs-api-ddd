@@ -4,7 +4,7 @@ import { type AddProductParams } from '@/core/ports/driving/services'
 import {
   MongoDBHelper,
   ProductMongoRepository
-} from '@/infra/db'
+} from '@/infrastructure/db'
 
 let productCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
