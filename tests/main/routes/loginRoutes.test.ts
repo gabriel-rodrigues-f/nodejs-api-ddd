@@ -6,7 +6,7 @@ import request from 'supertest'
 import { type Express } from 'express'
 import { setupApp } from '@/main/config/app'
 import env from '@/main/config/env'
-import { MongoDBHelper } from '@/infrastructure/db/mongodb'
+import { MongoDBHelper } from '@/infrastructure/repositories/mongodb'
 
 let app: Express
 

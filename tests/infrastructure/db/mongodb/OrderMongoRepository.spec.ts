@@ -4,7 +4,7 @@ import {
   type AddOrderDetailsParams,
   type AddOrderParams
 } from '@/core/ports/driving/services'
-import { MongoDBHelper, OrderMongoRepository } from '@/infrastructure/db'
+import { MongoDBHelper, OrderMongoRepository } from '@/infrastructure/repositories'
 import { ObjectId, type Collection } from 'mongodb'
 
 const mockSut = (): OrderMongoRepository => new OrderMongoRepository()

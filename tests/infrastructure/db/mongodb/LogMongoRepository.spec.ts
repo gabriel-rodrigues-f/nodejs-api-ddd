@@ -1,7 +1,7 @@
 import {
   MongoDBHelper,
   LogMongoRepository
-} from '@/infrastructure/db'
+} from '@/infrastructure/repositories'
 import { type ILogErrorRepository } from '@/core/ports/driven'
 
 describe('Log Mongo Repository', () => {

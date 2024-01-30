@@ -3,7 +3,7 @@ import { type AddAccountParams } from '@/core/ports/driving/services'
 import {
   MongoDBHelper,
   AccountMongoRepository
-} from '@/infrastructure/db'
+} from '@/infrastructure/repositories'
 
 let accountCollection: Collection
 const MONGO_URL = process.env.MONGO_URL || ''
