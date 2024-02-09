@@ -8,3 +8,5 @@ data
 globalConfig.json
 __status__
 todo
+.DS_Store
+*/.DS_Store

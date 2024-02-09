@@ -8,6 +8,5 @@ export class UpdateOrder implements IUpdateOrder {
   constructor (private readonly repository: IUpdateOrderRepository) { }
   async update (params: UpdateOrderParams): Promise<void> {
     await this.repository.updateOrder(params)
-    return await Promise.resolve(null)
   }
 }

@@ -4,7 +4,6 @@ import {
 } from '@/core/ports/driving/presentation'
 import { AddOrderController } from '@/application/presentation/controllers'
 import { badRequest, noContent, serverError } from '@/application/presentation/helpers'
-import { type Order } from '@/core/entities'
 import { type IAddOrder, type AddOrderParams } from '@/core/ports/driving/services/IAddOrder'
 
 const mockAddOrderParams = (): AddOrderParams => ({
@@ -38,7 +37,7 @@ const mockValidation = (): IValidation => {
 
 const mockAddOrder = (): IAddOrder => {
   class AddOrderStub implements IAddOrder {
-    async add (order: AddOrderParams): Promise<Order> {
+    async add (order: AddOrderParams): Promise<void> {
       return await Promise.resolve(null)
     }
   }

@@ -17,14 +17,13 @@ export class OrderMongoRepository implements
   IAddOrderRepository,
   IUpdateOrderRepository,
   ILoadOrdersRepository {
-  async addOrderTransaction (params: AddOrderParams): Promise<Order> {
+  async addOrderTransaction (params: AddOrderParams): Promise<void> {
     const session = await MongoDBHelper.startTransaction()
     try {
       const { products, ...order } = params
       const insertedId = await this.addOrder(order)
       products.forEach(async product => await this.addOrderItem({ orderId: new ObjectId(insertedId), ...product }))
       await MongoDBHelper.commitTransaction(session)
-      return await Promise.resolve(null)
     } catch (error) {
       await MongoDBHelper.abortTransaction(session)
       throw error

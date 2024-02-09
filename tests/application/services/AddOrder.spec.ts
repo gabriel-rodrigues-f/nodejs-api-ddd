@@ -1,4 +1,3 @@
-import { type Order } from '@/core/entities'
 import {
   type AddOrderParams,
   type IAddOrderRepository
@@ -23,7 +22,7 @@ const mockAddOrderParams = (): AddOrderParams => ({
 
 const mockAddOrderRepository = (): IAddOrderRepository => {
   class AddOrderRepositoryStub implements IAddOrderRepository {
-    async addOrderTransaction (params: AddOrderParams): Promise<Order> {
+    async addOrderTransaction (params: AddOrderParams): Promise<void> {
       return await Promise.resolve(null)
     }
   }
